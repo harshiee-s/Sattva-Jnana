@@ -171,7 +171,10 @@
   .hamburger span{width:22px; height:2px; background:var(--navy);}
   .mobile-menu{display:none; position:fixed; inset:0; background:var(--white); z-index:300; padding:24px; flex-direction:column;}
   .mobile-menu.open{display:flex;}
-  .mobile-menu .close-btn{align-self:flex-end; background:none; border:none; font-size:28px; color:var(--navy); cursor:pointer;}
+  .mobile-menu-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:28px;}
+  .mobile-menu-top .brand img{width:42px; height:42px;}
+  .mobile-menu-top .brand-text .main{font-size:18px;}
+  .mobile-menu .close-btn{background:none; border:none; font-size:28px; color:var(--navy); cursor:pointer;}
   .mobile-menu a{font-size:20px; font-family:var(--serif); color:var(--navy); padding:14px 0; border-bottom:1px solid #eee;}
 
   /* Hero */
@@ -341,9 +344,11 @@
   .founder-heading-divider span{width:26px; height:1px; background:rgba(16,42,67,0.25);}
   .founder-heading-divider .fl{color:var(--gold); font-size:14px;}
   .founder-wrap{position:relative; max-width:900px; margin:0 auto; perspective:1800px;}
-  .founder-stack-1, .founder-stack-2{position:absolute; border-radius:22px; z-index:0; background:rgba(255,255,255,0.75); box-shadow:0 20px 50px rgba(16,42,67,0.12); border:1px solid rgba(212,175,87,0.2);}
-  .founder-stack-1{top:16px; right:-16px; bottom:16px; left:26px;}
-  .founder-stack-2{top:30px; right:-30px; bottom:30px; left:52px; background:rgba(255,255,255,0.5);}
+  .founder-stack-1, .founder-stack-2{position:absolute; border-radius:22px; background:rgba(255,255,255,0.75); box-shadow:0 20px 50px rgba(16,42,67,0.12); border:1px solid rgba(212,175,87,0.2);}
+  .founder-stack-1{top:16px; right:-16px; bottom:16px; left:26px; z-index:-1;}
+  .founder-stack-2{top:30px; right:-30px; bottom:30px; left:52px; background:rgba(255,255,255,0.5); z-index:-2;}
+  .founder-stack-num{display:none; position:absolute; top:26px; right:20px; font-family:var(--serif); font-weight:600; font-size:16px; color:var(--navy); opacity:0.5;}
+  .founder-stack-2 .founder-stack-num{font-size:14px; opacity:0.4;}
   .founder-card{
     position:relative; z-index:1; background:var(--white); border-radius:22px; overflow:hidden;
     border:1px solid rgba(212,175,87,0.35); box-shadow:0 30px 70px rgba(16,42,67,0.22);
@@ -364,6 +369,7 @@
     justify-content:center; box-shadow:0 10px 24px rgba(0,0,0,0.3); z-index:2; padding:12px;
   }
   .founder-seal img{width:100%; height:100%; object-fit:contain;}
+  .founder-mobile-num{display:none; position:absolute; top:18px; right:20px; z-index:3; font-family:var(--serif); font-weight:700; font-size:19px; color:var(--gold); border-bottom:2px solid var(--gold); padding-bottom:2px;}
   .founder-info{background:var(--white); padding:40px 40px 34px; text-align:left;}
   .founder-sri{font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); font-weight:700; margin-bottom:8px;}
   .founder-name{font-family:var(--serif); font-size:26px; font-weight:700; color:var(--navy); letter-spacing:0.3px; margin-bottom:6px;}
@@ -506,9 +512,14 @@
   }
   @media (max-width: 900px){
     .founder-top{grid-template-columns:1fr;}
-    .founder-side-nav{border-left:none; border-top:1px solid rgba(16,42,67,0.12); flex-direction:row; justify-content:flex-start; padding:14px 0 0; margin:0 24px 20px; gap:22px;}
-    .founder-photo-wrap{aspect-ratio:4/3;}
-    .founder-info{padding:32px 30px 8px;}
+    .founder-side-nav{display:none;}
+    .founder-photo-wrap{aspect-ratio:4/3.3; position:relative;}
+    .founder-seal{left:50%; top:auto; bottom:-30px; transform:translateX(-50%); width:74px; height:74px;}
+    .founder-info{padding:48px 32px 26px; text-align:center;}
+    .founder-sri, .founder-role{text-align:center;}
+    .founder-divider{justify-content:center;}
+    .founder-bio{text-align:center; max-width:440px; margin:0 auto 26px;}
+    .founder-mobile-num, .founder-stack-num{display:block;}
   }
   @media (max-width: 760px){
     .selector{margin-top:-40px;}
@@ -530,14 +541,15 @@
     .tl-h{flex-wrap:wrap; flex-direction:column;}
     .tl-h::before{display:none;}
     .tl-h-item{min-width:100%; padding:0 4px;}
-    .founder-details{grid-template-columns:1fr;}
+    .founder-details{grid-template-columns:1fr 1fr;}
     .founder-wrap{max-width:100%;}
-    .founder-stack-1, .founder-stack-2{display:none;}
-    .founder-top{grid-template-columns:1fr;}
-    .founder-side-nav{border-left:none; border-top:1px solid rgba(16,42,67,0.12); flex-direction:row; padding:14px 0 0; margin:0 20px 18px;}
-    .founder-photo-wrap{aspect-ratio:4/3.2;}
-    .founder-seal{left:16px; bottom:16px; width:56px; height:56px; padding:9px;}
-    .founder-info{padding:28px 20px 6px;}
+    .founder-stack-1{top:12px; right:-12px; bottom:12px; left:12px;}
+    .founder-stack-2{top:20px; right:-18px; bottom:20px; left:20px;}
+    .founder-stack-num{top:18px; right:4px; font-size:11px;}
+    .founder-stack-2 .founder-stack-num{top:18px; right:4px; font-size:10px;}
+    .founder-photo-wrap{aspect-ratio:4/3.5;}
+    .founder-seal{width:60px; height:60px; padding:9px; bottom:-26px;}
+    .founder-info{padding:44px 22px 22px;}
     .founder-name{font-size:22px;}
     .founder-bio{max-width:100%;}
     .founder-pagination{gap:14px;}
@@ -556,6 +568,7 @@
   }
   @media (max-width: 400px){
     .founder-top{grid-template-columns:1fr;}
+    .founder-details{grid-template-columns:1fr;}
     .nav-right .btn-sm{padding:8px 11px; font-size:11.5px;}
     h2.title{font-size:clamp(24px,6vw,30px);}
   }
@@ -588,11 +601,16 @@
 </header>
 
 <div class="mobile-menu" id="mobileMenu">
-  <button class="close-btn" id="closeMenuBtn" aria-label="Close menu">&times;</button>
+  <div class="mobile-menu-top">
+    <a href="#home" class="brand" aria-label="Sattva Jnana home">
+      <img src="logo.png" alt="Sattva Jnana logo">
+      <span class="brand-text"><span class="sri">Sri Hari</span><span class="main">SATTVA JNANA</span></span>
+    </a>
+    <button class="close-btn" id="closeMenuBtn" aria-label="Close menu">&times;</button>
+  </div>
   <a href="#home">Home</a>
   <a href="#programmes">Find Tutor</a>
   <a href="#career">Career</a>
-  <a href="mailto:hello@sattvajnana.com?subject=Book%20a%20Demo" class="btn btn-primary" style="margin-top:20px; text-align:center;">Book a Demo</a>
 </div>
 
 <!-- ============ HERO ============ -->
@@ -852,8 +870,8 @@
       <div class="founder-heading-divider"><span></span><span class="fl">✿</span><span></span></div>
     </div>
     <div class="founder-wrap reveal">
-      <div class="founder-stack-1"></div>
-      <div class="founder-stack-2"></div>
+      <div class="founder-stack-1"><span class="founder-stack-num" id="stackNum1"></span></div>
+      <div class="founder-stack-2"><span class="founder-stack-num" id="stackNum2"></span></div>
       <div class="founder-card" id="founderCard"></div>
     </div>
     <div class="founder-pagination">
@@ -1160,7 +1178,7 @@
       photo: 'founders/founder-1.png',
       name: 'Harshith G S',
       role: 'Founder & Academic Mentor',
-      bio: "With a strong academic foundation and a passion for teaching, Harshith founded Sattva Jnana with a simple belief — every student deserves individual attention, the right guidance, and a learning experience built around their needs.",
+      bio: "With a strong academic foundation and a passion for teaching, Harshith G S founded Sattva Jnana with a simple belief — every student deserves individual attention, the right guidance, and a learning experience built around their needs.",
       details: [
         { icon: 'cap', label: 'Academic Background', value: 'B.Com, CT, M.Com' },
         { icon: 'book', label: 'Specialisation', value: 'Commerce & Accountancy' },
@@ -1175,7 +1193,7 @@
       photo: 'founders/founder-2.png',
       name: 'Sahana Shree',
       role: 'Co-Founder & Science Mentor',
-      bio: "Sahana brings a research-driven approach to teaching, helping students build strong conceptual foundations in Science and Mathematics through curiosity-led, hands-on learning.",
+      bio: "Ananya brings a research-driven approach to teaching, helping students build strong conceptual foundations in Science and Mathematics through curiosity-led, hands-on learning.",
       details: [
         { icon: 'cap', label: 'Academic Background', value: 'B.Sc, M.Sc Physics' },
         { icon: 'book', label: 'Specialisation', value: 'Physics & Mathematics' },
@@ -1235,6 +1253,7 @@
       <div class="founder-top">
         <div class="founder-photo-wrap">
           <img src="${f.photo}" alt="${f.name}, ${f.role}">
+          <span class="founder-mobile-num">${String(founderIdx + 1).padStart(2, '0')}</span>
           <div class="founder-seal"><img src="logo.png" alt="Sattva Jnana seal"></div>
         </div>
         <div class="founder-info">
@@ -1253,6 +1272,10 @@
     });
     founderQuoteBox.innerHTML = `<span class="qm">&ldquo;</span><p>${f.quote}</p><span class="qm">&rdquo;</span>`;
     founderPages.querySelectorAll('button').forEach((b, i) => b.classList.toggle('active', i === founderIdx));
+    const next1 = (founderIdx + 1) % founders.length;
+    const next2 = (founderIdx + 2) % founders.length;
+    document.getElementById('stackNum1').textContent = String(next1 + 1).padStart(2, '0');
+    document.getElementById('stackNum2').textContent = String(next2 + 1).padStart(2, '0');
   }
   function goToFounder(newIdx, dir) {
     if (founderFlipping || newIdx === founderIdx) return;
@@ -1276,6 +1299,25 @@
     goToFounder(newIdx, dir);
   }
   renderFounderContent();
+
+  // Founder card swipe support
+  (function() {
+    let touchStartX = 0, touchStartY = 0, touchDX = 0, touchDY = 0;
+    founderCard.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchDX = 0; touchDY = 0;
+    }, { passive: true });
+    founderCard.addEventListener('touchmove', (e) => {
+      touchDX = e.touches[0].clientX - touchStartX;
+      touchDY = e.touches[0].clientY - touchStartY;
+    }, { passive: true });
+    founderCard.addEventListener('touchend', () => {
+      if (Math.abs(touchDX) > 45 && Math.abs(touchDX) > Math.abs(touchDY)) {
+        moveFounder(touchDX < 0 ? 1 : -1);
+      }
+    });
+  })();
 </script>
 </body>
 </html>
