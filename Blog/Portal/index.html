@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="../svg.png" />
+<title>Sattva Jnana | Admin Portal</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+  :root{
+    --navy:#102A43;
+    --navy-dark:#0B1F33;
+    --blue:#1E5FA8;
+    --blue-soft:#EAF1FB;
+    --gold:#C5962E;
+    --gold-warm:#D4AF57;
+    --gold-soft:#FBF3E2;
+    --white:#FFFFFF;
+    --ivory:#F4F6F9;
+    --text:#374151;
+    --text-soft:#6B7280;
+    --border:#E2E7EF;
+    --danger:#C4453A;
+    --danger-soft:#FBEAE8;
+    --radius:10px;
+    --radius-lg:16px;
+    --shadow:0 4px 18px rgba(16,42,67,0.08);
+    --shadow-lg:0 18px 44px rgba(16,42,67,0.16);
+    --serif:'Playfair Display', Georgia, serif;
+    --sans:'Inter', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:var(--sans); background:var(--ivory); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  button{font-family:inherit; cursor:pointer;}
+  input, select, textarea{font-family:inherit; font-size:14px;}
+  h1,h2,h3{font-family:var(--serif); color:var(--navy); font-weight:700;}
+
+  /* ============ LOGIN SCREEN ============ */
+  #loginScreen{min-height:100vh; display:flex; align-items:center; justify-content:center; background:linear-gradient(160deg, var(--navy) 0%, var(--navy-dark) 100%); padding:24px;}
+  .login-card{background:var(--white); border-radius:var(--radius-lg); padding:44px 40px; width:100%; max-width:400px; box-shadow:var(--shadow-lg);}
+  .login-brand{display:flex; flex-direction:column; align-items:center; margin-bottom:28px;}
+  .login-brand .sri{font-size:10px; letter-spacing:2px; color:var(--gold); font-weight:700; text-transform:uppercase; margin-bottom:2px;}
+  .login-brand .main{font-family:var(--serif); font-size:21px; color:var(--navy); font-weight:700;}
+  .login-brand .tag{font-size:12px; color:var(--text-soft); margin-top:6px;}
+  .field{margin-bottom:18px;}
+  .field label{display:block; font-size:12.5px; font-weight:600; color:var(--navy); margin-bottom:7px;}
+  .field input, .field select, .field textarea{width:100%; padding:11px 14px; border:1.5px solid var(--border); border-radius:8px; background:var(--white); color:var(--text); transition:border-color .2s;}
+  .field input:focus, .field select:focus, .field textarea:focus{outline:none; border-color:var(--blue);}
+  .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 22px; border-radius:100px; font-size:14px; font-weight:600; border:none; transition:transform .15s, box-shadow .15s, background .15s;}
+  .btn-gold{background:linear-gradient(135deg, var(--gold-warm), var(--gold)); color:var(--white);}
+  .btn-gold:hover{transform:translateY(-1px); box-shadow:0 8px 20px rgba(197,150,46,0.3);}
+  .btn-blue{background:var(--navy); color:var(--white);}
+  .btn-blue:hover{background:var(--navy-dark);}
+  .btn-outline{background:var(--white); border:1.5px solid var(--border); color:var(--navy);}
+  .btn-outline:hover{border-color:var(--blue);}
+  .btn-danger{background:var(--white); border:1.5px solid var(--danger); color:var(--danger);}
+  .btn-danger:hover{background:var(--danger-soft);}
+  .btn-block{width:100%;}
+  .btn:disabled{opacity:0.6; cursor:not-allowed; transform:none;}
+  .login-error{background:var(--danger-soft); color:var(--danger); font-size:13px; padding:10px 14px; border-radius:8px; margin-bottom:16px; display:none;}
+  .login-error.show{display:block;}
+  .setup-notice{background:var(--blue-soft); color:var(--blue); font-size:13px; padding:12px 14px; border-radius:8px; margin-bottom:18px; display:none; gap:9px; align-items:flex-start; line-height:1.5;}
+  .setup-notice.show{display:flex;}
+  .setup-notice i{margin-top:2px; flex-shrink:0;}
+
+  /* ============ APP SHELL ============ */
+  #appShell{display:none; min-height:100vh;}
+  #appShell.show{display:flex;}
+  .sidebar{width:230px; background:var(--navy); color:var(--white); flex-shrink:0; display:flex; flex-direction:column; padding:26px 18px;}
+  .sidebar-brand{display:flex; flex-direction:column; margin-bottom:36px; padding:0 6px;}
+  .sidebar-brand .sri{font-size:9px; letter-spacing:2px; color:var(--gold-warm); font-weight:700; text-transform:uppercase;}
+  .sidebar-brand .main{font-family:var(--serif); font-size:17px; font-weight:700;}
+  .sidebar-nav{display:flex; flex-direction:column; gap:4px; flex:1;}
+  .sidebar-nav button{display:flex; align-items:center; gap:11px; padding:11px 14px; border-radius:9px; background:none; border:none; color:#B9C2CE; font-size:14px; font-weight:600; text-align:left;}
+  .sidebar-nav button.active{background:rgba(255,255,255,0.08); color:var(--white);}
+  .sidebar-nav button:hover{color:var(--white);}
+  .sidebar-nav button i{width:18px; text-align:center; color:var(--gold-warm);}
+  .sidebar-foot{border-top:1px solid rgba(255,255,255,0.12); padding-top:16px; margin-top:16px;}
+  .sidebar-user{font-size:12.5px; color:#B9C2CE; margin-bottom:12px; word-break:break-all;}
+  .sidebar-foot button{width:100%; display:flex; align-items:center; justify-content:center; gap:8px; padding:10px; border-radius:8px; background:rgba(255,255,255,0.06); border:none; color:var(--white); font-size:13px; font-weight:600;}
+  .sidebar-foot button:hover{background:rgba(255,255,255,0.12);}
+
+  .main-area{flex:1; padding:32px 40px; max-width:1100px;}
+  .page-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; flex-wrap:wrap; gap:14px;}
+  .page-head h1{font-size:24px;}
+  .page-head p{color:var(--text-soft); font-size:13.5px; margin-top:4px;}
+
+  /* ============ POST LIST ============ */
+  .toolbar{display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:18px; flex-wrap:wrap;}
+  .status-tabs{display:flex; gap:8px;}
+  .status-tabs button{padding:8px 16px; border-radius:100px; border:1.5px solid var(--border); background:var(--white); color:var(--navy); font-size:12.5px; font-weight:600;}
+  .status-tabs button.active{background:var(--navy); border-color:var(--navy); color:var(--white);}
+
+  .post-table{background:var(--white); border-radius:var(--radius-lg); box-shadow:var(--shadow); overflow:hidden;}
+  .post-row{display:grid; grid-template-columns:64px 1fr 130px 150px 170px; align-items:center; gap:14px; padding:14px 20px; border-bottom:1px solid var(--border);}
+  .post-row:last-child{border-bottom:none;}
+  .post-row.head{background:var(--ivory); font-size:11px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; color:var(--text-soft);}
+  .post-thumb{width:56px; height:40px; border-radius:6px; overflow:hidden; background:var(--blue-soft); flex-shrink:0;}
+  .post-thumb img{width:100%; height:100%; object-fit:cover;}
+  .post-title-cell{min-width:0;}
+  .post-title-cell .t{font-weight:600; color:var(--navy); font-size:14.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .post-title-cell .s{font-size:12px; color:var(--text-soft); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .badge{display:inline-block; padding:4px 12px; border-radius:100px; font-size:11px; font-weight:700; letter-spacing:.4px;}
+  .badge-published{background:var(--gold-soft); color:var(--gold);}
+  .badge-draft{background:var(--blue-soft); color:var(--blue);}
+  .row-actions{display:flex; gap:8px;}
+  .icon-btn{width:32px; height:32px; border-radius:8px; border:1.5px solid var(--border); background:var(--white); display:flex; align-items:center; justify-content:center; color:var(--navy); font-size:13px;}
+  .icon-btn:hover{border-color:var(--blue); color:var(--blue);}
+  .icon-btn.danger:hover{border-color:var(--danger); color:var(--danger);}
+
+  .empty-state{text-align:center; padding:60px 24px; color:var(--text-soft);}
+  .empty-state i{font-size:30px; color:var(--gold-warm); margin-bottom:14px; display:block;}
+
+  /* ============ EDITOR ============ */
+  #editorView{display:none;}
+  #editorView.show{display:block;}
+  .editor-grid{display:grid; grid-template-columns:1.6fr 1fr; gap:24px; align-items:start;}
+  .editor-card{background:var(--white); border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:26px 28px;}
+  .editor-card h3{font-size:15px; margin-bottom:18px;}
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  textarea{resize:vertical; min-height:340px; line-height:1.6;}
+  .hint{font-size:11.5px; color:var(--text-soft); margin-top:6px;}
+  .status-toggle{display:flex; gap:10px; margin-top:4px;}
+  .status-toggle label{flex:1; display:flex; align-items:center; justify-content:center; gap:8px; padding:11px; border-radius:8px; border:1.5px solid var(--border); font-size:13px; font-weight:600; color:var(--navy); cursor:pointer;}
+  .status-toggle input{display:none;}
+  .status-toggle input:checked + span{color:var(--white);}
+  .status-toggle label:has(input:checked){background:var(--navy); border-color:var(--navy); color:var(--white);}
+  .editor-actions{display:flex; gap:12px; margin-top:22px;}
+  .save-msg{font-size:13px; padding:10px 14px; border-radius:8px; margin-top:14px; display:none;}
+  .save-msg.show{display:block;}
+  .save-msg.ok{background:var(--gold-soft); color:var(--gold);}
+  .save-msg.err{background:var(--danger-soft); color:var(--danger);}
+  .preview-box{border:1.5px dashed var(--border); border-radius:10px; padding:16px; font-size:13.5px; color:var(--text-soft); max-height:200px; overflow:auto;}
+  .preview-box img{max-width:100%; border-radius:6px;}
+
+  @media (max-width: 900px){
+    #appShell.show{flex-direction:column;}
+    .sidebar{width:100%; flex-direction:row; align-items:center; padding:14px 18px;}
+    .sidebar-brand{margin-bottom:0; margin-right:auto;}
+    .sidebar-nav{flex-direction:row; flex:none;}
+    .sidebar-foot{display:none;}
+    .main-area{padding:22px 18px;}
+    .editor-grid{grid-template-columns:1fr;}
+    .post-row{grid-template-columns:44px 1fr 90px; }
+    .post-row .col-date, .post-row .col-actions-label{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ LOGIN SCREEN ============ -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-brand">
+      <span class="sri">Sri Hari</span>
+      <span class="main">SATTVA JNANA</span>
+      <span class="tag" id="loginTag">Admin Portal</span>
+    </div>
+    <div class="setup-notice" id="setupNotice">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>No admin account exists yet. Create one below — the account you set up here becomes the only account with access to this portal.</span>
+    </div>
+    <div class="login-error" id="loginError"></div>
+    <form id="loginForm">
+      <div class="field">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" required autocomplete="username">
+      </div>
+      <div class="field">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" required autocomplete="current-password" minlength="6">
+      </div>
+      <div class="field" id="confirmPasswordField" style="display:none;">
+        <label for="loginPasswordConfirm">Confirm Password</label>
+        <input type="password" id="loginPasswordConfirm" autocomplete="new-password" minlength="6">
+      </div>
+      <button type="submit" class="btn btn-gold btn-block" id="loginBtn">Sign In</button>
+    </form>
+  </div>
+</div>
+
+<!-- ============ APP SHELL ============ -->
+<div id="appShell">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="sri">Sri Hari</span>
+      <span class="main">SATTVA JNANA</span>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="active" id="navBlogPosts"><i class="fa-solid fa-feather-pointed"></i> Blog Posts</button>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="sidebar-user" id="sidebarUser"></div>
+      <button id="signOutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="main-area">
+
+    <!-- ============ POST LIST VIEW ============ -->
+    <div id="listView">
+      <div class="page-head">
+        <div>
+          <h1>Blog Posts</h1>
+          <p>Create and manage posts shown on the public blog page.</p>
+        </div>
+        <button class="btn btn-gold" id="newPostBtn"><i class="fa-solid fa-plus"></i> New Post</button>
+      </div>
+
+      <div class="toolbar">
+        <div class="status-tabs" id="statusTabs">
+          <button class="active" data-filter="All">All</button>
+          <button data-filter="Published">Published</button>
+          <button data-filter="Draft">Draft</button>
+        </div>
+      </div>
+
+      <div class="post-table" id="postTable">
+        <div class="post-row head">
+          <div></div>
+          <div>Title</div>
+          <div>Status</div>
+          <div class="col-date">Last Updated</div>
+          <div class="col-actions-label">Actions</div>
+        </div>
+        <div id="postRows"></div>
+      </div>
+
+      <div class="empty-state" id="listEmpty" style="display:none;">
+        <i class="fa-solid fa-feather-pointed"></i>
+        <p>No posts yet — click "New Post" to write your first one.</p>
+      </div>
+    </div>
+
+    <!-- ============ EDITOR VIEW ============ -->
+    <div id="editorView">
+      <div class="page-head">
+        <div>
+          <h1 id="editorHeading">New Post</h1>
+          <p>Write in Markdown — headings, **bold**, *italic*, links and lists are supported.</p>
+        </div>
+        <button class="btn btn-outline" id="backToListBtn"><i class="fa-solid fa-arrow-left"></i> Back to list</button>
+      </div>
+
+      <form id="postForm">
+        <div class="editor-grid">
+          <div class="editor-card">
+            <h3>Content</h3>
+            <div class="field">
+              <label for="fTitle">Title</label>
+              <input type="text" id="fTitle" required>
+            </div>
+            <div class="field">
+              <label for="fExcerpt">Excerpt (shown on the blog list card)</label>
+              <input type="text" id="fExcerpt" maxlength="180" required>
+            </div>
+            <div class="field">
+              <label for="fContent">Body (Markdown)</label>
+              <textarea id="fContent" required placeholder="## A heading&#10;&#10;Write your post here. **Bold**, *italic* and [links](https://example.com) all work."></textarea>
+            </div>
+          </div>
+
+          <div>
+            <div class="editor-card" style="margin-bottom:20px;">
+              <h3>Details</h3>
+              <div class="field">
+                <label for="fSlug">URL Slug</label>
+                <input type="text" id="fSlug" required pattern="[a-z0-9\-]+" placeholder="how-to-plan-a-study-timetable">
+                <div class="hint">Auto-generated from the title. Lowercase letters, numbers and hyphens only.</div>
+              </div>
+              <div class="field">
+                <label for="fCategory">Category</label>
+                <input type="text" id="fCategory" placeholder="e.g. Study Tips">
+              </div>
+              <div class="field">
+                <label for="fAuthor">Author</label>
+                <input type="text" id="fAuthor" value="Sattva Jnana Team" required>
+              </div>
+              <div class="field">
+                <label for="fCoverImage">Cover Image URL</label>
+                <input type="url" id="fCoverImage" placeholder="https://...">
+              </div>
+              <div class="field" id="coverPreviewWrap" style="display:none;">
+                <div class="preview-box"><img id="coverPreviewImg" alt="Cover preview"></div>
+              </div>
+            </div>
+
+            <div class="editor-card">
+              <h3>Publishing</h3>
+              <div class="status-toggle">
+                <label><input type="radio" name="fStatus" value="Draft" checked><span>Draft</span></label>
+                <label><input type="radio" name="fStatus" value="Published"><span>Published</span></label>
+              </div>
+              <div class="editor-actions">
+                <button type="submit" class="btn btn-blue btn-block" id="saveBtn">Save Post</button>
+              </div>
+              <button type="button" class="btn btn-danger btn-block" id="deleteBtn" style="margin-top:12px; display:none;">Delete Post</button>
+              <div class="save-msg" id="saveMsg"></div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </main>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import {
+    getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword,
+    onAuthStateChanged, signOut, deleteUser
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import {
+    getFirestore, collection, doc, getDocs, getDoc, setDoc, deleteDoc,
+    serverTimestamp, orderBy, query
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  // Firebase web API keys only identify which project this app talks
+  // to — they are not secrets. Access is controlled by Firestore
+  // Security Rules and Authentication (Firebase console).
+  const firebaseConfig = {
+    apiKey: "AIzaSyCxkJ4XYL3z3ojEOt-2LGckmnvqN457lC0",
+    authDomain: "sattva-jnana-jb.firebaseapp.com",
+    projectId: "sattva-jnana-jb",
+    storageBucket: "sattva-jnana-jb.firebasestorage.app",
+    messagingSenderId: "897453485131",
+    appId: "1:897453485131:web:1a45d35a04baf3ebeeb1ce"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // ---------- Elements ----------
+  const loginScreen = document.getElementById('loginScreen');
+  const appShell = document.getElementById('appShell');
+  const loginForm = document.getElementById('loginForm');
+  const loginError = document.getElementById('loginError');
+  const loginBtn = document.getElementById('loginBtn');
+  const loginTag = document.getElementById('loginTag');
+  const setupNotice = document.getElementById('setupNotice');
+  const confirmPasswordField = document.getElementById('confirmPasswordField');
+  const loginPasswordConfirm = document.getElementById('loginPasswordConfirm');
+  const sidebarUser = document.getElementById('sidebarUser');
+  const signOutBtn = document.getElementById('signOutBtn');
+
+  const listView = document.getElementById('listView');
+  const editorView = document.getElementById('editorView');
+  const postRows = document.getElementById('postRows');
+  const listEmpty = document.getElementById('listEmpty');
+  const statusTabs = document.getElementById('statusTabs');
+  const newPostBtn = document.getElementById('newPostBtn');
+  const backToListBtn = document.getElementById('backToListBtn');
+
+  const postForm = document.getElementById('postForm');
+  const editorHeading = document.getElementById('editorHeading');
+  const fTitle = document.getElementById('fTitle');
+  const fSlug = document.getElementById('fSlug');
+  const fExcerpt = document.getElementById('fExcerpt');
+  const fContent = document.getElementById('fContent');
+  const fCategory = document.getElementById('fCategory');
+  const fAuthor = document.getElementById('fAuthor');
+  const fCoverImage = document.getElementById('fCoverImage');
+  const coverPreviewWrap = document.getElementById('coverPreviewWrap');
+  const coverPreviewImg = document.getElementById('coverPreviewImg');
+  const saveBtn = document.getElementById('saveBtn');
+  const deleteBtn = document.getElementById('deleteBtn');
+  const saveMsg = document.getElementById('saveMsg');
+
+  let allPosts = [];
+  let activeFilter = 'All';
+  let editingSlug = null; // null = creating new post
+  let slugManuallyEdited = false;
+  let isSetupMode = false; // true = no admin exists yet, this login form creates one
+
+  // ---------- Admin setup check ----------
+  // "system/admin" holds the uid of the one and only admin account. The
+  // first person to submit this form (when the doc doesn't exist yet)
+  // becomes that admin. After that, this form only ever signs people in —
+  // it never creates further accounts.
+  async function checkAdminExists() {
+    try {
+      const snap = await getDoc(doc(db, 'system', 'admin'));
+      isSetupMode = !snap.exists();
+    } catch (err) {
+      console.error('Failed to check admin status:', err);
+      isSetupMode = false; // fail safe: default to a plain sign-in form
+    }
+    updateLoginMode();
+  }
+
+  function updateLoginMode() {
+    if (isSetupMode) {
+      loginTag.textContent = 'Set Up Admin Account';
+      setupNotice.classList.add('show');
+      confirmPasswordField.style.display = 'block';
+      loginPasswordConfirm.required = true;
+      loginBtn.textContent = 'Create Admin Account';
+    } else {
+      loginTag.textContent = 'Admin Portal';
+      setupNotice.classList.remove('show');
+      confirmPasswordField.style.display = 'none';
+      loginPasswordConfirm.required = false;
+      loginBtn.textContent = 'Sign In';
+    }
+  }
+
+  // ---------- Auth ----------
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    loginError.classList.remove('show');
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+
+    if (isSetupMode) {
+      // Creating the first-ever admin account
+      if (password !== loginPasswordConfirm.value) {
+        loginError.textContent = 'Passwords do not match.';
+        loginError.classList.add('show');
+        return;
+      }
+      loginBtn.disabled = true;
+      loginBtn.textContent = 'Creating account...';
+      try {
+        const cred = await createUserWithEmailAndPassword(auth, email, password);
+        try {
+          // Firestore rules only allow this write once — if another
+          // browser won the race and became admin a moment earlier,
+          // this write fails and we roll the new account back below.
+          await setDoc(doc(db, 'system', 'admin'), {
+            uid: cred.user.uid,
+            email: cred.user.email,
+            createdAt: serverTimestamp()
+          });
+          // onAuthStateChanged below picks this up and opens the dashboard.
+        } catch (claimErr) {
+          console.error('Admin slot already taken:', claimErr);
+          await deleteUser(cred.user).catch(() => {});
+          await signOut(auth).catch(() => {});
+          isSetupMode = false;
+          updateLoginMode();
+          loginError.textContent = 'An admin account was just set up by someone else. Please sign in instead.';
+          loginError.classList.add('show');
+        }
+      } catch (err) {
+        console.error(err);
+        loginError.textContent = err.code === 'auth/email-already-in-use'
+          ? 'An account with this email already exists. Please sign in instead.'
+          : 'Could not create the account. Please try again.';
+        loginError.classList.add('show');
+      } finally {
+        loginBtn.disabled = false;
+        updateLoginMode();
+      }
+    } else {
+      // Normal sign-in
+      loginBtn.disabled = true;
+      loginBtn.textContent = 'Signing in...';
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (err) {
+        console.error(err);
+        loginError.textContent = 'Incorrect email or password. Please try again.';
+        loginError.classList.add('show');
+      } finally {
+        loginBtn.disabled = false;
+        loginBtn.textContent = 'Sign In';
+      }
+    }
+  });
+
+  signOutBtn.addEventListener('click', () => signOut(auth));
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      loginScreen.style.display = 'none';
+      appShell.classList.add('show');
+      sidebarUser.textContent = user.email;
+      showList();
+      loadPosts();
+    } else {
+      appShell.classList.remove('show');
+      loginScreen.style.display = 'flex';
+      loginForm.reset();
+      loginError.classList.remove('show');
+      checkAdminExists();
+    }
+  });
+
+  // ---------- View switching ----------
+  function showList() {
+    listView.style.display = 'block';
+    editorView.classList.remove('show');
+  }
+  function showEditor() {
+    listView.style.display = 'none';
+    editorView.classList.add('show');
+  }
+
+  newPostBtn.addEventListener('click', () => openEditor(null));
+  backToListBtn.addEventListener('click', () => { showList(); loadPosts(); });
+
+  // ---------- Load & render posts ----------
+  async function loadPosts() {
+    postRows.innerHTML = '<div class="post-row"><div colspan="5" style="grid-column:1/-1; color:var(--text-soft); font-size:13px;">Loading&hellip;</div></div>';
+    try {
+      const q = query(collection(db, 'blogPosts'), orderBy('updatedAt', 'desc'));
+      const snap = await getDocs(q);
+      allPosts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      renderRows();
+    } catch (err) {
+      console.error('Failed to load posts:', err);
+      postRows.innerHTML = '';
+      listEmpty.style.display = 'block';
+      listEmpty.querySelector('p').textContent = "Couldn't load posts. Check your connection and Firestore rules.";
+    }
+  }
+
+  function fmtDate(ts) {
+    if (!ts) return '—';
+    const d = ts.toDate ? ts.toDate() : new Date(ts);
+    return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+
+  function renderRows() {
+    const posts = activeFilter === 'All' ? allPosts : allPosts.filter(p => p.status === activeFilter);
+    postRows.innerHTML = '';
+    listEmpty.style.display = posts.length === 0 ? 'block' : 'none';
+    listEmpty.querySelector('p').textContent = 'No posts yet — click "New Post" to write your first one.';
+
+    posts.forEach(p => {
+      const row = document.createElement('div');
+      row.className = 'post-row';
+      row.innerHTML = `
+        <div class="post-thumb">${p.coverImage ? `<img src="${p.coverImage}" alt="">` : ''}</div>
+        <div class="post-title-cell">
+          <div class="t">${escapeHtml(p.title || 'Untitled')}</div>
+          <div class="s">/${escapeHtml(p.id)}</div>
+        </div>
+        <div><span class="badge ${p.status === 'Published' ? 'badge-published' : 'badge-draft'}">${p.status || 'Draft'}</span></div>
+        <div class="col-date">${fmtDate(p.updatedAt || p.createdAt)}</div>
+        <div class="row-actions">
+          <button class="icon-btn edit-btn" title="Edit"><i class="fa-solid fa-pen"></i></button>
+          <button class="icon-btn danger delete-btn" title="Delete"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      `;
+      row.querySelector('.edit-btn').addEventListener('click', () => openEditor(p.id));
+      row.querySelector('.delete-btn').addEventListener('click', () => confirmDelete(p.id, p.title));
+      postRows.appendChild(row);
+    });
+  }
+
+  statusTabs.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      statusTabs.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      renderRows();
+    });
+  });
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str || '';
+    return div.innerHTML;
+  }
+
+  function slugify(str) {
+    return (str || '').toLowerCase().trim()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+  }
+
+  fTitle.addEventListener('input', () => {
+    if (!slugManuallyEdited) fSlug.value = slugify(fTitle.value);
+  });
+  fSlug.addEventListener('input', () => { slugManuallyEdited = true; });
+  fCoverImage.addEventListener('input', () => {
+    if (fCoverImage.value.trim()) {
+      coverPreviewImg.src = fCoverImage.value.trim();
+      coverPreviewWrap.style.display = 'block';
+    } else {
+      coverPreviewWrap.style.display = 'none';
+    }
+  });
+
+  // ---------- Open editor (new or existing) ----------
+  async function openEditor(slug) {
+    postForm.reset();
+    saveMsg.classList.remove('show');
+    coverPreviewWrap.style.display = 'none';
+    slugManuallyEdited = false;
+    editingSlug = slug;
+
+    if (slug) {
+      editorHeading.textContent = 'Edit Post';
+      fSlug.disabled = true;
+      deleteBtn.style.display = 'block';
+      deleteBtn.onclick = () => confirmDelete(slug, fTitle.value);
+      showEditor();
+      try {
+        const snap = await getDoc(doc(db, 'blogPosts', slug));
+        if (snap.exists()) {
+          const p = snap.data();
+          fTitle.value = p.title || '';
+          fSlug.value = slug;
+          fExcerpt.value = p.excerpt || '';
+          fContent.value = p.content || '';
+          fCategory.value = p.category || '';
+          fAuthor.value = p.author || 'Sattva Jnana Team';
+          fCoverImage.value = p.coverImage || '';
+          if (p.coverImage) { coverPreviewImg.src = p.coverImage; coverPreviewWrap.style.display = 'block'; }
+          const radio = postForm.querySelector(`input[name="fStatus"][value="${p.status || 'Draft'}"]`);
+          if (radio) radio.checked = true;
+        }
+      } catch (err) {
+        console.error('Failed to load post for editing:', err);
+        saveMsg.textContent = "Couldn't load this post.";
+        saveMsg.className = 'save-msg show err';
+      }
+    } else {
+      editorHeading.textContent = 'New Post';
+      fSlug.disabled = false;
+      fAuthor.value = 'Sattva Jnana Team';
+      deleteBtn.style.display = 'none';
+      showEditor();
+    }
+  }
+
+  // ---------- Save (create or update) ----------
+  postForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const slug = editingSlug || slugify(fSlug.value);
+    if (!slug) {
+      saveMsg.textContent = 'Please enter a valid URL slug.';
+      saveMsg.className = 'save-msg show err';
+      return;
+    }
+    const status = postForm.querySelector('input[name="fStatus"]:checked').value;
+
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving...';
+
+    try {
+      const existing = editingSlug ? (await getDoc(doc(db, 'blogPosts', editingSlug))).data() : null;
+      const data = {
+        title: fTitle.value.trim(),
+        excerpt: fExcerpt.value.trim(),
+        content: fContent.value,
+        category: fCategory.value.trim(),
+        author: fAuthor.value.trim(),
+        coverImage: fCoverImage.value.trim(),
+        status,
+        updatedAt: serverTimestamp(),
+        createdAt: existing?.createdAt || serverTimestamp(),
+        publishedAt: status === 'Published' ? (existing?.publishedAt || serverTimestamp()) : (existing?.publishedAt || null)
+      };
+      await setDoc(doc(db, 'blogPosts', slug), data, { merge: true });
+
+      saveMsg.textContent = 'Post saved successfully.';
+      saveMsg.className = 'save-msg show ok';
+      editingSlug = slug;
+      fSlug.disabled = true;
+      deleteBtn.style.display = 'block';
+      deleteBtn.onclick = () => confirmDelete(slug, fTitle.value);
+      editorHeading.textContent = 'Edit Post';
+    } catch (err) {
+      console.error('Failed to save post:', err);
+      saveMsg.textContent = "Couldn't save the post. Check your connection and try again.";
+      saveMsg.className = 'save-msg show err';
+    } finally {
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Save Post';
+    }
+  });
+
+  // ---------- Delete ----------
+  function confirmDelete(slug, title) {
+    if (!confirm(`Delete "${title || slug}"? This can't be undone.`)) return;
+    deletePost(slug);
+  }
+
+  async function deletePost(slug) {
+    try {
+      await deleteDoc(doc(db, 'blogPosts', slug));
+      showList();
+      loadPosts();
+    } catch (err) {
+      console.error('Failed to delete post:', err);
+      alert("Couldn't delete this post. Please try again.");
+    }
+  }
+</script>
+
+</body>
+</html>
