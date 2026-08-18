@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="icon" type="image/png" href="svg.png" />
   <link rel="shortcut icon" type="image/png" href="svg.png" />
   <link rel="apple-touch-icon" href="svg.png" />
@@ -16,13 +16,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
   <style>
     :root {
-      --bg:#F4F3EE; --surface:#FFFFFF; --surface-2:#FAFAF8;
+      --bg:#FFFFFF; --surface:#FFFFFF; --surface-2:#F6F7F9;
       --primary:#0A1628; --primary-mid:#162847;
       --gold:#C9A84C; --gold-soft:rgba(201,168,76,0.15); --gold-border:rgba(201,168,76,0.3);
       --text:#0A1628; --text-2:#4A5568; --text-3:#9BA3AE;
       --border:rgba(10,22,40,0.1); --border-2:rgba(10,22,40,0.06);
       --success:#0D7A4E; --success-bg:#E6F7F1;
-      --warn:#A05C00; --warn-bg:#FFF3E0;
+      --warn:#1A5EBB; --warn-bg:#EBF3FF;
       --error:#C0392B; --error-bg:#FEF0EE;
       --info:#1A5EBB; --info-bg:#EBF3FF;
       --shadow-sm:0 1px 4px rgba(10,22,40,0.06),0 0 0 1px rgba(10,22,40,0.04);
@@ -35,7 +35,7 @@
       --font-mono:"JetBrains Mono",monospace;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    html,body{height:100%;overflow:hidden;}
+    html,body{height:100%;overflow:hidden;touch-action:manipulation;}
     body{font-family:var(--font-body);color:var(--text);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased;}
     body::before{content:'';position:fixed;inset:0;z-index:-1;background-image:linear-gradient(rgba(10,22,40,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(10,22,40,0.025) 1px,transparent 1px);background-size:32px 32px;}
     button,input,textarea,select{font:inherit;color:inherit;outline:none;}
@@ -46,19 +46,68 @@
     ::-webkit-scrollbar-thumb{background:rgba(10,22,40,0.15);border-radius:99px;}
 
     /* LOGIN */
-    #loginScreen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:9999;background:linear-gradient(135deg,#F4F3EE 0%,#FFFFFF 55%,#F0EEE6 100%);transition:opacity 0.4s ease;}
-    #loginScreen::before{content:'';position:absolute;inset:0;background-image:radial-gradient(ellipse at 20% 50%,rgba(201,168,76,0.16) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(201,168,76,0.12) 0%,transparent 50%);}
-    .login-card{position:relative;z-index:1;background:rgba(255,255,255,0.85);border:1px solid var(--gold-border);border-radius:var(--r-xl);backdrop-filter:blur(20px);padding:2.5rem 2rem;width:100%;max-width:400px;text-align:center;box-shadow:var(--shadow-lg);}
-    .login-logo{width:80px;height:80px;margin:0 auto 1rem;border-radius:18px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-    .login-logo img{width:100%;height:100%;object-fit:contain;}
-    .login-card h2{font-family:var(--font-head);font-size:1.9rem;color:var(--primary);margin-bottom:.2rem;letter-spacing:-.02em;}
-    .login-card p{font-size:.88rem;color:var(--text-2);margin-bottom:1.6rem;}
-    .login-input{width:100%;padding:.85rem 1rem;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--surface-2);color:var(--text);margin-bottom:.7rem;font-size:.9rem;transition:var(--t);}
+    #loginScreen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:9999;background:var(--bg);transition:opacity 0.4s ease;padding:1.5rem;}
+    .login-shell{position:relative;z-index:1;width:100%;max-width:1040px;height:min(640px,92vh);display:grid;grid-template-columns:1.05fr 1fr;background:var(--surface);border-radius:var(--r-xl);box-shadow:var(--shadow-lg);border:1px solid var(--border);overflow:hidden;}
+
+    /* Brand / illustration side */
+    .login-brand{position:relative;background-image:linear-gradient(160deg,rgba(10,22,40,0) 0%,rgba(22,40,71,0) 55%,rgba(28,54,96,0) 100%),url('bck-lg.png');background-size:cover;background-position:left center;background-repeat:no-repeat;color:#fff;overflow:hidden;}
+    .login-brand-glow{position:absolute;inset:0;background-image:radial-gradient(ellipse at 15% 15%,rgba(201,168,76,0.28) 0%,transparent 55%),radial-gradient(ellipse at 90% 85%,rgba(201,168,76,0.18) 0%,transparent 50%);pointer-events:none;}
+    .login-brand-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+    .login-brand-top{position:relative;display:flex;align-items:center;gap:.7rem;}
+    .login-brand-icon{width:42px;height:42px;border-radius:12px;overflow:hidden;flex-shrink:0;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.15);}
+    .login-brand-icon img{width:100%;height:100%;object-fit:contain;}
+    .login-brand-name{font-family:var(--font-head);font-size:1.05rem;display:block;letter-spacing:-.01em;}
+    .login-brand-sub{font-size:.68rem;color:rgba(255,255,255,0.55);letter-spacing:.08em;text-transform:uppercase;display:block;margin-top:1px;}
+    .login-brand-mid{position:relative;margin-top:2.2rem;}
+    .login-portal-pill{display:inline-flex;align-items:center;padding:.35rem .8rem;border-radius:var(--r-pill);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:rgba(201,168,76,0.18);color:var(--gold);border:1px solid rgba(201,168,76,0.35);margin-bottom:1rem;}
+    .login-brand-mid h1{font-family:var(--font-head);font-size:2rem;line-height:1.18;letter-spacing:-.02em;margin-bottom:.9rem;color:#fff;}
+    .login-brand-mid p{font-size:.88rem;color:rgba(255,255,255,0.68);max-width:340px;line-height:1.6;}
+    .login-brand-illustration{position:relative;flex:1;display:flex;align-items:center;justify-content:center;min-height:100px;margin:1rem 0;}
+    .lbi-glow{position:absolute;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.22) 0%,transparent 70%);}
+    .lbi-item{position:relative;display:flex;align-items:center;justify-content:center;border-radius:16px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);backdrop-filter:blur(6px);color:var(--gold);box-shadow:0 8px 24px rgba(0,0,0,0.18);}
+    .lbi-stack{position:relative;display:flex;align-items:flex-end;gap:.9rem;}
+    .lbi-books{width:58px;height:58px;font-size:1.3rem;}
+    .lbi-plant{width:64px;height:64px;font-size:1.5rem;color:#8FCB9B;transform:translateY(-6px);}
+    .lbi-grad{width:58px;height:58px;font-size:1.3rem;}
+    .lbi-lamp{position:absolute;top:-6px;right:14%;width:46px;height:46px;font-size:1.1rem;color:#F2D98A;transform:rotate(8deg);}
+    .login-brand-foot{position:relative;}
+    .login-trust-card{display:flex;align-items:center;gap:.7rem;padding:.85rem 1rem;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);border-radius:var(--r-md);font-size:.8rem;color:rgba(255,255,255,0.85);}
+    .login-trust-card i{color:var(--gold);font-size:1rem;flex-shrink:0;}
+
+    /* Form side */
+    .login-form-panel{display:flex;align-items:center;justify-content:center;padding:2.5rem;background:var(--surface);overflow-y:auto;}
+    .login-card{position:relative;width:100%;max-width:340px;}
+    .login-role-badge{display:inline-flex;align-items:center;padding:.32rem .8rem;border-radius:var(--r-pill);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:var(--info-bg);color:var(--warn);border:1px solid rgba(26,94,187,.3);margin-bottom:1rem;}
+    .login-card h2{font-family:var(--font-head);font-size:1.9rem;color:var(--primary);margin-bottom:.3rem;letter-spacing:-.02em;display:flex;align-items:center;gap:.4rem;}
+    .login-card .wave{display:inline-block;font-size:1.5rem;transform-origin:70% 70%;animation:wave 2.2s ease-in-out infinite;}
+    @keyframes wave{0%,60%,100%{transform:rotate(0deg);}10%,30%{transform:rotate(14deg);}20%{transform:rotate(-8deg);}40%{transform:rotate(10deg);}}
+    .login-card>p{font-size:.86rem;color:var(--text-2);margin-bottom:1.6rem;}
+    .login-label{display:block;font-size:.72rem;font-weight:600;color:var(--text-2);margin-bottom:.35rem;}
+    .login-input-wrap{position:relative;margin-bottom:1rem;}
+    .login-input-wrap i{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);color:var(--text-3);font-size:.8rem;}
+    .login-input{width:100%;padding:.8rem 1rem .8rem 2.4rem;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--surface-2);color:var(--text);font-size:.88rem;transition:var(--t);}
     .login-input::placeholder{color:var(--text-3);}
     .login-input:focus{border-color:var(--gold);background:var(--surface);box-shadow:0 0 0 3px rgba(201,168,76,.15);}
-    .login-btn{width:100%;padding:.9rem;border-radius:var(--r-sm);background:linear-gradient(135deg,#E2BC5E,#C9A84C);color:var(--primary);font-weight:700;font-size:.9rem;transition:var(--t);}
-    .login-btn:hover{filter:brightness(1.05);transform:translateY(-1px);box-shadow:0 8px 24px rgba(201,168,76,.35);}
-    #loginError{margin-top:.9rem;font-size:.84rem;color:var(--error);display:none;background:var(--error-bg);padding:.5rem .8rem;border-radius:var(--r-sm);border:1px solid rgba(192,57,43,.2);}
+    .login-btn{width:100%;padding:.85rem;border-radius:var(--r-sm);background:linear-gradient(135deg,var(--primary) 0%,var(--primary-mid) 100%);color:#fff;font-weight:700;font-size:.88rem;transition:var(--t);margin-top:.3rem;box-shadow:0 8px 20px rgba(10,22,40,.28);}
+    .login-btn:hover{filter:brightness(1.15);transform:translateY(-1px);box-shadow:0 10px 26px rgba(10,22,40,.38);}
+    #loginError{margin-top:.9rem;font-size:.82rem;color:var(--error);display:none;background:var(--error-bg);padding:.55rem .8rem;border-radius:var(--r-sm);border:1px solid rgba(192,57,43,.2);}
+    .login-help{display:flex;align-items:center;gap:.5rem;margin-top:1.6rem;padding-top:1.2rem;border-top:1px solid var(--border-2);font-size:.78rem;color:var(--text-3);}
+    .login-help i{color:var(--text-3);font-size:.85rem;}
+    .login-help a{color:var(--warn);font-weight:600;}
+    .login-help a:hover{text-decoration:underline;}
+
+    @media (max-width:820px){
+      .login-shell{grid-template-columns:1fr;height:auto;max-height:94vh;overflow-y:auto;}
+      .login-brand{height:280px;background-position:left top;flex-shrink:0;}
+      .login-form-panel{padding:2rem 1.6rem;}
+    }
+
+    @media (max-width:480px){
+      #loginScreen{padding:.6rem;}
+      .login-brand{height:230px;}
+      .login-form-panel{padding:1.6rem 1.2rem;}
+      .login-card{max-width:100%;}
+    }
 
     /* LAYOUT */
     #appContent{display:none;opacity:0;transition:opacity .4s ease;height:100%;}
@@ -78,29 +127,31 @@
     .nav-item{display:flex;align-items:center;gap:.7rem;padding:.65rem .8rem;font-size:.84rem;font-weight:500;border-radius:var(--r-sm);color:var(--text-2);transition:var(--t);position:relative;cursor:pointer;}
     .nav-item i{width:16px;text-align:center;font-size:.85rem;}
     .nav-item:hover{color:var(--primary);background:var(--surface-2);}
-    .nav-item.active{background:var(--gold-soft);color:var(--warn);}
-    .nav-item.active::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:60%;background:var(--gold);border-radius:0 99px 99px 0;}
+    .nav-item.active{background:var(--info-bg);color:var(--warn);}
+    .nav-item.active::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:60%;background:var(--warn);border-radius:0 99px 99px 0;}
     .nav-item.logout-item{color:var(--error);margin-top:.3rem;}
     .nav-item.logout-item:hover{color:var(--error);background:var(--error-bg);}
-    .sidebar-footer{margin-top:auto;padding:.9rem 1rem;background:var(--gold-soft);border:1px solid var(--gold-border);border-radius:var(--r-md);font-size:.73rem;color:var(--text-2);}
+    .sidebar-footer{margin-top:auto;padding:.9rem 1rem;background:var(--info-bg);border:1px solid rgba(26,94,187,.3);border-radius:var(--r-md);font-size:.73rem;color:var(--text-2);}
     .sidebar-footer strong{display:block;color:var(--warn);margin-bottom:.3rem;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;}
 
     /* HEADER */
-    .header{grid-column:2;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;background:rgba(244,243,238,.92);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);position:sticky;top:0;z-index:6;gap:1rem;}
+    .header{grid-column:2;grid-row:1;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;background:rgba(244,243,238,.92);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);position:sticky;top:0;z-index:6;gap:1rem;}
     .header-title h1{font-family:var(--font-head);font-size:1.35rem;color:var(--primary);letter-spacing:-.02em;}
     .header-title p{font-size:.8rem;color:var(--text-3);margin-top:1px;}
     .header-actions{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;justify-content:flex-end;flex-shrink:0;}
     .role-badge{padding:.3rem .8rem;border-radius:var(--r-pill);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;}
-    .role-admin{background:var(--gold-soft);color:var(--warn);border:1px solid var(--gold-border);}
+    .role-admin{background:var(--info-bg);color:var(--warn);border:1px solid rgba(26,94,187,.3);}
     .role-manager{background:var(--info-bg);color:var(--info);border:1px solid rgba(26,94,187,.2);}
     .role-employee{background:var(--success-bg);color:var(--success);border:1px solid rgba(13,122,78,.2);}
 
     /* BUTTONS */
+    .admin-hamburger{display:none;width:36px;height:36px;border-radius:var(--r-sm);align-items:center;justify-content:center;background:var(--surface-2);border:1px solid var(--border);color:var(--text-2);font-size:1rem;flex-shrink:0;margin-right:.7rem;}
+    .admin-hamburger:hover{background:var(--gold-soft);color:var(--primary);}
     .btn{display:inline-flex;align-items:center;gap:.45rem;padding:.55rem 1rem;font-size:.82rem;font-weight:600;border-radius:var(--r-pill);border:1px solid transparent;transition:var(--t);white-space:nowrap;}
     .btn-primary{background:var(--primary);color:#fff;box-shadow:0 2px 8px rgba(10,22,40,.25);}
     .btn-primary:hover{background:var(--primary-mid);transform:translateY(-1px);}
-    .btn-gold{background:linear-gradient(135deg,#E2BC5E,#C9A84C);color:var(--primary);}
-    .btn-gold:hover{filter:brightness(1.04);transform:translateY(-1px);}
+    .btn-gold{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-mid) 100%);color:#fff;box-shadow:0 2px 8px rgba(10,22,40,.25);}
+    .btn-gold:hover{filter:brightness(1.15);transform:translateY(-1px);}
     .btn-secondary{background:var(--surface);color:var(--primary);border-color:var(--border);}
     .btn-secondary:hover{background:var(--primary);color:#fff;}
     .btn-danger{background:var(--error-bg);color:var(--error);border-color:rgba(192,57,43,.2);}
@@ -109,17 +160,25 @@
     .btn-icon{width:32px;height:32px;padding:0;border-radius:var(--r-sm);background:var(--surface-2);color:var(--text-2);border:1px solid var(--border);display:inline-flex;align-items:center;justify-content:center;}
     .btn-icon:hover{background:var(--primary);color:#fff;border-color:var(--primary);}
     .row-actions{display:flex;gap:.4rem;flex-wrap:wrap;}
-    .pill-new{background:var(--gold-soft);color:var(--warn);border:1px solid var(--gold-border);}
+    .pill-new{background:var(--info-bg);color:var(--warn);border:1px solid rgba(26,94,187,.3);}
     .pill-contacted{background:var(--info-bg);color:var(--info);border:1px solid rgba(26,94,187,.2);}
     .pill-converted{background:var(--success-bg);color:var(--success);border:1px solid rgba(13,122,78,.2);}
     .pill-lost{background:var(--error-bg);color:var(--error);border:1px solid rgba(192,57,43,.2);}
     .status-select{border:1px solid var(--border);border-radius:var(--r-pill);padding:.25rem .6rem;font-size:.7rem;font-weight:700;text-transform:uppercase;background:var(--surface);cursor:pointer;}
     .checklist{display:flex;flex-direction:column;gap:.6rem;max-height:280px;overflow:auto;border:1px solid var(--border);border-radius:var(--r-md);padding:.8rem;}
+    .sched-row{display:flex;align-items:center;gap:.7rem;padding:.55rem .7rem;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface-2);}
+    .sched-row label{display:flex;align-items:center;gap:.5rem;font-size:.84rem;font-weight:600;min-width:110px;cursor:pointer;}
+    .sched-row input[type="checkbox"]{width:16px;height:16px;accent-color:var(--primary);}
+    .sched-row .sched-dur{display:flex;align-items:center;gap:.4rem;margin-left:auto;opacity:.4;pointer-events:none;transition:var(--t);}
+    .sched-row.on .sched-dur{opacity:1;pointer-events:auto;}
+    .sched-row.on{border-color:var(--gold-border);background:var(--gold-soft);}
+    .sched-row .sched-dur input{width:70px;padding:.35rem .5rem;border-radius:var(--r-sm);border:1px solid var(--border);font-size:.82rem;background:var(--surface);}
+    .sched-badge{display:inline-flex;align-items:center;gap:.3rem;padding:.18rem .55rem;border-radius:var(--r-pill);background:var(--info-bg);color:var(--warn);font-size:.68rem;font-weight:700;border:1px solid rgba(26,94,187,.25);}
     .checklist label{display:flex;align-items:center;gap:.6rem;font-size:.82rem;cursor:pointer;}
     .checklist input[type="checkbox"]{width:15px;height:15px;accent-color:var(--gold);}
 
     /* MAIN */
-    .main{grid-column:2;overflow:auto;padding:1.4rem 1.5rem;display:grid;gap:1.2rem;align-content:flex-start;}
+    .main{grid-column:2;grid-row:2;overflow:auto;padding:1.4rem 1.5rem;display:grid;gap:1.2rem;align-content:flex-start;}
     .page{display:none;}
     .page.active{display:block;}
 
@@ -179,8 +238,10 @@
     .success-box{padding:.75rem 1rem;border-radius:var(--r-md);background:var(--success-bg);border:1px solid rgba(13,122,78,.2);font-size:.82rem;color:var(--success);}
 
     /* TABLE */
-    .table-wrap{overflow:auto;border-radius:var(--r-md);border:1px solid var(--border);}
+    .table-wrap{overflow:auto;-webkit-overflow-scrolling:touch;border-radius:var(--r-md);border:1px solid var(--border);}
     table{width:100%;border-collapse:collapse;background:var(--surface);}
+    table th{white-space:nowrap;}
+    table td{white-space:nowrap;}
     th,td{padding:.75rem .9rem;border-bottom:1px solid var(--border-2);font-size:.82rem;text-align:left;}
     th{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;background:var(--surface-2);color:var(--text-2);font-weight:700;}
     tr:last-child td{border-bottom:none;}
@@ -190,10 +251,10 @@
     .pill{display:inline-flex;align-items:center;gap:.25rem;padding:.15rem .65rem;border-radius:var(--r-pill);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
     .pill-active{background:var(--success-bg);color:var(--success);border:1px solid rgba(13,122,78,.2);}
     .pill-inactive{background:var(--error-bg);color:var(--error);border:1px solid rgba(192,57,43,.2);}
-    .pill-pending{background:var(--warn-bg);color:var(--warn);border:1px solid rgba(160,92,0,.2);}
+    .pill-pending{background:var(--warn-bg);color:var(--warn);border:1px solid rgba(26,94,187,.2);}
     .pill-approved{background:var(--success-bg);color:var(--success);border:1px solid rgba(13,122,78,.2);}
     .pill-rejected{background:var(--error-bg);color:var(--error);border:1px solid rgba(192,57,43,.2);}
-    .pill-admin{background:var(--gold-soft);color:var(--warn);}
+    .pill-admin{background:var(--info-bg);color:var(--warn);}
     .pill-manager{background:var(--info-bg);color:var(--info);}
     .pill-employee{background:var(--success-bg);color:var(--success);}
     .pill-present{background:var(--success-bg);color:var(--success);}
@@ -245,10 +306,14 @@
     .clock-date{font-size:.85rem;color:rgba(255,255,255,.6);margin-top:.4rem;}
     .clock-status{margin-top:1.2rem;font-size:.83rem;color:rgba(255,255,255,.7);}
     .clock-btns{display:flex;gap:.8rem;justify-content:center;margin-top:1.2rem;flex-wrap:wrap;}
-    .clock-in-btn{padding:.85rem 2rem;border-radius:var(--r-pill);background:linear-gradient(135deg,#E2BC5E,#C9A84C);color:var(--primary);font-weight:700;font-size:.9rem;transition:var(--t);}
+    .clock-in-btn{padding:.85rem 2rem;border-radius:var(--r-pill);background:linear-gradient(135deg,var(--primary) 0%,var(--primary-mid) 100%);color:#fff;font-weight:700;font-size:.9rem;transition:var(--t);}
     .clock-in-btn:hover{filter:brightness(1.06);transform:translateY(-1px);}
     .clock-out-btn{padding:.85rem 2rem;border-radius:var(--r-pill);background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2);font-weight:700;font-size:.9rem;transition:var(--t);}
     .clock-out-btn:hover{background:rgba(255,255,255,.2);}
+    .session-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem 1.1rem;border:1px solid var(--border);border-radius:var(--r-md);background:var(--surface-2);flex-wrap:wrap;}
+    .session-row-name{font-weight:700;font-size:.9rem;color:var(--primary);}
+    .session-row-meta{font-size:.78rem;color:var(--text-3);margin-top:.15rem;}
+    .session-row-actions{flex-shrink:0;}
 
     /* TOAST */
     .toast{position:fixed;right:1.2rem;bottom:1.2rem;max-width:300px;background:var(--primary);color:#fff;padding:.8rem 1.1rem;border-radius:var(--r-md);box-shadow:var(--shadow-lg);font-size:.83rem;font-weight:500;opacity:0;transform:translateY(12px) scale(.97);transition:.25s cubic-bezier(.34,1.56,.64,1);z-index:10001;display:flex;align-items:center;gap:.6rem;}
@@ -269,16 +334,135 @@
     .ep-brand-icon img{width:100%;height:100%;object-fit:contain;}
     .ep-brand-name{font-family:var(--font-head);font-size:1.05rem;color:var(--primary);}
     .ep-brand-sub{font-size:.7rem;color:var(--text-3);}
-    .ep-badge{display:inline-flex;align-items:center;gap:.35rem;padding:.22rem .7rem;border-radius:var(--r-pill);background:var(--gold-soft);color:var(--warn);font-size:.72rem;font-weight:700;border:1px solid var(--gold-border);text-transform:uppercase;letter-spacing:.05em;}
+    .ep-badge{display:inline-flex;align-items:center;gap:.35rem;padding:.22rem .7rem;border-radius:var(--r-pill);background:var(--info-bg);color:var(--warn);font-size:.72rem;font-weight:700;border:1px solid rgba(26,94,187,.3);text-transform:uppercase;letter-spacing:.05em;}
     .ep-logout-btn{display:flex;align-items:center;gap:.5rem;padding:.48rem 1rem;border-radius:var(--r-pill);background:var(--surface-2);color:var(--text-2);border:1px solid var(--border);font-size:.81rem;font-weight:600;transition:var(--t);}
     .ep-logout-btn:hover{background:var(--error-bg);color:var(--error);border-color:rgba(192,57,43,.2);}
     .ep-body{flex:1;overflow-y:auto;padding:1.5rem;}
     .ep-main{max-width:1000px;margin:0 auto;display:grid;gap:1.2rem;}
-    .ep-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem;}
-    .ep-tab{padding:.55rem 1.1rem;border-radius:var(--r-pill);font-size:.82rem;font-weight:600;border:1px solid var(--border);background:var(--surface);color:var(--text-2);transition:var(--t);}
-    .ep-tab.active{background:var(--primary);color:#fff;border-color:var(--primary);}
+    .ep-tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-pill);padding:.35rem;}
+    .ep-tab{display:inline-flex;align-items:center;gap:.45rem;padding:.6rem 1.15rem;border-radius:var(--r-pill);font-size:.82rem;font-weight:600;border:1px solid transparent;background:transparent;color:var(--text-2);transition:var(--t);}
+    .ep-tab:hover{color:var(--primary);}
+    .ep-tab.active{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 6px 16px rgba(10,22,40,.2);}
     .ep-tab-panel{display:none;}
     .ep-tab-panel.active{display:block;}
+
+    /* ─── CLIENT PORTAL (parent dashboard) — dedicated layout ─── */
+    .cp-shell{display:grid;grid-template-columns:256px 1fr;grid-template-rows:64px 1fr;height:100%;}
+    .cp-header{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;background:var(--surface);border-bottom:1px solid var(--border);gap:1rem;flex-shrink:0;}
+    .cp-header-left{display:flex;align-items:center;gap:.85rem;}
+    .cp-header-actions{display:flex;align-items:center;gap:.8rem;flex-shrink:0;}
+    .cp-notif-wrap{position:relative;}
+    .cp-hamburger{display:none;width:38px;height:38px;border-radius:var(--r-sm);align-items:center;justify-content:center;background:var(--surface-2);border:1px solid var(--border);color:var(--text-2);font-size:1rem;flex-shrink:0;}
+    .cp-hamburger:hover{background:var(--gold-soft);color:var(--primary);}
+    .cp-bell{position:relative;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--surface-2);border:1px solid var(--border);color:var(--text-2);font-size:.95rem;transition:var(--t);}
+    .cp-bell:hover{color:var(--primary);background:var(--gold-soft);}
+    .cp-bell.active{color:var(--primary);background:var(--gold-soft);border-color:var(--gold-border);}
+    .cp-bell .cp-bell-dot{position:absolute;top:-3px;right:-3px;min-width:16px;height:16px;padding:0 3px;border-radius:50%;background:var(--gold);color:var(--primary);font-size:.6rem;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid var(--surface);}
+    .cp-notif-panel{position:absolute;top:calc(100% + 12px);right:0;width:340px;max-height:420px;display:none;flex-direction:column;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow-lg);z-index:80;overflow:hidden;}
+    .cp-notif-panel.open{display:flex;}
+    .cp-notif-panel-head{padding:.85rem 1rem;font-family:var(--font-head);font-size:.98rem;color:var(--primary);border-bottom:1px solid var(--border-2);flex-shrink:0;}
+    .cp-notif-list{overflow-y:auto;flex:1;}
+    .cp-notif-item{display:flex;gap:.7rem;align-items:flex-start;padding:.8rem 1rem;border-bottom:1px solid var(--border-2);transition:var(--t);}
+    .cp-notif-item:last-child{border-bottom:none;}
+    .cp-notif-item:hover{background:var(--surface-2);}
+    .cp-notif-icon{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;}
+    .cp-notif-icon.violet{background:#ECE9FB;color:#6C5CE7;}
+    .cp-notif-icon.teal{background:#E0F5F3;color:#0E9488;}
+    .cp-notif-icon.green{background:#E3F5EA;color:#2E9E5B;}
+    .cp-notif-icon.blue{background:#E6F0FE;color:#2F6FE0;}
+    .cp-notif-body{min-width:0;}
+    .cp-notif-title{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.4;}
+    .cp-notif-sub{font-size:.75rem;color:var(--text-3);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .cp-notif-date{font-size:.68rem;color:var(--text-3);margin-top:3px;}
+    .cp-notif-empty{display:flex;flex-direction:column;align-items:center;gap:.5rem;padding:2.2rem 1rem;color:var(--text-3);font-size:.82rem;text-align:center;}
+    .cp-notif-empty i{font-size:1.4rem;}
+
+    .cp-sidebar{grid-row:2;background:var(--surface);padding:1.2rem 1rem;display:flex;flex-direction:column;overflow-y:auto;position:relative;border-right:1px solid var(--border);}
+    .cp-sidebar::after{content:'';position:absolute;top:0;right:-1px;width:1px;height:100%;background:linear-gradient(to bottom,transparent,rgba(201,168,76,.35) 30%,rgba(201,168,76,.35) 70%,transparent);}
+    .cp-sidebar-footer{margin-top:auto;display:flex;flex-direction:column;gap:.7rem;padding-top:1rem;}
+    .cp-footer-card{padding:1rem .9rem;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-md);text-align:center;}
+    .cp-footer-card .cp-footer-illus{width:64px;height:64px;margin:0 auto .6rem;border-radius:50%;background:var(--gold-soft);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1.4rem;}
+    .cp-footer-card p{font-size:.78rem;color:var(--text-2);line-height:1.5;}
+    .cp-help-card{display:flex;align-items:center;gap:.7rem;padding:.8rem .9rem;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-md);}
+    .cp-help-card i{width:34px;height:34px;border-radius:50%;background:var(--info-bg);color:var(--warn);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.85rem;}
+    .cp-help-card strong{display:block;font-size:.8rem;color:var(--primary);}
+    .cp-help-card span{font-size:.75rem;color:var(--text-3);}
+    .cp-help-card a{color:inherit;}
+
+    .cp-main{grid-row:2;overflow-y:auto;padding:1.6rem;}
+    .cp-main-inner{max-width:1180px;margin:0 auto;display:grid;gap:1.1rem;}
+
+    .cp-hero{position:relative;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.4rem .2rem 1rem;overflow:hidden;}
+    .cp-hero h1{font-family:var(--font-head);font-size:1.9rem;color:var(--primary);letter-spacing:-.02em;display:flex;align-items:center;gap:.5rem;}
+    .cp-hero .wave{display:inline-block;animation:wave 2.2s ease-in-out infinite;transform-origin:70% 70%;}
+    .cp-hero p{font-size:.92rem;color:var(--text-3);margin-top:.25rem;}
+    .cp-hero p strong{color:var(--primary);font-weight:700;}
+    .cp-hero-illus{position:relative;width:220px;height:110px;flex-shrink:0;display:flex;align-items:flex-end;justify-content:center;gap:.6rem;}
+    .cp-hero-illus .glow{position:absolute;width:180px;height:180px;top:-40px;right:10px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.16) 0%,transparent 70%);}
+    .cp-hi-item{position:relative;display:flex;align-items:center;justify-content:center;border-radius:14px;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-sm);color:var(--gold);}
+    .cp-hi-books{width:50px;height:50px;font-size:1.15rem;}
+    .cp-hi-plant{width:56px;height:70px;font-size:1.3rem;color:#4E9F63;transform:translateY(-4px);}
+    .cp-hi-lamp{width:44px;height:44px;font-size:1rem;color:var(--warn);position:absolute;top:-14px;right:6px;transform:rotate(10deg);}
+
+    .cp-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem;}
+    .cp-stat-card{display:flex;align-items:flex-start;gap:.85rem;padding:1.1rem 1.15rem;border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-sm);transition:var(--t);}
+    .cp-stat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);}
+    .cp-stat-icon{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0;}
+    .cp-stat-icon.violet{background:#ECE9FB;color:#6C5CE7;}
+    .cp-stat-icon.teal{background:#E0F5F3;color:#0E9488;}
+    .cp-stat-icon.green{background:#E3F5EA;color:#2E9E5B;}
+    .cp-stat-icon.blue{background:#E6F0FE;color:#2F6FE0;}
+    .cp-stat-body .stat-label{display:block;}
+    .cp-stat-body .stat-value{font-family:var(--font-head);font-size:1.15rem;margin-top:.15rem;}
+    .cp-stat-body .stat-help{margin-top:.1rem;}
+
+    .cp-panel-icon{width:42px;height:42px;border-radius:12px;background:var(--info-bg);color:var(--warn);display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0;}
+    .cp-panel-head-row{display:flex;align-items:flex-start;gap:.8rem;}
+    .cp-range-select{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .9rem;border-radius:var(--r-pill);border:1px solid var(--border);background:var(--surface);font-size:.8rem;font-weight:600;color:var(--text-2);cursor:pointer;}
+
+    .cp-empty{padding:3rem 1.5rem;text-align:center;border-radius:var(--r-lg);border:1.5px dashed var(--border);background:var(--surface-2);}
+    .cp-empty-illus{position:relative;width:120px;height:120px;margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;}
+    .cp-empty-illus .glow{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.14) 0%,transparent 72%);}
+    .cp-empty-illus i.main-i{position:relative;font-size:3.4rem;color:var(--gold);}
+    .cp-empty-illus i.spark{position:absolute;top:2px;left:6px;font-size:.85rem;color:var(--gold);}
+    .cp-empty-illus i.badge-i{position:absolute;bottom:6px;right:2px;width:30px;height:30px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--primary);box-shadow:var(--shadow-sm);}
+    .cp-empty h3{font-family:var(--font-head);font-size:1.15rem;color:var(--primary);margin-bottom:.35rem;}
+    .cp-empty p{font-size:.84rem;color:var(--text-3);max-width:360px;margin:0 auto;line-height:1.55;}
+
+    @media (max-width:900px){
+      .cp-shell{grid-template-columns:1fr;}
+      .cp-sidebar{
+        position:fixed;top:64px;left:0;bottom:0;z-index:150;width:78vw;max-width:300px;
+        transform:translateX(-100%);transition:transform .28s ease;box-shadow:var(--shadow-lg);
+      }
+      .cp-sidebar.mobile-open{transform:translateX(0);}
+      .cp-sidebar-backdrop{position:fixed;inset:64px 0 0 0;background:rgba(10,22,40,.45);z-index:140;display:none;}
+      .cp-sidebar-backdrop.show{display:block;}
+      .cp-hamburger{display:flex !important;}
+      .cp-hero-illus{display:none;}
+      .cp-stats{grid-template-columns:repeat(2,1fr);}
+      #epHomeStats{grid-template-columns:1fr 1fr !important;}
+      .ep-detail-grid{grid-template-columns:1fr 1fr !important;}
+      .report-card-body{grid-template-columns:1fr 1fr !important;}
+      .cp-main,.ep-body{padding:1rem !important;}
+      .cp-header{padding:0 .8rem !important;}
+      .ep-brand-sub{display:none;}
+      .ep-badge{display:none;}
+    }
+    @media (max-width:480px){
+      #epHomeStats{grid-template-columns:1fr !important;}
+      .ep-detail-grid{grid-template-columns:1fr !important;}
+      .report-card-body{grid-template-columns:1fr 1fr !important;}
+      .cp-stats{grid-template-columns:1fr !important;}
+      .cp-hero{flex-direction:column;align-items:flex-start;}
+      .cp-hero h1{font-size:1.5rem;}
+      .session-row{flex-direction:column;align-items:flex-start;}
+      .session-row-actions{width:100%;}
+      .session-row-actions .btn{width:100%;justify-content:center;}
+      .sched-row{flex-wrap:wrap;}
+      .sched-row label{min-width:0;flex:1 1 auto;}
+      .sched-row .sched-dur{margin-left:0;width:100%;justify-content:flex-end;}
+    }
     .ep-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
 
     /* PROFILE PHOTO */
@@ -321,13 +505,39 @@
     .upload-progress-bar{height:100%;background:linear-gradient(90deg,#E2BC5E,#C9A84C);border-radius:99px;transition:width .3s ease;}
 
     @media(max-width:1100px){.stats{grid-template-columns:repeat(2,1fr);} .emp-grid{grid-template-columns:1fr;}}
-    @media(max-width:860px){html,body{overflow:auto;height:auto;} .dashboard{display:block;} .sidebar{display:none;} .main{padding:1rem;} .form-row,.form-row-3{grid-template-columns:1fr;} .ep-grid-2{grid-template-columns:1fr;}}
-    @media(max-width:560px){.stats{grid-template-columns:1fr;}}
+    @media(max-width:860px){
+      html,body{overflow:auto;height:auto;}
+      .dashboard{display:block;}
+      .sidebar{
+        position:fixed;top:0;left:0;bottom:0;z-index:250;width:78vw;max-width:300px;
+        transform:translateX(-100%);transition:transform .28s ease;box-shadow:var(--shadow-lg);
+      }
+      .sidebar.mobile-open{transform:translateX(0);}
+      .sidebar-backdrop{position:fixed;inset:0;background:rgba(10,22,40,.45);z-index:240;display:none;}
+      .sidebar-backdrop.show{display:block;}
+      .admin-hamburger{display:flex !important;}
+      .main{padding:1rem;}
+      .form-row,.form-row-3{grid-template-columns:1fr;}
+      .ep-grid-2{grid-template-columns:1fr;}
+      .header{padding:0 1rem;flex-wrap:wrap;row-gap:.5rem;}
+      .header-title h1{font-size:1.1rem;}
+      table{font-size:.78rem;}
+      th,td{padding:.55rem .6rem !important;}
+    }
+    @media(max-width:560px){
+      .stats{grid-template-columns:1fr;}
+      .modal-backdrop{padding:.6rem;}
+      .modal{padding:1.1rem;max-height:94vh;}
+      .modal-head h2{font-size:1.05rem;}
+      .modal-head{flex-wrap:wrap;gap:.5rem;}
+      .form-row,.form-row-3{grid-template-columns:1fr;}
+      .checklist{max-height:220px;}
+    }
   </style>
 </head>
 <body>
 <!-- BOOT SPLASH (shown until Firebase resolves auth state) -->
-<div id="bootSplash" style="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#F4F3EE 0%,#FFFFFF 55%,#F0EEE6 100%);transition:opacity .3s ease;">
+<div id="bootSplash" style="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#FFFFFF;transition:opacity .3s ease;">
   <div style="text-align:center;">
     <div style="font-size:2.4rem;color:#C9A84C;margin-bottom:1rem;"><i class="fa-solid fa-spinner fa-spin"></i></div>
     <div style="font-family:var(--font-head);font-size:1.3rem;color:#0A1628;">Workspace</div>
@@ -336,62 +546,138 @@
 </div>
 <!-- LOGIN -->
 <div id="loginScreen" style="display:none;opacity:0;">
+  <div class="login-shell">
 
-  <div class="login-card">
-    <div class="login-logo"><img src="logo.png" alt="Logo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 80%22><rect width=%2280%22 height=%2280%22 rx=%2212%22 fill=%22rgba(201,168,76,0.2)%22/><text x=%2240%22 y=%2252%22 text-anchor=%22middle%22 font-size=%2236%22>🏢</text></svg>'"></div>
-    <h2>Workspace</h2>
-    <p>Sattva Jnana &nbsp;·&nbsp; Human Resources</p>
-    <form id="loginForm">
-      <input type="email" id="loginEmail" class="login-input" placeholder="Email address" required>
-      <input type="password" id="loginPassword" class="login-input" placeholder="Password" required>
-      <button type="submit" class="login-btn" id="loginBtnEl"><i class="fa-solid fa-lock"></i>&ensp;Secure Login</button>
-    </form>
-    <div id="loginError"></div>
+    <!-- Brand / illustration panel — pure background image, no overlay content -->
+    <div class="login-brand"></div>
+
+    <!-- Form panel -->
+    <div class="login-form-panel">
+      <div class="login-card">
+        <span class="login-role-badge"><i class="fa-solid fa-user-shield"></i>&ensp;ADMIN · EMPLOYEE · PARENT</span>
+        <h2>Welcome back <span class="wave">👋</span></h2>
+        <p>Sign in to access your Workspace dashboard.</p>
+        <form id="loginForm">
+          <label class="login-label" for="loginEmail">Email address</label>
+          <div class="login-input-wrap">
+            <i class="fa-solid fa-envelope"></i>
+            <input type="email" id="loginEmail" class="login-input" placeholder="you@example.com" required>
+          </div>
+          <label class="login-label" for="loginPassword">Password</label>
+          <div class="login-input-wrap">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="loginPassword" class="login-input" placeholder="Enter your password" required>
+          </div>
+          <button type="submit" class="login-btn" id="loginBtnEl"><i class="fa-solid fa-lock"></i>&ensp;Secure Login</button>
+        </form>
+        <div id="loginError"></div>
+        <div class="login-help">
+          <i class="fa-solid fa-headset"></i>
+          <span>Need help? <a href="#">Contact Support</a></span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <!-- EMPLOYEE PORTAL -->
 <div id="empPortalScreen">
-  <header class="ep-header">
-    <div class="ep-brand">
-      <div class="ep-brand-icon"><img src="logo.png" alt="Logo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 36 36%22><rect width=%2236%22 height=%2236%22 rx=%228%22 fill=%22rgba(201,168,76,0.3)%22/><text x=%2218%22 y=%2225%22 text-anchor=%22middle%22 font-size=%2216%22>🏢</text></svg>'"></div>
-      <div>
-        <div class="ep-brand-name">Sattva Jnana Workspace</div>
-        <div class="ep-brand-sub">Employee Self-Service</div>
+  <div class="cp-shell">
+    <header class="cp-header">
+      <div class="cp-header-left">
+        <button class="cp-hamburger" onclick="toggleCpSidebar('empPortalScreen')" title="Menu"><i class="fa-solid fa-bars"></i></button>
+        <div class="ep-brand-icon"><img src="logo.png" alt="Logo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 36 36%22><rect width=%2236%22 height=%2236%22 rx=%228%22 fill=%22rgba(201,168,76,0.3)%22/><text x=%2218%22 y=%2225%22 text-anchor=%22middle%22 font-size=%2216%22>🏢</text></svg>'"></div>
+        <div>
+          <div class="ep-brand-name">Sattva Jnana Workspace</div>
+          <div class="ep-brand-sub">Employee Self-Service</div>
+        </div>
+        <span class="ep-badge" id="epRoleBadge"><i class="fa-solid fa-id-badge"></i> Employee</span>
       </div>
-      <span class="ep-badge" id="epRoleBadge"><i class="fa-solid fa-id-badge"></i> Employee</span>
-    </div>
-    <button class="ep-logout-btn" id="epLogoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
-  </header>
-  <div class="ep-body">
-    <div class="ep-main" id="epMainContent">
-      <div class="empty"><h3><i class="fa-solid fa-spinner fa-spin"></i>&ensp;Loading...</h3></div>
-    </div>
+      <div class="cp-header-actions">
+        <button class="ep-logout-btn" id="epLogoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+      </div>
+    </header>
+
+    <div class="cp-sidebar-backdrop" onclick="closeCpSidebar('empPortalScreen')"></div>
+    <aside class="cp-sidebar">
+      <nav class="nav-group" id="epSidebarNav">
+        <div class="empty" style="border:none;padding:1rem 0;"><h3 style="font-size:.85rem;"><i class="fa-solid fa-spinner fa-spin"></i></h3></div>
+      </nav>
+    </aside>
+
+    <main class="cp-main">
+      <div class="cp-main-inner" id="epMainContent">
+        <div class="empty"><h3><i class="fa-solid fa-spinner fa-spin"></i>&ensp;Loading...</h3></div>
+      </div>
+    </main>
   </div>
 </div>
 
 <!-- CLIENT / PARENT PORTAL -->
 <div id="clientPortalScreen">
-  <header class="ep-header">
-    <div class="ep-brand">
-      <div class="ep-brand-icon"><img src="logo.png" alt="Logo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 36 36%22><rect width=%2236%22 height=%2236%22 rx=%228%22 fill=%22rgba(201,168,76,0.3)%22/><text x=%2218%22 y=%2225%22 text-anchor=%22middle%22 font-size=%2216%22>🏢</text></svg>'"></div>
-      <div>
-        <div class="ep-brand-name">Sattva Jnana Workspace</div>
-        <div class="ep-brand-sub">Parent / Client Portal</div>
+  <div class="cp-shell">
+    <header class="cp-header">
+      <div class="cp-header-left">
+        <button class="cp-hamburger" onclick="toggleCpSidebar('clientPortalScreen')" title="Menu"><i class="fa-solid fa-bars"></i></button>
+        <div class="ep-brand-icon"><img src="logo.png" alt="Logo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 36 36%22><rect width=%2236%22 height=%2236%22 rx=%228%22 fill=%22rgba(201,168,76,0.3)%22/><text x=%2218%22 y=%2225%22 text-anchor=%22middle%22 font-size=%2216%22>🏢</text></svg>'"></div>
+        <div>
+          <div class="ep-brand-name">Sattva Jnana Workspace</div>
+          <div class="ep-brand-sub">Parent / Client Portal</div>
+        </div>
+        <span class="ep-badge" id="cpRoleBadge"><i class="fa-solid fa-people-roof"></i> Parent / Client</span>
       </div>
-      <span class="ep-badge" id="cpRoleBadge"><i class="fa-solid fa-id-badge"></i> Parent / Client</span>
-    </div>
-    <button class="ep-logout-btn" id="cpLogoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
-  </header>
-  <div class="ep-body">
-    <div class="ep-main" id="cpMainContent">
-      <div class="empty"><h3><i class="fa-solid fa-spinner fa-spin"></i>&ensp;Loading...</h3></div>
-    </div>
+      <div class="cp-header-actions">
+        <div class="cp-notif-wrap">
+          <button class="cp-bell" id="cpBellBtn" title="Notifications"><i class="fa-regular fa-bell"></i><span class="cp-bell-dot" id="cpNotifCount" style="display:none;">0</span></button>
+          <div class="cp-notif-panel" id="cpNotifPanel">
+            <div class="cp-notif-panel-head">Notifications</div>
+            <div class="cp-notif-list" id="cpNotifList">
+              <div class="cp-notif-empty"><i class="fa-regular fa-bell-slash"></i><span>You're all caught up.</span></div>
+            </div>
+          </div>
+        </div>
+        <button class="ep-logout-btn" id="cpLogoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+      </div>
+    </header>
+
+    <div class="cp-sidebar-backdrop" onclick="closeCpSidebar('clientPortalScreen')"></div>
+    <aside class="cp-sidebar">
+      <nav class="nav-group">
+        <div class="nav-item active" data-cp-nav="dashboard" onclick="cpSidebarNav('dashboard',this)"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></div>
+        <div class="nav-item" data-cp-nav="attendance" onclick="cpSidebarNav('attendance',this)"><i class="fa-solid fa-clock"></i><span>Attendance</span></div>
+        <div class="nav-item" data-cp-nav="materials" onclick="cpSidebarNav('materials',this)"><i class="fa-solid fa-book-open"></i><span>Study Materials</span></div>
+        <div class="nav-item" data-cp-nav="progress" onclick="cpSidebarNav('progress',this)"><i class="fa-solid fa-chart-line"></i><span>Student Progress</span></div>
+        <div class="nav-item" data-cp-nav="testperf" onclick="cpSidebarNav('testperf',this)"><i class="fa-solid fa-graduation-cap"></i><span>Test Performance</span></div>
+        <div class="nav-item" data-cp-nav="schedule" onclick="cpSidebarNav('schedule',this)"><i class="fa-solid fa-calendar-week"></i><span>Schedule &amp; Leave</span></div>
+      </nav>
+
+      <div class="cp-sidebar-footer">
+        <div class="cp-footer-card">
+          <div class="cp-footer-illus"><i class="fa-solid fa-people-group"></i></div>
+          <p>We're here to support your child's learning journey.</p>
+        </div>
+        <div class="cp-help-card">
+          <i class="fa-solid fa-headset"></i>
+          <div>
+            <strong>Need Help?</strong>
+            <span><a href="#">Contact Support</a></span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="cp-main">
+      <div class="cp-main-inner" id="cpMainContent">
+        <div class="empty"><h3><i class="fa-solid fa-spinner fa-spin"></i>&ensp;Loading...</h3></div>
+      </div>
+    </main>
   </div>
 </div>
 
 <!-- ADMIN / MANAGER APP -->
 <div id="appContent" class="dashboard">
+  <div class="sidebar-backdrop" onclick="closeAdminSidebar()"></div>
   <aside class="sidebar">
     <div class="brand">
       <div class="brand-icon"><img src="logo.png" alt="Logo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22><rect width=%2240%22 height=%2240%22 rx=%228%22 fill=%22rgba(201,168,76,0.3)%22/><text x=%2220%22 y=%2228%22 text-anchor=%22middle%22 font-size=%2218%22>🏢</text></svg>'"></div>
@@ -436,9 +722,12 @@
   </aside>
 
   <header class="header">
-    <div class="header-title">
-      <h1 id="pageHeadTitle">Dashboard</h1>
-      <p id="pageHeadSub">Overview of your team and activity.</p>
+    <div class="header-title" style="display:flex;align-items:center;">
+      <button class="admin-hamburger" onclick="toggleAdminSidebar()" title="Menu"><i class="fa-solid fa-bars"></i></button>
+      <div>
+        <h1 id="pageHeadTitle">Dashboard</h1>
+        <p id="pageHeadSub">Overview of your team and activity.</p>
+      </div>
     </div>
     <div class="header-actions">
       <span class="role-badge" id="headerRoleBadge"></span>
@@ -749,7 +1038,7 @@
     <section class="page" id="pageMonthlyReport">
       <div class="card panel" style="padding:.9rem 1rem;">
         <div class="panel-head">
-          <div><h2>Monthly Attendance Report</h2><p>Present/Absent/Leave summary per employee. ≥9 hrs = Present.</p></div>
+          <div><h2>Monthly Attendance Report</h2><p>Present/Absent per employee, measured against each day's scheduled client hours — not a flat 9 hrs.</p></div>
           <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;">
             <input class="input" type="month" id="reportMonth" style="width:160px;padding:.5rem .8rem;">
             <select class="select-filter" id="reportEmpFilter"><option value="all">All Employees</option></select>
@@ -767,7 +1056,7 @@
     <section class="page" id="pageRegularization">
       <div class="card panel">
         <div class="panel-head">
-          <div><h2>Regularization Requests</h2><p>Employees can request to mark an absent day as present. Admin approval makes it present.</p></div>
+          <div><h2>Regularization Requests</h2><p>Session-wise: employees request per client, per date. Approval excuses just that session's hours from the day's requirement.</p></div>
           <select class="select-filter" id="regFilterStatus">
             <option value="pending">Pending</option>
             <option value="all">All</option>
@@ -1056,6 +1345,28 @@
 
 </div>
 
+<!-- PARENT: APPLY LEAVE MODAL -->
+<div class="modal-backdrop" id="parentLeaveModal">
+  <div class="modal" style="max-width:460px;">
+    <div class="modal-head">
+      <h2><i class="fa-solid fa-calendar-xmark" style="color:var(--warn);font-size:1rem;"></i> Apply for Leave</h2>
+      <button class="modal-close" onclick="document.getElementById('parentLeaveModal').classList.remove('open')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="info-box" style="margin-bottom:1rem;"><i class="fa-solid fa-circle-info"></i> Days you mark here won't count as scheduled tuition sessions — no need for a make-up, and it won't affect your tutor's attendance.</div>
+    <form id="parentLeaveForm" class="form-grid" autocomplete="off">
+      <div class="form-row">
+        <div class="field"><label>From <span class="req">*</span></label><input class="input" type="date" id="plFrom" required></div>
+        <div class="field"><label>To</label><input class="input" type="date" id="plTo" placeholder="Same as From if empty"></div>
+      </div>
+      <div class="field"><label>Reason</label><textarea class="textarea" id="plReason" placeholder="Optional — e.g. family trip, exams, unwell..."></textarea></div>
+      <div style="display:flex;gap:.7rem;justify-content:flex-end;flex-wrap:wrap;">
+        <button class="btn btn-secondary" type="button" onclick="document.getElementById('parentLeaveModal').classList.remove('open')">Cancel</button>
+        <button class="btn btn-gold" type="submit" id="plSubmitBtn"><i class="fa-solid fa-paper-plane"></i> Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <!-- REGULARIZATION REQUEST MODAL -->
 <div class="modal-backdrop" id="regRequestModal">
   <div class="modal" style="max-width:500px;">
@@ -1063,9 +1374,12 @@
       <h2><i class="fa-solid fa-clock-rotate-left" style="color:var(--gold);font-size:1rem;"></i> Apply for Regularization</h2>
       <button class="modal-close" onclick="document.getElementById('regRequestModal').classList.remove('open')"><i class="fa-solid fa-xmark"></i></button>
     </div>
-    <div class="info-box" style="margin-bottom:1rem;"><i class="fa-solid fa-circle-info"></i> Request to mark an absent/short day as present. Admin will review and approve.</div>
+    <div class="info-box" style="margin-bottom:1rem;"><i class="fa-solid fa-circle-info"></i> Request applies to one client's session on one date — not the whole day. Admin will review and approve.</div>
     <form id="regRequestForm" class="form-grid" autocomplete="off">
       <input type="hidden" id="regEmpDocId">
+      <div class="field"><label>Client / Session <span class="req">*</span></label>
+        <select class="select-input" id="regClient" required><option value="" disabled selected>Select client…</option></select>
+      </div>
       <div class="field"><label>Date <span class="req">*</span></label><input class="input" type="date" id="regDate" required></div>
       <div class="field"><label>Reason <span class="req">*</span></label><textarea class="textarea" id="regReason" required placeholder="e.g. Forgot to check out, system issue, worked from site..."></textarea></div>
       <div style="display:flex;gap:.7rem;justify-content:flex-end;flex-wrap:wrap;">
@@ -1335,6 +1649,11 @@
         <div class="field"><label>Status</label><select class="select-input" id="cf_status"><option>Active</option><option>Inactive</option></select></div>
       </div>
       <div class="field"><label>Fee (₹)</label><input class="input" id="cf_fee" type="number" min="0" step="0.01" placeholder="e.g. 5000 per month"></div>
+      <div class="field">
+        <label>Tuition Days &amp; Duration <span class="req">*</span></label>
+        <div class="muted-note" style="margin-bottom:.4rem;">Pick the days this student has sessions, and how many hours each. This drives the employee's expected working hours and attendance status.</div>
+        <div id="cf_scheduleGrid" style="display:grid;gap:.5rem;"></div>
+      </div>
       <div class="field"><label>Notes</label><textarea class="input" id="cf_notes" rows="3" placeholder="Internal notes (optional)"></textarea></div>
       <div style="display:flex;gap:.7rem;justify-content:flex-end;flex-wrap:wrap;">
         <button class="btn btn-secondary" type="button" onclick="document.getElementById('clientModal').classList.remove('open')">Cancel</button>
@@ -1363,7 +1682,8 @@
       <h2><i class="fa-solid fa-user-shield" style="color:var(--gold);font-size:1rem;"></i> Assign Users to Client</h2>
       <button class="modal-close" onclick="document.getElementById('assignUsersModal').classList.remove('open')"><i class="fa-solid fa-xmark"></i></button>
     </div>
-    <p style="font-size:.8rem;color:var(--text-3);margin-bottom:.8rem;">Assigned users will be able to see and update this client's record.</p>
+    <p style="font-size:.8rem;color:var(--text-3);margin-bottom:.6rem;">Assigned users will be able to see and update this client's record. They'll also be expected to log this student's scheduled tuition hours for attendance.</p>
+    <div id="assignUsersSchedule" style="margin-bottom:.9rem;display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;"></div>
     <div class="checklist" id="assignUsersChecklist"></div>
     <div style="display:flex;gap:.7rem;justify-content:flex-end;margin-top:1rem;flex-wrap:wrap;">
       <button class="btn btn-secondary" type="button" onclick="document.getElementById('assignUsersModal').classList.remove('open')">Cancel</button>
@@ -1779,13 +2099,24 @@ async function renderClientPortal(user, userData) {
   }
 
   main.innerHTML = `
-    <div class="card panel" style="margin-bottom:1rem;">
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;">
-        <div class="stat-card"><div class="stat-label">Student</div><div class="stat-value" style="font-size:1.05rem;font-family:var(--font-head);">${escHtml(client.studentName)}</div><div class="stat-help">${escHtml(client.grade||'')}</div></div>
-        <div class="stat-card"><div class="stat-label">Parent / Guardian</div><div class="stat-value" style="font-size:1.05rem;">${escHtml(client.parentName)}</div></div>
-        <div class="stat-card"><div class="stat-label">Subjects</div><div class="stat-value" style="font-size:.95rem;">${escHtml(client.subjects)||'—'}</div></div>
-        <div class="stat-card"><div class="stat-label">Client #</div><div class="stat-value" style="font-size:1.05rem;">${escHtml(client.clientNumber)}</div></div>
+    <div class="cp-hero">
+      <div>
+        <h1>Welcome back! <span class="wave">👋</span></h1>
+        <p>Here's what's happening with <strong>${escHtml(client.studentName)}</strong>.</p>
       </div>
+      <div class="cp-hero-illus" aria-hidden="true">
+        <div class="glow"></div>
+        <div class="cp-hi-item cp-hi-books"><i class="fa-solid fa-book"></i></div>
+        <div class="cp-hi-item cp-hi-plant"><i class="fa-solid fa-seedling"></i></div>
+        <div class="cp-hi-item cp-hi-lamp"><i class="fa-solid fa-lightbulb"></i></div>
+      </div>
+    </div>
+
+    <div class="cp-stats">
+      <div class="cp-stat-card"><div class="cp-stat-icon violet"><i class="fa-solid fa-user"></i></div><div class="cp-stat-body"><div class="stat-label">Student</div><div class="stat-value">${escHtml(client.studentName)}</div><div class="stat-help">${escHtml(client.grade||'')}</div></div></div>
+      <div class="cp-stat-card"><div class="cp-stat-icon teal"><i class="fa-solid fa-people-roof"></i></div><div class="cp-stat-body"><div class="stat-label">Parent / Guardian</div><div class="stat-value">${escHtml(client.parentName)}</div></div></div>
+      <div class="cp-stat-card"><div class="cp-stat-icon green"><i class="fa-solid fa-book-open"></i></div><div class="cp-stat-body"><div class="stat-label">Subjects</div><div class="stat-value" style="font-size:.95rem;">${escHtml(client.subjects)||'—'}</div></div></div>
+      <div class="cp-stat-card"><div class="cp-stat-icon blue"><i class="fa-solid fa-file-lines"></i></div><div class="cp-stat-body"><div class="stat-label">Client #</div><div class="stat-value">${escHtml(client.clientNumber)}</div></div></div>
     </div>
 
     <div class="ep-tabs">
@@ -1793,40 +2124,96 @@ async function renderClientPortal(user, userData) {
       <button class="ep-tab" onclick="cpSwitchTab('materials',this)"><i class="fa-solid fa-book"></i> Study Materials</button>
       <button class="ep-tab" onclick="cpSwitchTab('progress',this)"><i class="fa-solid fa-chart-line"></i> Student Progress</button>
       <button class="ep-tab" onclick="cpSwitchTab('testperf',this)"><i class="fa-solid fa-graduation-cap"></i> Test Performance</button>
+      <button class="ep-tab" onclick="cpSwitchTab('schedule',this)"><i class="fa-solid fa-calendar-week"></i> Schedule &amp; Leave</button>
     </div>
 
     <div class="ep-tab-panel active" id="cp-tab-attendance">
       <div class="card panel">
-        <div class="panel-head"><div><h2>Attendance Sheet</h2><p>Tutoring sessions logged for ${escHtml(client.studentName)}.</p></div></div>
+        <div class="panel-head">
+          <div class="cp-panel-head-row">
+            <div class="cp-panel-icon"><i class="fa-solid fa-calendar-days"></i></div>
+            <div><h2>Attendance Sheet</h2><p>Tutoring sessions logged for ${escHtml(client.studentName)}.</p></div>
+          </div>
+          <span class="cp-range-select"><i class="fa-regular fa-calendar"></i> All Time <i class="fa-solid fa-chevron-down" style="font-size:.65rem;"></i></span>
+        </div>
         <div class="table-wrap" id="cpAttWrap"><div class="empty"><h3><i class="fa-solid fa-spinner fa-spin"></i> Loading...</h3></div></div>
       </div>
     </div>
 
     <div class="ep-tab-panel" id="cp-tab-materials">
       <div class="card panel">
-        <div class="panel-head"><div><h2>Study Materials</h2><p>Worksheets, notes, and resources shared by the tutor.</p></div></div>
+        <div class="panel-head">
+          <div class="cp-panel-head-row">
+            <div class="cp-panel-icon"><i class="fa-solid fa-book-open"></i></div>
+            <div><h2>Study Materials</h2><p>Worksheets, notes, and resources shared by the tutor.</p></div>
+          </div>
+        </div>
         <div id="cpMaterialsGrid" class="doc-grid"><div class="empty" style="grid-column:1/-1;border:none;"><h3><i class="fa-solid fa-spinner fa-spin"></i> Loading...</h3></div></div>
       </div>
     </div>
 
     <div class="ep-tab-panel" id="cp-tab-progress">
       <div class="card panel">
-        <div class="panel-head"><div><h2>Student Progress</h2><p>Updates on what's been covered and how ${escHtml(client.studentName)} is doing.</p></div></div>
+        <div class="panel-head">
+          <div class="cp-panel-head-row">
+            <div class="cp-panel-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <div><h2>Student Progress</h2><p>Updates on what's been covered and how ${escHtml(client.studentName)} is doing.</p></div>
+          </div>
+        </div>
         <div id="cpProgressLog"><p class="muted-note"><i class="fa-solid fa-spinner fa-spin"></i> Loading…</p></div>
       </div>
     </div>
 
     <div class="ep-tab-panel" id="cp-tab-testperf">
       <div class="card panel">
-        <div class="panel-head"><div><h2>Test Performance</h2><p>Marks recorded for each test, by subject and date.</p></div></div>
+        <div class="panel-head">
+          <div class="cp-panel-head-row">
+            <div class="cp-panel-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div><h2>Test Performance</h2><p>Marks recorded for each test, by subject and date.</p></div>
+          </div>
+        </div>
         <div id="cpTestPerfLog"><p class="muted-note"><i class="fa-solid fa-spinner fa-spin"></i> Loading…</p></div>
       </div>
     </div>
+
+    <div class="ep-tab-panel" id="cp-tab-schedule">
+      <div class="card panel" style="margin-bottom:1rem;">
+        <div class="panel-head">
+          <div class="cp-panel-head-row">
+            <div class="cp-panel-icon"><i class="fa-solid fa-calendar-week"></i></div>
+            <div><h2>Tuition Schedule</h2><p>The days and hours ${escHtml(client.studentName)} has sessions each week.</p></div>
+          </div>
+        </div>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;">
+          ${formatClientSchedule(client.tuitionDays)}
+          ${client.tuitionDays?.length ? `<span class="muted-note">(${clientWeeklyHours(client.tuitionDays)} hrs/week total)</span>` : ''}
+        </div>
+      </div>
+      <div class="card panel">
+        <div class="panel-head">
+          <div class="cp-panel-head-row">
+            <div class="cp-panel-icon"><i class="fa-solid fa-calendar-xmark"></i></div>
+            <div><h2>Leave</h2><p>Let us know ahead of time if ${escHtml(client.studentName)} will miss a session — no make-up needed, and it won't affect the tutor's attendance.</p></div>
+          </div>
+          <button class="btn btn-gold" onclick="openParentLeaveModal('${client.id}')"><i class="fa-solid fa-plus"></i> Apply Leave</button>
+        </div>
+        <div id="cpLeaveWrap"><div class="empty"><h3><i class="fa-solid fa-spinner fa-spin"></i> Loading...</h3></div></div>
+      </div>
+    </div>
   `;
-  loadClientAttendance(client.id);
-  loadClientMaterials(client.id);
-  loadClientProgress(client.id);
-  loadClientTestPerformance(client.id);
+  window.__cpNotifPending = 4;
+  window.__cpNotifAtt = window.__cpNotifMat = window.__cpNotifProg = window.__cpNotifTp = null;
+  loadClientAttendance(client.id).then(n => { window.__cpNotifAtt = n; cpTryRenderNotifs(); });
+  loadClientMaterials(client.id).then(n => { window.__cpNotifMat = n; cpTryRenderNotifs(); });
+  loadClientProgress(client.id).then(n => { window.__cpNotifProg = n; cpTryRenderNotifs(); });
+  loadClientTestPerformance(client.id).then(n => { window.__cpNotifTp = n; cpTryRenderNotifs(); });
+  loadClientLeaves(client.id);
+}
+
+function cpTryRenderNotifs() {
+  window.__cpNotifPending = (window.__cpNotifPending || 4) - 1;
+  if (window.__cpNotifPending > 0) return;
+  renderCpNotifications([window.__cpNotifAtt, window.__cpNotifMat, window.__cpNotifProg, window.__cpNotifTp]);
 }
 
 window.cpSwitchTab = function(name, btn) {
@@ -1835,17 +2222,42 @@ window.cpSwitchTab = function(name, btn) {
   btn.classList.add('active');
   const panel = document.getElementById('cp-tab-'+name);
   if (panel) panel.classList.add('active');
+  // keep the sidebar in sync with whichever tab is now showing
+  document.querySelectorAll('#clientPortalScreen .cp-sidebar .nav-item').forEach(n=>n.classList.remove('active'));
+  const navMatch = document.querySelector(`#clientPortalScreen .cp-sidebar .nav-item[data-cp-nav="${name}"]`);
+  if (navMatch) navMatch.classList.add('active');
+};
+
+// Sidebar nav → drives the same tab switcher. "Dashboard" resets to the first (Attendance) tab.
+window.cpSidebarNav = function(name, el) {
+  document.querySelectorAll('#clientPortalScreen .cp-sidebar .nav-item').forEach(n=>n.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelector('#clientPortalScreen .cp-main').scrollTo({top:0,behavior:'smooth'});
+  const target = name === 'dashboard' ? 'attendance' : name;
+  const tabBtn = document.querySelector(`#clientPortalScreen .ep-tab[onclick*="cpSwitchTab('${target}'"]`);
+  if (tabBtn) {
+    document.querySelectorAll('#clientPortalScreen .ep-tab').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('#clientPortalScreen .ep-tab-panel').forEach(p=>p.classList.remove('active'));
+    tabBtn.classList.add('active');
+    const panel = document.getElementById('cp-tab-'+target);
+    if (panel) panel.classList.add('active');
+  }
+  // re-highlight the sidebar item for "dashboard" specifically, since the tab click above would otherwise steal it
+  if (name === 'dashboard') {
+    document.querySelectorAll('#clientPortalScreen .cp-sidebar .nav-item').forEach(n=>n.classList.remove('active'));
+    el.classList.add('active');
+  }
 };
 
 async function loadClientAttendance(clientId) {
   const wrap = document.getElementById('cpAttWrap');
-  if (!wrap) return;
+  if (!wrap) return null;
   try {
-    const snap = await getDocs(query(collection(db,'hrm_attendance'),where('assignedClientId','==',clientId)));
+    const snap = await getDocs(query(collection(db,'hrm_attendance'),where('clientId','==',clientId)));
     const records = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.date||'').localeCompare(a.date||''));
     if (!records.length) {
-      wrap.innerHTML = `<div class="empty"><h3>No sessions recorded yet.</h3></div>`;
-      return;
+      wrap.innerHTML = `<div class="cp-empty"><div class="cp-empty-illus"><div class="glow"></div><i class="fa-solid fa-calendar-days main-i"></i><i class="fa-solid fa-sparkle spark"></i><span class="badge-i"><i class="fa-regular fa-clock"></i></span></div><h3>No sessions recorded yet.</h3><p>Attendance records will appear here once tutoring sessions are scheduled and completed.</p></div>`;
+      return null;
     }
     const uids = [...new Set(records.map(r=>r.empUID).filter(Boolean))];
     const empMap = {};
@@ -1856,30 +2268,39 @@ async function loadClientAttendance(clientId) {
         eSnap.docs.forEach(d=>{ const e=d.data(); empMap[e.uid]=e.name; });
       } catch(e) { /* ignore lookup errors, fall back to blank name */ }
     }
-    wrap.innerHTML = `<table><thead><tr><th>Date</th><th>Tutor</th><th>Check In</th><th>Check Out</th><th>Duration</th><th>Session Notes</th></tr></thead><tbody>
-      ${records.map(r=>`<tr>
+    wrap.innerHTML = `<table><thead><tr><th>Date</th><th>Tutor</th><th>Check In</th><th>Check Out</th><th>Duration</th><th>Scheduled</th><th>Status</th><th>Session Notes</th></tr></thead><tbody>
+      ${records.map(r=>{
+        const mins = calcDurationMinutes(r.checkIn, r.checkOut);
+        const met = r.scheduledHours ? mins >= r.scheduledHours*60 : null;
+        const statusPill = !r.checkOut ? '<span class="pill pill-checkedin">In progress</span>' : met===false ? '<span class="pill pill-pending">Short</span>' : '<span class="pill pill-present">Completed</span>';
+        return `<tr>
         <td>${r.date?new Date(r.date).toLocaleDateString('en-IN'):'—'}</td>
         <td>${escHtml(empMap[r.empUID]||'—')}</td>
         <td>${escHtml(r.checkIn||'—')}</td>
         <td>${escHtml(r.checkOut||'—')}</td>
         <td>${calcDuration(r.checkIn,r.checkOut)}</td>
+        <td>${r.scheduledHours?`${r.scheduledHours}h`:'—'}</td>
+        <td>${statusPill}</td>
         <td style="font-size:.8rem;">${escHtml(r.checkOutNotes)||'—'}</td>
-      </tr>`).join('')}
+      </tr>`;}).join('')}
     </tbody></table>`;
+    const latest = records[0];
+    return { icon:'fa-clock', color:'blue', title:`Session logged with ${escHtml(empMap[latest.empUID]||'your tutor')}`, sub:latest.checkOutNotes?escHtml(latest.checkOutNotes):'Attendance updated', date: latest.date };
   } catch(err) {
     wrap.innerHTML = `<div class="empty"><h3>Error loading attendance.</h3></div>`;
+    return null;
   }
 }
 
 async function loadClientMaterials(clientId) {
   const grid = document.getElementById('cpMaterialsGrid');
-  if (!grid) return;
+  if (!grid) return null;
   try {
     const snap = await getDocs(query(collection(db,'hrm_study_materials'),where('clientId','==',clientId)));
     const mats = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.uploadedAt||'').localeCompare(a.uploadedAt||''));
     if (!mats.length) {
-      grid.innerHTML = `<div class="empty" style="grid-column:1/-1;border:none;"><div class="empty-icon">📚</div><h3>No study materials uploaded yet.</h3></div>`;
-      return;
+      grid.innerHTML = `<div class="cp-empty" style="grid-column:1/-1;"><div class="cp-empty-illus"><div class="glow"></div><i class="fa-solid fa-book-open main-i"></i><i class="fa-solid fa-sparkle spark"></i><span class="badge-i"><i class="fa-solid fa-pen"></i></span></div><h3>No study materials uploaded yet.</h3><p>Worksheets and notes shared by the tutor will show up here.</p></div>`;
+      return null;
     }
     grid.innerHTML = mats.map(m => {
       const icon = m.fileType === 'application/pdf' ? '📄' : (m.fileType && m.fileType.startsWith('image/') ? '🖼️' : '📎');
@@ -1899,20 +2320,23 @@ async function loadClientMaterials(clientId) {
         </div>
       </div>`;
     }).join('');
+    const latest = mats[0];
+    return { icon:'fa-book-open', color:'green', title:`New material: ${escHtml(latest.title||latest.fileName)}`, sub:`Uploaded by ${escHtml(latest.uploadedByName||'your tutor')}`, date: latest.uploadedAt };
   } catch(err) {
     grid.innerHTML = `<div class="empty" style="grid-column:1/-1;border:none;"><h3>Error loading materials.</h3></div>`;
+    return null;
   }
 }
 
 async function loadClientProgress(clientId) {
   const log = document.getElementById('cpProgressLog');
-  if (!log) return;
+  if (!log) return null;
   try {
     const snap = await getDocs(query(collection(db,'hrm_student_progress'),where('clientId','==',clientId)));
     const entries = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.createdAt||'').localeCompare(a.createdAt||''));
     if (!entries.length) {
-      log.innerHTML = `<p class="muted-note">No progress updates yet.</p>`;
-      return;
+      log.innerHTML = `<div class="cp-empty"><div class="cp-empty-illus"><div class="glow"></div><i class="fa-solid fa-chart-line main-i"></i><i class="fa-solid fa-sparkle spark"></i><span class="badge-i"><i class="fa-solid fa-arrow-trend-up"></i></span></div><h3>No progress updates yet.</h3><p>Notes on what's been covered and how your child is doing will appear here.</p></div>`;
+      return null;
     }
     log.innerHTML = entries.map(e => `
       <div class="perf-entry">
@@ -1924,20 +2348,23 @@ async function loadClientProgress(clientId) {
         <div class="perf-entry-meta"><span>Added by ${escHtml(e.addedByName)}</span></div>
       </div>
     `).join('');
+    const latest = entries[0];
+    return { icon:'fa-chart-line', color:'violet', title:`Progress update: ${escHtml(latest.subject||'General')}`, sub: escHtml(latest.note||''), date: latest.date||latest.createdAt };
   } catch(err) {
     log.innerHTML = `<p class="muted-note">Could not load progress history.</p>`;
+    return null;
   }
 }
 
 async function loadClientTestPerformance(clientId) {
   const log = document.getElementById('cpTestPerfLog');
-  if (!log) return;
+  if (!log) return null;
   try {
     const snap = await getDocs(query(collection(db,'hrm_test_performance'),where('clientId','==',clientId)));
     const entries = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.date||b.createdAt||'').localeCompare(a.date||a.createdAt||''));
     if (!entries.length) {
-      log.innerHTML = `<p class="muted-note">No test results recorded yet.</p>`;
-      return;
+      log.innerHTML = `<div class="cp-empty"><div class="cp-empty-illus"><div class="glow"></div><i class="fa-solid fa-graduation-cap main-i"></i><i class="fa-solid fa-sparkle spark"></i><span class="badge-i"><i class="fa-solid fa-check"></i></span></div><h3>No test results recorded yet.</h3><p>Marks for each test, by subject and date, will appear here once they're recorded.</p></div>`;
+      return null;
     }
     log.innerHTML = entries.map(e => {
       const obtained = Number(e.marksObtained)||0;
@@ -1960,9 +2387,189 @@ async function loadClientTestPerformance(clientId) {
         </div>
       </div>
     `;}).join('');
+    const latest = entries[0];
+    const lo = Number(latest.marksObtained)||0, lt = Number(latest.totalMarks)||0;
+    const lpct = lt>0?Math.round((lo/lt)*100):0;
+    return { icon:'fa-graduation-cap', color:'teal', title:`Test result: ${escHtml(latest.subject||'Test')} — ${lpct}%`, sub:`Added by ${escHtml(latest.addedByName||'your tutor')}`, date: latest.date||latest.createdAt };
   } catch(err) {
     log.innerHTML = `<p class="muted-note">Could not load test performance history.</p>`;
+    return null;
   }
+}
+
+// ─── PARENT: APPLY LEAVE (marks days as non-working for this client) ───
+window.openParentLeaveModal = function(clientId) {
+  window._parentLeaveClientId = clientId;
+  document.getElementById('plFrom').value = '';
+  document.getElementById('plTo').value = '';
+  document.getElementById('plReason').value = '';
+  document.getElementById('parentLeaveModal').classList.add('open');
+};
+
+document.getElementById('parentLeaveForm')?.addEventListener('submit', async ev => {
+  ev.preventDefault();
+  const clientId = window._parentLeaveClientId;
+  if (!clientId) return;
+  const btn = document.getElementById('plSubmitBtn');
+  const from = document.getElementById('plFrom').value;
+  const to = document.getElementById('plTo').value || from;
+  const reason = document.getElementById('plReason').value.trim();
+  if (!from) return;
+  if (to < from) { showToast('End date is before start date.', true); return; }
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...'; btn.disabled = true;
+  try {
+    const cSnap = await getDoc(doc(db,'clients',clientId));
+    const studentName = cSnap.exists() ? cSnap.data().studentName : '';
+    const dates = [];
+    let cur = new Date(from+'T00:00:00');
+    const end = new Date(to+'T00:00:00');
+    while (cur <= end) {
+      dates.push(cur.toISOString().slice(0,10));
+      cur.setDate(cur.getDate()+1);
+    }
+    await Promise.all(dates.map(date =>
+      setDoc(doc(db,'hrm_client_leaves', clientId+'_'+date), {
+        clientId, studentName, date, reason,
+        createdAt: new Date().toISOString()
+      })
+    ));
+    document.getElementById('parentLeaveModal').classList.remove('open');
+    showToast(`Leave marked for ${dates.length} day${dates.length===1?'':'s'}.`);
+    loadClientLeaves(clientId);
+  } catch(err) { showToast('Error: '+err.message, true); }
+  finally { btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit'; btn.disabled = false; }
+});
+
+window.cancelClientLeave = async function(leaveId, clientId) {
+  if (!confirm('Cancel this leave day? The session will count as scheduled again.')) return;
+  try {
+    await deleteDoc(doc(db,'hrm_client_leaves',leaveId));
+    showToast('Leave cancelled.');
+    loadClientLeaves(clientId);
+  } catch(err) { showToast('Error: '+err.message, true); }
+};
+
+async function loadClientLeaves(clientId) {
+  const wrap = document.getElementById('cpLeaveWrap');
+  if (!wrap) return;
+  try {
+    const snap = await getDocs(query(collection(db,'hrm_client_leaves'),where('clientId','==',clientId)));
+    const leaves = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+    if (!leaves.length) {
+      wrap.innerHTML = `<div class="cp-empty"><div class="cp-empty-illus"><div class="glow"></div><i class="fa-solid fa-calendar-check main-i"></i><i class="fa-solid fa-sparkle spark"></i><span class="badge-i"><i class="fa-solid fa-check"></i></span></div><h3>No leave days marked.</h3><p>Use "Apply Leave" above if a session will be missed — it'll show here.</p></div>`;
+      return;
+    }
+    const today = todayISO();
+    wrap.innerHTML = `<table><thead><tr><th>Date</th><th>Reason</th><th></th></tr></thead><tbody>
+      ${leaves.map(l => `<tr>
+        <td>${l.date?new Date(l.date).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric',weekday:'short'}):'—'}${l.date>=today?' <span class="pill pill-pending" style="margin-left:.3rem;">Upcoming</span>':''}</td>
+        <td style="font-size:.82rem;">${escHtml(l.reason)||'—'}</td>
+        <td>${l.date>=today?`<button class="mini-btn mini-btn-danger" onclick="cancelClientLeave('${l.id}','${clientId}')"><i class="fa-solid fa-xmark"></i> Cancel</button>`:''}</td>
+      </tr>`).join('')}
+    </tbody></table>`;
+  } catch(err) {
+    wrap.innerHTML = `<div class="empty"><h3>Could not load leave days.</h3></div>`;
+  }
+}
+
+function cpFormatNotifDate(d) {
+  if (!d) return '';
+  try {
+    const dt = new Date(d);
+    if (isNaN(dt.getTime())) return '';
+    return dt.toLocaleDateString('en-IN', { day:'numeric', month:'short' });
+  } catch(e) { return ''; }
+}
+
+function renderCpNotifications(items) {
+  const list = items.filter(Boolean).sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
+  const listEl = document.getElementById('cpNotifList');
+  const countEl = document.getElementById('cpNotifCount');
+  if (!listEl || !countEl) return;
+  if (!list.length) {
+    listEl.innerHTML = `<div class="cp-notif-empty"><i class="fa-regular fa-bell-slash"></i><span>You're all caught up.</span></div>`;
+    countEl.style.display = 'none';
+    return;
+  }
+  countEl.style.display = 'flex';
+  countEl.textContent = list.length;
+  listEl.innerHTML = list.map(n => `
+    <div class="cp-notif-item">
+      <div class="cp-notif-icon ${n.color}"><i class="fa-solid ${n.icon}"></i></div>
+      <div class="cp-notif-body">
+        <div class="cp-notif-title">${n.title}</div>
+        ${n.sub ? `<div class="cp-notif-sub">${n.sub}</div>` : ''}
+        <div class="cp-notif-date">${cpFormatNotifDate(n.date)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Bell toggle + outside-click close — bound once since the header markup is static
+(function initCpNotifBell(){
+  const bellBtn = document.getElementById('cpBellBtn');
+  const panel = document.getElementById('cpNotifPanel');
+  if (!bellBtn || !panel) return;
+  bellBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const willOpen = !panel.classList.contains('open');
+    panel.classList.toggle('open', willOpen);
+    bellBtn.classList.toggle('active', willOpen);
+  });
+  document.addEventListener('click', (e) => {
+    if (panel.classList.contains('open') && !panel.contains(e.target) && !bellBtn.contains(e.target)) {
+      panel.classList.remove('open');
+      bellBtn.classList.remove('active');
+    }
+  });
+})();
+
+// ─── MOBILE SIDEBAR DRAWER (parent + employee portals share .cp-shell) ───
+window.toggleCpSidebar = function(screenId) {
+  const screen = document.getElementById(screenId);
+  if (!screen) return;
+  const sidebar = screen.querySelector('.cp-sidebar');
+  const backdrop = screen.querySelector('.cp-sidebar-backdrop');
+  const opening = !sidebar.classList.contains('mobile-open');
+  sidebar.classList.toggle('mobile-open', opening);
+  if (backdrop) backdrop.classList.toggle('show', opening);
+};
+window.closeCpSidebar = function(screenId) {
+  const screen = document.getElementById(screenId);
+  if (!screen) return;
+  screen.querySelector('.cp-sidebar')?.classList.remove('mobile-open');
+  screen.querySelector('.cp-sidebar-backdrop')?.classList.remove('show');
+};
+// Close the drawer automatically whenever a nav item inside it is tapped —
+// delegated so it also covers the employee sidebar, which is rebuilt on
+// every render (see epBuildSidebarNav).
+document.addEventListener('click', (e) => {
+  const navItem = e.target.closest('.cp-sidebar .nav-item');
+  if (!navItem) return;
+  const screen = navItem.closest('#empPortalScreen, #clientPortalScreen');
+  if (screen) window.closeCpSidebar(screen.id);
+});
+
+function epBuildSidebarNav(user, empDoc, userData, pendingCount) {
+  const items = [
+    { id:'clock', icon:'fa-clock', label:'Attendance' },
+    { id:'leaves', icon:'fa-calendar-minus', label:'My Leaves' },
+    { id:'report', icon:'fa-chart-bar', label:'Monthly Report', extra:`loadMyMonthlyReport('${user.uid}','${empDoc.id}')` },
+    { id:'profile', icon:'fa-user', label:'My Profile' },
+    { id:'editreq', icon:'fa-pen-to-square', label:'Edit Profile' },
+    { id:'documents', icon:'fa-folder-open', label:'Documents', extra:`loadMyDocuments('${user.uid}')` },
+    { id:'materials', icon:'fa-book', label:'Study Materials' },
+    { id:'progress', icon:'fa-chart-line', label:'Student Progress' },
+    { id:'testperf', icon:'fa-graduation-cap', label:'Test Performance' },
+    { id:'slips', icon:'fa-file-invoice-dollar', label:'Salary Slips', extra:`loadMySlips('${user.uid}')` },
+  ];
+  if (userData.role === 'manager') {
+    items.push({ id:'manage', icon:'fa-users', label:`Team Leaves${pendingCount ? ` (${pendingCount})` : ''}` });
+  }
+  return items.map((it,i) => `
+    <div class="nav-item${i===0?' active':''}" data-ep-nav="${it.id}" onclick="epSidebarNav('${it.id}',this);${it.extra||''}">
+      <i class="fa-solid ${it.icon}"></i><span>${it.label}</span>
+    </div>`).join('');
 }
 
 async function renderEmployeePortal(user, userData) {
@@ -1978,17 +2585,26 @@ async function renderEmployeePortal(user, userData) {
   const empDoc = empSnap.docs[0];
   const emp = {id: empDoc.id, ...empDoc.data()};
 
-  // Load attendance for today
-  const todayStr = todayISO();
-  const attSnap = await getDocs(query(collection(db,'hrm_attendance'),where('empUID','==',user.uid),where('date','==',todayStr)));
-  const todayAtt = attSnap.empty ? null : attSnap.docs[0].data();
-
-  // Load my CRM client assignments (for the check-in "assignment" selector)
+  // Load my CRM client assignments (each carries its own tuition-day schedule)
   let myAssignedClients = [];
   try {
     const clientSnap = await getDocs(query(collection(db,'clients'),where('assignedUserIds','array-contains',user.uid)));
     myAssignedClients = clientSnap.docs.map(d=>({id:d.id,...d.data()}));
   } catch(e) { console.error('assigned clients load', e); }
+
+  // Today's attendance sessions — one doc per client (id: {uid}_{date}_{clientId}),
+  // or a single flat doc ({uid}_{date}) for employees with no client assignments.
+  const todayStr = todayISO();
+  const todayWeekday = dateWeekdayName(todayStr);
+  const attSnap = await getDocs(query(collection(db,'hrm_attendance'),where('empUID','==',user.uid),where('date','==',todayStr)));
+  const todaySessionsByClient = {};
+  let todayFlatAtt = null, todayFlatAttId = null;
+  attSnap.docs.forEach(d => {
+    const r = d.data();
+    if (r.clientId) todaySessionsByClient[r.clientId] = { id:d.id, ...r };
+    else { todayFlatAtt = r; todayFlatAttId = d.id; }
+  });
+  const todaysScheduledClients = myAssignedClients.filter(c => (c.tuitionDays||[]).some(d => d.day === todayWeekday));
 
   // Load leaves
   const leaveSnap = await getDocs(query(collection(db,'hrm_leaves'),where('empUID','==',user.uid)));
@@ -2009,66 +2625,62 @@ async function renderEmployeePortal(user, userData) {
     }
   }
 
-  const isCheckedIn = todayAtt && todayAtt.checkIn && !todayAtt.checkOut;
-  const isCheckedOut = todayAtt && todayAtt.checkIn && todayAtt.checkOut;
+  const isCheckedIn = todayFlatAtt && todayFlatAtt.checkIn && !todayFlatAtt.checkOut;
+  const isCheckedOut = todayFlatAtt && todayFlatAtt.checkIn && todayFlatAtt.checkOut;
+
+  document.getElementById('epSidebarNav').innerHTML = epBuildSidebarNav(user, empDoc, userData, pendingCount);
 
   main.innerHTML = `
-    <div style="display:flex;gap:1rem;align-items:flex-start;flex-wrap:wrap;">
-      <div class="profile-photo-wrap" onclick="openPhotoUploadModal('${user.uid}','${escHtml(emp.name)}')">
-        ${emp.photoURL
-          ? `<img class="profile-photo" src="${escHtml(emp.photoURL)}" alt="Profile">`
-          : `<div class="profile-photo-initials">${escHtml(emp.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase())}</div>`}
-        <div class="photo-upload-btn" title="Change photo"><i class="fa-solid fa-camera"></i></div>
-      </div>
-      <div id="epHomeStats" style="flex:1;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1rem;min-width:0;">
-        <div class="stat-card"><div class="stat-label">Name</div><div class="stat-value" style="font-size:1.05rem;font-family:var(--font-head);">${escHtml(emp.name)}</div><div class="stat-help">${escHtml(emp.title||'')}</div></div>
-        <div class="stat-card"><div class="stat-label">Employee ID</div><div class="stat-value" style="font-size:1.05rem;">${escHtml(emp.employeeId||'')}</div><div class="stat-help">${escHtml(emp.role||'employee')}</div></div>
-        <div class="stat-card"><div class="stat-label">Leave Requests</div><div class="stat-value" style="font-size:1.05rem;">${myLeaves.filter(l=>l.status==='pending').length} pending</div><div class="stat-help">${myLeaves.length} total submitted</div></div>
-        <div class="stat-card" style="border-left:3px solid var(--gold);"><div class="stat-label">Annual CTC</div><div class="stat-value" style="font-size:1.05rem;color:var(--warn);">${formatCurrency(emp.salary||0)}</div><div class="stat-help">Monthly: ${formatCurrency(Math.round((emp.salary||0)/12))}</div></div>
-      </div>
-    </div>
-
-    <div class="ep-tabs">
-      <button class="ep-tab active" onclick="epSwitchTab('clock',this)"><i class="fa-solid fa-clock"></i> Attendance</button>
-      <button class="ep-tab" onclick="epSwitchTab('leaves',this)"><i class="fa-solid fa-calendar-minus"></i> My Leaves</button>
-      <button class="ep-tab" onclick="epSwitchTab('report',this);loadMyMonthlyReport('${user.uid}','${empDoc.id}')"><i class="fa-solid fa-chart-bar"></i> Monthly Report</button>
-      <button class="ep-tab" onclick="epSwitchTab('profile',this)"><i class="fa-solid fa-user"></i> My Profile</button>
-      <button class="ep-tab" onclick="epSwitchTab('editreq',this)"><i class="fa-solid fa-pen-to-square"></i> Edit Profile</button>
-      <button class="ep-tab" onclick="epSwitchTab('documents',this);loadMyDocuments('${user.uid}')"><i class="fa-solid fa-folder-open"></i> Documents</button>
-      <button class="ep-tab" onclick="epSwitchTab('materials',this)"><i class="fa-solid fa-book"></i> Study Materials</button>
-      <button class="ep-tab" onclick="epSwitchTab('progress',this)"><i class="fa-solid fa-chart-line"></i> Student Progress</button>
-      <button class="ep-tab" onclick="epSwitchTab('testperf',this)"><i class="fa-solid fa-graduation-cap"></i> Test Performance</button>
-      <button class="ep-tab" onclick="epSwitchTab('slips',this);loadMySlips('${user.uid}')"><i class="fa-solid fa-file-invoice-dollar"></i> Salary Slips</button>
-      ${userData.role === 'manager' ? `<button class="ep-tab" onclick="epSwitchTab('manage',this)"><i class="fa-solid fa-users"></i> Team Leaves (${pendingCount})</button>` : ''}
-    </div>
-
     <!-- CLOCK TAB -->
     <div class="ep-tab-panel active" id="ep-tab-clock">
-      <div class="clock-card">
-        <div class="clock-time" id="epClock">--:--:--</div>
-        <div class="clock-date" id="epDate"></div>
-        <div class="clock-status" id="clockStatusText">
-          ${isCheckedOut ? `<span style="color:#86efac;"><i class="fa-solid fa-circle-check"></i> Checked out at ${todayAtt.checkOut}</span>` :
-            isCheckedIn ? `<span style="color:#fde68a;"><i class="fa-solid fa-circle-dot fa-beat"></i> Checked in since ${todayAtt.checkIn}</span>` :
-            `<span>Not checked in yet today</span>`}
+      ${myAssignedClients.length > 0 ? `
+        <div class="card panel">
+          <div class="panel-head">
+            <div><h2>Today's Sessions</h2><p>${escHtml(todayWeekday)}, ${new Date(todayStr+'T00:00:00').toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})} — check in and out per client.</p></div>
+          </div>
+          ${todaysScheduledClients.length === 0
+            ? `<div class="empty" style="border:none;"><h3>No sessions scheduled today.</h3><p style="font-size:.8rem;margin-top:.3rem;">None of your assigned clients have a tuition day on ${escHtml(todayWeekday)}s.</p></div>`
+            : `<div style="display:grid;gap:.7rem;">
+                ${todaysScheduledClients.map(c => {
+                  const sched = (c.tuitionDays||[]).find(d=>d.day===todayWeekday);
+                  const sess = todaySessionsByClient[c.id];
+                  const sessIn = sess && sess.checkIn && !sess.checkOut;
+                  const sessOut = sess && sess.checkIn && sess.checkOut;
+                  return `<div class="session-row">
+                    <div class="session-row-info">
+                      <div class="session-row-name">${escHtml(c.studentName)}</div>
+                      <div class="session-row-meta">${escHtml(c.clientNumber)} · Scheduled ${sched.hours}h
+                        ${sessOut ? ` · Logged ${calcDuration(sess.checkIn,sess.checkOut)} · <span style="color:var(--success);">Checked out ${sess.checkOut}</span>`
+                          : sessIn ? ` · <span style="color:var(--warn);">Checked in since ${sess.checkIn}</span>`
+                          : ` · Not checked in yet`}
+                      </div>
+                    </div>
+                    <div class="session-row-actions">
+                      ${sessOut ? `<span class="pill pill-present">Done</span>`
+                        : sessIn ? `<button class="btn btn-secondary btn-sm" onclick="openCheckoutNotesModal('${user.uid}','${empDoc.id}','${sess.id}')"><i class="fa-solid fa-right-from-bracket"></i> Check Out</button>`
+                        : `<button class="btn btn-gold btn-sm" onclick="doClientCheckIn('${user.uid}','${empDoc.id}','${c.id}','${escHtml(c.clientNumber)}','${escHtml(c.studentName)}',${sched.hours})"><i class="fa-solid fa-right-to-bracket"></i> Check In</button>`}
+                    </div>
+                  </div>`;
+                }).join('')}
+              </div>`
+          }
         </div>
-        <div class="clock-btns">
-          ${!isCheckedIn && !isCheckedOut ? (
-            myAssignedClients.length > 0
-              ? `<div style="display:flex;flex-direction:column;align-items:center;gap:.6rem;">
-                  <select id="clockAssignmentSelect" class="select-input" style="max-width:300px;" onchange="document.getElementById('clockInBtn').disabled = !this.value;">
-                    <option value="">Select assignment…</option>
-                    ${myAssignedClients.map(c=>`<option value="${escHtml(c.id)}" data-number="${escHtml(c.clientNumber)}" data-student="${escHtml(c.studentName)}">${escHtml(c.clientNumber)} — ${escHtml(c.studentName)}</option>`).join('')}
-                  </select>
-                  <button class="clock-in-btn" id="clockInBtn" disabled onclick="doCheckInWithAssignment('${user.uid}','${empDoc.id}')"><i class="fa-solid fa-right-to-bracket"></i> Check In</button>
-                  <div style="font-size:.72rem;color:var(--text-3);">Pick which client/session this check-in is for.</div>
-                </div>`
-              : `<button class="clock-in-btn" onclick="doCheckIn('${user.uid}','${empDoc.id}')"><i class="fa-solid fa-right-to-bracket"></i> Check In</button>`
-          ) : ''}
-          ${isCheckedIn ? `<button class="clock-out-btn" onclick="openCheckoutNotesModal('${user.uid}','${empDoc.id}','${attSnap.docs[0].id}')"><i class="fa-solid fa-right-from-bracket"></i> Check Out</button>` : ''}
-          ${isCheckedOut ? `<div style="color:#86efac;font-size:.9rem;"><i class="fa-solid fa-circle-check"></i> Attendance marked for today. Duration: ${calcDuration(todayAtt.checkIn,todayAtt.checkOut)}</div>` : ''}
+      ` : `
+        <div class="clock-card">
+          <div class="clock-time" id="epClock">--:--:--</div>
+          <div class="clock-date" id="epDate"></div>
+          <div class="clock-status" id="clockStatusText">
+            ${isCheckedOut ? `<span style="color:#86efac;"><i class="fa-solid fa-circle-check"></i> Checked out at ${todayFlatAtt.checkOut}</span>` :
+              isCheckedIn ? `<span style="color:#fde68a;"><i class="fa-solid fa-circle-dot fa-beat"></i> Checked in since ${todayFlatAtt.checkIn}</span>` :
+              `<span>Not checked in yet today</span>`}
+          </div>
+          <div class="clock-btns">
+            ${!isCheckedIn && !isCheckedOut ? `<button class="clock-in-btn" onclick="doCheckIn('${user.uid}','${empDoc.id}')"><i class="fa-solid fa-right-to-bracket"></i> Check In</button>` : ''}
+            ${isCheckedIn ? `<button class="clock-out-btn" onclick="openCheckoutNotesModal('${user.uid}','${empDoc.id}','${todayFlatAttId}')"><i class="fa-solid fa-right-from-bracket"></i> Check Out</button>` : ''}
+            ${isCheckedOut ? `<div style="color:#86efac;font-size:.9rem;"><i class="fa-solid fa-circle-check"></i> Attendance marked for today. Duration: ${calcDuration(todayFlatAtt.checkIn,todayFlatAtt.checkOut)}</div>` : ''}
+          </div>
         </div>
-      </div>
+      `}
       <div style="margin-top:1rem;">
         <div class="card panel"><div class="panel-head"><h2>My Attendance History</h2></div>
           <div class="table-wrap" id="epMyAttTable"><div class="empty"><h3>Loading...</h3></div></div>
@@ -2103,7 +2715,7 @@ async function renderEmployeePortal(user, userData) {
     <div class="ep-tab-panel" id="ep-tab-report">
       <div class="card panel" style="padding:.9rem 1rem;margin-bottom:1rem;">
         <div class="panel-head">
-          <div><h2>My Monthly Report</h2><p>≥9 hrs logged = Present. Everything else counts as Absent, including approved leave.</p></div>
+          <div><h2>My Monthly Report</h2><p>Each day's required hours = sum of your scheduled clients' session durations that day. Logging less than that marks the day Absent; days with no client scheduled aren't counted at all.</p></div>
           <div style="display:flex;gap:.5rem;align-items:center;">
             <input class="input" type="month" id="empReportMonth" style="width:160px;padding:.5rem .8rem;">
             <button class="btn btn-gold" onclick="loadMyMonthlyReport('${user.uid}','${empDoc.id}')"><i class="fa-solid fa-rotate"></i> Load</button>
@@ -2119,7 +2731,21 @@ async function renderEmployeePortal(user, userData) {
     <div class="ep-tab-panel" id="ep-tab-profile">
       <div class="card panel">
         <div class="panel-head"><h2>My Profile</h2></div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;">
+        <div style="display:flex;gap:1rem;align-items:flex-start;flex-wrap:wrap;margin-bottom:.3rem;">
+          <div class="profile-photo-wrap" onclick="openPhotoUploadModal('${user.uid}','${escHtml(emp.name)}')">
+            ${emp.photoURL
+              ? `<img class="profile-photo" src="${escHtml(emp.photoURL)}" alt="Profile">`
+              : `<div class="profile-photo-initials">${escHtml(emp.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase())}</div>`}
+            <div class="photo-upload-btn" title="Change photo"><i class="fa-solid fa-camera"></i></div>
+          </div>
+          <div id="epHomeStats" style="flex:1;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1rem;min-width:0;">
+            <div class="stat-card"><div class="stat-label">Name</div><div class="stat-value" style="font-size:1.05rem;font-family:var(--font-head);">${escHtml(emp.name)}</div><div class="stat-help">${escHtml(emp.title||'')}</div></div>
+            <div class="stat-card"><div class="stat-label">Employee ID</div><div class="stat-value" style="font-size:1.05rem;">${escHtml(emp.employeeId||'')}</div><div class="stat-help">${escHtml(emp.role||'employee')}</div></div>
+            <div class="stat-card"><div class="stat-label">Leave Requests</div><div class="stat-value" style="font-size:1.05rem;">${myLeaves.filter(l=>l.status==='pending').length} pending</div><div class="stat-help">${myLeaves.length} total submitted</div></div>
+            <div class="stat-card" style="border-left:3px solid var(--gold);"><div class="stat-label">Annual CTC</div><div class="stat-value" style="font-size:1.05rem;color:var(--warn);">${formatCurrency(emp.salary||0)}</div><div class="stat-help">Monthly: ${formatCurrency(Math.round((emp.salary||0)/12))}</div></div>
+          </div>
+        </div>
+        <div class="ep-detail-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-top:1rem;">
           ${profileDetailItem('Name', emp.name)}
           ${profileDetailItem('Employee ID', emp.employeeId)}
           ${profileDetailItem('Title', emp.title)}
@@ -2133,7 +2759,7 @@ async function renderEmployeePortal(user, userData) {
           ${profileDetailItem('IFSC', emp.ifsc)}
           ${profileDetailItem('Bank Name', emp.bankName)}
         </div>
-        <div style="margin-top:1rem;padding:1rem;border-radius:var(--r-md);background:linear-gradient(135deg,var(--gold-soft),rgba(201,168,76,0.05));border:1px solid var(--gold-border);display:grid;grid-template-columns:1fr 1fr 1fr;gap:.7rem;">
+        <div class="ep-detail-grid" style="margin-top:1rem;padding:1rem;border-radius:var(--r-md);background:linear-gradient(135deg,var(--gold-soft),rgba(201,168,76,0.05));border:1px solid var(--gold-border);display:grid;grid-template-columns:1fr 1fr 1fr;gap:.7rem;">
           <div>
             <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--warn);margin-bottom:.3rem;"><i class="fa-solid fa-indian-rupee-sign"></i> Annual CTC</div>
             <div style="font-size:1.3rem;font-family:var(--font-mono);font-weight:700;color:var(--primary);">${formatCurrency(emp.salary||0)}</div>
@@ -2347,13 +2973,17 @@ function profileDetailItem(label, val) {
   </div>`;
 }
 
-window.epSwitchTab = function(name, btn) {
-  document.querySelectorAll('.ep-tab').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.ep-tab-panel').forEach(p=>p.classList.remove('active'));
-  btn.classList.add('active');
+window.epSidebarNav = function(name, el) {
+  document.querySelectorAll('#empPortalScreen .cp-sidebar .nav-item').forEach(n=>n.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('#empPortalScreen .ep-tab-panel').forEach(p=>p.classList.remove('active'));
   const panel = document.getElementById('ep-tab-'+name);
   if (panel) panel.classList.add('active');
+  const mainEl = document.querySelector('#empPortalScreen .cp-main');
+  if (mainEl) mainEl.scrollTo({top:0,behavior:'smooth'});
 };
+// kept as an alias so any older call sites (or inline onclick strings) referencing epSwitchTab keep working
+window.epSwitchTab = window.epSidebarNav;
 
 function startClock() {
   if (clockInterval) clearInterval(clockInterval);
@@ -2377,39 +3007,36 @@ function calcDuration(checkIn, checkOut) {
   return `${h}h ${m}m`;
 }
 
-window.doCheckIn = async function(uid, empDocId, assignment) {
+window.doCheckIn = async function(uid, empDocId) {
   const now = new Date();
   const timeStr = now.toTimeString().split(' ')[0];
   const dateStr = now.toISOString().split('T')[0];
   const attId = `${uid}_${dateStr}`;
   try {
-    const payload = {empUID:uid, empDocId, date:dateStr, checkIn:timeStr, checkOut:null, createdAt: now.toISOString()};
-    if (assignment) {
-      payload.assignedClientId = assignment.clientId;
-      payload.assignedClientNumber = assignment.clientNumber;
-      payload.assignedStudentName = assignment.studentName;
-    }
-    await setDoc(doc(db,'hrm_attendance',attId), payload);
+    await setDoc(doc(db,'hrm_attendance',attId), {empUID:uid, empDocId, date:dateStr, checkIn:timeStr, checkOut:null, createdAt: now.toISOString()});
     showToast('Checked in at '+timeStr);
-    // Reload portal
     const ud = await getDoc(doc(db,'hrm_users',uid));
     renderEmployeePortal(window.hrmCurrentUser, ud.data());
   } catch(e) { showToast('Check-in failed: '+e.message, true); }
 };
 
-// Check-in flow when the employee has CRM client assignments — reads the
-// selected <option> for clientId/number/student and requires a real
-// selection (the Check In button starts disabled and only enables once
-// something is chosen, so this should never actually fire with none).
-window.doCheckInWithAssignment = async function(uid, empDocId) {
-  const sel = document.getElementById('clockAssignmentSelect');
-  if (!sel || !sel.value) { showToast('Please select an assignment before checking in.', true); return; }
-  const opt = sel.options[sel.selectedIndex];
-  await doCheckIn(uid, empDocId, {
-    clientId: sel.value,
-    clientNumber: opt.dataset.number,
-    studentName: opt.dataset.student
-  });
+// Per-client session check-in — one attendance doc per (employee, date, client),
+// so each client's session is tracked and reportable on its own.
+window.doClientCheckIn = async function(uid, empDocId, clientId, clientNumber, studentName, scheduledHours) {
+  const now = new Date();
+  const timeStr = now.toTimeString().split(' ')[0];
+  const dateStr = now.toISOString().split('T')[0];
+  const attId = `${uid}_${dateStr}_${clientId}`;
+  try {
+    await setDoc(doc(db,'hrm_attendance',attId), {
+      empUID:uid, empDocId, clientId, clientNumber, studentName,
+      scheduledHours: Number(scheduledHours)||0,
+      date:dateStr, checkIn:timeStr, checkOut:null, createdAt: now.toISOString()
+    });
+    showToast(`Checked in for ${studentName} at ${timeStr}`);
+    const ud = await getDoc(doc(db,'hrm_users',uid));
+    renderEmployeePortal(window.hrmCurrentUser, ud.data());
+  } catch(e) { showToast('Check-in failed: '+e.message, true); }
 };
 
 window.doCheckOut = async function(uid, empDocId, attDocId, notes) {
@@ -2444,17 +3071,21 @@ async function loadMyAttHistory(uid) {
   if (!el) return;
   try {
     const snap = await getDocs(query(collection(db,'hrm_attendance'),where('empUID','==',uid)));
-    const recs = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,30);
+    const recs = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,40);
     if (!recs.length) { el.innerHTML=`<div class="empty" style="border:none;"><h3>No records yet.</h3></div>`; return; }
-    el.innerHTML = `<table><thead><tr><th>Date</th><th>Assignment</th><th>Check In</th><th>Check Out</th><th>Duration</th><th>Notes</th></tr></thead><tbody>
-      ${recs.map(r=>`<tr>
+    el.innerHTML = `<table><thead><tr><th>Date</th><th>Client</th><th>Check In</th><th>Check Out</th><th>Logged</th><th>Scheduled</th><th>Notes</th></tr></thead><tbody>
+      ${recs.map(r=>{
+        const mins = calcDurationMinutes(r.checkIn, r.checkOut);
+        const met = r.scheduledHours ? mins >= r.scheduledHours*60 : null;
+        return `<tr>
         <td>${escHtml(r.date)}</td>
-        <td>${r.assignedClientNumber ? `${escHtml(r.assignedClientNumber)}<div style="font-size:.72rem;color:var(--text-3);">${escHtml(r.assignedStudentName)}</div>` : '<span style="color:var(--text-3);">—</span>'}</td>
+        <td>${r.clientNumber ? `${escHtml(r.clientNumber)}<div style="font-size:.72rem;color:var(--text-3);">${escHtml(r.studentName)}</div>` : '<span style="color:var(--text-3);">—</span>'}</td>
         <td>${escHtml(r.checkIn||'—')}</td>
         <td>${escHtml(r.checkOut||'—')}</td>
-        <td>${calcDuration(r.checkIn,r.checkOut)}</td>
+        <td>${calcDuration(r.checkIn,r.checkOut)}${met===false?' <span class="pill pill-pending" style="margin-left:.2rem;">Short</span>':met===true?' <span class="pill pill-present" style="margin-left:.2rem;">Met</span>':''}</td>
+        <td>${r.scheduledHours?`${r.scheduledHours}h`:'—'}</td>
         <td style="max-width:220px;font-size:.78rem;">${escHtml(r.checkOutNotes)||'<span style="color:var(--text-3);">—</span>'}</td>
-      </tr>`).join('')}
+      </tr>`;}).join('')}
     </tbody></table>`;
   } catch(e) { el.innerHTML=`<div class="empty"><h3>Error loading records.</h3></div>`; }
 }
@@ -2639,6 +3270,52 @@ function startCrmSync() {
 
 function crmVal(id){ return (document.getElementById(id).value||'').trim(); }
 function crmSetVal(id,v){ document.getElementById(id).value = v||''; }
+
+// ─── CLIENT TUITION SCHEDULE (days + duration) ───
+const WEEK_DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+function renderClientScheduleGrid(existingDays) {
+  const map = {};
+  (existingDays||[]).forEach(d => { map[d.day] = d.hours; });
+  const grid = document.getElementById('cf_scheduleGrid');
+  if (!grid) return;
+  grid.innerHTML = WEEK_DAYS.map(day => {
+    const checked = map.hasOwnProperty(day);
+    const hrs = checked ? map[day] : '';
+    return `<div class="sched-row${checked?' on':''}" id="sched-row-${day}">
+      <label><input type="checkbox" data-sched-day="${day}" ${checked?'checked':''} onchange="toggleSchedRow('${day}',this.checked)"> ${day}</label>
+      <div class="sched-dur"><input type="number" min="0.5" step="0.5" data-sched-hours="${day}" value="${hrs}" placeholder="hrs"> hrs / session</div>
+    </div>`;
+  }).join('');
+}
+window.toggleSchedRow = function(day, on) {
+  const row = document.getElementById('sched-row-'+day);
+  if (!row) return;
+  row.classList.toggle('on', on);
+  if (on) {
+    const input = row.querySelector('[data-sched-hours]');
+    if (input && !input.value) input.value = '1';
+  }
+};
+function collectClientSchedule() {
+  const grid = document.getElementById('cf_scheduleGrid');
+  if (!grid) return [];
+  return WEEK_DAYS
+    .map(day => {
+      const cb = grid.querySelector(`[data-sched-day="${day}"]`);
+      const hrsInput = grid.querySelector(`[data-sched-hours="${day}"]`);
+      if (!cb || !cb.checked) return null;
+      const hours = Number(hrsInput?.value) || 1;
+      return { day, hours };
+    })
+    .filter(Boolean);
+}
+function formatClientSchedule(tuitionDays) {
+  if (!tuitionDays || !tuitionDays.length) return '<span class="muted-note">No tuition days set.</span>';
+  return tuitionDays.map(d => `<span class="sched-badge"><i class="fa-solid fa-clock"></i> ${escHtml(d.day.slice(0,3))} · ${d.hours}h</span>`).join(' ');
+}
+function clientWeeklyHours(tuitionDays) {
+  return (tuitionDays||[]).reduce((s,d)=>s+(Number(d.hours)||0),0);
+}
 function crmFmtDate(ts){
   if(!ts) return '—';
   const d = ts.toDate ? ts.toDate() : new Date(ts);
@@ -2897,6 +3574,7 @@ window.openAddClientModal = function() {
   document.getElementById('clientModalTitle').innerHTML = '<i class="fa-solid fa-user-group" style="color:var(--gold);font-size:1rem;"></i> Add Client';
   document.getElementById('clientForm').reset();
   document.getElementById('cf_id').value = '';
+  renderClientScheduleGrid([]);
   document.getElementById('clientModal').classList.add('open');
 };
 
@@ -2909,6 +3587,7 @@ window.openClientEditModal = function(client) {
   crmSetVal('cf_subjects',client.subjects); crmSetVal('cf_area',client.area);
   crmSetVal('cf_status',client.status); crmSetVal('cf_notes',client.notes);
   crmSetVal('cf_fee',client.fee);
+  renderClientScheduleGrid(client.tuitionDays||[]);
   document.getElementById('clientModal').classList.add('open');
 };
 
@@ -2998,6 +3677,7 @@ window.openClientDetailModal = function(id) {
       <div><div style="font-size:.72rem;text-transform:uppercase;color:var(--text-3);font-weight:700;">Fee</div><div style="font-family:var(--font-mono);color:var(--warn);font-weight:700;">${c.fee?formatCurrency(c.fee):'—'}</div></div>
       <div><div style="font-size:.72rem;text-transform:uppercase;color:var(--text-3);font-weight:700;">Status</div><div><span class="pill pill-${(c.status||'active').toLowerCase()}">${escHtml(c.status||'Active')}</span></div></div>
     </div>
+    <div style="margin-top:.8rem;"><div style="font-size:.72rem;text-transform:uppercase;color:var(--text-3);font-weight:700;margin-bottom:.35rem;">Tuition Schedule</div><div style="display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;">${formatClientSchedule(c.tuitionDays)} ${c.tuitionDays?.length?`<span class="muted-note">(${clientWeeklyHours(c.tuitionDays)} hrs/week)</span>`:''}</div></div>
     <div style="margin-top:.8rem;"><div style="font-size:.72rem;text-transform:uppercase;color:var(--text-3);font-weight:700;">Assigned User(s)</div><div>${crmAssignedTutorTags(c.assignedUserIds)}</div></div>
     ${c.leadNumber?`<div class="info-box" style="margin-top:.8rem;"><i class="fa-solid fa-circle-check"></i> Converted from lead <strong>${escHtml(c.leadNumber)}</strong>.</div>`:''}
     ${c.notes?`<div class="info-box" style="margin-top:.8rem;"><i class="fa-solid fa-note-sticky"></i> ${escHtml(c.notes)}</div>`:''}
@@ -3030,13 +3710,16 @@ document.getElementById('clientSearch')?.addEventListener('input', renderClients
 document.getElementById('clientStatusFilter')?.addEventListener('change', renderClientsPage);
 document.getElementById('clientForm')?.addEventListener('submit', async (e) => {
   e.preventDefault();
+  const tuitionDays = collectClientSchedule();
+  if (!tuitionDays.length) { showToast('Select at least one tuition day and duration.', true); return; }
   const payload = {
     parentName: crmVal('cf_parentName'), studentName: crmVal('cf_studentName'),
     phone: crmVal('cf_phone'), email: crmVal('cf_email'),
     grade: crmVal('cf_grade'), curriculum: crmVal('cf_curriculum'),
     subjects: crmVal('cf_subjects'), area: crmVal('cf_area'),
     status: crmVal('cf_status')||'Active', notes: crmVal('cf_notes'),
-    fee: Number(crmVal('cf_fee'))||0
+    fee: Number(crmVal('cf_fee'))||0,
+    tuitionDays
   };
   const id = document.getElementById('cf_id').value;
   const btn = document.getElementById('clientSaveBtn');
@@ -3062,6 +3745,10 @@ window.openAssignUsersModal = function(clientId) {
   _assignUsersTargetClientId = clientId;
   const client = (window.hrmClients||[]).find(c=>c.id===clientId);
   const users = (window.hrmEmployees||[]).filter(e=>e.crmAssignable && e.status==='active');
+  const scheduleEl = document.getElementById('assignUsersSchedule');
+  if (scheduleEl) {
+    scheduleEl.innerHTML = formatClientSchedule(client?.tuitionDays) + (client?.tuitionDays?.length ? ` <span class="muted-note">(${clientWeeklyHours(client.tuitionDays)} hrs/week — assignee's expected hours)</span>` : '');
+  }
   const checklist = document.getElementById('assignUsersChecklist');
   checklist.innerHTML = users.length === 0
     ? '<p style="font-size:.8rem;color:var(--text-3);">No CRM-assignable employees yet — check "Can be assigned to CRM clients" on an employee\'s record first.</p>'
@@ -3085,7 +3772,7 @@ window.openAssignClientsModal = function(userId) {
   const checklist = document.getElementById('assignClientsChecklist');
   checklist.innerHTML = clients.length === 0
     ? '<p style="font-size:.8rem;color:var(--text-3);">No clients yet.</p>'
-    : clients.map(c=>`<label><input type="checkbox" value="${c.id}" ${(c.assignedUserIds||[]).includes(userId)?'checked':''}> ${escHtml(c.clientNumber)} — ${escHtml(c.studentName)}</label>`).join('');
+    : clients.map(c=>`<label><input type="checkbox" value="${c.id}" ${(c.assignedUserIds||[]).includes(userId)?'checked':''}> ${escHtml(c.clientNumber)} — ${escHtml(c.studentName)} <span style="color:var(--text-3);font-size:.76rem;">(${clientWeeklyHours(c.tuitionDays)} hrs/wk)</span></label>`).join('');
   document.getElementById('assignClientsModal').classList.add('open');
 };
 document.getElementById('saveAssignClientsBtn')?.addEventListener('click', async () => {
@@ -3146,6 +3833,18 @@ window.removeCrmAssignable = async function(empDocId) {
 };
 
 // ─── ADMIN PAGE NAV ───
+window.toggleAdminSidebar = function() {
+  const sidebar = document.querySelector('#appContent .sidebar');
+  const backdrop = document.querySelector('#appContent .sidebar-backdrop');
+  const opening = !sidebar.classList.contains('mobile-open');
+  sidebar.classList.toggle('mobile-open', opening);
+  if (backdrop) backdrop.classList.toggle('show', opening);
+};
+window.closeAdminSidebar = function() {
+  document.querySelector('#appContent .sidebar')?.classList.remove('mobile-open');
+  document.querySelector('#appContent .sidebar-backdrop')?.classList.remove('show');
+};
+
 window.showAdminPage = function(name) {
   document.querySelectorAll('.page').forEach(p=>{p.classList.remove('active');p.style.display='none';});
   const tgt = document.getElementById('page'+name.charAt(0).toUpperCase()+name.slice(1));
@@ -3158,6 +3857,7 @@ window.showAdminPage = function(name) {
     document.getElementById('pageHeadSub').textContent = pageConfig[name].s;
   }
   renderCurrentAdminPage();
+  closeAdminSidebar();
 };
 
 document.querySelectorAll('.nav-item[data-page]').forEach(btn=>{
@@ -3455,21 +4155,28 @@ window.loadAttendance = async function() {
 
     if (!recs.length) { wrap.innerHTML=`<div class="empty"><div class="empty-icon">📋</div><h3>No records found.</h3></div>`; return; }
 
-    wrap.innerHTML = `<table><thead><tr><th>Employee</th><th>Title</th><th>Date</th><th>Assignment</th><th>Check In</th><th>Check Out</th><th>Duration</th><th>Notes</th><th>Status</th></tr></thead><tbody>
+    wrap.innerHTML = `<table><thead><tr><th>Employee</th><th>Title</th><th>Date</th><th>Client</th><th>Check In</th><th>Check Out</th><th>Logged</th><th>Scheduled</th><th>Notes</th><th>Status</th></tr></thead><tbody>
       ${recs.map(r=>{
         const emp = empMap[r.empUID]||{};
         const dur = calcDuration(r.checkIn, r.checkOut);
-        const status = r.checkOut ? 'Present' : (r.checkIn ? 'Checked In' : 'Absent');
+        const mins = calcDurationMinutes(r.checkIn, r.checkOut);
+        let status;
+        if (!r.checkIn) status = 'Absent';
+        else if (!r.checkOut) status = 'Checked In';
+        else if (r.scheduledHours) status = mins >= r.scheduledHours*60 ? 'Present' : 'Short';
+        else status = 'Present';
+        const pillClass = status==='Present'?'pill-present':(status==='Checked In'?'pill-checkedin':(status==='Short'?'pill-pending':'pill-absent'));
         return `<tr>
           <td><strong>${escHtml(emp.name||r.empUID)}</strong></td>
           <td>${escHtml(emp.title||'')}</td>
           <td>${escHtml(r.date)}</td>
-          <td>${r.assignedClientNumber ? `${escHtml(r.assignedClientNumber)}<div style="font-size:.72rem;color:var(--text-3);">${escHtml(r.assignedStudentName)}</div>` : '<span style="color:var(--text-3);">—</span>'}</td>
+          <td>${r.clientNumber ? `${escHtml(r.clientNumber)}<div style="font-size:.72rem;color:var(--text-3);">${escHtml(r.studentName)}</div>` : '<span style="color:var(--text-3);">—</span>'}</td>
           <td>${escHtml(r.checkIn||'—')}</td>
           <td>${escHtml(r.checkOut||'—')}</td>
           <td>${dur}</td>
+          <td>${r.scheduledHours?`${r.scheduledHours}h`:'—'}</td>
           <td style="max-width:200px;font-size:.78rem;">${escHtml(r.checkOutNotes)||'<span style="color:var(--text-3);">—</span>'}</td>
-          <td><span class="pill ${status==='Present'?'pill-present':(status==='Checked In'?'pill-checkedin':'pill-absent')}">${status}</span></td>
+          <td><span class="pill ${pillClass}">${status}</span></td>
         </tr>`;
       }).join('')}
     </tbody></table>`;
@@ -3585,9 +4292,12 @@ window.exportAttendanceExcel = async function() {
         'Employee Name': e.name||r.empUID,
         'Employee ID': e.employeeId||'',
         'Date': r.date,
+        'Client': r.clientNumber||'',
+        'Student': r.studentName||'',
         'Check In': r.checkIn||'',
         'Check Out': r.checkOut||'',
         'Duration': calcDuration(r.checkIn,r.checkOut),
+        'Scheduled Hours': r.scheduledHours||'',
         'Bank Account': e.bankAccount||'',
         'IFSC': e.ifsc||'',
         'Bank Name': e.bankName||'',
@@ -3664,7 +4374,7 @@ document.getElementById('empEditReqForm').addEventListener('submit', async e => 
     document.getElementById('empEditReqModal').classList.remove('open');
     showToast('Edit request submitted! Admin will review it.');
     loadMyEditRequests(uid);
-    epSwitchTab('editreq', document.querySelector('.ep-tab[onclick*="editreq"]'));
+    epSwitchTab('editreq', document.querySelector('#empPortalScreen .nav-item[onclick*="editreq"]'));
   } catch(err) { showToast('Error: '+err.message, true); }
   finally { btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit for Approval'; btn.disabled = false; }
 });
@@ -4450,54 +5160,132 @@ function getDatesInMonth(ym) { // ym = "YYYY-MM"
   return Array.from({length:days},(_,i)=>`${ym}-${String(i+1).padStart(2,'0')}`);
 }
 
+function dateWeekdayName(dateStr) {
+  return WEEK_DAYS[(new Date(dateStr+'T00:00:00').getDay()+6)%7]; // getDay(): Sun=0..Sat=6 → shift so Mon=0..Sun=6
+}
+
+// Expected minutes an employee should be logged in for on a given date, based on
+// the tuition schedules of the clients assigned to them — minus any client-side
+// leave for that date, minus any *approved* session-wise regularization for that
+// specific client+date (which excuses just that session, not the whole day).
+function computeExpectedMinutesForDate(dateStr, assignedClients, clientLeaveKeys, approvedRegKeys) {
+  const weekday = dateWeekdayName(dateStr);
+  let minutes = 0;
+  const sessions = [];
+  assignedClients.forEach(c => {
+    const sched = (c.tuitionDays||[]).find(d => d.day === weekday);
+    if (!sched) return;
+    const leaveKey = c.id+'_'+dateStr;
+    const regKey = c.id+'_'+dateStr;
+    if (clientLeaveKeys.has(leaveKey)) { sessions.push({clientId:c.id, studentName:c.studentName, hours:sched.hours, excused:'leave'}); return; }
+    if (approvedRegKeys.has(regKey)) { sessions.push({clientId:c.id, studentName:c.studentName, hours:sched.hours, excused:'regularized'}); return; }
+    minutes += sched.hours * 60;
+    sessions.push({clientId:c.id, studentName:c.studentName, hours:sched.hours, excused:null});
+  });
+  return {minutes, sessions};
+}
+
 function isWorkingDay(dateStr) {
-  // Returns false for Sundays (getDay() === 0)
+  // Fallback rule (Sundays off) — used only for staff with zero client assignments.
   return new Date(dateStr + 'T00:00:00').getDay() !== 0;
 }
 
-function getWorkingDaysInMonth(ym) {
-  // Returns all non-Sunday dates in the month (actual count, not capped at 26)
-  const [y,m] = ym.split('-').map(Number);
-  const totalDays = new Date(y, m, 0).getDate();
-  const all = Array.from({length:totalDays}, (_,i) => `${ym}-${String(i+1).padStart(2,'0')}`);
-  return all.filter(isWorkingDay);
-}
-
 async function buildMonthReport(uid, empDocId, ym) {
-  // Attendance records
+  // Attendance records — grouped by date+clientId (per-session) and, separately,
+  // any flat/no-client records (for staff with no assigned clients).
   const attSnap = await getDocs(query(collection(db,'hrm_attendance'),where('empUID','==',uid)));
-  const attMap  = {};
-  attSnap.docs.forEach(d=>{ const r=d.data(); attMap[r.date]=r; });
+  const attByDateClient = {};
+  const attByDateFlat = {};
+  attSnap.docs.forEach(d=>{
+    const r = d.data();
+    if (r.clientId) attByDateClient[r.date+'_'+r.clientId] = r;
+    else attByDateFlat[r.date] = r;
+  });
 
-  // Regularizations approved
-  const regSnap = await getDocs(query(collection(db,'hrm_regularizations'),where('empUID','==',uid),where('status','==','approved')));
-  const regDates = new Set(regSnap.docs.map(d=>d.data().date));
+  // Clients assigned to this employee — each carries its own tuition-day schedule
+  let assignedClients = [];
+  try {
+    const clientSnap = await getDocs(query(collection(db,'clients'),where('assignedUserIds','array-contains',uid)));
+    assignedClients = clientSnap.docs.map(d=>({id:d.id,...d.data()}));
+  } catch(e) { console.error('assigned clients load (report)', e); }
 
-  // Working days = all non-Sunday days in the month (auto-detected, no hard cap)
-  const allWorkingDates = getWorkingDaysInMonth(ym);
-  const workingDaysCount = allWorkingDates.length;
+  const allDates = getDatesInMonth(ym);
   const today = todayISO();
-  let presentDays=0, absentDays=0;
+  let presentDays=0, absentDays=0, workingDaysCount=0;
 
-  // Note: leave requests (hrm_leaves) are no longer factored in here at
-  // all — approved or not, a day with no attendance is simply "absent",
-  // same as before leave requests existed. Leave requests are purely
-  // advance notice for admins now, not a payroll category.
-  const dayRows = allWorkingDates.map(date=>{
-    if (date > today) return null; // future
-    const att  = attMap[date];
-    const mins = att ? calcDurationMinutes(att.checkIn, att.checkOut) : 0;
-    let status;
-    if (regDates.has(date)) {
-      status = 'regularized'; presentDays++;
-    } else if (mins >= 540) { // ≥9 hrs = Present
-      status = 'present'; presentDays++;
-    } else if (att && att.checkIn) {
-      status = 'short'; absentDays++; // checked in but < 9 hrs
-    } else {
-      status = 'absent'; absentDays++;
+  // ── Staff with no client assignments: fall back to the simple flat rule
+  // (≥9 hrs on any non-Sunday day = Present) since there's no schedule to
+  // measure against.
+  if (assignedClients.length === 0) {
+    const dayRows = allDates.filter(isWorkingDay).map(date=>{
+      if (date > today) return null;
+      const att = attByDateFlat[date];
+      const mins = att ? calcDurationMinutes(att.checkIn, att.checkOut) : 0;
+      workingDaysCount++;
+      let status;
+      if (mins >= 540) { status = 'present'; presentDays++; }
+      else if (att && att.checkIn) { status = 'short'; absentDays++; }
+      else { status = 'absent'; absentDays++; }
+      return {date, mins, expectedMins:540, sessions:[], status, checkIn:att?.checkIn||'', checkOut:att?.checkOut||''};
+    }).filter(Boolean);
+    return {dayRows, presentDays, absentDays, workingDays: workingDaysCount};
+  }
+
+  // Client-submitted leave days (parent portal) — zero out that client's
+  // expected hours for that date, same as a day outside the tuition schedule.
+  let clientLeaveKeys = new Set();
+  try {
+    const clientIds = assignedClients.map(c=>c.id);
+    if (clientIds.length) {
+      const leaveSnap = await getDocs(collection(db,'hrm_client_leaves'));
+      leaveSnap.docs.forEach(d=>{
+        const l = d.data();
+        if (clientIds.includes(l.clientId) && l.date >= ym+'-01' && l.date <= ym+'-31') {
+          clientLeaveKeys.add(l.clientId+'_'+l.date);
+        }
+      });
     }
-    return {date, mins, status, checkIn:att?.checkIn||'', checkOut:att?.checkOut||''};
+  } catch(e) { console.error('client leaves load', e); }
+
+  // Session-wise regularizations, approved only — excuses just that one client's
+  // session on that date rather than the whole day.
+  let approvedRegKeys = new Set();
+  try {
+    const regSnap = await getDocs(query(collection(db,'hrm_regularizations'),where('empUID','==',uid),where('status','==','approved')));
+    regSnap.docs.forEach(d=>{
+      const r = d.data();
+      if (r.clientId && r.date) approvedRegKeys.add(r.clientId+'_'+r.date);
+    });
+  } catch(e) { console.error('regularizations load', e); }
+
+  // ── Real per-client session comparison: each scheduled, non-excused client
+  // session that day must individually meet its own scheduled duration.
+  const dayRows = allDates.map(date=>{
+    if (date > today) return null; // future
+    const {sessions} = computeExpectedMinutesForDate(date, assignedClients, clientLeaveKeys, approvedRegKeys);
+    const required = sessions.filter(s => !s.excused);
+    if (!sessions.length) return null; // nothing scheduled at all → not a working day
+
+    let expectedMins = 0, mins = 0;
+    const annotated = sessions.map(s => {
+      if (s.excused) return {...s, met:true, loggedMins:0};
+      const att = attByDateClient[date+'_'+s.clientId];
+      const sessMins = att ? calcDurationMinutes(att.checkIn, att.checkOut) : 0;
+      expectedMins += s.hours*60;
+      mins += sessMins;
+      return {...s, met: sessMins >= s.hours*60, loggedMins: sessMins, checkIn: att?.checkIn||'', checkOut: att?.checkOut||''};
+    });
+
+    if (required.length === 0) return null; // every session that day was excused → non-working day
+    workingDaysCount++;
+    const allMet = annotated.filter(s=>!s.excused).every(s=>s.met);
+    const anyLogged = annotated.some(s=>!s.excused && s.loggedMins > 0);
+    let status;
+    if (allMet) { status = 'present'; presentDays++; }
+    else if (anyLogged) { status = 'short'; absentDays++; }
+    else { status = 'absent'; absentDays++; }
+
+    return {date, mins, expectedMins, sessions: annotated, status, checkIn:'', checkOut:''};
   }).filter(Boolean);
 
   return {dayRows, presentDays, absentDays, workingDays: workingDaysCount};
@@ -4564,16 +5352,22 @@ window.loadMyMonthlyReport = async function(uid, empDocId) {
       ${renderReportCard(emp, report, ym)}
       <div class="card panel" style="margin-top:1rem;">
         <div class="panel-head">
-          <h2>Day-wise Breakdown</h2>
+          <div><h2>Day-wise Breakdown</h2><p>Expected hours are the sum of that day's scheduled client sessions.</p></div>
           <button class="btn btn-gold" onclick="openRegModal('${empDocId}','${uid}')"><i class="fa-solid fa-clock-rotate-left"></i> Apply Regularization</button>
         </div>
         <div class="table-wrap">
-          <table><thead><tr><th>Date</th><th>Check In</th><th>Check Out</th><th>Hours</th><th>Status</th></tr></thead>
+          <table><thead><tr><th>Date</th><th>Sessions</th><th>Logged</th><th>Expected</th><th>Status</th></tr></thead>
           <tbody>
             ${dayRows.map(r=>{
               const hrs  = r.mins > 0 ? `${Math.floor(r.mins/60)}h ${r.mins%60}m` : '—';
-              const stMap = {present:'<span class="pill pill-present">Present</span>',absent:'<span class="pill pill-absent">Absent</span>',short:'<span class="pill pill-pending">Short Hours</span>',regularized:'<span class="pill pill-regularized">Regularized</span>'};
-              return `<tr><td>${escHtml(r.date)}</td><td>${escHtml(r.checkIn||'—')}</td><td>${escHtml(r.checkOut||'—')}</td><td>${hrs}</td><td>${stMap[r.status]||r.status}</td></tr>`;
+              const expHrs = `${Math.floor(r.expectedMins/60)}h ${r.expectedMins%60}m`;
+              const stMap = {present:'<span class="pill pill-present">Present</span>',absent:'<span class="pill pill-absent">Absent</span>',short:'<span class="pill pill-pending">Short Hours</span>'};
+              const sessionsHtml = (r.sessions||[]).map(s => {
+                if (s.excused) return `<div>${escHtml(s.studentName)} — ${s.hours}h <span class="pill pill-checkedin" style="font-size:.65rem;">${s.excused}</span></div>`;
+                const timeTxt = s.checkIn ? `${escHtml(s.checkIn)}${s.checkOut?'–'+escHtml(s.checkOut):' (in progress)'}` : 'not checked in';
+                return `<div>${escHtml(s.studentName)} — ${s.hours}h scheduled, ${timeTxt} ${s.met?'<span class="pill pill-present" style="font-size:.65rem;">met</span>':'<span class="pill pill-absent" style="font-size:.65rem;">short</span>'}</div>`;
+              }).join('') || '—';
+              return `<tr><td>${escHtml(r.date)}</td><td style="font-size:.78rem;max-width:280px;">${sessionsHtml}</td><td>${hrs}</td><td>${expHrs}</td><td>${stMap[r.status]||r.status}</td></tr>`;
             }).join('')}
           </tbody></table>
         </div>
@@ -4638,12 +5432,21 @@ window.exportMonthlyReport = function() {
 };
 
 // ─── REGULARIZATION ───
-window.openRegModal = function(empDocId, uid) {
+window.openRegModal = async function(empDocId, uid) {
   document.getElementById('regEmpDocId').value = empDocId;
   window._regEmpUID = uid;
   document.getElementById('regDate').value = '';
   document.getElementById('regReason').value = '';
+  const sel = document.getElementById('regClient');
+  sel.innerHTML = `<option value="" disabled selected>Loading clients…</option>`;
   document.getElementById('regRequestModal').classList.add('open');
+  try {
+    const clientSnap = await getDocs(query(collection(db,'clients'),where('assignedUserIds','array-contains',uid)));
+    const clients = clientSnap.docs.map(d=>({id:d.id,...d.data()}));
+    sel.innerHTML = clients.length
+      ? `<option value="" disabled selected>Select client…</option>` + clients.map(c=>`<option value="${c.id}" data-name="${escHtml(c.studentName)}">${escHtml(c.clientNumber)} — ${escHtml(c.studentName)}</option>`).join('')
+      : `<option value="" disabled selected>No clients assigned to you</option>`;
+  } catch(e) { sel.innerHTML = `<option value="" disabled selected>Could not load clients</option>`; }
 };
 
 document.getElementById('regRequestForm').addEventListener('submit', async ev => {
@@ -4654,11 +5457,14 @@ document.getElementById('regRequestForm').addEventListener('submit', async ev =>
   const uid      = window._regEmpUID;
   const date     = document.getElementById('regDate').value;
   const reason   = document.getElementById('regReason').value.trim();
+  const clientSel = document.getElementById('regClient');
+  const clientId  = clientSel.value;
+  const clientLabel = clientSel.options[clientSel.selectedIndex]?.dataset.name || '';
   try {
     const empSnap = await getDocs(query(collection(db,'hrm_employees'),where('uid','==',uid)));
     const empName = empSnap.empty ? '' : empSnap.docs[0].data().name;
-    await setDoc(doc(db,'hrm_regularizations','reg_'+uid+'_'+date), {
-      empUID:uid, empDocId, empName, date, reason,
+    await setDoc(doc(db,'hrm_regularizations','reg_'+uid+'_'+clientId+'_'+date), {
+      empUID:uid, empDocId, empName, date, reason, clientId, clientLabel,
       status:'pending', submittedAt:new Date().toISOString()
     });
     document.getElementById('regRequestModal').classList.remove('open');
@@ -4683,17 +5489,18 @@ window.loadRegularizations = async function() {
     const badge = document.getElementById('regBadge');
     if (badge) { badge.textContent=pending; badge.style.display=pending?'inline':'none'; }
     if (!reqs.length) { wrap.innerHTML=`<div class="empty"><div class="empty-icon">🕐</div><h3>No regularization requests.</h3></div>`; return; }
-    wrap.innerHTML = `<table><thead><tr><th>Employee</th><th>Date</th><th>Reason</th><th>Submitted</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+    wrap.innerHTML = `<table><thead><tr><th>Employee</th><th>Client / Session</th><th>Date</th><th>Reason</th><th>Submitted</th><th>Status</th><th>Actions</th></tr></thead><tbody>
       ${reqs.map(r=>`<tr>
         <td><strong>${escHtml(r.empName||'')}</strong></td>
+        <td>${escHtml(r.clientLabel||'—')}</td>
         <td>${escHtml(r.date)}</td>
         <td style="font-size:.8rem;max-width:220px;">${escHtml(r.reason||'—')}</td>
         <td style="font-size:.74rem;">${r.submittedAt?new Date(r.submittedAt).toLocaleDateString('en-IN'):'—'}</td>
         <td><span class="pill pill-${r.status||'pending'}">${r.status||'pending'}</span></td>
         <td style="display:flex;gap:.3rem;flex-wrap:wrap;">
           ${r.status==='pending'?`
-            <button class="mini-btn mini-btn-success" onclick="actionReg('${r.id}','approved','${r.empUID}','${r.date}')">✓ Approve</button>
-            <button class="mini-btn mini-btn-danger" onclick="actionReg('${r.id}','rejected','${r.empUID}','${r.date}')">✕ Reject</button>
+            <button class="mini-btn mini-btn-success" onclick="actionReg('${r.id}','approved')">✓ Approve</button>
+            <button class="mini-btn mini-btn-danger" onclick="actionReg('${r.id}','rejected')">✕ Reject</button>
           `:''}
         </td>
       </tr>`).join('')}
@@ -4703,25 +5510,12 @@ window.loadRegularizations = async function() {
 
 document.getElementById('regFilterStatus').addEventListener('change', loadRegularizations);
 
-window.actionReg = async function(regId, action, empUID, date) {
+window.actionReg = async function(regId, action) {
   try {
     await setDoc(doc(db,'hrm_regularizations',regId), {status:action, actionedAt:new Date().toISOString()}, {merge:true});
-    if (action === 'approved') {
-      // Create or update attendance record marking this day as 9+ hours present
-      const attId = `${empUID}_${date}`;
-      const existing = await getDoc(doc(db,'hrm_attendance',attId));
-      if (existing.exists()) {
-        // Ensure checkOut is set so duration ≥ 9 hrs
-        const d = existing.data();
-        if (!d.checkIn) await setDoc(doc(db,'hrm_attendance',attId),{checkIn:'09:00:00',checkOut:'18:00:00',regularized:true},{merge:true});
-        else if (!d.checkOut) await setDoc(doc(db,'hrm_attendance',attId),{checkOut:'18:00:00',regularized:true},{merge:true});
-        else await setDoc(doc(db,'hrm_attendance',attId),{regularized:true},{merge:true});
-      } else {
-        const empSnap = await getDocs(query(collection(db,'hrm_employees'),where('uid','==',empUID)));
-        const empDocId = empSnap.empty ? '' : empSnap.docs[0].id;
-        await setDoc(doc(db,'hrm_attendance',attId),{empUID,empDocId,date,checkIn:'09:00:00',checkOut:'18:00:00',regularized:true,createdAt:new Date().toISOString()});
-      }
-    }
+    // No attendance record is synthesized here — an approved regularization simply
+    // excuses that one client's expected hours for that date (see
+    // computeExpectedMinutesForDate), which buildMonthReport picks up live.
     showToast(`Regularization ${action}!`);
     loadRegularizations();
   } catch(err) { showToast('Error: '+err.message, true); }
