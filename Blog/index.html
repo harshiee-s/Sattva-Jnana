@@ -1000,7 +1000,7 @@
     blogEmpty.style.display = 'none';
     posts.forEach(p => {
       const card = document.createElement('a');
-      card.href = '#post/' + p.slug;
+      card.href = '#post/' + p.id;
       card.className = 'blog-card reveal in';
       card.innerHTML = `
         <div class="bimg"><img src="${escapeHtml(p.coverImage || '')}" alt="${escapeHtml(p.title)}" loading="lazy"></div>
