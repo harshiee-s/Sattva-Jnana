@@ -7,15 +7,15 @@
   <link rel="shortcut icon" type="image/png" href="svg.png" />
   <link rel="apple-touch-icon" href="svg.png" />
 <title>Sattva Jnana | Personalised Home Tuition &amp; Private Mentors</title>
-<meta name="description" content="Sattva Jnana provides personalised home tuition, one-no-one learning and academic support for students, with focused attention and learning designed around individual needs.">
-<meta name="keywords" content="home tuition, home tuition near me, private tutor, home tutor, one-no-one tuition, personalised tuition, private tuition, tuition classes, subject tuition, exam preparation">
-<link rel="canonical" href="https://www.sattvajnana.in/">
+<meta name="description" content="Sattva Jnana provides personalised home tuition, one-on-one learning and academic support for students, with focused attention and learning designed around individual needs.">
+<meta name="keywords" content="home tuition, home tuition near me, private tutor, home tutor, one-on-one tuition, personalised tuition, private tuition, tuition classes, subject tuition, exam preparation">
+<link rel="canonical" href="https://sattvajnana.in/">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sattva Jnana">
 <meta property="og:title" content="Sattva Jnana | Personalised Home Tuition &amp; Private Mentors">
-<meta property="og:description" content="Personalised home tuition with one-no-one attention. Focused academic support designed around your child's learning pace.">
+<meta property="og:description" content="Personalised home tuition with one-on-one attention. Focused academic support designed around your child's learning pace.">
 <meta property="og:image" content="assets/og-cover.jpg">
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
@@ -26,13 +26,15 @@
   "@context": "https://schema.org",
   "@type": "EducationalOrganization",
   "name": "Sattva Jnana",
+  "legalName": "Sri Hari Sattva Jnana",
   "alternateName": "Sri Hari",
-  "description": "Personalised home tuition and one-no-one academic support for students, provided at home by qualified private mentors.",
-  "url": "https://www.sattvajnana.in/",
+  "description": "Personalised home tuition and one-on-one academic support for students, provided at home by qualified private mentors.",
+  "url": "https://sattvajnana.in/",
   "logo": "logo.png",
   "areaServed": "Bengaluru, Karnataka",
   "sameAs": [
     "https://www.instagram.com/sattvajnana",
+    "https://www.linkedin.com/company/sri-hari-sattva-jnana/",
     "https://www.facebook.com/sattvajnana",
     "https://www.youtube.com/@sattvajnana"
   ]
@@ -168,6 +170,8 @@
   nav.primary-nav a::after{content:''; position:absolute; left:0; right:100%; bottom:0; height:1.5px; background:var(--gold); transition:right .25s ease;}
   nav.primary-nav a:hover{color:var(--gold);}
   nav.primary-nav a:hover::after{right:0;}
+  nav.primary-nav a.active{color:var(--gold); font-weight:600;}
+  nav.primary-nav a.active::after{right:0;}
   .nav-right{display:flex; align-items:center; gap:14px;}
   .nav-call{display:flex; align-items:center; gap:6px; font-size:13.5px; font-weight:600; color:var(--navy);}
   .nav-call svg{stroke:#102A43;}
@@ -181,6 +185,7 @@
   .mobile-menu-top .brand-text .main{font-size:18px;}
   .mobile-menu .close-btn{background:none; border:none; font-size:28px; color:var(--navy); cursor:pointer;}
   .mobile-menu a{font-size:20px; font-family:var(--serif); color:var(--navy); padding:14px 0; border-bottom:1px solid #eee;}
+  .mobile-menu a.active{color:var(--gold);}
 
   /* Hero */
   .hero{
@@ -260,13 +265,13 @@
   .prog-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
   .prog-card{position:relative; border-radius:var(--radius); overflow:hidden; background:var(--navy); color:var(--white); min-height:210px; padding:26px; display:flex; flex-direction:column; justify-content:flex-end; transition:transform .3s;}
   .prog-card:hover{transform:translateY(-4px);}
-  .prog-card::before{content:''; position:absolute; inset:0; background:linear-gradient(160deg, rgba(16,42,67,0.5), rgba(11,31,51,0.92));}
   .prog-card img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; transition:transform .5s;}
   .prog-card:hover img{transform:scale(1.06);}
-  .prog-card .content{position:relative; z-index:1;}
+  .prog-card::before{content:''; position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(16,42,67,0.45) 0%, rgba(16,42,67,0.55) 40%, rgba(16,42,67,0.92) 100%);}
+  .prog-card .content{position:relative; z-index:2;}
   .prog-card h4{color:var(--white); font-size:19px; margin-bottom:6px;}
-  .prog-card p{color:#D7DEE8; font-size:13.5px;}
-  .prog-card .tag{position:relative; z-index:1; display:inline-block; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold-warm); font-weight:700; margin-bottom:10px;}
+  .prog-card p{color:#E9EDF3; font-size:13.5px;}
+  .prog-card .tag{position:relative; z-index:2; display:inline-block; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold-warm); font-weight:700; margin-bottom:10px;}
 
   /* Subjects Flip-Book */
   .book-wrap{position:relative; display:flex; align-items:center; justify-content:center; gap:22px; margin-top:56px;}
@@ -596,8 +601,14 @@
     .prog-item{min-width:45%;}
     .prog-wave{display:none;}
     .prog-dot{display:none;}
-    .tutor-card-top{grid-template-columns:1fr; gap:52px; padding:44px;}
-    .tutor-badge-v2{position:static; margin:-40px auto 0; }
+    .tutor-card-top{grid-template-columns:1fr; gap:0; padding:44px;}
+    .tutor-media-v2{max-width:260px; margin:0 auto;}
+    .tutor-media-v2 img{aspect-ratio:1/1; border-radius:50%; box-shadow:0 20px 44px rgba(16,42,67,0.22);}
+    .tutor-badge-v2{position:static; margin:-34px auto 0; width:108px; height:108px;}
+    .tutor-content-v2{text-align:center; margin-top:28px;}
+    .tutor-content-v2 .eyebrow{justify-content:center;}
+    .tutor-lede{margin-left:auto; margin-right:auto; text-align:center;}
+    .tutor-pill-grid{justify-content:center;}
     .split-section, .area-grid{grid-template-columns:1fr;}
     .tutor-trust-bar{padding:28px 44px; flex-direction:column; gap:20px;}
     .tutor-trust-item:not(:last-child)::after{display:none;}
@@ -611,7 +622,8 @@
   @media (max-width: 900px){
     .founder-top{grid-template-columns:1fr;}
     .founder-side-nav{display:none;}
-    .founder-photo-wrap{aspect-ratio:4/3.3; position:relative;}
+    .founder-photo-wrap{aspect-ratio:auto; min-height:280px; position:relative; display:flex; align-items:center; justify-content:center;}
+    .founder-photo-wrap img{width:100%; height:100%; max-height:420px; object-fit:contain; object-position:center;}
     .founder-seal{left:50%; top:auto; bottom:-30px; transform:translateX(-50%); width:74px; height:74px;}
     .founder-info{padding:48px 32px 26px; text-align:center;}
     .founder-sri, .founder-role{text-align:center;}
@@ -638,15 +650,19 @@
     .prog-grid, .blog-grid, .footer-grid{grid-template-columns:1fr;}
     .selector-grid{grid-template-columns:1fr;}
     .cta-band{padding:32px 22px !important; grid-template-columns:1fr !important; text-align:center !important;}
-    .book-wrap{gap:10px;}
-    .book{aspect-ratio:3/4; max-width:400px;}
-    .book-page{padding:22px 18px;}
-    .book-icon{width:36px; height:36px; margin:20px 0 12px; font-size:15px;}
-    .book-title{font-size:17px;}
+    .book-wrap{flex-wrap:wrap; justify-content:center; gap:16px; row-gap:20px;}
+    .book{order:1; flex:0 0 100%; aspect-ratio:3/5.4; max-width:380px; margin:0 auto;}
+    #bookPrev{order:2;}
+    #bookNext{order:3;}
+    .book-spread{grid-template-columns:1fr; grid-template-rows:auto 1fr;}
+    .book-page{padding:20px 18px;}
+    .book-page-left{align-items:flex-start;}
+    .book-icon{width:36px; height:36px; margin:18px 0 10px; font-size:15px;}
+    .book-title{font-size:17px; margin-bottom:6px;}
     .book-desc{font-size:12px; max-width:100%;}
     .book-deco{font-size:60px;}
     .book-ribbon{font-size:13px; padding:6px 12px 14px; left:18px;}
-    .book-page-right{padding-top:30px;}
+    .book-page-right{padding-top:18px;}
     .book-dotgrid{display:none;}
     .book-list{gap:8px;}
     .book-list-item{font-size:12px; padding:7px 14px 7px 7px; gap:9px;}
@@ -674,14 +690,14 @@
     .founder-stack-2{top:20px; right:-18px; bottom:20px; left:20px;}
     .founder-stack-num{top:18px; right:4px; font-size:11px;}
     .founder-stack-2 .founder-stack-num{top:18px; right:4px; font-size:10px;}
-    .founder-photo-wrap{aspect-ratio:4/3.5;}
+    .founder-photo-wrap{aspect-ratio:auto; min-height:220px;}
+    .founder-photo-wrap img{max-height:320px;}
     .founder-seal{width:60px; height:60px; padding:9px; bottom:-26px;}
     .founder-info{padding:44px 22px 22px;}
     .founder-name{font-size:22px;}
     .founder-bio{max-width:100%;}
     .founder-pagination{gap:14px;}
     .founder-prev, .founder-next{padding:9px 16px; font-size:13px;}
-    .brand-text .sri{display:none;}
     .brand img{width:32px; height:32px;}
     .nav-wrap{padding:8px 8px 8px 16px !important;}
     .nav-right{gap:10px;}
@@ -710,21 +726,21 @@
 <!-- ============ HEADER ============ -->
 <header id="site-header">
   <div class="nav-wrap">
-    <a href="#home" class="brand" aria-label="Sattva Jnana home">
+    <a href="https://sattvajnana.in/" class="brand" aria-label="Sattva Jnana home">
       <img src="logo.png" alt="Sattva Jnana logo">
       <span class="brand-text"><span class="sri">Sri Hari</span><span class="main">SATTVA JNANA</span></span>
     </a>
     <nav class="primary-nav" aria-label="Primary navigation">
-      <a href="#home">Home</a>
-      <a href="https://harshiee-s.github.io/Sattva-Jnana/Book demo">Find Tutor</a>
-      <a href="https://harshiee-s.github.io/Sattva-Jnana/Career">Career</a>
+      <a href="#home" class="active">Home</a>
+      <a href="https://sattvajnana.in/Book demo">Find Tutor</a>
+      <a href="https://sattvajnana.in/Career">Career</a>
     </nav>
     <div class="nav-right">
       <a class="nav-call" href="mailto:info@sattvajnana.in" aria-label="Email Sattva Jnana">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#102A43" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg>
         info@sattvajnana.in
       </a>
-      <a href="https://harshiee-s.github.io/Sattva-Jnana/Book demo" class="btn btn-primary btn-sm">Book a Demo</a>
+      <a href="https://sattvajnana.in/Book demo" class="btn btn-primary btn-sm">Book a Demo</a>
       <button class="hamburger" id="hamburgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -738,9 +754,9 @@
     </a>
     <button class="close-btn" id="closeMenuBtn" aria-label="Close menu">&times;</button>
   </div>
-  <a href="#home">Home</a>
-  <a href="#programmes">Find Tutor</a>
-  <a href="#career">Career</a>
+  <a href="#home" class="active">Home</a>
+  <a href="https://sattvajnana.in/Book demo">Find Tutor</a>
+  <a href="https://sattvajnana.in/Career">Career</a>
 </div>
 
 <!-- ============ HERO ============ -->
@@ -748,10 +764,10 @@
   <div class="hero-grid">
     <div>
       <h1><span class="brand-line">Sri Hari</span>Personalised Home Tuition. Focused Attention.</h1>
-      <p class="sub">One-no-one learning at home, paced to your child's understanding.</p>
+      <p class="sub">One-on-one learning at home, paced to your child's understanding.</p>
       <div class="hero-ctas">
-        <a href="https://harshiee-s.github.io/Sattva-Jnana/Book demo" class="btn btn-gold">Book a Free Demo</a>
-        <a href="https://harshiee-s.github.io/Sattva-Jnana/programmes" class="btn btn-outline-light">Explore Tuition Programmes</a>
+        <a href="https://sattvajnana.in/Book demo" class="btn btn-gold">Book a Free Demo</a>
+        <a href="https://sattvajnana.in/programmes" class="btn btn-outline-light">Explore Tuition Programmes</a>
       </div>
       <div class="hero-trust">One Child•One Tutor• One Focus</div>
     </div>
@@ -770,7 +786,7 @@
       </div>
       <div class="selector-card" onclick="document.getElementById('programmes').scrollIntoView({behavior:'smooth'})">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#C5962E" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
-        <h4>One-no-One Tuition</h4>
+        <h4>One-on-One Tuition</h4>
         <p>Individual attention focused entirely on the student.</p>
       </div>
       <div class="selector-card" onclick="document.getElementById('subjects').scrollIntoView({behavior:'smooth'})">
@@ -812,7 +828,7 @@
         </div>
         <div class="offer-item reveal">
           <div class="offer-item-head"><span class="offer-num">02</span><span class="offer-icon"><i class="fa-solid fa-user-group"></i></span></div>
-          <h4>One-no-One Attention</h4><p>Focused teaching where the tutor gives dedicated attention to the individual student.</p>
+          <h4>One-on-One Attention</h4><p>Focused teaching where the tutor gives dedicated attention to the individual student.</p>
         </div>
         <div class="offer-item reveal">
           <div class="offer-item-head"><span class="offer-num">03</span><span class="offer-icon"><i class="fa-solid fa-house"></i></span></div>
@@ -873,27 +889,27 @@
     </div>
     <div class="prog-grid">
       <div class="prog-card reveal">
-        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=700&q=80" alt="Young student building strong fundamentals">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=700&q=80" alt="Young student building strong fundamentals" loading="lazy">
         <div class="content"><span class="tag">Grades 1–5</span><h4>Primary Classes</h4><p>Strong fundamentals and enjoyable learning habits.</p></div>
       </div>
       <div class="prog-card reveal">
-        <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=700&q=80" alt="Middle school student practising in a notebook">
+        <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=700&q=80" alt="Middle school student practising in a notebook" loading="lazy">
         <div class="content"><span class="tag">Grades 6–8</span><h4>Middle School</h4><p>Concept strengthening and academic consistency.</p></div>
       </div>
       <div class="prog-card reveal">
-        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=700&q=80" alt="High school student studying with textbooks">
+        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=700&q=80" alt="High school student studying with textbooks" loading="lazy">
         <div class="content"><span class="tag">Grades 9–10</span><h4>High School</h4><p>Subject support, academic mentoring and exam preparation.</p></div>
       </div>
       <div class="prog-card reveal">
-        <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=700&q=80" alt="Student preparing for board examinations">
+        <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=700&q=80" alt="Student preparing for board examinations" loading="lazy">
         <div class="content"><span class="tag">Grades 11–12</span><h4>Board Exam Preparation</h4><p>Focused revision, practice and examination strategy.</p></div>
       </div>
       <div class="prog-card reveal">
-        <img src="https://images.unsplash.com/photo-1516534775068-ba3e7458af70?auto=format&fit=crop&w=700&q=80" alt="Tutor giving one-no-one attention to a single student">
-        <div class="content"><span class="tag">All Grades</span><h4>One-no-One Tuition</h4><p>Dedicated individual learning sessions.</p></div>
+        <img src="https://images.unsplash.com/photo-1516534775068-ba3e7458af70?auto=format&fit=crop&w=700&q=80" alt="Tutor giving one-on-one attention to a single student" loading="lazy">
+        <div class="content"><span class="tag">All Grades</span><h4>One-on-One Tuition</h4><p>Dedicated individual learning sessions.</p></div>
       </div>
       <div class="prog-card reveal">
-        <img src="https://images.unsplash.com/photo-1519452575417-564c1401ecc0?auto=format&fit=crop&w=700&q=80" alt="Student receiving focused support in a specific subject">
+        <img src="https://images.unsplash.com/photo-1519452575417-564c1401ecc0?auto=format&fit=crop&w=700&q=80" alt="Student receiving focused support in a specific subject" loading="lazy">
         <div class="content"><span class="tag">By Requirement</span><h4>Subject-Specific Tuition</h4><p>Focused support in selected subjects.</p></div>
       </div>
     </div>
@@ -1024,9 +1040,9 @@
       <div class="tl-v-item reveal"><div class="tl-v-num">01</div><div class="tl-v-content"><h4>Individual Attention</h4><p>Students can ask questions freely and receive focused guidance.</p></div></div>
       <div class="tl-v-item reveal"><div class="tl-v-num">02</div><div class="tl-v-content"><h4>Convenient Home Learning</h4><p>No daily travel to a coaching centre.</p></div></div>
       <div class="tl-v-item reveal"><div class="tl-v-num">03</div><div class="tl-v-content"><h4>Personalized material</h4><p>The tutor can slow down or move ahead according to understanding.</p></div></div>
-      <div class="tl-v-item reveal"><div class="tl-v-num">04</div><div class="tl-v-content"><h4>Qualified Mentors</h4><p>No daily travel to a coaching centre.</p></div></div>
+      <div class="tl-v-item reveal"><div class="tl-v-num">04</div><div class="tl-v-content"><h4>Qualified Mentors</h4><p>Learn from experienced, subject-qualified tutors.</p></div></div>
       <div class="tl-v-item reveal"><div class="tl-v-num">05</div><div class="tl-v-content"><h4>Subject Matter Experts</h4><p>Build consistent study and revision habits.</p></div></div>
-      <div class="tl-v-item reveal"><div class="tl-v-num">06</div><div class="tl-v-content"><h4>Parent Visibility</h4><p>.</p></div></div>
+      <div class="tl-v-item reveal"><div class="tl-v-num">06</div><div class="tl-v-content"><h4>Parent Visibility</h4><p>Stay informed with regular updates on the student's progress.</p></div></div>
       <div class="tl-v-item reveal"><div class="tl-v-num">07</div><div class="tl-v-content"><h4>Stronger Fundamentals</h4><p>Identify gaps and strengthen the basics.</p></div></div>
     
 </div>
@@ -1098,7 +1114,7 @@
       <h3>Not Sure Which Tuition Is Right for Your Child?</h3>
       <p>Tell us about your child's learning needs and we'll help you find the right fit.</p>
       <div class="btnrow">
-        <a href="https://harshiee-s.github.io/Sattva-Jnana/Book demo/#book-demo" class="btn btn-gold">Book a Free Demo</a>
+        <a href="https://sattvajnana.in/Book demo/#book-demo" class="btn btn-gold">Book a Free Demo</a>
         <a href="mailto:info@sattvajnana.in" class="btn btn-outline-light">Email Us</a>
       </div>
     </div>
@@ -1113,11 +1129,11 @@
       <h2 class="title">How We Teach</h2>
     </div>
     <div class="tl-h reveal">
-      <div class="tl-h-item"><div class="tl-h-num">1</div><h4>Understand</h4><p>Identify what the student already knows.</p></div>
+      <div class="tl-h-item"><div class="tl-h-num">1</div><h4>Understand</h4><p>Identify where the student is lacking.</p></div>
       <div class="tl-h-item"><div class="tl-h-num">2</div><h4>Explain</h4><p>Break concepts into simple, understandable steps.</p></div>
-      <div class="tl-h-item"><div class="tl-h-num">3</div><h4>Practise</h4><p>Apply learning through exercises and questions.</p></div>
+      <div class="tl-h-item"><div class="tl-h-num">3</div><h4>Practice</h4><p>Apply learning through exercises and questions.</p></div>
       <div class="tl-h-item"><div class="tl-h-num">4</div><h4>Assess</h4><p>Review progress and identify gaps.</p></div>
-      <div class="tl-h-item"><div class="tl-h-num">5</div><h4>Improve</h4><p>Focus additional time where the student needs it most.</p></div>
+      <div class="tl-h-item"><div class="tl-h-num">5</div><h4>Improve</h4><p>Focus on the topics where the student needs it most.</p></div>
     </div>
   </div>
 </section>
@@ -1129,7 +1145,7 @@
       <div class="tutor-dotgrid"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
       <div class="tutor-card-top">
         <div class="tutor-media-v2 reveal">
-          <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=700&q=80" alt="A patient tutor smiling, holding a folder of teaching materials">
+          <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=700&q=80" alt="A patient tutor smiling, holding a folder of teaching materials" loading="lazy">
           <div class="tutor-badge-v2">
             <div class="num">100%</div>
             <div class="lbl">Verified &amp; personally interviewed</div>
@@ -1178,7 +1194,7 @@
         </div>
       </div>
       <div class="tutor-cta-row" style="background:var(--navy); padding-top:0;">
-        <a href="mailto:info@sattvajnana.com?subject=Find%20the%20Right%20Learning%20Support" class="btn btn-gold">Find the Right Learning Support &#8594;</a>
+        <a href="https://sattvajnana.in/Book demo/#book-demo" class="btn btn-gold">Find the Right Learning Support &#8594;</a>
       </div>
     </div>
   </div>
@@ -1189,7 +1205,7 @@
 <section class="section founders-section" id="founders" style="background-image:url('founders/bck.png');">
   <div class="container">
     <div class="section-head center reveal">
-      <div class="eyebrow no-dash">— <span class="fl">✿</span> — The People Behind Sattva Jnana</div>
+      <div class="eyebrow no-dash">The People Behind Sattva Jnana</div>
       <h2 class="title" style="color:var(--navy);">Meet Our Founders</h2>
       <p class="lede">Three founders. One educational vision.</p>
       <div class="founder-heading-divider"><span></span><span class="fl">✿</span><span></span></div>
@@ -1219,11 +1235,10 @@
     </div>
     <div class="tl-h reveal">
       <div class="tl-h-item"><div class="tl-h-num">1</div><h4>Focused Learning</h4><p>Understand where additional attention is needed.</p></div>
-      <div class="tl-h-item"><div class="tl-h-num">2</div><h4>Convenient Scheduling</h4><p>Plan sessions around school and family routines.</p></div>
-      <div class="tl-h-item"><div class="tl-h-num">3</div><h4>Direct Communication</h4><p>Share concerns and requirements directly.</p></div>
-      <div class="tl-h-item"><div class="tl-h-num">4</div><h4>Regular Updates</h4><p>Know how your child is progressing.</p></div>
-      <div class="tl-h-item"><div class="tl-h-num">5</div><h4>Direct Communication</h4><p>Share concerns and requirements directly.</p></div>
-      <div class="tl-h-item"><div class="tl-h-num">6</div><h4>Consistent Support</h4><p>Maintain continuity in the student's learning.</p></div>
+      <div class="tl-h-item"><div class="tl-h-num">2</div><h4>Convenient Scheduling</h4><p>Plan sessions according to school and family routine.</p></div>
+      <div class="tl-h-item"><div class="tl-h-num">3</div><h4>Regular Updates</h4><p>Know how your child is progressing.</p></div>
+      <div class="tl-h-item"><div class="tl-h-num">4</div><h4>Direct Communication</h4><p>Share concerns and requirements directly.</p></div>
+      <div class="tl-h-item"><div class="tl-h-num">5</div><h4>Consistent Support</h4><p>Maintain continuity in the student's learning.</p></div>
     </div>
   </div>
 </section>
@@ -1368,7 +1383,7 @@
       <h3>Give Your Child the Attention They Need to Learn Better.</h3>
       <p>Start with a conversation and find the right learning approach for your child.</p>
       <div class="btnrow">
-        <a href="https://harshiee-s.github.io/Sattva-Jnana/Book demo" class="btn btn-gold">Book a Free Demo</a>
+        <a href="https://sattvajnana.in/Book demo" class="btn btn-gold">Book a Free Demo</a>
         <a href="mailto:info@sattvajnana.in" class="btn btn-outline-light">Email Sattva Jnana</a>
       </div>
     </div>
@@ -1386,9 +1401,10 @@
         </div>
         <p style="font-size:14px; max-width:260px;">Personalised learning. Focused attention. Meaningful progress.</p>
         <div class="social-row">
-          <a href="#" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4AF57" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
-          <a href="#" aria-label="Facebook"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4AF57" stroke-width="1.8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-          <a href="#" aria-label="YouTube"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4AF57" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z"/></svg></a>
+          <a href="https://www.instagram.com/sattvajnana" target="_blank" rel="noopener" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4AF57" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="https://www.linkedin.com/company/sri-hari-sattva-jnana/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4AF57" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><line x1="7" y1="10" x2="7" y2="17"/><circle cx="7" cy="6.5" r="1" fill="#D4AF57" stroke="none"/><line x1="12" y1="10" x2="12" y2="17"/><path d="M12 13c0-2 1.5-3 3-3s2.5 1 2.5 3v4"/></svg></a>
+          <a href="https://www.facebook.com/sattvajnana" target="_blank" rel="noopener" aria-label="Facebook"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4AF57" stroke-width="1.8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://www.youtube.com/@sattvajnana" target="_blank" rel="noopener" aria-label="YouTube"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4AF57" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z"/></svg></a>
         </div>
       </div>
       <div>
@@ -1396,15 +1412,14 @@
         <ul>
           <li><a href="#about">About</a></li>
           <li><a href="#how-it-works">Our Approach</a></li>
-          <li><a href="https://harshiee-s.github.io/Sattva-Jnana/programmes">Tuition Programmes</a></li>
+          <li><a href="https://sattvajnana.in/programmes">Tuition Programmes</a></li>
           <li><a href="#subjects">Subjects</a></li>
-          <li><a href="#Demo Class FAQs">FAQs</a></li>
         </ul>
       </div>
       <div>
         <h5>For Parents</h5>
         <ul>
-          <li><a href="https://harshiee-s.github.io/Sattva-Jnana/Book demo/#book-demo">Book a Demo</a></li>
+          <li><a href="https://sattvajnana.in/Book demo/#book-demo">Book a Demo</a></li>
           <li><a href="mailto:info@sattvajnana.in">Enquire Now</a></li>
           <li><a href="mailto:info@sattvajnana.in">Email Us</a></li>
         </ul>
@@ -1412,15 +1427,15 @@
       <div>
         <h5>Resources</h5>
         <ul>
-          <li><a href="https://harshiee-s.github.io/Sattva-Jnana/Blog">Blog</a></li>
-          <li><a href="https://harshiee-s.github.io/Sattva-Jnana/Blog/Study Resources">Study Resources</a></li>
-          <li><a href="https://harshiee-s.github.io/Sattva-Jnana/Blog/Parent Resources">Parent Resources</a></li>
+          <li><a href="https://sattvajnana.in/Blog">Blog</a></li>
+          <li><a href="https://sattvajnana.in/Blog/Study Resources">Study Resources</a></li>
+          <li><a href="https://sattvajnana.in/Blog/Parent Resources">Parent Resources</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Sattva Jnana. All Rights Reserved.</span>
-      <span><a href="https://harshiee-s.github.io/Sattva-Jnana/Privacy Policy">Privacy Policy</a> | <a href="https://harshiee-s.github.io/Sattva-Jnana/Terms and Conditions">Terms &amp; Conditions</a></span>
+      <span>© 2026 Sri Hari Sattva Jnana. All Rights Reserved.</span>
+      <span><a href="https://sattvajnana.in/Privacy Policy">Privacy Policy</a> | <a href="https://sattvajnana.in/Terms and Conditions">Terms &amp; Conditions</a></span>
     </div>
   </div>
 </footer>
@@ -1428,8 +1443,8 @@
 <!-- ============ MOBILE BOTTOM BAR ============ -->
 <div class="mobile-bar">
   <div class="mobile-bar-inner">
-    <a href="mailto:info@sattvajnanain"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg>Email</a>
-    <a href="https://harshiee-s.github.io/Sattva-Jnana/Book demo/#book-demo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M9 11l3 3L22 4"/></svg>Book Demo</a>
+    <a href="mailto:info@sattvajnana.in"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg>Email</a>
+    <a href="https://sattvajnana.in/Book demo/#book-demo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M9 11l3 3L22 4"/></svg>Book Demo</a>
   </div>
 </div>
 
@@ -1466,7 +1481,7 @@
     { msg: "The tutor took time to explain concepts my daughter struggled with. She's far more confident asking questions now.", who: "Parent of Grade 8 Student", rel: "Middle School Mathematics" },
     { msg: "Having someone come home made revision so much easier to fit around school. Communication with the tutor has been clear throughout.", who: "Parent of Grade 10 Student", rel: "Board Exam Preparation" },
     { msg: "I understand chemistry so much better when I can ask questions immediately instead of waiting for the next class.", who: "Grade 11 Student", rel: "Subject-Specific Tuition" },
-    { msg: "We appreciated the regular updates on where our son needed extra practice. It made the sessions feel purposeful.", who: "Parent of Grade 6 Student", rel: "One-no-One Tuition" }
+    { msg: "We appreciated the regular updates on where our son needed extra practice. It made the sessions feel purposeful.", who: "Parent of Grade 6 Student", rel: "One-on-One Tuition" }
   ];
   let testiIdx = 0;
   const testiMsg = document.getElementById('testiMsg');
@@ -1523,30 +1538,30 @@
     {
       photo: 'founders/founder-2.png',
       name: 'Sahana Shree',
-      role: 'Co-Founder & Science Mentor',
-      bio: "Ananya brings a research-driven approach to teaching, helping students build strong conceptual foundations in Science and Mathematics through curiosity-led, hands-on learning.",
+      role: 'Co-Founder & Maths Mentor',
+      bio: "Rooted in academic excellence and guided by a passion for teaching, Sahana envisioned Sattva Jnana as more than a learning centre — a thoughtful space where individual potential is recognised, nurtured, and transformed into lasting progress.",
       details: [
-        { icon: 'cap', label: 'Academic Background', value: 'B.Sc, M.Sc Physics' },
-        { icon: 'book', label: 'Specialisation', value: 'Physics & Mathematics' },
-        { icon: 'star', label: 'Teaching Experience', value: '5+ Years' },
-        { icon: 'target', label: 'Teaching Approach', value: 'Inquiry-Based • Visual • Practical' },
-        { icon: 'people', label: 'Students Mentored', value: '80+ Students' },
-        { icon: 'heart', label: 'Core Belief', value: 'Curiosity is the starting point of every strong learner.' }
+        { icon: 'cap', label: 'Academic Background', value: 'B.Sc | M.Sc' },
+        { icon: 'book', label: 'Specialisation', value: 'Mathematics' },
+        { icon: 'star', label: 'Teaching Experience', value: '6+ Years' },
+        { icon: 'target', label: 'Teaching Approach', value: 'Awaken • Acquire • Achieve' },
+        { icon: 'people', label: 'Students Mentored', value: '100+ Students' },
+        { icon: 'heart', label: 'Core Belief', value: 'Understand the learner. Nurture the potential. Elevate the future.' }
       ],
       quote: 'A good teacher makes the student ask better questions, not just give better answers.'
     },
     {
       photo: 'founders/founder-3.png',
       name: 'Jeevan G',
-      role: 'Co-Founder & Language Mentor',
-      bio: "Jeevan specialises in building strong communication and comprehension skills, helping students develop confidence in English and Social Sciences through structured, engaging sessions.",
+      role: 'Co-Founder & Science Mentor',
+      bio: "Driven by a deep commitment to education, Jeevan established Sattva Jnana with a distinctive approach — combining personalised guidance, purposeful learning, and the right academic direction to bring out every student's potential.",
       details: [
-        { icon: 'cap', label: 'Academic Background', value: 'B.A. English, M.A. Education' },
-        { icon: 'book', label: 'Specialisation', value: 'English & Social Science' },
-        { icon: 'star', label: 'Teaching Experience', value: '7+ Years' },
-        { icon: 'target', label: 'Teaching Approach', value: 'Structured • Communicative • Reflective' },
-        { icon: 'people', label: 'Students Mentored', value: '120+ Students' },
-        { icon: 'heart', label: 'Core Belief', value: 'Confidence grows when a student feels genuinely heard.' }
+        { icon: 'cap', label: 'Academic Background', value: 'B.Sc' },
+        { icon: 'book', label: 'Specialisation', value: 'Mathematics and Physics' },
+        { icon: 'star', label: 'Teaching Experience', value: '6+ Years' },
+        { icon: 'target', label: 'Teaching Approach', value: 'Foundation • Foresight • Excellence' },
+        { icon: 'people', label: 'Students Mentored', value: '50+ Students' },
+        { icon: 'heart', label: 'Core Belief', value: 'Every learner deserves a smarter path, shaped around their unique potential.' }
       ],
       quote: 'Every child can express brilliantly — they just need the right words and the right encouragement.'
     }
@@ -1585,7 +1600,7 @@
         <div class="founder-photo-wrap">
           <img src="${f.photo}" alt="${f.name}, ${f.role}">
           <span class="founder-mobile-num">${String(founderIdx + 1).padStart(2, '0')}</span>
-          <div class="founder-seal"><img src="logo.png" alt="Sattva Jnana seal"></div>
+          <div class="founder-seal"><img src="svg.png" alt="Sattva Jnana seal"></div>
         </div>
         <div class="founder-info">
           <div class="founder-sri">Sri Hari</div>
