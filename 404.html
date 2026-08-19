@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="svg.png" />
+<link rel="shortcut icon" type="image/png" href="svg.png" />
+<link rel="apple-touch-icon" href="svg.png" />
+<title>404 | Page Not Found — Sattva Jnana</title>
+<meta name="description" content="The page you're looking for doesn't exist or has been moved. Return to the Sattva Jnana homepage for personalised home tuition and private mentors.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://sattvajnana.in/404">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+  :root{
+    --navy:#102A43;
+    --navy-dark:#0B1F33;
+    --gold:#C5962E;
+    --gold-warm:#D4AF57;
+    --ivory:#E9EDF3;
+    --white:#FFFFFF;
+    --text:#374151;
+    --text-soft:#5B6472;
+    --radius:10px;
+    --radius-lg:16px;
+    --shadow:0 6px 24px rgba(16,42,67,0.08);
+    --shadow-lg:0 14px 40px rgba(16,42,67,0.14);
+    --maxw:1180px;
+    --serif:'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+    --sans:'Inter', 'Manrope', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--sans);
+    color:var(--text);
+    background:var(--ivory);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  h1,h2,h3,h4{font-family:var(--serif); color:var(--navy); font-weight:600; line-height:1.2;}
+  .container{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:15px 30px; border-radius:999px; font-weight:600; font-size:15px;
+    cursor:pointer; border:1px solid transparent; transition:all .25s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{background:var(--navy); color:var(--white);}
+  .btn-primary:hover{background:var(--navy-dark); transform:translateY(-1px); box-shadow:var(--shadow-lg);}
+  .btn-sm{padding:10px 18px; font-size:13.5px;}
+
+  /* Header — floating glass capsule navbar */
+  header{
+    position:fixed; top:22px; left:50%; transform:translateX(-50%);
+    z-index:200; width:calc(100% - 40px); max-width:1080px;
+    background:rgba(255,255,255,0.6);
+    backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,0.55);
+    border-radius:999px;
+    box-shadow:0 10px 34px rgba(16,42,67,0.14);
+    transition:top .35s ease, background .35s ease, box-shadow .35s ease, padding .35s ease;
+  }
+  header.scrolled{
+    top:14px;
+    background:rgba(255,255,255,0.88);
+    box-shadow:0 14px 40px rgba(16,42,67,0.2);
+  }
+  .nav-wrap{display:flex; align-items:center; justify-content:space-between; padding:10px 12px 10px 22px; transition:padding .3s ease;}
+  header.scrolled .nav-wrap{padding:8px 10px 8px 20px;}
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand img{width:36px; height:36px;}
+  .brand-text{display:flex; flex-direction:column; line-height:1.1;}
+  .brand-text .sri{font-size:9px; letter-spacing:2px; color:var(--gold); font-weight:600; text-transform:uppercase;}
+  .brand-text .main{font-family:var(--serif); font-size:17px; font-weight:700; color:var(--navy); letter-spacing:0.5px;}
+  nav.primary-nav{display:flex; align-items:center; gap:26px;}
+  nav.primary-nav a{position:relative; font-size:14px; font-weight:500; color:var(--text); transition:color .25s ease; padding-bottom:4px;}
+  nav.primary-nav a::after{content:''; position:absolute; left:0; right:100%; bottom:0; height:1.5px; background:var(--gold); transition:right .25s ease;}
+  nav.primary-nav a:hover{color:var(--gold);}
+  nav.primary-nav a:hover::after{right:0;}
+  .nav-right{display:flex; align-items:center; gap:14px;}
+  .nav-call{display:flex; align-items:center; gap:6px; font-size:13.5px; font-weight:600; color:var(--navy);}
+  .nav-call svg{stroke:#102A43;}
+  .nav-right .btn-sm{border-radius:999px;}
+  .hamburger{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:6px;}
+  .hamburger span{width:22px; height:2px; background:var(--navy);}
+  .mobile-menu{display:none; position:fixed; inset:0; background:var(--white); z-index:300; padding:24px; flex-direction:column;}
+  .mobile-menu.open{display:flex;}
+  .mobile-menu-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:28px;}
+  .mobile-menu-top .brand img{width:42px; height:42px;}
+  .mobile-menu-top .brand-text .main{font-size:18px;}
+  .mobile-menu .close-btn{background:none; border:none; font-size:28px; color:var(--navy); cursor:pointer;}
+  .mobile-menu a{font-size:20px; font-family:var(--serif); color:var(--navy); padding:14px 0; border-bottom:1px solid #eee;}
+
+  /* ============ 404 HERO (background-image based — deters casual right-click saving) ============ */
+  .error-hero{
+    position:relative;
+    display:flex; align-items:center; justify-content:center;
+    padding:130px 20px 60px;
+    background:var(--ivory);
+    min-height:100vh;
+  }
+  .hero-img-wrap{
+    position:relative;
+    width:100%;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    border-radius:14px;
+    box-shadow:0 20px 60px rgba(16,42,67,0.14);
+    /* block casual copy attempts */
+    user-select:none; -webkit-user-select:none;
+    -webkit-touch-callout:none;
+    pointer-events:auto;
+  }
+  .hero-img-wrap.desktop{
+    max-width:1180px;
+    aspect-ratio:1672/941;
+    background-image:url('assets/404-desktop.png');
+  }
+  .hero-img-wrap.mobile{
+    max-width:480px;
+    aspect-ratio:1024/1536;
+    background-image:url('assets/404-mobile.png');
+    display:none;
+    margin:0 auto;
+  }
+  .hero-link-overlay{
+    position:absolute;
+    display:block;
+    border-radius:999px;
+    /* invisible clickable hit-area, sized/positioned to the button in the artwork */
+  }
+  .hero-link-overlay:focus-visible{outline:2px solid var(--gold-warm); outline-offset:3px;}
+  /* Desktop artwork: 1672x941 — button measured at x 53.05–74.94%, y 82.89–91.29% */
+  .hero-img-wrap.desktop .hero-link-overlay{
+    left:53.05%; top:82.89%; width:21.89%; height:8.4%;
+  }
+  /* Mobile artwork: 1024x1536 — button measured at x 29.88–70.31%, y 79.04–84.57% */
+  .hero-img-wrap.mobile .hero-link-overlay{
+    left:29.88%; top:79.04%; width:40.43%; height:5.53%;
+  }
+
+  @media (max-width:760px){
+    .error-hero{padding:120px 16px 40px;}
+    .hero-img-wrap.desktop{display:none;}
+    .hero-img-wrap.mobile{display:block;}
+    nav.primary-nav, .nav-call{display:none;}
+    .hamburger{display:flex; padding:10px;}
+  }
+
+  /* ============ FOOTER ============ */
+  footer{background:var(--navy-dark); color:#B9C2CE; padding:72px 0 24px;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08);}
+  .footer-brand{display:flex; gap:12px; align-items:center; margin-bottom:16px;}
+  .footer-brand .main{font-family:var(--serif); color:var(--white); font-size:19px; font-weight:700;}
+  .footer-brand .sri{font-size:10px; letter-spacing:2px; color:var(--gold-warm); text-transform:uppercase; display:block;}
+  footer h5{color:var(--white); font-size:14px; margin-bottom:18px; font-weight:600; letter-spacing:0.5px;}
+  footer ul li{margin-bottom:11px; font-size:14px;}
+  footer ul li a:hover{color:var(--gold-warm);}
+  .social-row{display:flex; gap:12px; margin-top:18px;}
+  .social-row a{width:34px; height:34px; border-radius:50%; border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center;}
+  .social-row a:hover{border-color:var(--gold-warm); background:rgba(212,175,87,0.1);}
+  .footer-bottom{padding-top:22px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:13px;}
+  @media (max-width:760px){
+    .footer-grid{grid-template-columns:1fr 1fr; row-gap:36px;}
+    .mobile-bar{display:block;}
+  }
+  @media (max-width:520px){
+    .footer-grid{grid-template-columns:1fr;}
+  }
+
+  /* ============ MOBILE BOTTOM BAR ============ */
+  .mobile-bar{display:none; position:fixed; bottom:0; left:0; right:0; z-index:250; background:var(--navy); box-shadow:0 -4px 20px rgba(0,0,0,0.15);}
+  .mobile-bar-inner{display:flex;}
+  .mobile-bar a{flex:1; text-align:center; padding:13px 0; font-size:12.5px; font-weight:600; color:var(--white); border-right:1px solid rgba(255,255,255,0.12); display:flex; flex-direction:column; align-items:center; gap:4px;}
+  .mobile-bar a:last-child{border-right:none; background:var(--gold);}
+  .mobile-bar svg{width:18px; height:18px;}
+  body{padding-bottom:0;}
+  @media (max-width:760px){ body{padding-bottom:60px;} }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header id="site-header">
+  <div class="nav-wrap">
+    <a href="https://sattvajnana.in/#home" class="brand" aria-label="Sattva Jnana home">
+      <img src="logo.png" alt="Sattva Jnana logo">
+      <span class="brand-text"><span class="sri">Sri Hari</span><span class="main">SATTVA JNANA</span></span>
+    </a>
+    <nav class="primary-nav" aria-label="Primary navigation">
+      <a href="https://sattvajnana.in/#home">Home</a>
+      <a href="https://sattvajnana.in/book-demo">Find Tutor</a>
+      <a href="https://sattvajnana.in/career">Career</a>
+    </nav>
+    <div class="nav-right">
+      <a class="nav-call" href="mailto:info@sattvajnana.in" aria-label="Email Sattva Jnana">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#102A43" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg>
+        info@sattvajnana.in
+      </a>
+      <a href="https://sattvajnana.in/book-demo" class="btn btn-primary btn-sm">Book a Demo</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-top">
+    <a href="https://sattvajnana.in/#home" class="brand" aria-label="Sattva Jnana home">
+      <img src="logo.png" alt="Sattva Jnana logo">
+      <span class="brand-text"><span class="sri">Sri Hari</span><span class="main">SATTVA JNANA</span></span>
+    </a>
+    <button class="close-btn" id="closeMenuBtn" aria-label="Close menu">&times;</button>
+  </div>
+  <a href="https://sattvajnana.in/#home">Home</a>
+  <a href="https://sattvajnana.in/book-demo">Find Tutor</a>
+  <a href="https://sattvajnana.in/career">Career</a>
+</div>
+
+<!-- ============ 404 ERROR SECTION (background-image artwork, right-click/drag protected) ============ -->
+<section class="error-hero" id="error-404">
+  <h1 class="sr-only" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);">404 — Page Not Found | Sattva Jnana</h1>
+
+  <div class="hero-img-wrap desktop" role="img" aria-label="Sattva Jnana 404 — Oops! Page Not Found. The page you're looking for doesn't exist or has been moved." oncontextmenu="return false;">
+    <a href="https://sattvajnana.in/" class="hero-link-overlay" aria-label="Go to Homepage"></a>
+  </div>
+
+  <div class="hero-img-wrap mobile" role="img" aria-label="Sattva Jnana 404 — Oops! Page Not Found. The page you're looking for doesn't exist or has been moved." oncontextmenu="return false;">
+    <a href="https://sattvajnana.in/" class="hero-link-overlay" aria-label="Go to Homepage"></a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="svg.png" alt="Sattva Jnana logo" width="40" height="40">
+          <span><span class="sri">Sri Hari</span><span class="main">SATTVA JNANA</span></span>
+        </div>
+        <p style="font-size:14px; max-width:260px;">Personalised learning. Focused attention. Meaningful progress.</p>
+        <div class="social-row">
+          <a href="https://www.instagram.com/sattvajnana" target="_blank" rel="noopener" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4AF57" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="https://www.facebook.com/sattvajnana" target="_blank" rel="noopener" aria-label="Facebook"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4AF57" stroke-width="1.8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://www.youtube.com/@sattvajnana" target="_blank" rel="noopener" aria-label="YouTube"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D4AF57" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h5>Sattva Jnana</h5>
+        <ul>
+          <li><a href="https://sattvajnana.in/#about">About</a></li>
+          <li><a href="https://sattvajnana.in/#how-it-works">Our Approach</a></li>
+          <li><a href="https://sattvajnana.in/programmes">Tuition Programmes</a></li>
+          <li><a href="https://sattvajnana.in/#subjects">Subjects</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>For Parents</h5>
+        <ul>
+          <li><a href="https://sattvajnana.in/book-demo/#book-demo">Book a Demo</a></li>
+          <li><a href="mailto:info@sattvajnana.in">Enquire Now</a></li>
+          <li><a href="mailto:info@sattvajnana.in">Email Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Resources</h5>
+        <ul>
+          <li><a href="https://sattvajnana.in/blog">Blog</a></li>
+          <li><a href="https://sattvajnana.in/blog/">Study Resources</a></li>
+          <li><a href="https://sattvajnana.in/blog/">Parent Resources</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Sattva Jnana. All Rights Reserved.</span>
+      <span><a href="https://sattvajnana.in/privacy-policy">Privacy Policy</a> | <a href="https://sattvajnana.in/terms-and-conditions">Terms &amp; Conditions</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ MOBILE BOTTOM BAR ============ -->
+<div class="mobile-bar">
+  <div class="mobile-bar-inner">
+    <a href="mailto:info@sattvajnana.in"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg>Email</a>
+    <a href="https://sattvajnana.in/book-demo/#book-demo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M9 11l3 3L22 4"/></svg>Book Demo</a>
+  </div>
+</div>
+
+<script>
+  // Header scroll state
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // Mobile menu
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const closeMenuBtn = document.getElementById('closeMenuBtn');
+  hamburgerBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
+  closeMenuBtn.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  // Basic copy deterrents for the hero artwork (casual protection only — not foolproof)
+  document.querySelectorAll('.hero-img-wrap').forEach(el => {
+    el.addEventListener('contextmenu', e => e.preventDefault());
+    el.addEventListener('dragstart', e => e.preventDefault());
+  });
+</script>
+</body>
+</html>
