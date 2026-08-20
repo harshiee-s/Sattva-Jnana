@@ -44,12 +44,41 @@
       "url": "https://sattvajnana.in/",
       "logo": "https://sattvajnana.in/logo.png",
       "areaServed": "Bengaluru, Karnataka",
+      "founder": [
+        { "@id": "https://sattvajnana.in/founders/#harshith-g-s" },
+        { "@id": "https://sattvajnana.in/founders/#sahana-shree" },
+        { "@id": "https://sattvajnana.in/founders/#jeevan-g" }
+      ],
       "sameAs": [
         "https://www.instagram.com/sattvajnana",
         "https://www.linkedin.com/company/sri-hari-sattva-jnana/",
         "https://www.facebook.com/sattvajnana",
         "https://www.youtube.com/@sattvajnana"
       ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://sattvajnana.in/founders/#harshith-g-s",
+      "name": "Harshith G S",
+      "jobTitle": "Founder & AI-Powered Education Strategist",
+      "url": "https://sattvajnana.in/founders/",
+      "worksFor": { "@id": "https://sattvajnana.in/#organization" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://sattvajnana.in/founders/#sahana-shree",
+      "name": "Sahana Shree",
+      "jobTitle": "Co-Founder & Science Mentor",
+      "url": "https://sattvajnana.in/founders/",
+      "worksFor": { "@id": "https://sattvajnana.in/#organization" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://sattvajnana.in/founders/#jeevan-g",
+      "name": "Jeevan G",
+      "jobTitle": "Co-Founder & Maths Mentor",
+      "url": "https://sattvajnana.in/founders/",
+      "worksFor": { "@id": "https://sattvajnana.in/#organization" }
     },
     {
       "@type": "WebSite",
@@ -483,7 +512,7 @@
   .founder-heading-divider{display:flex; align-items:center; justify-content:center; gap:12px; margin-top:18px;}
   .founder-heading-divider span{width:26px; height:1px; background:rgba(16,42,67,0.25);}
   .founder-heading-divider .fl{color:var(--gold); font-size:14px;}
-  .founder-wrap{position:relative; max-width:900px; margin:0 auto; perspective:1800px;}
+  .founder-wrap{position:relative; max-width:460px; margin:0 auto; perspective:1800px;}
   .founder-stack-1, .founder-stack-2{position:absolute; border-radius:22px; background:rgba(255,255,255,0.75); box-shadow:0 20px 50px rgba(16,42,67,0.12); border:1px solid rgba(212,175,87,0.2);}
   .founder-stack-1{top:16px; right:-16px; bottom:16px; left:26px; z-index:-1;}
   .founder-stack-2{top:30px; right:-30px; bottom:30px; left:52px; background:rgba(255,255,255,0.5); z-index:-2;}
@@ -500,21 +529,22 @@
   .founder-card.flip-origin-left{transform-origin:left center;}
   .founder-card.flip-out{animation:founderFlipOut .3s ease-in forwards;}
   .founder-card.flip-in{animation:founderFlipIn .32s ease-out forwards;}
-  .founder-top{display:grid; grid-template-columns:300px 1fr 66px; align-items:stretch;}
-  .founder-photo-wrap{position:relative; background:var(--navy); overflow:hidden;}
-  .founder-photo-wrap img{width:100%; height:100%; object-fit:cover; display:block;}
+  .founder-top{display:grid; grid-template-columns:1fr; align-items:stretch;}
+  .founder-photo-wrap{position:relative; background:var(--navy); overflow:hidden; aspect-ratio:1/1; min-height:0; display:flex; align-items:center; justify-content:center;}
+  .founder-photo-wrap img{width:100%; height:100%; object-fit:cover; object-position:center; display:block;}
   .founder-seal{
-    position:absolute; left:22px; bottom:22px; width:80px; height:80px;
+    position:absolute; left:50%; top:auto; bottom:-30px; transform:translateX(-50%); width:80px; height:80px;
     border-radius:50%; background:var(--white); border:2px solid var(--gold); display:flex; align-items:center;
     justify-content:center; box-shadow:0 10px 24px rgba(0,0,0,0.3); z-index:2; padding:12px;
   }
   .founder-seal img{width:100%; height:100%; object-fit:contain;}
-  .founder-mobile-num{display:none; position:absolute; top:18px; right:20px; z-index:3; font-family:var(--serif); font-weight:700; font-size:19px; color:var(--gold); border-bottom:2px solid var(--gold); padding-bottom:2px;}
-  .founder-info{background:var(--white); padding:40px 40px 34px; text-align:left;}
-  .founder-sri{font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); font-weight:700; margin-bottom:8px;}
+  .founder-mobile-num{display:block; position:absolute; top:18px; right:20px; z-index:3; font-family:var(--serif); font-weight:700; font-size:19px; color:var(--gold); border-bottom:2px solid var(--gold); padding-bottom:2px;}
+  .founder-info{background:var(--white); padding:52px 40px 34px; text-align:center;}
+  .founder-sri{font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); font-weight:700; margin-bottom:8px; text-align:center;}
   .founder-name{font-family:var(--serif); font-size:26px; font-weight:700; color:var(--navy); letter-spacing:0.3px; margin-bottom:6px;}
-  .founder-role{font-size:12.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); font-weight:700; margin-bottom:16px;}
-  .founder-divider{display:flex; align-items:center; justify-content:flex-start; gap:10px; margin-bottom:20px;}
+  .founder-role{font-size:12.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); font-weight:700; margin-bottom:16px; text-align:center;}
+  .founder-divider{display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:20px;}
+  .founder-story-btn{display:inline-block;}
   .founder-divider span{width:26px; height:1px; background:rgba(16,42,67,0.25);}
   .founder-divider .fl{color:var(--gold); font-size:13px;}
   .founder-bio{font-size:13.5px; color:var(--text-soft); line-height:1.7; margin-bottom:26px; max-width:480px;}
@@ -527,17 +557,14 @@
   .founder-icon svg{width:16px; height:16px; stroke:var(--gold); fill:none; stroke-width:1.8;}
   .founder-detail h5{font-family:var(--serif); font-size:14px; color:var(--navy); font-weight:700; margin-bottom:3px; padding-bottom:4px; border-bottom:1px solid rgba(16,42,67,0.12); display:inline-block;}
   .founder-detail p{font-size:12.5px; color:var(--text-soft); line-height:1.4; margin-top:3px;}
-  .founder-side-nav{
-    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:26px;
-    border-left:1px solid rgba(16,42,67,0.12); padding:0 10px;
-  }
+  .founder-side-nav{display:none;}
   .founder-side-nav button{
     background:none; border:none; cursor:pointer; font-family:var(--serif); font-size:16px;
     color:rgba(16,42,67,0.35); font-weight:600; padding-bottom:4px; border-bottom:2px solid transparent; transition:all .2s;
   }
   .founder-side-nav button.active{color:var(--gold); border-bottom-color:var(--gold);}
 
-  .founder-pagination{display:flex; align-items:center; justify-content:center; gap:22px; margin-top:32px; flex-wrap:wrap;}
+  .founder-pagination{display:flex; align-items:center; justify-content:center; gap:22px; margin-bottom:28px; flex-wrap:wrap;}
   .founder-prev, .founder-next{
     border:1.5px solid var(--gold); color:var(--gold); background:transparent; padding:10px 22px;
     border-radius:999px; font-size:14px; font-weight:600; cursor:pointer; transition:all .2s; font-family:var(--sans);
@@ -663,8 +690,6 @@
   @media (max-width: 900px){
     .founder-top{grid-template-columns:1fr;}
     .founder-side-nav{display:none;}
-    .founder-photo-wrap{aspect-ratio:auto; min-height:280px; position:relative; display:flex; align-items:center; justify-content:center;}
-    .founder-photo-wrap img{width:100%; height:100%; max-height:420px; object-fit:contain; object-position:center;}
     .founder-seal{left:50%; top:auto; bottom:-30px; transform:translateX(-50%); width:74px; height:74px;}
     .founder-info{padding:48px 32px 26px; text-align:center;}
     .founder-sri, .founder-role{text-align:center;}
@@ -731,8 +756,6 @@
     .founder-stack-2{top:20px; right:-18px; bottom:20px; left:20px;}
     .founder-stack-num{top:18px; right:4px; font-size:11px;}
     .founder-stack-2 .founder-stack-num{top:18px; right:4px; font-size:10px;}
-    .founder-photo-wrap{aspect-ratio:auto; min-height:220px;}
-    .founder-photo-wrap img{max-height:320px;}
     .founder-seal{width:60px; height:60px; padding:9px; bottom:-26px;}
     .founder-info{padding:44px 22px 22px;}
     .founder-name{font-size:22px;}
@@ -788,6 +811,7 @@
     <nav class="primary-nav" aria-label="Primary navigation">
       <a href="#home" class="active">Home</a>
       <a href="https://sattvajnana.in/programmes/">Programmes</a>
+      <a href="https://sattvajnana.in/founders/">About Us</a>
       <a href="https://sattvajnana.in/book-demo/">Book a Demo</a>
       <a href="https://sattvajnana.in/career/">Career</a>
     </nav>
@@ -812,6 +836,7 @@
   </div>
   <a href="#home" class="active">Home</a>
   <a href="https://sattvajnana.in/programmes/">Programmes</a>
+  <a href="https://sattvajnana.in/founders/">About Us</a>
   <a href="https://sattvajnana.in/book-demo/">Book a Demo</a>
   <a href="https://sattvajnana.in/career/">Career</a>
 </div>
@@ -1266,20 +1291,19 @@
     <div class="section-head center reveal">
       <div class="eyebrow no-dash">The People Behind Sattva Jnana</div>
       <h2 class="title" style="color:var(--navy);">Meet Our Founders</h2>
-      <p class="lede">Three founders. One educational vision.</p>
+      <p class="lede">Three founders. One educational vision — Harshith G S, Sahana Shree and Jeevan G.</p>
       <div class="founder-heading-divider"><span></span><span class="fl">✿</span><span></span></div>
-    </div>
-    <div class="founder-wrap reveal">
-      <div class="founder-stack-1"><span class="founder-stack-num" id="stackNum1"></span></div>
-      <div class="founder-stack-2"><span class="founder-stack-num" id="stackNum2"></span></div>
-      <div class="founder-card" id="founderCard"></div>
     </div>
     <div class="founder-pagination">
       <button class="founder-prev" onclick="moveFounder(-1)">&#8592; Previous</button>
       <div class="founder-pages" id="founderPages"></div>
       <button class="founder-next" onclick="moveFounder(1)">Next &#8594;</button>
     </div>
-    <div class="founder-quote-box" id="founderQuoteBox"></div>
+    <div class="founder-wrap reveal">
+      <div class="founder-stack-1"><span class="founder-stack-num" id="stackNum1"></span></div>
+      <div class="founder-stack-2"><span class="founder-stack-num" id="stackNum2"></span></div>
+      <div class="founder-card" id="founderCard"></div>
+    </div>
   </div>
 </section>
 
@@ -1472,6 +1496,7 @@
         <h5>Sattva Jnana</h5>
         <ul>
           <li><a href="#about">About</a></li>
+          <li><a href="https://sattvajnana.in/founders/">About Us</a></li>
           <li><a href="#how-it-works">Our Approach</a></li>
           <li><a href="https://sattvajnana.in/programmes/">Tuition Programmes</a></li>
           <li><a href="#subjects">Subjects</a></li>
@@ -1632,7 +1657,6 @@
   let founderFlipping = false;
   const founderCard = document.getElementById('founderCard');
   const founderPages = document.getElementById('founderPages');
-  const founderQuoteBox = document.getElementById('founderQuoteBox');
   founders.forEach((f, i) => {
     if (i > 0) {
       const sep = document.createElement('span');
@@ -1648,12 +1672,6 @@
   });
   function renderFounderContent() {
     const f = founders[founderIdx];
-    const detailsHtml = f.details.map(d => `
-      <div class="founder-detail">
-        <div class="founder-icon">${FOUNDER_ICONS[d.icon]}</div>
-        <div><h5>${d.label}</h5><p>${d.value}</p></div>
-      </div>
-    `).join('');
     const sideNavHtml = founders.map((_, i) =>
       `<button data-i="${i}" class="${i === founderIdx ? 'active' : ''}">${String(i + 1).padStart(2, '0')}</button>`
     ).join('');
@@ -1669,8 +1687,7 @@
           <div class="founder-name">${f.name}</div>
           <div class="founder-role">${f.role}</div>
           <div class="founder-divider"><span></span><span class="fl">✿</span><span></span></div>
-          <p class="founder-bio">${f.bio}</p>
-          <div class="founder-details">${detailsHtml}</div>
+          <a href="https://sattvajnana.in/founders" class="btn btn-outline btn-sm founder-story-btn">My Story →</a>
         </div>
         <div class="founder-side-nav">${sideNavHtml}</div>
       </div>
@@ -1678,7 +1695,6 @@
     founderCard.querySelectorAll('.founder-side-nav button').forEach(b => {
       b.addEventListener('click', () => goToFounder(parseInt(b.dataset.i, 10)));
     });
-    founderQuoteBox.innerHTML = `<span class="qm">&ldquo;</span><p>${f.quote}</p><span class="qm">&rdquo;</span>`;
     founderPages.querySelectorAll('button').forEach((b, i) => b.classList.toggle('active', i === founderIdx));
     const next1 = (founderIdx + 1) % founders.length;
     const next2 = (founderIdx + 2) % founders.length;
