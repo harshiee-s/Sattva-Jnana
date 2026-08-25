@@ -17,182 +17,222 @@
     --navy-dark:#0B1F33;
     --gold:#C5962E;
     --gold-warm:#D4AF57;
-    --ivory:#E9EDF3;
     --white:#FFFFFF;
-    --text:#374151;
-    --text-soft:#5B6472;
-    --line:#E3E8EF;
+    --ink:#F2F5F9;          /* primary text on image */
+    --ink-soft:#B9C6D4;     /* secondary text on image */
+    --ink-faint:#8C9CAE;    /* tertiary text on image */
+    --hair:rgba(255,255,255,.42);
+    --hair-soft:rgba(255,255,255,.26);
+    --glass:transparent;
     --serif:'Playfair Display', Georgia, serif;
     --sans:'Inter', -apple-system, sans-serif;
+
+    /* Backdrop darkening behind the controls. 0 = fully transparent, the
+       photo shows at full strength. Raise toward 0.65 only if your
+       pricing-img.png is light enough to fight the white text. */
+    --scrim:0;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html,body{height:100%;}
   body{
-    font-family:var(--sans); color:var(--text); line-height:1.5;
+    font-family:var(--sans); color:var(--ink); line-height:1.5;
     -webkit-font-smoothing:antialiased;
     background:var(--navy-dark) url('pricing-img.png') center/cover no-repeat fixed;
     display:flex; align-items:center; justify-content:center;
-    padding:20px; overflow:hidden;
+    padding:28px; overflow:hidden;
+    text-shadow:0 1px 3px rgba(0,0,0,.65), 0 0 14px rgba(0,0,0,.4);
   }
+  /* Transparent by default — driven entirely by --scrim above. */
   body::before{
-    content:''; position:fixed; inset:0;
-    background:linear-gradient(150deg, rgba(11,31,51,.90), rgba(16,42,67,.82));
-    z-index:0;
+    content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:linear-gradient(155deg,
+      rgba(16,42,67,var(--scrim)), rgba(11,31,51,var(--scrim)));
   }
   img{max-width:100%; display:block;}
   h1,h2,h3{font-family:var(--serif); font-weight:600; line-height:1.2;}
 
-  /* ---------- Panel ---------- */
-  .panel{
+  /* ---------- Stage (no card) ---------- */
+  .stage{
     position:relative; z-index:1;
-    width:100%; max-width:1120px; max-height:calc(100vh - 40px);
-    background:rgba(255,255,255,.97);
-    border:1px solid rgba(255,255,255,.6);
-    border-radius:20px; overflow:hidden;
-    box-shadow:0 34px 90px rgba(5,15,28,.55);
-    display:grid; grid-template-columns:1.25fr .85fr;
+    width:100%; max-width:1180px; max-height:calc(100vh - 56px);
+    display:flex; flex-direction:column;
   }
 
-  /* ---------- Left: controls ---------- */
-  .form{padding:26px 30px 24px; overflow-y:auto;}
-  .brandbar{display:flex; align-items:center; gap:14px; padding-bottom:16px; border-bottom:1px solid var(--line); margin-bottom:20px;}
-  .brandbar img{height:42px; width:auto;}
-  .brandbar .txt h1{font-size:20px; color:var(--navy);}
-  .brandbar .txt p{font-size:12px; color:var(--text-soft); margin-top:2px;}
+  .topbar{
+    display:flex; align-items:center; gap:16px;
+    padding-bottom:18px; border-bottom:1px solid var(--hair-soft); margin-bottom:24px;
+  }
+  .topbar img{height:46px; width:auto;}
+  .topbar h1{font-size:22px; color:var(--white); letter-spacing:.2px;}
+  .topbar p{font-size:12.5px; color:var(--ink-faint); margin-top:2px;}
 
-  .row{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:16px;}
+  .grid{display:grid; grid-template-columns:1.22fr .78fr; gap:46px; min-height:0;}
+
+  /* ---------- Controls ---------- */
+  .form{min-width:0; overflow-y:auto; padding-right:4px;}
+  .row{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:18px;}
+  .field{display:flex; flex-direction:column; min-width:0;}
   .field label:not(.addon), .block-label{
-    display:block; font-size:10.5px; font-weight:700; letter-spacing:1.4px;
-    text-transform:uppercase; color:var(--gold); margin-bottom:7px;
+    display:block; font-size:10.5px; font-weight:700; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--gold-warm); margin-bottom:8px;
   }
   select, input[type=number]{
-    width:100%; font-family:var(--sans); font-size:14px; font-weight:500; color:var(--navy);
-    background:var(--white); border:1px solid var(--line); border-radius:8px;
-    padding:10px 12px; transition:border-color .2s, box-shadow .2s;
+    width:100%; font-family:var(--sans); font-size:14px; font-weight:500; color:var(--white);
+    background:var(--glass); border:1px solid var(--hair); border-radius:8px;
+    padding:11px 13px; transition:border-color .2s, box-shadow .2s, background .2s;
   }
   select{
-    appearance:none; cursor:pointer; padding-right:34px;
-    background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23102A43' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-    background-repeat:no-repeat; background-position:right 11px center; background-size:15px;
+    appearance:none; cursor:pointer; padding-right:36px;
+    background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D4AF57' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 12px center; background-size:15px;
   }
-  select:focus, input:focus{outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(197,150,46,.16);}
+  /* Native dropdown list renders on the OS surface, so force readable colours */
+  select option{color:#102A43; background:#FFFFFF;}
+  select:hover, input[type=number]:hover{border-color:rgba(212,175,87,.75);}
+  select:focus, input:focus{
+    outline:none; border-color:var(--gold);
+    box-shadow:0 0 0 3px rgba(197,150,46,.22);
+  }
+  input::placeholder{color:var(--ink-faint);}
 
   /* Subjects */
-  .subj-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:7px;}
+  .subj-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px;}
   .subj-head .block-label{margin-bottom:0;}
   .link-btn{
     background:none; border:none; font-family:var(--sans); font-size:11.5px; font-weight:600;
-    color:var(--text-soft); cursor:pointer; padding:0; text-decoration:underline;
+    color:var(--ink-faint); cursor:pointer; padding:0; text-decoration:underline;
     text-underline-offset:3px; transition:color .2s;
   }
-  .link-btn:hover{color:var(--gold);}
-  .subjects{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:18px;}
+  .link-btn:hover{color:var(--gold-warm);}
+  .subjects{display:grid; grid-template-columns:repeat(4,1fr); gap:9px; margin-bottom:20px;}
   .chip{
-    position:relative; display:flex; flex-direction:column; gap:1px;
-    border:1px solid var(--line); border-radius:9px; padding:9px 10px;
-    cursor:pointer; background:var(--white); transition:all .18s ease;
+    position:relative; display:flex; flex-direction:column; gap:2px;
+    border:1px solid var(--hair); border-radius:9px; padding:10px 11px;
+    cursor:pointer; background:var(--glass); transition:all .18s ease;
   }
-  .chip:hover{border-color:var(--gold-warm); transform:translateY(-1px);}
+  .chip:hover{border-color:rgba(212,175,87,.75);}
   .chip input{position:absolute; opacity:0; pointer-events:none;}
-  .chip .nm{font-size:12.5px; font-weight:600; color:var(--navy); display:flex; align-items:center; gap:6px;}
+  .chip .nm{font-size:12.5px; font-weight:600; color:var(--ink); display:flex; align-items:center; gap:7px;}
   .chip .nm::before{
-    content:''; width:13px; height:13px; border:1.5px solid #C7CFDA; border-radius:4px;
-    flex-shrink:0; transition:all .18s ease;
+    content:''; width:13px; height:13px; border:1.5px solid rgba(255,255,255,.45);
+    border-radius:4px; flex-shrink:0; transition:all .18s ease;
   }
-  .chip .rt{font-size:11px; color:var(--text-soft); padding-left:19px; font-variant-numeric:tabular-nums;}
-  .chip.on{border-color:var(--gold); background:#FDF9F0;}
+  .chip .rt{font-size:11px; color:var(--ink-faint); padding-left:20px; font-variant-numeric:tabular-nums;}
+  .chip.on{border-color:var(--gold); box-shadow:inset 0 0 0 1px var(--gold);}
+  .chip.on .nm{color:var(--white);}
   .chip.on .nm::before{
-    background:var(--gold) url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center/9px no-repeat;
+    background:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D4AF57' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center/11px no-repeat;
     border-color:var(--gold);
   }
-  .chip.on .rt{color:var(--gold);}
-  .chip:focus-within{box-shadow:0 0 0 3px rgba(197,150,46,.16);}
+  .chip.on .rt{color:var(--gold-warm);}
+  .chip:focus-within{box-shadow:0 0 0 3px rgba(197,150,46,.22);}
 
   /* AI add-on */
   .addon{
     display:flex; align-items:center; gap:11px; cursor:pointer;
-    border:1px solid var(--line); border-radius:10px; padding:11px 13px;
-    background:var(--white); transition:all .18s ease; height:100%;
+    border:1px solid var(--hair); border-radius:9px; padding:11px 13px;
+    background:var(--glass); transition:all .18s ease; flex:1;
     text-transform:none; letter-spacing:normal; margin-bottom:0;
   }
-  .addon .box{display:block;}
-  .addon:hover{border-color:var(--gold-warm);}
-  .addon.on{border-color:var(--gold); background:#FDF9F0;}
+  .addon:hover{border-color:rgba(212,175,87,.75);}
+  .addon.on{border-color:var(--gold); box-shadow:inset 0 0 0 1px var(--gold);}
   .addon input{position:absolute; opacity:0; pointer-events:none;}
   .addon .box{
-    width:16px; height:16px; border:1.5px solid #C7CFDA; border-radius:5px; flex-shrink:0; transition:all .18s;
+    display:block; width:16px; height:16px; border:1.5px solid rgba(255,255,255,.45);
+    border-radius:5px; flex-shrink:0; transition:all .18s;
   }
   .addon.on .box{
-    background:var(--gold) url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center/11px no-repeat;
+    background:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D4AF57' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center/13px no-repeat;
     border-color:var(--gold);
   }
-  .addon strong{display:block; font-size:12.5px; font-weight:600; color:var(--navy);}
-  .addon span{font-size:11px; color:var(--text-soft);}
+  .addon strong{display:block; font-size:12.5px; font-weight:600; color:var(--ink);}
+  .addon > span > span{font-size:11px; color:var(--ink-faint);}
 
   /* Discount */
-  .disc-wrap{display:flex; gap:8px;}
+  .disc-wrap{display:flex; gap:9px;}
   .disc-wrap input{flex:1;}
-  .toggle{display:flex; background:#EEF1F6; border-radius:8px; padding:3px; flex-shrink:0;}
+  .toggle{display:flex; border:1px solid var(--hair); border-radius:8px; padding:3px; flex-shrink:0;}
   .toggle button{
-    font-family:var(--sans); font-size:13px; font-weight:700; color:var(--text-soft);
-    background:none; border:none; border-radius:6px; padding:0 13px; cursor:pointer; transition:all .18s;
+    font-family:var(--sans); font-size:13px; font-weight:700; color:var(--ink-soft);
+    background:none; border:none; border-radius:6px; padding:0 14px; cursor:pointer; transition:all .18s;
   }
-  .toggle button.on{background:var(--navy); color:var(--white);}
+  .toggle button.on{color:var(--gold-warm); box-shadow:inset 0 0 0 1px var(--gold);}
 
-  /* ---------- Right: quote ---------- */
+  /* ---------- Quote ---------- */
   .quote{
-    background:var(--navy); color:var(--white); padding:26px 28px 24px;
-    display:flex; flex-direction:column; position:relative; overflow:hidden;
+    min-width:0; display:flex; flex-direction:column;
+    border-left:1px solid var(--hair-soft); padding-left:44px; position:relative;
   }
   .quote::after{
-    content:''; position:absolute; inset:0; opacity:.055; pointer-events:none;
-    background:url('logo.png') no-repeat right -50px bottom -50px; background-size:300px;
+    content:''; position:absolute; inset:0; opacity:.06; pointer-events:none;
+    background:url('logo.png') no-repeat right bottom; background-size:230px;
   }
   .quote > *{position:relative; z-index:1;}
-  .quote h2{font-size:17px; color:var(--white);}
-  .quote .ctx{
-    font-size:11px; letter-spacing:1.4px; text-transform:uppercase;
-    color:var(--gold-warm); font-weight:600; margin-bottom:4px;
-  }
-  .qhead{padding-bottom:14px; border-bottom:1px solid rgba(255,255,255,.14);}
+  .ctx{font-size:10.5px; letter-spacing:1.6px; text-transform:uppercase; color:var(--gold-warm); font-weight:700; margin-bottom:5px;}
+  .quote h2{font-size:18px; color:var(--white);}
+  .qhead{padding-bottom:15px; border-bottom:1px solid var(--hair-soft);}
 
-  .lines{flex:1; overflow-y:auto; margin:14px 0; min-height:60px;}
+  .lines{flex:1; overflow-y:auto; margin:15px 0; min-height:60px;}
   .lines::-webkit-scrollbar{width:4px;}
-  .lines::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2); border-radius:4px;}
-  .li{display:flex; justify-content:space-between; gap:12px; align-items:baseline; padding:5px 0; font-size:13px;}
-  .li .l{color:#C6D0DC;}
-  .li .l em{font-style:normal; color:#8A99AB; font-size:11.5px; display:block; margin-top:1px;}
-  .li .v{font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap;}
+  .lines::-webkit-scrollbar-thumb{background:rgba(255,255,255,.22); border-radius:4px;}
+  .li{display:flex; justify-content:space-between; gap:12px; align-items:baseline; padding:6px 0; font-size:13px;}
+  .li .l{color:var(--ink-soft);}
+  .li .l em{font-style:normal; color:var(--ink-faint); font-size:11.5px; display:block; margin-top:1px;}
+  .li .v{font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--ink);}
   .li.ai .l{color:var(--gold-warm);}
-  .empty{color:#8A99AB; font-size:12.5px; padding:14px 0; line-height:1.6;}
+  .empty{color:var(--ink-faint); font-size:12.5px; padding:14px 0; line-height:1.6;}
 
-  .sums{border-top:1px solid rgba(255,255,255,.14); padding-top:12px;}
-  .sums .li{font-size:12.5px; color:#C6D0DC;}
-  .sums .li .v{color:#E6ECF3;}
-  .sums .li.off .v{color:#7BC49A;}
+  .sums{border-top:1px solid var(--hair-soft); padding-top:13px;}
+  .sums .li{font-size:12.5px;}
+  .sums .li.off .v{color:#84D3A6;}
 
   .total{
-    display:flex; align-items:flex-end; justify-content:space-between; gap:10px;
-    margin-top:12px; padding-top:14px; border-top:1px solid rgba(255,255,255,.14);
+    display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+    margin-top:13px; padding-top:15px; border-top:1px solid var(--hair);
   }
-  .total .lb{font-size:11px; letter-spacing:1.4px; text-transform:uppercase; color:#9AA8B8; font-weight:600;}
-  .total .lb em{display:block; font-style:normal; font-size:10.5px; letter-spacing:.4px; text-transform:none; color:#7C8B9D; margin-top:3px;}
-  .total .amt{font-family:var(--serif); font-size:33px; font-weight:700; color:var(--gold-warm); line-height:1; font-variant-numeric:tabular-nums;}
+  .total .lb{font-size:10.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink-faint); font-weight:700;}
+  .total .lb em{display:block; font-style:normal; font-size:10.5px; letter-spacing:.4px; text-transform:none; color:var(--ink-faint); margin-top:4px;}
+  .total .amt{
+    font-family:var(--serif); font-size:38px; font-weight:700; color:var(--gold-warm);
+    line-height:1; font-variant-numeric:tabular-nums;
+  }
 
-  .actions{display:flex; gap:9px; margin-top:16px;}
+  .actions{display:flex; gap:10px; margin-top:18px;}
   .btn{
     flex:1; font-family:var(--sans); font-size:12.5px; font-weight:600; cursor:pointer;
-    border-radius:7px; padding:11px 12px; border:1px solid transparent; transition:all .2s;
+    border-radius:7px; padding:12px; border:1px solid transparent; transition:all .2s;
     display:inline-flex; align-items:center; justify-content:center; gap:7px;
   }
-  .btn-gold{background:var(--gold); color:var(--white);}
-  .btn-gold:hover{background:#B5851F;}
-  .btn-ghost{background:transparent; color:#C6D0DC; border-color:rgba(255,255,255,.28);}
-  .btn-ghost:hover{background:rgba(255,255,255,.09); color:var(--white);}
-  .note{font-size:10.5px; color:#7C8B9D; margin-top:11px; line-height:1.5;}
-
-  :focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+  .btn-gold{color:var(--gold-warm); border-color:var(--gold); box-shadow:inset 0 0 0 1px var(--gold);}
+  .btn-gold:hover{color:var(--white); border-color:var(--gold-warm); box-shadow:inset 0 0 0 1px var(--gold-warm);}
+  .btn-ghost{color:var(--ink-soft); border-color:var(--hair);}
+  .btn-ghost:hover{color:var(--white); border-color:rgba(255,255,255,.7);}
   .btn[disabled]{opacity:.55; cursor:progress;}
+  .note{font-size:10.5px; color:var(--ink-faint); margin-top:12px; line-height:1.5;}
+
+  :focus-visible{outline:2px solid var(--gold-warm); outline-offset:2px;}
+
+  /* Shadow is for text sitting on the photo only — never on the PDF sheet
+     or on solid-filled controls, where it just reads as blur. */
+  .btn, .toggle button{text-shadow:none;}
+  #sheet, #sheet *{text-shadow:none !important;}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:1000px){
+    body{overflow:auto; align-items:flex-start; padding:20px 18px 32px;}
+    .stage{max-height:none;}
+    .grid{grid-template-columns:1fr; gap:30px;}
+    .quote{border-left:none; border-top:1px solid var(--hair-soft); padding-left:0; padding-top:26px;}
+    .quote::after{background-position:right top;}
+  }
+  @media (max-width:560px){
+    .row{grid-template-columns:1fr; gap:15px;}
+    .subjects{grid-template-columns:repeat(2,1fr);}
+    .topbar img{height:38px;}
+    .topbar h1{font-size:19px;}
+    .total .amt{font-size:32px;}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none !important; animation:none !important;}}
 
   /* ---------- A4 quote sheet (PDF only) ---------- */
   /* Hidden by display:none, then rendered in normal flow while capturing —
@@ -209,7 +249,7 @@
     overflow:auto; display:block; padding:0; background:#fff;
   }
   body.capturing::before{display:none;}
-  body.capturing .panel{display:none;}
+  body.capturing .stage{display:none;}
   body.capturing #sheet{display:flex;}
 
   /* Veil covers the flash while the sheet is laid out. html2canvas renders
@@ -275,129 +315,117 @@
   /* Print fallback — used only if the PDF library can't load or capture */
   @media print{
     body{background:#fff; padding:0; display:block; overflow:visible;}
-    body::before, .panel, #veil{display:none !important;}
+    body::before, .stage, #veil{display:none !important;}
     #sheet{display:flex !important; width:100%; min-height:0; padding:0; margin:0;}
     @page{size:A4; margin:14mm;}
   }
 
-  /* ---------- Responsive ---------- */
-  @media (max-width:1000px){
-    body{overflow:auto; align-items:flex-start; padding:14px;}
-    .panel{grid-template-columns:1fr; max-height:none;}
-    .form{padding:22px 20px 20px;}
-    .quote{padding:22px 20px;}
-    .lines{max-height:none;}
-  }
-  @media (max-width:560px){
-    .row{grid-template-columns:1fr; gap:13px;}
-    .subjects{grid-template-columns:repeat(2,1fr);}
-    .brandbar img{height:36px;}
-    .total .amt{font-size:29px;}
-  }
-  @media (prefers-reduced-motion:reduce){*{transition:none !important;}}
 </style>
 </head>
 <body>
 
-<main class="panel">
+<main class="stage">
 
-  <!-- ============ CONTROLS ============ -->
-  <section class="form">
-    <div class="brandbar">
-      <img src="logo.png" alt="Sattva Jnana">
-      <div class="txt">
-        <h1>Tuition Fee Calculator</h1>
-        <p>Build a monthly quote in a few taps.</p>
-      </div>
+  <header class="topbar">
+    <img src="logo.png" alt="Sattva Jnana">
+    <div>
+      <h1>Tuition Fee Calculator</h1>
+      <p>Build a monthly quote in a few taps.</p>
     </div>
+  </header>
 
-    <div class="row">
-      <div class="field">
-        <label for="board">Board</label>
-        <select id="board">
-          <option value="CBSE">CBSE Board</option>
-          <option value="ICSE">ICSE Board</option>
-          <option value="State">State Board</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="cls">Class</label>
-        <select id="cls">
-          <option value="5">5th Standard</option>
-          <option value="6">6th Standard</option>
-          <option value="7">7th Standard</option>
-          <option value="8" selected>8th Standard</option>
-          <option value="9">9th Standard</option>
-          <option value="10">10th Standard</option>
-        </select>
-      </div>
-    </div>
+  <div class="grid">
 
-    <div class="subj-head">
-      <span class="block-label">Subjects</span>
-      <button type="button" class="link-btn" id="clearSubj">Clear all</button>
-    </div>
-    <div class="subjects" id="subjects"></div>
-
-    <div class="row">
-      <div class="field">
-        <label for="hrs">Hours per week <span style="text-transform:none;letter-spacing:0;color:var(--text-soft);font-weight:500;">(per subject)</span></label>
-        <input type="number" id="hrs" value="2" min="0" max="20" step="0.5" inputmode="decimal">
-      </div>
-      <div class="field">
-        <span class="block-label">AI Learning</span>
-        <label class="addon" id="aiWrap">
-          <input type="checkbox" id="ai">
-          <span class="box"></span>
-          <span>
-            <strong>Add AI Learning</strong>
-            <span id="aiPrice">₹2,000 / month</span>
-          </span>
-        </label>
-      </div>
-    </div>
-
-    <div class="field">
-      <label for="disc">Discount</label>
-      <div class="disc-wrap">
-        <input type="number" id="disc" value="0" min="0" step="1" inputmode="decimal" placeholder="0">
-        <div class="toggle" id="discToggle" role="group" aria-label="Discount type">
-          <button type="button" data-mode="amt" class="on" aria-pressed="true">₹</button>
-          <button type="button" data-mode="pct" aria-pressed="false">%</button>
+    <!-- ============ CONTROLS ============ -->
+    <section class="form">
+      <div class="row">
+        <div class="field">
+          <label for="board">Board</label>
+          <select id="board">
+            <option value="CBSE">CBSE Board</option>
+            <option value="ICSE">ICSE Board</option>
+            <option value="State">State Board</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="cls">Class</label>
+          <select id="cls">
+            <option value="5">5th Standard</option>
+            <option value="6">6th Standard</option>
+            <option value="7">7th Standard</option>
+            <option value="8" selected>8th Standard</option>
+            <option value="9">9th Standard</option>
+            <option value="10">10th Standard</option>
+          </select>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ============ QUOTE ============ -->
-  <aside class="quote">
-    <div class="qhead">
-      <p class="ctx" id="ctx">CBSE · Class 8</p>
-      <h2>Monthly fee estimate</h2>
-    </div>
+      <div class="subj-head">
+        <span class="block-label">Subjects</span>
+        <button type="button" class="link-btn" id="clearSubj">Clear all</button>
+      </div>
+      <div class="subjects" id="subjects"></div>
 
-    <div class="lines" id="lines"></div>
+      <div class="row">
+        <div class="field">
+          <label for="hrs">Hours per week <span style="text-transform:none;letter-spacing:0;color:var(--ink-faint);font-weight:500;">(per subject)</span></label>
+          <input type="number" id="hrs" value="2" min="0" max="20" step="0.5" inputmode="decimal">
+        </div>
+        <div class="field">
+          <span class="block-label">AI Learning</span>
+          <label class="addon" id="aiWrap">
+            <input type="checkbox" id="ai">
+            <span class="box"></span>
+            <span>
+              <strong>Add AI Learning</strong>
+              <span id="aiPrice">₹2,000 / month</span>
+            </span>
+          </label>
+        </div>
+      </div>
 
-    <div class="sums" id="sums"></div>
+      <div class="field">
+        <label for="disc">Discount</label>
+        <div class="disc-wrap">
+          <input type="number" id="disc" value="0" min="0" step="1" inputmode="decimal" placeholder="0">
+          <div class="toggle" id="discToggle" role="group" aria-label="Discount type">
+            <button type="button" data-mode="amt" class="on" aria-pressed="true">₹</button>
+            <button type="button" data-mode="pct" aria-pressed="false">%</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="total">
-      <span class="lb">Total / month<em id="totalSub">Payable monthly</em></span>
-      <span class="amt" id="total">₹0</span>
-    </div>
+    <!-- ============ QUOTE ============ -->
+    <aside class="quote">
+      <div class="qhead">
+        <p class="ctx" id="ctx">CBSE · Class 8</p>
+        <h2>Monthly fee estimate</h2>
+      </div>
 
-    <div class="actions">
-      <button type="button" class="btn btn-gold" id="pdfBtn">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
-        Download PDF
-      </button>
-    </div>
-    <div class="actions" style="margin-top:9px;">
-      <button type="button" class="btn btn-ghost" id="copyBtn">Copy quote</button>
-      <button type="button" class="btn btn-ghost" id="resetBtn">Reset</button>
-    </div>
-    <p class="note">Subject rates are per hour. Monthly fee = rate × hours per week × 4 weeks.</p>
-  </aside>
+      <div class="lines" id="lines"></div>
 
+      <div class="sums" id="sums"></div>
+
+      <div class="total">
+        <span class="lb">Total / month<em id="totalSub">Payable monthly</em></span>
+        <span class="amt" id="total">₹0</span>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-gold" id="pdfBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          Download PDF
+        </button>
+      </div>
+      <div class="actions" style="margin-top:10px;">
+        <button type="button" class="btn btn-ghost" id="copyBtn">Copy quote</button>
+        <button type="button" class="btn btn-ghost" id="resetBtn">Reset</button>
+      </div>
+      <p class="note">Subject rates are per hour. Monthly fee = rate × hours per week × 4 weeks.</p>
+    </aside>
+
+  </div>
 </main>
 
 <!-- A4 sheet, populated on download -->
@@ -785,5 +813,7 @@
   render();
 })();
 </script>
+</body>
+</html>
 </body>
 </html>
