@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="svg.png" />
+<title>Fee Calculator | Sattva Jnana</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<style>
+  :root{
+    --navy:#102A43;
+    --navy-dark:#0B1F33;
+    --gold:#C5962E;
+    --gold-warm:#D4AF57;
+    --ivory:#E9EDF3;
+    --white:#FFFFFF;
+    --text:#374151;
+    --text-soft:#5B6472;
+    --line:#E3E8EF;
+    --serif:'Playfair Display', Georgia, serif;
+    --sans:'Inter', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:var(--sans); color:var(--text); line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    background:var(--navy-dark) url('pricing-img.png') center/cover no-repeat fixed;
+    display:flex; align-items:center; justify-content:center;
+    padding:20px; overflow:hidden;
+  }
+  body::before{
+    content:''; position:fixed; inset:0;
+    background:linear-gradient(150deg, rgba(11,31,51,.90), rgba(16,42,67,.82));
+    z-index:0;
+  }
+  img{max-width:100%; display:block;}
+  h1,h2,h3{font-family:var(--serif); font-weight:600; line-height:1.2;}
+
+  /* ---------- Panel ---------- */
+  .panel{
+    position:relative; z-index:1;
+    width:100%; max-width:1120px; max-height:calc(100vh - 40px);
+    background:rgba(255,255,255,.97);
+    border:1px solid rgba(255,255,255,.6);
+    border-radius:20px; overflow:hidden;
+    box-shadow:0 34px 90px rgba(5,15,28,.55);
+    display:grid; grid-template-columns:1.25fr .85fr;
+  }
+
+  /* ---------- Left: controls ---------- */
+  .form{padding:26px 30px 24px; overflow-y:auto;}
+  .brandbar{display:flex; align-items:center; gap:14px; padding-bottom:16px; border-bottom:1px solid var(--line); margin-bottom:20px;}
+  .brandbar img{height:42px; width:auto;}
+  .brandbar .txt h1{font-size:20px; color:var(--navy);}
+  .brandbar .txt p{font-size:12px; color:var(--text-soft); margin-top:2px;}
+
+  .row{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:16px;}
+  .field label:not(.addon), .block-label{
+    display:block; font-size:10.5px; font-weight:700; letter-spacing:1.4px;
+    text-transform:uppercase; color:var(--gold); margin-bottom:7px;
+  }
+  select, input[type=number]{
+    width:100%; font-family:var(--sans); font-size:14px; font-weight:500; color:var(--navy);
+    background:var(--white); border:1px solid var(--line); border-radius:8px;
+    padding:10px 12px; transition:border-color .2s, box-shadow .2s;
+  }
+  select{
+    appearance:none; cursor:pointer; padding-right:34px;
+    background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23102A43' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 11px center; background-size:15px;
+  }
+  select:focus, input:focus{outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(197,150,46,.16);}
+
+  /* Subjects */
+  .subj-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:7px;}
+  .subj-head .block-label{margin-bottom:0;}
+  .link-btn{
+    background:none; border:none; font-family:var(--sans); font-size:11.5px; font-weight:600;
+    color:var(--text-soft); cursor:pointer; padding:0; text-decoration:underline;
+    text-underline-offset:3px; transition:color .2s;
+  }
+  .link-btn:hover{color:var(--gold);}
+  .subjects{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:18px;}
+  .chip{
+    position:relative; display:flex; flex-direction:column; gap:1px;
+    border:1px solid var(--line); border-radius:9px; padding:9px 10px;
+    cursor:pointer; background:var(--white); transition:all .18s ease;
+  }
+  .chip:hover{border-color:var(--gold-warm); transform:translateY(-1px);}
+  .chip input{position:absolute; opacity:0; pointer-events:none;}
+  .chip .nm{font-size:12.5px; font-weight:600; color:var(--navy); display:flex; align-items:center; gap:6px;}
+  .chip .nm::before{
+    content:''; width:13px; height:13px; border:1.5px solid #C7CFDA; border-radius:4px;
+    flex-shrink:0; transition:all .18s ease;
+  }
+  .chip .rt{font-size:11px; color:var(--text-soft); padding-left:19px; font-variant-numeric:tabular-nums;}
+  .chip.on{border-color:var(--gold); background:#FDF9F0;}
+  .chip.on .nm::before{
+    background:var(--gold) url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center/9px no-repeat;
+    border-color:var(--gold);
+  }
+  .chip.on .rt{color:var(--gold);}
+  .chip:focus-within{box-shadow:0 0 0 3px rgba(197,150,46,.16);}
+
+  /* AI add-on */
+  .addon{
+    display:flex; align-items:center; gap:11px; cursor:pointer;
+    border:1px solid var(--line); border-radius:10px; padding:11px 13px;
+    background:var(--white); transition:all .18s ease; height:100%;
+    text-transform:none; letter-spacing:normal; margin-bottom:0;
+  }
+  .addon .box{display:block;}
+  .addon:hover{border-color:var(--gold-warm);}
+  .addon.on{border-color:var(--gold); background:#FDF9F0;}
+  .addon input{position:absolute; opacity:0; pointer-events:none;}
+  .addon .box{
+    width:16px; height:16px; border:1.5px solid #C7CFDA; border-radius:5px; flex-shrink:0; transition:all .18s;
+  }
+  .addon.on .box{
+    background:var(--gold) url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center/11px no-repeat;
+    border-color:var(--gold);
+  }
+  .addon strong{display:block; font-size:12.5px; font-weight:600; color:var(--navy);}
+  .addon span{font-size:11px; color:var(--text-soft);}
+
+  /* Discount */
+  .disc-wrap{display:flex; gap:8px;}
+  .disc-wrap input{flex:1;}
+  .toggle{display:flex; background:#EEF1F6; border-radius:8px; padding:3px; flex-shrink:0;}
+  .toggle button{
+    font-family:var(--sans); font-size:13px; font-weight:700; color:var(--text-soft);
+    background:none; border:none; border-radius:6px; padding:0 13px; cursor:pointer; transition:all .18s;
+  }
+  .toggle button.on{background:var(--navy); color:var(--white);}
+
+  /* ---------- Right: quote ---------- */
+  .quote{
+    background:var(--navy); color:var(--white); padding:26px 28px 24px;
+    display:flex; flex-direction:column; position:relative; overflow:hidden;
+  }
+  .quote::after{
+    content:''; position:absolute; inset:0; opacity:.055; pointer-events:none;
+    background:url('logo.png') no-repeat right -50px bottom -50px; background-size:300px;
+  }
+  .quote > *{position:relative; z-index:1;}
+  .quote h2{font-size:17px; color:var(--white);}
+  .quote .ctx{
+    font-size:11px; letter-spacing:1.4px; text-transform:uppercase;
+    color:var(--gold-warm); font-weight:600; margin-bottom:4px;
+  }
+  .qhead{padding-bottom:14px; border-bottom:1px solid rgba(255,255,255,.14);}
+
+  .lines{flex:1; overflow-y:auto; margin:14px 0; min-height:60px;}
+  .lines::-webkit-scrollbar{width:4px;}
+  .lines::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2); border-radius:4px;}
+  .li{display:flex; justify-content:space-between; gap:12px; align-items:baseline; padding:5px 0; font-size:13px;}
+  .li .l{color:#C6D0DC;}
+  .li .l em{font-style:normal; color:#8A99AB; font-size:11.5px; display:block; margin-top:1px;}
+  .li .v{font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap;}
+  .li.ai .l{color:var(--gold-warm);}
+  .empty{color:#8A99AB; font-size:12.5px; padding:14px 0; line-height:1.6;}
+
+  .sums{border-top:1px solid rgba(255,255,255,.14); padding-top:12px;}
+  .sums .li{font-size:12.5px; color:#C6D0DC;}
+  .sums .li .v{color:#E6ECF3;}
+  .sums .li.off .v{color:#7BC49A;}
+
+  .total{
+    display:flex; align-items:flex-end; justify-content:space-between; gap:10px;
+    margin-top:12px; padding-top:14px; border-top:1px solid rgba(255,255,255,.14);
+  }
+  .total .lb{font-size:11px; letter-spacing:1.4px; text-transform:uppercase; color:#9AA8B8; font-weight:600;}
+  .total .lb em{display:block; font-style:normal; font-size:10.5px; letter-spacing:.4px; text-transform:none; color:#7C8B9D; margin-top:3px;}
+  .total .amt{font-family:var(--serif); font-size:33px; font-weight:700; color:var(--gold-warm); line-height:1; font-variant-numeric:tabular-nums;}
+
+  .actions{display:flex; gap:9px; margin-top:16px;}
+  .btn{
+    flex:1; font-family:var(--sans); font-size:12.5px; font-weight:600; cursor:pointer;
+    border-radius:7px; padding:11px 12px; border:1px solid transparent; transition:all .2s;
+    display:inline-flex; align-items:center; justify-content:center; gap:7px;
+  }
+  .btn-gold{background:var(--gold); color:var(--white);}
+  .btn-gold:hover{background:#B5851F;}
+  .btn-ghost{background:transparent; color:#C6D0DC; border-color:rgba(255,255,255,.28);}
+  .btn-ghost:hover{background:rgba(255,255,255,.09); color:var(--white);}
+  .note{font-size:10.5px; color:#7C8B9D; margin-top:11px; line-height:1.5;}
+
+  :focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+  .btn[disabled]{opacity:.55; cursor:progress;}
+
+  /* ---------- A4 quote sheet (PDF only) ---------- */
+  /* Hidden by display:none, then rendered in normal flow while capturing —
+     html2canvas cannot rasterise position:fixed / negatively-offset nodes. */
+  #sheet{
+    display:none;
+    /* 1123px is the exact A4 ratio at 794px wide; a few px of slack stops
+       floating-point rounding spilling a blank second page. */
+    width:794px; min-height:1112px; background:#fff; margin:0;
+    font-family:var(--sans); color:#374151; padding:52px 56px 44px;
+    flex-direction:column;
+  }
+  body.capturing{
+    overflow:auto; display:block; padding:0; background:#fff;
+  }
+  body.capturing::before{display:none;}
+  body.capturing .panel{display:none;}
+  body.capturing #sheet{display:flex;}
+
+  /* Veil covers the flash while the sheet is laid out. html2canvas renders
+     only the #sheet subtree, so the veil never appears in the PDF. */
+  #veil{
+    position:fixed; inset:0; z-index:9999; display:none;
+    align-items:center; justify-content:center; flex-direction:column; gap:16px;
+    background:rgba(11,31,51,.95); color:#fff; text-align:center;
+  }
+  #veil.on{display:flex;}
+  #veil .ring{
+    width:34px; height:34px; border:2.5px solid rgba(255,255,255,.22);
+    border-top-color:var(--gold-warm); border-radius:50%; animation:spin .8s linear infinite;
+  }
+  #veil p{font-size:13px; letter-spacing:.3px; color:#C6D0DC;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  #sheet .s-head{display:flex; justify-content:space-between; align-items:flex-start; gap:24px;}
+  #sheet .s-head img{height:56px; width:auto;}
+  #sheet .s-wordmark{font-family:var(--serif); font-size:27px; font-weight:700; color:#102A43; line-height:1.1;}
+  #sheet .s-wordmark span{display:block; font-family:var(--sans); font-size:9.5px; font-weight:600; letter-spacing:2.4px; text-transform:uppercase; color:#C5962E; margin-top:5px;}
+  #sheet .s-meta{text-align:right; font-size:11.5px; color:#5B6472; line-height:1.7;}
+  #sheet .s-meta b{color:#102A43; font-weight:600;}
+  #sheet .s-rule{height:2px; background:linear-gradient(90deg,#D4AF57,#C5962E); margin:20px 0 26px; border-radius:2px;}
+  #sheet h2{font-family:var(--serif); font-size:25px; color:#102A43; margin-bottom:6px;}
+  #sheet .s-ctx{font-size:12px; letter-spacing:1.6px; text-transform:uppercase; color:#C5962E; font-weight:700; margin-bottom:26px;}
+
+  #sheet table{width:100%; border-collapse:collapse; margin-bottom:22px;}
+  #sheet th{
+    font-size:10px; letter-spacing:1.3px; text-transform:uppercase; color:#5B6472;
+    font-weight:700; text-align:left; padding:0 0 9px; border-bottom:1.5px solid #102A43;
+  }
+  #sheet th.r, #sheet td.r{text-align:right;}
+  #sheet td{padding:12px 0; border-bottom:1px solid #E3E8EF; font-size:13.5px; vertical-align:top;}
+  #sheet td.nm{color:#102A43; font-weight:600;}
+  #sheet td.nm em{display:block; font-style:normal; font-size:11px; color:#8A99AB; font-weight:400; margin-top:2px;}
+  #sheet td.r{font-weight:600; color:#102A43; white-space:nowrap;}
+  #sheet tr.ai td.nm{color:#C5962E;}
+
+  #sheet .s-tot{margin-left:auto; width:300px;}
+  #sheet .s-tot .r1{display:flex; justify-content:space-between; font-size:13px; padding:7px 0; color:#5B6472;}
+  #sheet .s-tot .r1 b{color:#102A43; font-weight:600;}
+  #sheet .s-tot .r1.off b{color:#1F8A54;}
+  #sheet .s-tot .grand{
+    display:flex; justify-content:space-between; align-items:center; gap:16px;
+    background:#102A43; border-radius:10px; padding:15px 20px; margin-top:10px;
+  }
+  #sheet .s-tot .grand span{font-size:10.5px; letter-spacing:1.4px; text-transform:uppercase; color:#9AA8B8; font-weight:700;}
+  #sheet .s-tot .grand b{font-family:var(--serif); font-size:27px; color:#D4AF57; font-weight:700;}
+
+  #sheet .s-notes{
+    margin-top:34px; padding:16px 20px; background:#F5F7FA;
+    border-left:3px solid #C5962E; border-radius:6px;
+  }
+  #sheet .s-notes p{font-size:11px; color:#5B6472; line-height:1.75; margin:0;}
+  #sheet .s-notes p + p{margin-top:5px;}
+  #sheet .s-foot{
+    margin-top:auto; padding-top:20px; border-top:1px solid #E3E8EF;
+    display:flex; justify-content:space-between; font-size:10.5px; color:#8A99AB;
+  }
+  #sheet .s-foot b{color:#102A43; font-weight:600;}
+
+  /* Print fallback — used only if the PDF library can't load or capture */
+  @media print{
+    body{background:#fff; padding:0; display:block; overflow:visible;}
+    body::before, .panel, #veil{display:none !important;}
+    #sheet{display:flex !important; width:100%; min-height:0; padding:0; margin:0;}
+    @page{size:A4; margin:14mm;}
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:1000px){
+    body{overflow:auto; align-items:flex-start; padding:14px;}
+    .panel{grid-template-columns:1fr; max-height:none;}
+    .form{padding:22px 20px 20px;}
+    .quote{padding:22px 20px;}
+    .lines{max-height:none;}
+  }
+  @media (max-width:560px){
+    .row{grid-template-columns:1fr; gap:13px;}
+    .subjects{grid-template-columns:repeat(2,1fr);}
+    .brandbar img{height:36px;}
+    .total .amt{font-size:29px;}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none !important;}}
+</style>
+</head>
+<body>
+
+<main class="panel">
+
+  <!-- ============ CONTROLS ============ -->
+  <section class="form">
+    <div class="brandbar">
+      <img src="logo.png" alt="Sattva Jnana">
+      <div class="txt">
+        <h1>Tuition Fee Calculator</h1>
+        <p>Build a monthly quote in a few taps.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="board">Board</label>
+        <select id="board">
+          <option value="CBSE">CBSE Board</option>
+          <option value="ICSE">ICSE Board</option>
+          <option value="State">State Board</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="cls">Class</label>
+        <select id="cls">
+          <option value="5">5th Standard</option>
+          <option value="6">6th Standard</option>
+          <option value="7">7th Standard</option>
+          <option value="8" selected>8th Standard</option>
+          <option value="9">9th Standard</option>
+          <option value="10">10th Standard</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="subj-head">
+      <span class="block-label">Subjects</span>
+      <button type="button" class="link-btn" id="clearSubj">Clear all</button>
+    </div>
+    <div class="subjects" id="subjects"></div>
+
+    <div class="row">
+      <div class="field">
+        <label for="hrs">Hours per week <span style="text-transform:none;letter-spacing:0;color:var(--text-soft);font-weight:500;">(per subject)</span></label>
+        <input type="number" id="hrs" value="2" min="0" max="20" step="0.5" inputmode="decimal">
+      </div>
+      <div class="field">
+        <span class="block-label">AI Learning</span>
+        <label class="addon" id="aiWrap">
+          <input type="checkbox" id="ai">
+          <span class="box"></span>
+          <span>
+            <strong>Add AI Learning</strong>
+            <span id="aiPrice">₹2,000 / month</span>
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="disc">Discount</label>
+      <div class="disc-wrap">
+        <input type="number" id="disc" value="0" min="0" step="1" inputmode="decimal" placeholder="0">
+        <div class="toggle" id="discToggle" role="group" aria-label="Discount type">
+          <button type="button" data-mode="amt" class="on" aria-pressed="true">₹</button>
+          <button type="button" data-mode="pct" aria-pressed="false">%</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUOTE ============ -->
+  <aside class="quote">
+    <div class="qhead">
+      <p class="ctx" id="ctx">CBSE · Class 8</p>
+      <h2>Monthly fee estimate</h2>
+    </div>
+
+    <div class="lines" id="lines"></div>
+
+    <div class="sums" id="sums"></div>
+
+    <div class="total">
+      <span class="lb">Total / month<em id="totalSub">Payable monthly</em></span>
+      <span class="amt" id="total">₹0</span>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn btn-gold" id="pdfBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+        Download PDF
+      </button>
+    </div>
+    <div class="actions" style="margin-top:9px;">
+      <button type="button" class="btn btn-ghost" id="copyBtn">Copy quote</button>
+      <button type="button" class="btn btn-ghost" id="resetBtn">Reset</button>
+    </div>
+    <p class="note">Subject rates are per hour. Monthly fee = rate × hours per week × 4 weeks.</p>
+  </aside>
+
+</main>
+
+<!-- A4 sheet, populated on download -->
+<div id="sheet" aria-hidden="true"></div>
+
+<div id="veil" role="status" aria-live="polite">
+  <div class="ring"></div>
+  <p>Preparing your quote…</p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---- Editable settings ---------------------------------------- */
+  const WEEKS = 4;                       // billing weeks in a month
+  const SUBJECTS = ["Maths","Science","English","Kannada","Hindi","EVS","Social","Others"];
+
+  /* Per-hour subject rates, in SUBJECTS order, by board then class   */
+  const RATES = {
+    CBSE:{
+      5:[350,350,250,350,250,250,250,250],
+      6:[450,450,250,350,250,300,300,300],
+      7:[450,450,250,400,250,350,350,350],
+      8:[550,550,300,400,250,400,400,400],
+      9:[650,650,300,450,300,450,450,450],
+      10:[750,750,300,550,300,450,450,450]
+    },
+    ICSE:{
+      5:[400,400,300,400,300,300,300,300],
+      6:[500,500,300,400,300,350,350,350],
+      7:[500,500,300,450,300,400,400,400],
+      8:[600,600,350,450,300,450,450,450],
+      9:[700,700,350,500,350,500,500,500],
+      10:[800,800,350,600,350,500,500,500]
+    },
+    State:{
+      5:[300,300,200,300,200,200,200,200],
+      6:[400,400,200,300,200,250,250,250],
+      7:[400,400,200,350,200,300,300,300],
+      8:[500,500,250,350,200,350,350,350],
+      9:[600,600,250,400,250,400,400,400],
+      10:[700,700,250,500,250,400,400,400]
+    }
+  };
+
+  /* Flat monthly AI Learning fee by class (same across boards)       */
+  const AI_FEE = {5:1399, 6:1399, 7:1500, 8:2000, 9:2500, 10:3000};
+
+  const BOARD_LABEL = {CBSE:"CBSE", ICSE:"ICSE", State:"State Board"};
+  const ORDINAL = {5:"5th", 6:"6th", 7:"7th", 8:"8th", 9:"9th", 10:"10th"};
+
+  /* ---- Elements -------------------------------------------------- */
+  const $ = id => document.getElementById(id);
+  const boardEl=$("board"), clsEl=$("cls"), hrsEl=$("hrs"), aiEl=$("ai"),
+        aiWrap=$("aiWrap"), aiPrice=$("aiPrice"), discEl=$("disc"),
+        subjEl=$("subjects"), linesEl=$("lines"), sumsEl=$("sums"),
+        totalEl=$("total"), totalSub=$("totalSub"), ctxEl=$("ctx");
+
+  let discMode = "amt";
+  let state = null;
+  const rupee = n => "₹" + Math.round(n).toLocaleString("en-IN");
+
+  /* ---- Build subject chips --------------------------------------- */
+  SUBJECTS.forEach((name, i) => {
+    const el = document.createElement("label");
+    el.className = "chip";
+    el.dataset.i = i;
+    el.innerHTML =
+      '<input type="checkbox" data-i="' + i + '">' +
+      '<span class="nm">' + name + '</span>' +
+      '<span class="rt" data-rate="' + i + '"></span>';
+    subjEl.appendChild(el);
+  });
+  const boxes = Array.from(subjEl.querySelectorAll("input"));
+  boxes[0].checked = true;   // sensible starting point
+  boxes[1].checked = true;
+
+  /* ---- Calculate + render ---------------------------------------- */
+  function render(){
+    const board = boardEl.value;
+    const cls   = clsEl.value;
+    const rates = RATES[board][cls];
+    const hrs   = Math.max(0, parseFloat(hrsEl.value) || 0);
+
+    ctxEl.textContent = BOARD_LABEL[board] + " · Class " + ORDINAL[cls];
+    aiPrice.textContent = rupee(AI_FEE[cls]) + " / month";
+
+    /* chip states + live rates */
+    boxes.forEach((b, i) => {
+      subjEl.querySelector('[data-rate="' + i + '"]').textContent = rupee(rates[i]) + "/hr";
+      b.closest(".chip").classList.toggle("on", b.checked);
+    });
+    aiWrap.classList.toggle("on", aiEl.checked);
+
+    /* line items */
+    let tuition = 0;
+    linesEl.innerHTML = "";
+    const picked = boxes.filter(b => b.checked);
+
+    picked.forEach(b => {
+      const i = +b.dataset.i;
+      const amt = rates[i] * hrs * WEEKS;
+      tuition += amt;
+      const row = document.createElement("div");
+      row.className = "li";
+      row.innerHTML =
+        '<span class="l">' + SUBJECTS[i] +
+        '<em>' + rupee(rates[i]) + '/hr × ' + hrs + ' hr/wk × ' + WEEKS + ' wks</em></span>' +
+        '<span class="v">' + rupee(amt) + '</span>';
+      linesEl.appendChild(row);
+    });
+
+    if(aiEl.checked){
+      const row = document.createElement("div");
+      row.className = "li ai";
+      row.innerHTML =
+        '<span class="l">AI Learning<em>Flat monthly programme fee</em></span>' +
+        '<span class="v">' + rupee(AI_FEE[cls]) + '</span>';
+      linesEl.appendChild(row);
+    }
+
+    if(!picked.length && !aiEl.checked){
+      linesEl.innerHTML = '<p class="empty">Pick one or more subjects to start building the quote.</p>';
+    } else if(picked.length && hrs === 0){
+      const hint = document.createElement("p");
+      hint.className = "empty";
+      hint.textContent = "Enter hours per week to price the selected subjects.";
+      linesEl.appendChild(hint);
+    }
+
+    /* totals */
+    const aiAmt    = aiEl.checked ? AI_FEE[cls] : 0;
+    const subtotal = tuition + aiAmt;
+    const dVal     = Math.max(0, parseFloat(discEl.value) || 0);
+    let off = discMode === "pct" ? subtotal * Math.min(dVal, 100) / 100 : Math.min(dVal, subtotal);
+    off = Math.round(off);
+    const total = Math.max(0, subtotal - off);
+
+    sumsEl.innerHTML = "";
+    if(subtotal > 0){
+      sumsEl.innerHTML =
+        '<div class="li"><span class="l">Subtotal</span><span class="v">' + rupee(subtotal) + '</span></div>';
+      if(off > 0){
+        sumsEl.innerHTML +=
+          '<div class="li off"><span class="l">Discount' +
+          (discMode === "pct" ? " (" + Math.min(dVal,100) + "%)" : "") +
+          '</span><span class="v">− ' + rupee(off) + '</span></div>';
+      }
+    }
+
+    totalEl.textContent = rupee(total);
+    const n = picked.length;
+    totalSub.textContent = n
+      ? n + (n === 1 ? " subject" : " subjects") + " · " + (hrs * n) + " hr/week"
+      : "Payable monthly";
+
+    /* keep current state available to the PDF + copy actions */
+    state = {board, cls, rates, hrs, picked, aiAmt, subtotal, off, total,
+             discMode, dVal:Math.min(dVal, discMode === "pct" ? 100 : Infinity)};
+    window.__quote = buildText(state);
+  }
+
+  function buildText(d){
+    const L = [];
+    L.push("Sattva Jnana — Monthly Fee Estimate");
+    L.push(BOARD_LABEL[d.board] + " · Class " + ORDINAL[d.cls]);
+    L.push("");
+    d.picked.forEach(b => {
+      const i = +b.dataset.i;
+      L.push(SUBJECTS[i] + " — " + rupee(d.rates[i]) + "/hr × " + d.hrs + " hr/wk × " +
+             WEEKS + " wks = " + rupee(d.rates[i] * d.hrs * WEEKS));
+    });
+    if(d.aiAmt) L.push("AI Learning — " + rupee(d.aiAmt));
+    L.push("");
+    L.push("Subtotal: " + rupee(d.subtotal));
+    if(d.off) L.push("Discount: − " + rupee(d.off));
+    L.push("Total per month: " + rupee(d.total));
+    return L.join("\n");
+  }
+
+  /* ---- Events ----------------------------------------------------- */
+  [boardEl, clsEl, hrsEl, aiEl, discEl].forEach(el => {
+    el.addEventListener("change", render);
+    el.addEventListener("input", render);
+  });
+  boxes.forEach(b => b.addEventListener("change", render));
+
+  $("discToggle").addEventListener("click", e => {
+    const btn = e.target.closest("button");
+    if(!btn) return;
+    discMode = btn.dataset.mode;
+    $("discToggle").querySelectorAll("button").forEach(x => {
+      const on = x === btn;
+      x.classList.toggle("on", on);
+      x.setAttribute("aria-pressed", on);
+    });
+    render();
+  });
+
+  $("clearSubj").addEventListener("click", () => {
+    boxes.forEach(b => b.checked = false);
+    render();
+  });
+
+  $("resetBtn").addEventListener("click", () => {
+    boardEl.value = "CBSE"; clsEl.value = "8"; hrsEl.value = 2;
+    aiEl.checked = false; discEl.value = 0;
+    boxes.forEach((b, i) => b.checked = i < 2);
+    discMode = "amt";
+    $("discToggle").querySelectorAll("button").forEach(x => {
+      const on = x.dataset.mode === "amt";
+      x.classList.toggle("on", on);
+      x.setAttribute("aria-pressed", on);
+    });
+    render();
+  });
+
+  /* ---- PDF quote sheet -------------------------------------------- */
+  function buildSheet(d, useLogo){
+    const today = new Date();
+    const dateStr = today.toLocaleDateString("en-IN", {day:"numeric", month:"long", year:"numeric"});
+    const ref = "SJ-" + today.getFullYear() +
+                String(today.getMonth() + 1).padStart(2,"0") +
+                String(today.getDate()).padStart(2,"0") + "-" +
+                String(Math.floor(Math.random() * 900) + 100);
+    const valid = new Date(today.getTime() + 30 * 864e5)
+                  .toLocaleDateString("en-IN", {day:"numeric", month:"long", year:"numeric"});
+
+    let rows = "";
+    d.picked.forEach(b => {
+      const i = +b.dataset.i;
+      rows +=
+        '<tr><td class="nm">' + SUBJECTS[i] + '</td>' +
+        '<td class="r">' + rupee(d.rates[i]) + '</td>' +
+        '<td class="r">' + d.hrs + ' hr</td>' +
+        '<td class="r">' + (d.hrs * WEEKS) + ' hr</td>' +
+        '<td class="r">' + rupee(d.rates[i] * d.hrs * WEEKS) + '</td></tr>';
+    });
+    if(d.aiAmt){
+      rows +=
+        '<tr class="ai"><td class="nm">AI Learning<em>Flat monthly programme fee</em></td>' +
+        '<td class="r">—</td><td class="r">—</td><td class="r">—</td>' +
+        '<td class="r">' + rupee(d.aiAmt) + '</td></tr>';
+    }
+    if(!rows) rows = '<tr><td colspan="5" style="color:#8A99AB;padding:18px 0;">No subjects selected.</td></tr>';
+
+    let tot = '<div class="r1"><span>Subtotal</span><b>' + rupee(d.subtotal) + '</b></div>';
+    if(d.off > 0){
+      tot += '<div class="r1 off"><span>Discount' +
+             (d.discMode === "pct" ? " (" + d.dVal + "%)" : "") +
+             '</span><b>− ' + rupee(d.off) + '</b></div>';
+    }
+    tot += '<div class="grand"><span>Total / month</span><b>' + rupee(d.total) + '</b></div>';
+
+    const n = d.picked.length;
+
+    $("sheet").innerHTML =
+      '<div class="s-head">' +
+        (useLogo
+          ? '<img src="logo.png" alt="Sattva Jnana">'
+          : '<div class="s-wordmark">Sattva Jnana<span>Home Tuition</span></div>') +
+        '<div class="s-meta">' +
+          '<div><b>Quote no.</b> ' + ref + '</div>' +
+          '<div><b>Date</b> ' + dateStr + '</div>' +
+          '<div><b>Valid till</b> ' + valid + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="s-rule"></div>' +
+      '<h2>Monthly Fee Estimate</h2>' +
+      '<p class="s-ctx">' + BOARD_LABEL[d.board] + ' &middot; Class ' + ORDINAL[d.cls] + '</p>' +
+      '<table><thead><tr>' +
+        '<th>Subject</th><th class="r">Rate / hr</th><th class="r">Per week</th>' +
+        '<th class="r">Per month</th><th class="r">Amount</th>' +
+      '</tr></thead><tbody>' + rows + '</tbody></table>' +
+      '<div class="s-tot">' + tot + '</div>' +
+      '<div class="s-notes">' +
+        '<p><b>Schedule:</b> ' + (n ? n + (n === 1 ? " subject" : " subjects") + ' at ' + d.hrs +
+          ' hour' + (d.hrs === 1 ? "" : "s") + ' per week each — ' + (d.hrs * n) +
+          ' hours per week in total.' : 'No subjects selected.') + '</p>' +
+        '<p>Monthly fees are calculated on ' + WEEKS + ' teaching weeks per month. Sessions missed with prior notice are rescheduled, not forfeited.</p>' +
+        '<p>This is an estimate, not an invoice. Final fees are confirmed after the free demo session.</p>' +
+      '</div>' +
+      '<div class="s-foot">' +
+        '<span><b>Sattva Jnana</b> &middot; Personalised home tuition</span>' +
+        '<span>info@sattvajnana.in &middot; sattvajnana.in</span>' +
+      '</div>';
+
+    return "Sattva-Jnana-Fee-Estimate-" + BOARD_LABEL[d.board].replace(/\s+/g,"") +
+           "-Class" + ORDINAL[d.cls] + ".pdf";
+  }
+
+  /* Can logo.png be drawn to a canvas without tainting it?
+     Returns false over file:// or on a cross-origin/missing file, in which
+     case the sheet falls back to a typeset wordmark instead of failing. */
+  function logoUsable(){
+    return new Promise(resolve => {
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.onload = () => {
+        try{
+          const c = document.createElement("canvas");
+          c.width = c.height = 2;
+          c.getContext("2d").drawImage(img, 0, 0);
+          c.toDataURL();
+          resolve(true);
+        }catch{ resolve(false); }
+      };
+      img.onerror = () => resolve(false);
+      img.src = "logo.png?v=" + Date.now();
+    });
+  }
+
+  const nextFrame = () => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+
+  $("pdfBtn").addEventListener("click", async e => {
+    const btn = e.currentTarget, label = btn.innerHTML, veil = $("veil");
+    const scrollY = window.scrollY;
+
+    const showSheet = () => {
+      veil.classList.add("on");
+      document.body.classList.add("capturing");
+      window.scrollTo(0, 0);
+    };
+    const hideSheet = () => {
+      document.body.classList.remove("capturing");
+      veil.classList.remove("on");
+      window.scrollTo(0, scrollY);
+      btn.innerHTML = label;
+      btn.disabled = false;
+    };
+
+    btn.disabled = true;
+
+    const useLogo = await logoUsable();
+    const filename = buildSheet(state, useLogo);
+
+    /* Library unavailable — hand off to the print dialog instead. */
+    if(typeof html2pdf === "undefined"){
+      btn.disabled = false;
+      window.print();
+      return;
+    }
+
+    showSheet();
+
+    try{
+      if(document.fonts && document.fonts.ready) await document.fonts.ready;
+      await nextFrame();
+
+      await html2pdf().set({
+        margin: 0,
+        filename: filename,
+        image: {type:"jpeg", quality:0.98},
+        html2canvas: {
+          scale: 2.4,
+          useCORS: true,
+          backgroundColor: "#FFFFFF",
+          logging: false
+        },
+        jsPDF: {unit:"mm", format:"a4", orientation:"portrait"},
+        pagebreak: {mode:"avoid-all"}
+      }).from($("sheet")).save();
+
+      hideSheet();
+    }catch(err){
+      console.error("PDF export failed, falling back to print:", err);
+      veil.classList.remove("on");
+      window.print();
+      hideSheet();
+    }
+  });
+
+  $("copyBtn").addEventListener("click", async e => {
+    const btn = e.currentTarget, old = btn.textContent;
+    try{
+      await navigator.clipboard.writeText(window.__quote);
+      btn.textContent = "Copied";
+    }catch{
+      btn.textContent = "Press Ctrl+C";
+    }
+    setTimeout(() => btn.textContent = old, 1600);
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
