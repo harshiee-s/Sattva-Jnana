@@ -106,15 +106,31 @@
     .marquee-track{ animation:none; }
   }
 
-  /* ---------- Bottom panel ---------- */
-  .bottom-panel{
-    flex:0 0 auto;
+  /* ---------- Countdown section ---------- */
+  .countdown-section{
     width:100%;
+    display:flex; flex-direction:column; align-items:center;
+    text-align:center;
+    padding:clamp(14px, 2.5vh, 22px) 20px;
     margin-top:auto;
+  }
+  .countdown-panel{
+    background:rgba(11,31,51,0.55);
+    border:1px solid rgba(197,150,46,0.28);
+    border-radius:16px;
+    padding:clamp(14px, 2.4vh, 20px) clamp(18px, 4vw, 30px);
+    backdrop-filter:blur(3px);
+    -webkit-backdrop-filter:blur(3px);
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  }
+
+  /* ---------- CTA / socials section ---------- */
+  .cta-section{
+    width:100%;
     display:flex; flex-direction:column; align-items:center;
     text-align:center;
     background:linear-gradient(180deg, rgba(11,31,51,0) 0%, rgba(11,31,51,0.62) 30%, rgba(11,31,51,0.92) 100%);
-    padding:clamp(16px, 3vh, 28px) 20px clamp(16px, 3vh, 26px);
+    padding:clamp(16px, 3vh, 26px) 20px clamp(16px, 3vh, 24px);
   }
 
   .launch-line{
@@ -184,6 +200,8 @@
         linear-gradient(180deg, rgba(11,31,51,0.55) 0%, rgba(11,31,51,0.25) 30%, rgba(11,31,51,0.8) 100%),
         url('founders/founders-1m.png');
     }
+    .countdown-section{ margin-top:0; padding-top:clamp(14px, 2.5vh, 20px); }
+    .cta-section{ margin-top:auto; }
   }
   @media (max-width:480px){
     .unit{ width:58px; }
@@ -231,28 +249,32 @@
     </div>
   </div>
 
-  <main class="bottom-panel">
-    <p class="launch-line" id="launchLine">Launching <strong>Monday, 31 August 2026 · 7:00 PM IST</strong></p>
+  <div class="countdown-section">
+    <div class="countdown-panel">
+      <p class="launch-line" id="launchLine">Launching <strong>Monday, 31 August 2026 · 7:00 PM IST</strong></p>
 
-    <div class="countdown" id="countdown" aria-live="polite">
-      <div class="unit">
-        <div class="flip" id="flip-d"><span class="num" id="d">00</span></div>
-        <div class="label">Days</div>
-      </div>
-      <div class="unit">
-        <div class="flip" id="flip-h"><span class="num" id="h">00</span></div>
-        <div class="label">Hours</div>
-      </div>
-      <div class="unit">
-        <div class="flip" id="flip-m"><span class="num" id="m">00</span></div>
-        <div class="label">Minutes</div>
-      </div>
-      <div class="unit">
-        <div class="flip" id="flip-s"><span class="num" id="s">00</span></div>
-        <div class="label">Seconds</div>
+      <div class="countdown" id="countdown" aria-live="polite">
+        <div class="unit">
+          <div class="flip" id="flip-d"><span class="num" id="d">00</span></div>
+          <div class="label">Days</div>
+        </div>
+        <div class="unit">
+          <div class="flip" id="flip-h"><span class="num" id="h">00</span></div>
+          <div class="label">Hours</div>
+        </div>
+        <div class="unit">
+          <div class="flip" id="flip-m"><span class="num" id="m">00</span></div>
+          <div class="label">Minutes</div>
+        </div>
+        <div class="unit">
+          <div class="flip" id="flip-s"><span class="num" id="s">00</span></div>
+          <div class="label">Seconds</div>
+        </div>
       </div>
     </div>
+  </div>
 
+  <footer class="cta-section">
     <div class="cta-row">
       <a class="btn btn-primary" href="mailto:hello@sattvajnana.in"><i class="fa-regular fa-envelope"></i> Notify Me</a>
       <a class="btn btn-outline" href="https://www.instagram.com/sriharisattvajnana"><i class="fa-brands fa-instagram"></i> Follow Along</a>
@@ -264,7 +286,7 @@
       <a href="https://www.facebook.com/profile.php?id=61593261763800" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
       <a href="https://www.youtube.com/@SriHariSattvaJnana" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
     </div>
-  </main>
+  </footer>
 
 <script>
   // Countdown to 31 Aug 2026, 7:00 PM IST
