@@ -3368,7 +3368,7 @@ function renderLeadsPage() {
           <td>${escHtml(l.area)}</td>
           <td><span class="pill" style="background:var(--surface-2);color:var(--text-2);">${escHtml(l.source||'manual')}</span></td>
           <td>${crmLeadStatusSelect(l)}</td>
-          <td style="font-size:.78rem;color:var(--text-3);">${crmFmtDate(l.createdAt)}</td>
+          <td style="font-size:.78rem;color:var(--text-3);">${crmFmtDateTime(l.createdAt)}</td>
           <td class="row-actions">
             <button class="btn-icon" title="View" onclick="openLeadDetailModal('${l.id}')"><i class="fa-solid fa-eye"></i></button>
             <button class="btn-icon" title="Delete" onclick="deleteLead('${l.id}')"><i class="fa-solid fa-trash"></i></button>
