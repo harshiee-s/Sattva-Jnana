@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Priyanka Vishwakarma | High School Teacher Portfolio</title>
+<meta name="description" content="Portfolio of Priyanka Vishwakarma, a dedicated High School Teacher (Grades 8-10) based in Bengaluru, showcasing teaching experience, qualifications and skills.">
+<meta name="theme-color" content="#102A43">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --navy:#102A43;
+    --navy-dark:#0B1F33;
+    --gold:#C5962E;
+    --gold-warm:#D4AF57;
+    --ivory:#E9EDF3;
+    --white:#FFFFFF;
+    --text:#374151;
+    --text-soft:#5B6472;
+    --radius:10px;
+    --radius-lg:16px;
+    --shadow:0 6px 24px rgba(16,42,67,0.08);
+    --shadow-lg:0 14px 40px rgba(16,42,67,0.14);
+    --maxw:1080px;
+    --serif:'Playfair Display', Georgia, serif;
+    --sans:'Inter', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans); color:var(--text); background:var(--ivory); line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  h1,h2,h3,h4{font-family:var(--serif); color:var(--navy); font-weight:600; line-height:1.2;}
+  .container{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  .eyebrow{display:inline-flex; align-items:center; gap:8px; font-size:12.5px; font-weight:600; letter-spacing:2.2px; text-transform:uppercase; color:var(--gold); margin-bottom:14px;}
+  .eyebrow::before{content:''; width:16px; height:1px; background:var(--gold);}
+  .section{padding:88px 0;}
+  .section-tight{padding:56px 0;}
+  .section-dark{background-color:var(--navy);}
+  .section-dark h2.title, .section-dark h3{color:var(--white);}
+  .section-dark .lede{color:#B9C2CE;}
+  .section-head{max-width:640px; margin-bottom:48px;}
+  .section-head.center{margin:0 auto 48px; text-align:center;}
+  h2.title{font-size:clamp(26px,3.2vw,38px); margin-bottom:12px;}
+  .lede{color:var(--text-soft); font-size:16.5px;}
+  .divider-gold{width:64px; height:2px; background:linear-gradient(90deg,var(--gold-warm),var(--gold)); margin:16px auto 0; border-radius:2px;}
+  .section-head:not(.center) .divider-gold{margin-left:0;}
+
+  .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:14px 28px; border-radius:6px; font-weight:600; font-size:14.5px; cursor:pointer; border:1px solid transparent; transition:all .25s ease; white-space:nowrap;}
+  .btn-gold{background:var(--gold); color:var(--white);}
+  .btn-gold:hover{background:#b5851f; transform:translateY(-1px); box-shadow:var(--shadow-lg);}
+  .btn-outline-light{background:transparent; color:var(--white); border-color:rgba(255,255,255,0.5);}
+  .btn-outline-light:hover{background:rgba(255,255,255,0.12); border-color:var(--white);}
+
+  /* Header */
+  header{position:fixed; top:18px; left:50%; transform:translateX(-50%); z-index:200; width:calc(100% - 32px); max-width:980px; background:rgba(255,255,255,0.75); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.55); border-radius:999px; box-shadow:0 10px 34px rgba(16,42,67,0.14); transition:all .3s ease;}
+  header.scrolled{background:rgba(255,255,255,0.92);}
+  .nav-wrap{display:flex; align-items:center; justify-content:space-between; padding:10px 10px 10px 22px;}
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand-avatar{width:36px; height:36px; border-radius:50%; background:var(--navy); color:var(--gold-warm); display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-weight:700; font-size:15px;}
+  .brand-text{font-family:var(--serif); font-size:16px; font-weight:700; color:var(--navy);}
+  nav.primary-nav{display:flex; align-items:center; gap:24px;}
+  nav.primary-nav a{font-size:14px; font-weight:500; color:var(--text); transition:color .25s ease;}
+  nav.primary-nav a:hover{color:var(--gold);}
+  .nav-right .btn-sm{padding:10px 20px; font-size:13.5px; border-radius:999px;}
+  .hamburger{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:6px;}
+  .hamburger span{width:22px; height:2px; background:var(--navy);}
+  .mobile-menu{display:none; position:fixed; inset:0; background:var(--white); z-index:300; padding:24px; flex-direction:column;}
+  .mobile-menu.open{display:flex;}
+  .mobile-menu-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:28px;}
+  .mobile-menu .close-btn{background:none; border:none; font-size:28px; color:var(--navy);}
+  .mobile-menu a{font-size:20px; font-family:var(--serif); color:var(--navy); padding:14px 0; border-bottom:1px solid #eee;}
+
+  /* Hero */
+  .hero{position:relative; color:var(--white); overflow:hidden; background:linear-gradient(120deg, var(--navy-dark) 0%, var(--navy) 55%, #1b3a5c 100%);}
+  .hero::after{content:''; position:absolute; right:-120px; top:-120px; width:340px; height:340px; border:1px solid rgba(212,175,87,0.18); border-radius:50%;}
+  .hero::before{content:''; position:absolute; left:-100px; bottom:-140px; width:280px; height:280px; border:1px solid rgba(212,175,87,0.1); border-radius:50%;}
+  .hero-grid{position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; text-align:center; gap:22px; padding:150px 24px 100px; max-width:760px; margin:0 auto;}
+  .hero-photo{width:132px; height:132px; border-radius:50%; background:rgba(255,255,255,0.08); border:3px solid var(--gold-warm); display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-size:44px; font-weight:700; color:var(--gold-warm); box-shadow:0 20px 50px rgba(0,0,0,0.25);}
+  .hero .eyebrow{color:var(--gold-warm); justify-content:center;}
+  .hero h1{color:var(--white); font-size:clamp(32px,4.4vw,50px); letter-spacing:0.2px;}
+  .hero h1 .accent{color:var(--gold-warm); display:block; font-size:0.45em; letter-spacing:2px; text-transform:uppercase; font-family:var(--sans); font-weight:700; margin-top:10px;}
+  .hero p.sub{color:#D7DEE8; font-size:16.5px; max-width:520px;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-top:8px;}
+  .hero-trust{display:flex; gap:22px; flex-wrap:wrap; justify-content:center; margin-top:18px; font-size:13px; letter-spacing:.6px; color:#B9C2CE;}
+  .hero-trust span{display:flex; align-items:center; gap:7px;}
+  .hero-trust i{color:var(--gold-warm);}
+
+  /* Quick stats */
+  .stats{margin-top:-46px; position:relative; z-index:10;}
+  .stats-inner{background:rgba(255,255,255,0.65); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); border-radius:var(--radius-lg); box-shadow:0 20px 50px rgba(16,42,67,0.18); padding:30px; border:1px solid rgba(255,255,255,0.6); display:grid; grid-template-columns:repeat(4,1fr); gap:18px; text-align:center;}
+  .stat-num{font-family:var(--serif); font-size:26px; font-weight:700; color:var(--navy);}
+  .stat-label{font-size:12.5px; color:var(--text-soft); margin-top:4px; letter-spacing:.3px;}
+
+  /* About */
+  .about-wrap{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;}
+  .about-card{background:var(--white); border-radius:var(--radius-lg); padding:36px; box-shadow:var(--shadow);}
+  .about-card p{color:var(--text-soft); font-size:15px; line-height:1.75;}
+  .quote-strip{border-left:3px solid var(--gold); padding-left:20px; font-family:var(--serif); font-style:italic; color:var(--navy); font-size:16.5px; line-height:1.6;}
+
+  /* Timeline */
+  .tl-v{max-width:760px; margin:0 auto; position:relative;}
+  .tl-v-item{display:grid; grid-template-columns:56px 1fr; gap:22px; position:relative; padding-bottom:34px;}
+  .tl-v-item:last-child{padding-bottom:0;}
+  .tl-v-item::before{content:''; position:absolute; left:27px; top:56px; bottom:-34px; width:2px; background:rgba(16,42,67,0.15); z-index:0;}
+  .tl-v-item:last-child::before{display:none;}
+  .tl-v-num{width:56px; height:56px; border-radius:50%; background:rgba(255,255,255,0.16); backdrop-filter:blur(10px); border:2px solid var(--gold-warm); color:var(--white); font-family:var(--serif); font-weight:700; font-size:15px; display:flex; align-items:center; justify-content:center; flex-shrink:0; z-index:1; text-align:center; line-height:1.1;}
+  .tl-v-content{background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:14px; padding:20px 24px;}
+  .tl-v-content .role-title{font-size:17px; margin-bottom:2px; color:var(--white);}
+  .tl-v-content .role-org{font-size:13.5px; color:var(--gold-warm); font-weight:600; margin-bottom:10px;}
+  .tl-v-content ul{display:flex; flex-direction:column; gap:6px;}
+  .tl-v-content li{display:flex; gap:8px; font-size:14px; color:#C7CEDA; line-height:1.5;}
+  .tl-v-content li::before{content:'▸'; color:var(--gold-warm); flex-shrink:0;}
+
+  /* Additional experience (light section) */
+  .exp-card{background:var(--white); border-radius:14px; padding:22px 24px; box-shadow:var(--shadow); display:flex; gap:18px; align-items:flex-start;}
+  .exp-icon{width:46px; height:46px; border-radius:50%; background:var(--navy); color:var(--gold-warm); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:17px;}
+  .exp-card h4{font-size:16px; margin-bottom:2px;}
+  .exp-card .org{font-size:13px; color:var(--gold); font-weight:600; margin-bottom:8px;}
+  .exp-card p{font-size:13.5px; color:var(--text-soft); line-height:1.55;}
+  .exp-grid{display:flex; flex-direction:column; gap:18px;}
+
+  /* Education */
+  .edu-grid{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+  .edu-card{background:var(--white); border-radius:14px; padding:24px 26px; box-shadow:var(--shadow); position:relative;}
+  .edu-card .yr{position:absolute; top:22px; right:24px; font-family:var(--serif); font-size:13px; color:var(--gold); font-weight:700;}
+  .edu-card h4{font-size:16px; margin-bottom:4px; padding-right:56px;}
+  .edu-card .school{font-size:13.5px; color:var(--text-soft); margin-bottom:10px;}
+  .edu-card .grade{display:inline-block; font-size:12px; font-weight:700; letter-spacing:.5px; color:var(--navy); background:var(--ivory); padding:4px 12px; border-radius:20px;}
+
+  /* Skills */
+  .skills-wrap{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .skill-block h4{font-size:14px; text-transform:uppercase; letter-spacing:1.5px; color:var(--gold-warm); margin-bottom:16px;}
+  .pill-row{display:flex; flex-wrap:wrap; gap:10px;}
+  .pill{display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.08); border:1.4px solid var(--gold-warm); color:var(--white); font-size:13.5px; font-weight:500; padding:9px 16px; border-radius:999px;}
+
+  /* Horizontal step timeline (Teaching Approach) */
+  .tl-h{display:flex; align-items:flex-start; gap:0; position:relative; overflow-x:auto; padding-bottom:8px;}
+  .tl-h::before{content:''; position:absolute; top:27px; left:6%; right:6%; height:2px; background:rgba(255,255,255,0.18); z-index:0;}
+  .tl-h-item{flex:1; min-width:170px; text-align:center; padding:0 14px; position:relative; z-index:1;}
+  .tl-h-num{width:56px; height:56px; border-radius:50%; border:2px solid var(--gold-warm); background:rgba(255,255,255,0.16); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); color:var(--white); font-family:var(--serif); font-weight:700; font-size:18px; display:flex; align-items:center; justify-content:center; margin:0 auto 16px;}
+  .tl-h-item h4{font-size:15.5px; margin-bottom:6px; color:var(--white);}
+  .tl-h-item p{font-size:13px; color:#B9C2CE; margin:0;}
+  @media (max-width:900px){
+    .tl-h{flex-wrap:wrap;}
+    .tl-h-item{min-width:45%; margin-bottom:24px;}
+  }
+  @media (max-width:600px){
+    .tl-h{flex-wrap:wrap; flex-direction:column;}
+    .tl-h::before{display:none;}
+    .tl-h-item{min-width:100%; padding:0 4px;}
+  }
+
+  /* Certifications & Extra */
+  .split-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .info-card{background:var(--white); border-radius:14px; padding:26px; box-shadow:var(--shadow);}
+  .info-card h4{font-size:16px; margin-bottom:14px; display:flex; align-items:center; gap:10px;}
+  .info-card h4 i{color:var(--gold);}
+  .info-card ul{display:flex; flex-direction:column; gap:10px;}
+  .info-card li{display:flex; gap:10px; font-size:14px; color:var(--text-soft); line-height:1.5;}
+  .info-card li::before{content:'✓'; color:var(--gold); font-weight:700; flex-shrink:0;}
+
+  /* Personal details bar */
+  .personal-bar{display:flex; flex-wrap:wrap; gap:28px; justify-content:center; padding:22px 0; border-top:1px solid rgba(16,42,67,0.08); border-bottom:1px solid rgba(16,42,67,0.08); font-size:13.5px; color:var(--text-soft);}
+  .personal-bar span{display:flex; align-items:center; gap:8px;}
+  .personal-bar i{color:var(--gold);}
+
+  /* CTA */
+  .cta-band{background:var(--navy); color:var(--white); border-radius:var(--radius-lg); padding:52px 44px; text-align:center; position:relative; overflow:hidden;}
+  .cta-band h3{color:var(--white); font-size:clamp(22px,2.8vw,30px); margin-bottom:10px;}
+  .cta-band p{color:#D7DEE8; max-width:520px; margin:0 auto 26px;}
+  .cta-band .btnrow{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
+  .cta-band .gold-line{width:64px; height:2px; background:var(--gold-warm); margin:0 auto 20px;}
+
+  /* Footer */
+  footer{background:var(--navy-dark); color:#B9C2CE; padding:44px 0 24px; text-align:center; font-size:13.5px;}
+  footer .fname{font-family:var(--serif); color:var(--white); font-size:17px; margin-bottom:6px;}
+  footer .social-row{display:flex; gap:12px; justify-content:center; margin:16px 0;}
+  footer .social-row a{width:34px; height:34px; border-radius:50%; border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; color:var(--gold-warm);}
+  footer .social-row a:hover{border-color:var(--gold-warm); background:rgba(212,175,87,0.1);}
+
+  .reveal{opacity:0; transform:translateY(20px); transition:all .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (max-width:900px){
+    nav.primary-nav{display:none;}
+    .hamburger{display:flex;}
+    .about-wrap, .edu-grid, .split-grid, .skills-wrap{grid-template-columns:1fr;}
+    .stats-inner{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:600px){
+    .section{padding:56px 0;}
+    .hero-grid{padding:120px 20px 70px;}
+    .hero-trust{flex-direction:column; gap:8px;}
+    .cta-band{padding:32px 22px;}
+  }
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="nav-wrap">
+    <a href="#home" class="brand">
+      <span class="brand-avatar">PV</span>
+      <span class="brand-text">Priyanka Vishwakarma</span>
+    </a>
+    <nav class="primary-nav" aria-label="Primary navigation">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+    </nav>
+    <div class="nav-right">
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-top">
+    <span class="brand-text" style="font-size:18px;">Priyanka Vishwakarma</span>
+    <button class="close-btn" id="closeMenuBtn" aria-label="Close menu">&times;</button>
+  </div>
+  <a href="#about">About</a>
+  <a href="#experience">Experience</a>
+  <a href="#education">Education</a>
+  <a href="#skills">Skills</a>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid">
+    <div class="eyebrow">High School Teacher</div>
+    <h1>Priyanka Vishwakarma<span class="accent">Nurturing Young Minds, One Lesson at a Time</span></h1>
+    <p class="sub">Dedicated and passionate educator committed to holistic student development, academic excellence and fostering a lifelong love of learning in Grade 8-10 students.</p>
+    <div class="hero-trust">
+      <span><i class="fa-solid fa-location-dot"></i> Bengaluru, India</span>
+    </div>
+  </div>
+</section>
+
+<div class="container stats reveal">
+  <div class="stats-inner">
+    <div><div class="stat-num">5+</div><div class="stat-label">Years Classroom Teaching</div></div>
+    <div><div class="stat-num">HST</div><div class="stat-label">High School Teacher, Grades 8–10</div></div>
+    <div><div class="stat-num">Core</div><div class="stat-label">Subjects Across Curriculum</div></div>
+    <div><div class="stat-num">3</div><div class="stat-label">Languages Spoken</div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Career Objective</div>
+      <h2 class="title">About Priyanka</h2>
+      <div class="divider-gold"></div>
+    </div>
+    <div class="about-wrap">
+      <div class="about-card reveal">
+        <p>Dedicated and passionate educator seeking a High School Teacher role where she can leverage her teaching experience and academic background to create engaging, nurturing learning environments for Grade 8-10 students. Committed to holistic student development, academic excellence, and fostering a love of learning.</p>
+        <p style="margin-top:14px;">She also brings strong organisational and analytical discipline from process-management roles at Accenture, Infosys and Capgemini — experience she carries into structured lesson planning, record-keeping and parent communication.</p>
+      </div>
+      <div class="reveal">
+        <div class="quote-strip">"Committed to helping every child build strong fundamentals, confidence and curiosity — inside and outside the classroom."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHING PHILOSOPHY / APPROACH -->
+<section class="section section-tight section-dark" style="background:var(--navy-dark);">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Teaching Approach</div>
+      <h2 class="title">How She Teaches</h2>
+      <p class="lede">A structured, student-first approach built around understanding each child before teaching to them.</p>
+    </div>
+    <div class="tl-h reveal">
+      <div class="tl-h-item"><div class="tl-h-num">1</div><h4>Understand</h4><p>Get to know each student's pace, strengths and learning style.</p></div>
+      <div class="tl-h-item"><div class="tl-h-num">2</div><h4>Plan</h4><p>Build structured, curriculum-aligned lesson plans for every class.</p></div>
+      <div class="tl-h-item"><div class="tl-h-num">3</div><h4>Engage</h4><p>Deliver age-appropriate, engaging lessons across core subjects.</p></div>
+      <div class="tl-h-item"><div class="tl-h-num">4</div><h4>Assess</h4><p>Evaluate progress regularly and share clear updates with parents.</p></div>
+      <div class="tl-h-item"><div class="tl-h-num">5</div><h4>Nurture</h4><p>Support holistic growth through co-curricular activities.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- AREAS OF EXPERTISE -->
+<section class="section">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Areas of Expertise</div>
+      <h2 class="title">Where She Adds the Most Value</h2>
+    </div>
+    <div class="split-grid" style="grid-template-columns:repeat(4,1fr);">
+      <div class="info-card reveal" style="text-align:center;">
+        <div class="exp-icon" style="margin:0 auto 14px;"><i class="fa-solid fa-chalkboard-user"></i></div>
+        <h4 style="justify-content:center;">Lesson Planning</h4>
+        <p style="color:var(--text-soft); font-size:13.5px;">Structured, curriculum-aligned plans for comprehensive learning.</p>
+      </div>
+      <div class="info-card reveal" style="text-align:center;">
+        <div class="exp-icon" style="margin:0 auto 14px;"><i class="fa-solid fa-people-line"></i></div>
+        <h4 style="justify-content:center;">Classroom Management</h4>
+        <p style="color:var(--text-soft); font-size:13.5px;">Positive, disciplined environments where students can focus and grow.</p>
+      </div>
+      <div class="info-card reveal" style="text-align:center;">
+        <div class="exp-icon" style="margin:0 auto 14px;"><i class="fa-solid fa-clipboard-check"></i></div>
+        <h4 style="justify-content:center;">Student Assessment</h4>
+        <p style="color:var(--text-soft); font-size:13.5px;">Regular evaluation of progress with constructive feedback.</p>
+      </div>
+      <div class="info-card reveal" style="text-align:center;">
+        <div class="exp-icon" style="margin:0 auto 14px;"><i class="fa-solid fa-comments"></i></div>
+        <h4 style="justify-content:center;">Parent Communication</h4>
+        <p style="color:var(--text-soft); font-size:13.5px;">Clear, consistent updates that keep parents involved in progress.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHING EXPERIENCE -->
+<section class="section section-dark" id="experience">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Teaching Experience</div>
+      <h2 class="title">Classroom Experience</h2>
+      <p class="lede">Hands-on experience delivering engaging, curriculum-aligned learning for Grade 8-10 students.</p>
+    </div>
+    <div class="tl-v">
+      <div class="tl-v-item reveal">
+        <div class="tl-v-num">Dec<br>21</div>
+        <div class="tl-v-content">
+          <div class="role-title">High School Teacher (Grades 8–10)</div>
+          <div class="role-org">Sunbeam International School, Bangalore &middot; Dec 2021 – Present</div>
+          <ul>
+            <li>Delivered engaging and age-appropriate lessons to Grade 8-10 students across core subjects.</li>
+            <li>Developed structured lesson plans aligned with the school curriculum to ensure comprehensive learning.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="skills-wrap" style="margin-top:8px;">
+      <div class="skill-block reveal">
+        <h4>Curriculum &amp; Instruction</h4>
+        <ul style="display:flex; flex-direction:column; gap:10px;">
+          <li style="display:flex; gap:8px; font-size:14px; color:#C7CEDA;"><span style="color:var(--gold-warm);">▸</span> Delivered engaging, age-appropriate lessons across core subjects.</li>
+          <li style="display:flex; gap:8px; font-size:14px; color:#C7CEDA;"><span style="color:var(--gold-warm);">▸</span> Developed structured lesson plans aligned with the school curriculum.</li>
+        </ul>
+      </div>
+      <div class="skill-block reveal">
+        <h4>Classroom &amp; Student Care</h4>
+        <ul style="display:flex; flex-direction:column; gap:10px;">
+          <li style="display:flex; gap:8px; font-size:14px; color:#C7CEDA;"><span style="color:var(--gold-warm);">▸</span> Managed classroom activities and maintained discipline.</li>
+          <li style="display:flex; gap:8px; font-size:14px; color:#C7CEDA;"><span style="color:var(--gold-warm);">▸</span> Fostered a positive, supportive learning environment.</li>
+        </ul>
+      </div>
+      <div class="skill-block reveal">
+        <h4>Assessment &amp; Collaboration</h4>
+        <ul style="display:flex; flex-direction:column; gap:10px;">
+          <li style="display:flex; gap:8px; font-size:14px; color:#C7CEDA;"><span style="color:var(--gold-warm);">▸</span> Monitored student progress via regular evaluations and parent communication.</li>
+          <li style="display:flex; gap:8px; font-size:14px; color:#C7CEDA;"><span style="color:var(--gold-warm);">▸</span> Organized co-curricular activities; collaborated with staff to enhance teaching methods.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="section section-dark" id="education">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Educational Qualifications</div>
+      <h2 class="title">Academic Background</h2>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <span class="yr">2025</span>
+        <h4>MBA – Finance &amp; Marketing</h4>
+        <div class="school">Jain (Deemed-to-be University), Bengaluru</div>
+        <span class="grade">SGPA: 8.75</span>
+      </div>
+      <div class="edu-card reveal">
+        <span class="yr">2021</span>
+        <h4>B.Com – Finance Specialisation</h4>
+        <div class="school">Krupanidhi College, Bengaluru Central University</div>
+        <span class="grade">SGPA: 8.75</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section section-dark section-tight" id="skills" style="background:var(--navy-dark);">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Skills &amp; Competencies</div>
+      <h2 class="title">What She Brings to the Classroom</h2>
+    </div>
+    <div class="skills-wrap">
+      <div class="skill-block reveal">
+        <h4>Teaching</h4>
+        <div class="pill-row">
+          <span class="pill">Lesson Planning</span>
+          <span class="pill">Classroom Management</span>
+          <span class="pill">Student Assessment</span>
+          <span class="pill">Parent Communication</span>
+        </div>
+      </div>
+      <div class="skill-block reveal">
+        <h4>Computer</h4>
+        <div class="pill-row">
+          <span class="pill">MS Word</span>
+          <span class="pill">MS Excel</span>
+          <span class="pill">MS PowerPoint</span>
+          <span class="pill">SAP FICO</span>
+          <span class="pill">Oracle R12</span>
+        </div>
+      </div>
+      <div class="skill-block reveal">
+        <h4>Languages</h4>
+        <div class="pill-row">
+          <span class="pill">English</span>
+          <span class="pill">Hindi</span>
+          <span class="pill">Kannada</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS & EXTRACURRICULAR -->
+<section class="section">
+  <div class="container">
+    <div class="split-grid">
+      <div class="info-card reveal">
+        <h4><i class="fa-solid fa-certificate"></i> Certifications</h4>
+        <ul>
+          <li>SAP FICO ECC 6.0 (R/3) – Accounts Payable, General Ledger, AR Configuration, MM/SD Integration</li>
+        </ul>
+      </div>
+      <div class="info-card reveal">
+        <h4><i class="fa-solid fa-hand-holding-heart"></i> Extracurricular &amp; Volunteering</h4>
+        <ul>
+          <li>Volunteer – We Are Your Voice (Job Fair for Persons with Disabilities)</li>
+          <li>Hobbies: Painting, Singing</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONAL DETAILS -->
+<div class="container">
+  <div class="personal-bar reveal">
+    <span><i class="fa-solid fa-cake-candles"></i> Date of Birth: 07 December 2000</span>
+    <span><i class="fa-solid fa-venus"></i> Gender: Female</span>
+    <span><i class="fa-solid fa-location-dot"></i> Bengaluru, India</span>
+  </div>
+</div>
+
+<!-- CLOSING STATEMENT -->
+<section class="section-tight">
+  <div class="container">
+    <div class="cta-band reveal">
+      <div class="gold-line"></div>
+      <h3>Open to High School Teacher Opportunities</h3>
+      <p>Looking for a role where care, structure and a love of learning make a real difference to students.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="fname">Priyanka Vishwakarma</div>
+    <p>High School Teacher &middot; Bengaluru, India</p>
+    <p>&copy; 2026 Priyanka Vishwakarma. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 30));
+
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const closeMenuBtn = document.getElementById('closeMenuBtn');
+  hamburgerBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
+  closeMenuBtn.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('in');
+      else e.target.classList.remove('in');
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
