@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://www.gstatic.com; script-src-attr 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com; object-src 'none'; base-uri 'self'; frame-ancestors 'self';" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0B1120" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Sattva Jnana" />
+<title>Sri Hari Sattva Jnana | Admin Portal</title>
+<script src="theme-init.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ============ LOADING ============ -->
+<div id="loadingScreen">
+  <div class="loader-ring"><img class="app-logo-img" alt="Sri Hari Sattva Jnana logo"></div>
+  <div class="loader-text">Loading Sattva Jnana Admin Portal...</div>
+</div>
+
+<!-- ============ LOGIN ============ -->
+<div id="loginScreen">
+  <div class="login-shell">
+    <div class="login-brand">
+      <div class="brand-mark">
+        <div class="brand-ring"><img class="app-logo-img" alt="Sri Hari Sattva Jnana logo"></div>
+        <div>
+          <div class="brand-name">Sri Hari<br>Sattva Jnana</div>
+          <div class="brand-sub">AI-Integrated Learning</div>
+        </div>
+      </div>
+      <h1>Manage your entire learning ecosystem from one place.</h1>
+      <p>Students, mentors, subjects, topics, lessons, quizzes and AI-driven insights — all in the Admin Portal.</p>
+      <div class="login-brand-foot">&copy; 2026 Sri Hari Sattva Jnana. All rights reserved.</div>
+    </div>
+    <div class="login-form-panel">
+      <div id="loginFormWrap">
+        <h2>Welcome Back! 👋</h2>
+        <p class="sub">Sign in with your Admin, Mentor, or Student account.</p>
+        <form id="loginForm">
+          <div class="f-group">
+            <label class="f-label">Email Address</label>
+            <div class="f-input-wrap"><i class="fa-solid fa-envelope"></i><input class="f-input" type="email" id="loginEmail" required></div>
+          </div>
+          <div class="f-group">
+            <label class="f-label">Password</label>
+            <div class="f-input-wrap"><i class="fa-solid fa-lock"></i><input class="f-input" type="password" id="loginPass" placeholder="••••••••" required></div>
+          </div>
+          <button class="auth-btn" id="loginBtn" type="submit"><i class="fa-solid fa-right-to-bracket"></i> Sign In</button>
+        </form>
+      </div>
+
+      <div id="authMsg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ APP ============ -->
+<div id="app">
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-logo">
+      <div class="sb-ring"><img class="app-logo-img" alt="Sri Hari Sattva Jnana logo"></div>
+      <div>
+        <div class="sb-title">SATTVA JNANA</div>
+        <div class="sb-sub">AI-Integrated Learning</div>
+      </div>
+    </div>
+    <nav class="sb-nav" id="sbNav">
+      <div class="sb-item active" data-page="dashboard"><i class="fa-solid fa-grip"></i> Dashboard</div>
+
+      <div class="sb-group-label" data-admin-only>User Management</div>
+      <div class="sb-item" data-page="students" data-admin-only><i class="fa-solid fa-user-graduate"></i> Students</div>
+      <div class="sb-item" data-page="mentors" data-admin-only><i class="fa-solid fa-chalkboard-user"></i> Mentors</div>
+      <div class="sb-item" data-page="createUser" data-admin-only><i class="fa-solid fa-user-plus"></i> Create User</div>
+
+      <div class="sb-group-label">Academic Management</div>
+      <div class="sb-item" data-page="subjects"><i class="fa-solid fa-book"></i> Subjects</div>
+      <div class="sb-item" data-page="chapters"><i class="fa-solid fa-layer-group"></i> Chapters</div>
+      <div class="sb-item" data-page="topics"><i class="fa-solid fa-bookmark"></i> Topics</div>
+
+      <div class="sb-group-label">Calendar</div>
+      <div class="sb-item" data-page="sessions"><i class="fa-solid fa-calendar-days"></i> Sessions</div>
+
+      <div class="sb-group-label">AI Learning</div>
+      <div class="sb-item" data-page="aiKnowledge"><i class="fa-solid fa-brain"></i> AI Knowledge Base</div>
+      <div class="sb-item" data-page="lessons"><i class="fa-solid fa-clapperboard"></i> Learning Lessons</div>
+      <div class="sb-item" data-page="audioLessons"><i class="fa-solid fa-headphones"></i> Audio Explanations</div>
+
+      <div class="sb-group-label">Assessments</div>
+      <div class="sb-item" data-page="quizzes"><i class="fa-solid fa-file-circle-check"></i> Quizzes</div>
+      <div class="sb-item" data-page="questions"><i class="fa-solid fa-circle-question"></i> Questions</div>
+      <div class="sb-item" data-page="results"><i class="fa-solid fa-square-poll-vertical"></i> Results</div>
+
+      <div class="sb-group-label">Resources</div>
+      <div class="sb-item" data-page="studyMaterials"><i class="fa-solid fa-book-open"></i> Study Materials</div>
+      <div class="sb-item" data-page="questionBank"><i class="fa-solid fa-list-check"></i> Question Bank</div>
+      <div class="sb-item" data-page="questionPaper"><i class="fa-solid fa-file-lines"></i> Question Paper</div>
+
+      <div class="sb-group-label" data-admin-only>&nbsp;</div>
+      <div class="sb-item" data-page="settings" data-admin-only><i class="fa-solid fa-gear"></i> Settings</div>
+    </nav>
+  </aside>
+
+  <header class="topbar">
+    <div class="tb-left">
+      <button class="hamburger icon-btn" onclick="document.getElementById('sidebar').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
+      <div class="tb-greet">
+        <h1 id="greetTitle">Good Morning, Admin! 👋</h1>
+        <p>Welcome back to Sri Hari Sattva Jnana Admin Dashboard</p>
+      </div>
+    </div>
+    <div class="tb-right">
+      <button class="tb-search-toggle" id="mobileSearchToggle" title="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <div class="tb-search-wrap" id="tbSearchWrap">
+        <div class="tb-search"><i class="fa-solid fa-magnifying-glass"></i><input id="globalSearchInput" placeholder="Search anything..." autocomplete="off"></div>
+        <div class="search-dropdown" id="globalSearchResults"></div>
+      </div>
+      <button class="theme-toggle" id="themeToggleBtn" title="Toggle dark / light theme"><i class="fa-solid fa-moon" id="themeToggleIcon"></i></button>
+      <div class="tb-user">
+        <div class="tb-avatar" id="tbAvatar">A</div>
+        <div class="tb-user-info">
+          <div class="tb-user-name" id="tbName">Admin</div>
+          <div class="tb-user-role" id="tbUserRole">Super Admin</div>
+        </div>
+        <button class="tb-logout" onclick="doLogout()" title="Sign out"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main" id="main">
+
+    <!-- DASHBOARD -->
+    <section class="page active" id="page-dashboard">
+      <div class="stat-grid" id="statGrid"></div>
+      <div class="panel" style="margin-bottom:1.2rem;">
+        <div class="panel-head"><h3>Learning Overview</h3><span style="font-size:.78rem;color:var(--text-2);">This Month</span></div>
+        <div class="chart-wrap"><canvas id="overviewChart"></canvas></div>
+        <div class="mini-stats" id="miniStats"></div>
+      </div>
+      <div class="tables-grid" id="dashTablesGrid">
+        <div class="table-panel" data-admin-only>
+          <div class="panel-head"><h3>Recent Users</h3><a class="panel-link" data-page="students">View All</a></div>
+          <div style="overflow-x:auto;"><table id="recentUsersTable"></table></div>
+        </div>
+        <div class="table-panel" data-mentor-only style="display:none;">
+          <div class="panel-head"><h3>My Students</h3></div>
+          <div style="overflow-x:auto;"><table id="myStudentsTable"></table></div>
+        </div>
+        <div class="table-panel" data-student-only style="display:none;">
+          <div class="panel-head"><h3>My Mentors</h3></div>
+          <div style="overflow-x:auto;"><table id="myMentorsTable"></table></div>
+        </div>
+        <div class="table-panel">
+          <div class="panel-head"><h3>Top Topics</h3><a class="panel-link" data-page="topics">View All</a></div>
+          <div style="overflow-x:auto;"><table id="topTopicsTable"></table></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GENERIC ENTITY PAGES -->
+    <section class="page" id="page-students"></section>
+    <section class="page" id="page-mentors"></section>
+    <section class="page" id="page-subjects"></section>
+    <section class="page" id="page-chapters"></section>
+    <section class="page" id="page-topics"></section>
+    <section class="page" id="page-sessions"></section>
+
+    <!-- Learning Lessons — same Board→Class→Subject→Chapter→Topic→Subtopic drill-down, video links instead of files -->
+    <section class="page" id="page-lessons">
+      <div class="page-head">
+        <div><h2>Learning Lessons</h2></div>
+        <button class="btn btn-primary" id="addBtn-lessons"><i class="fa-solid fa-plus"></i> Add Lesson</button>
+      </div>
+      <div class="ai-breadcrumb" id="breadcrumb-lessons"></div>
+      <div class="table-panel">
+        <div class="cat-grid" id="grid-lessons"></div>
+      </div>
+    </section>
+
+    <!-- Audio Explanations — identical drill-down + link-based flow as Learning Lessons, audio links instead of video -->
+    <section class="page" id="page-audioLessons">
+      <div class="page-head">
+        <div><h2>Audio Explanations</h2></div>
+        <button class="btn btn-primary" id="addBtn-audioLessons"><i class="fa-solid fa-plus"></i> Add Audio</button>
+      </div>
+      <div class="ai-breadcrumb" id="breadcrumb-audioLessons"></div>
+      <div class="table-panel">
+        <div class="cat-grid" id="grid-audioLessons"></div>
+      </div>
+    </section>
+
+    <section class="page" id="page-aiKnowledge">
+      <div class="page-head">
+        <div><h2>AI Knowledge Base</h2></div>
+        <button class="btn btn-primary" id="addBtn-aiKnowledge"><i class="fa-solid fa-upload"></i> Upload</button>
+      </div>
+      <div class="ai-breadcrumb" id="breadcrumb-aiKnowledge"></div>
+      <div class="table-panel">
+        <div class="cat-grid" id="grid-aiKnowledge"></div>
+      </div>
+    </section>
+
+    <!-- Resource pages — Study Materials, Question Bank, Question Paper (same drill-down + upload flow) -->
+    <section class="page" id="page-studyMaterials">
+      <div class="page-head">
+        <div><h2>Study Materials</h2></div>
+        <button class="btn btn-primary" id="addBtn-studyMaterials"><i class="fa-solid fa-upload"></i> Upload</button>
+      </div>
+      <div class="ai-breadcrumb" id="breadcrumb-studyMaterials"></div>
+      <div class="table-panel">
+        <div class="cat-grid" id="grid-studyMaterials"></div>
+      </div>
+    </section>
+    <section class="page" id="page-questionBank">
+      <div class="page-head">
+        <div><h2>Question Bank</h2></div>
+        <button class="btn btn-primary" id="addBtn-questionBank"><i class="fa-solid fa-upload"></i> Upload</button>
+      </div>
+      <div class="ai-breadcrumb" id="breadcrumb-questionBank"></div>
+      <div class="table-panel">
+        <div class="cat-grid" id="grid-questionBank"></div>
+      </div>
+    </section>
+    <section class="page" id="page-questionPaper">
+      <div class="page-head">
+        <div><h2>Question Paper</h2></div>
+        <button class="btn btn-primary" id="addBtn-questionPaper"><i class="fa-solid fa-upload"></i> Upload</button>
+      </div>
+      <div class="ai-breadcrumb" id="breadcrumb-questionPaper"></div>
+      <div class="table-panel">
+        <div class="cat-grid" id="grid-questionPaper"></div>
+      </div>
+    </section>
+
+    <!-- Shared inline viewer for all Resource-style modules (no popup, replaces the page content) -->
+    <section class="page" id="page-resourceViewer">
+      <div class="page-head">
+        <div>
+          <button class="btn btn-ghost" style="margin-bottom:.8rem;" id="aiViewerBackBtn"><i class="fa-solid fa-arrow-left"></i> Back</button>
+          <h2 id="aiViewerTitle">Viewing</h2>
+          <p id="aiViewerMeta"></p>
+        </div>
+        <button class="btn btn-ghost" id="aiFullscreenBtn" onclick="toggleFullscreenPanel('aiViewerPanel')"><i class="fa-solid fa-expand"></i> Fullscreen</button>
+      </div>
+      <div class="table-panel" id="aiViewerPanel">
+        <iframe id="aiViewerFrame" class="ai-viewer-frame" sandbox="allow-scripts allow-forms allow-popups allow-modals allow-same-origin"></iframe>
+      </div>
+    </section>
+
+    <!-- Learning Lessons — inline video viewer (Google Drive / YouTube links) -->
+    <section class="page" id="page-lessonViewer">
+      <div class="page-head">
+        <div>
+          <button class="btn btn-ghost" style="margin-bottom:.8rem;" onclick="goToPage('lessons')"><i class="fa-solid fa-arrow-left"></i> Back to Learning Lessons</button>
+          <h2 id="lessonViewerTitle">Viewing</h2>
+          <p id="lessonViewerMeta"></p>
+        </div>
+      </div>
+      <div class="table-panel" id="lessonViewerPanel">
+        <div class="lesson-video-wrap" id="lessonVideoWrap">
+          <iframe id="lessonViewerFrame" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Audio Explanations — inline stylish custom audio player (native <audio>, fully custom controls) -->
+    <section class="page" id="page-audioViewer">
+      <div class="page-head">
+        <div>
+          <button class="btn btn-ghost" style="margin-bottom:.8rem;" onclick="goToPage('audioLessons')"><i class="fa-solid fa-arrow-left"></i> Back to Audio Explanations</button>
+          <h2 id="audioViewerTitle">Viewing</h2>
+          <p id="audioViewerMeta"></p>
+        </div>
+      </div>
+      <div class="table-panel">
+        <div class="audio-player-card" id="audioPlayerCard">
+          <div class="ap-art" id="apArt">
+            <div class="ap-art-rings"><span></span><span></span><span></span></div>
+            <i class="fa-solid fa-headphones"></i>
+            <div class="ap-bars" id="apBars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          </div>
+          <div class="ap-title" id="apTitle">Untitled</div>
+          <div class="ap-seek-row">
+            <span class="ap-time" id="apCurrentTime">0:00</span>
+            <input type="range" class="ap-seek" id="apSeek" min="0" max="100" value="0" step="0.1">
+            <span class="ap-time" id="apDuration">0:00</span>
+          </div>
+          <div class="ap-controls-row">
+            <div class="ap-speed-wrap">
+              <select class="ap-speed" id="apSpeed" title="Playback speed">
+                <option value="0.75">0.75×</option>
+                <option value="1" selected>1×</option>
+                <option value="1.25">1.25×</option>
+                <option value="1.5">1.5×</option>
+                <option value="2">2×</option>
+              </select>
+            </div>
+            <div class="ap-transport">
+              <button class="ap-skip-btn" id="apSkipBack" title="Back 10s"><i class="fa-solid fa-rotate-left"></i></button>
+              <button class="ap-play-btn" id="apPlayBtn"><i class="fa-solid fa-play"></i></button>
+              <button class="ap-skip-btn" id="apSkipFwd" title="Forward 10s"><i class="fa-solid fa-rotate-right"></i></button>
+            </div>
+            <div class="ap-volume-wrap">
+              <i class="fa-solid fa-volume-high" id="apVolIcon"></i>
+              <input type="range" class="ap-volume" id="apVolume" min="0" max="1" value="1" step="0.01">
+            </div>
+          </div>
+        </div>
+        <audio id="audioPlayerEl" preload="metadata" style="display:none;"></audio>
+      </div>
+    </section>
+    <section class="page" id="page-quizzes"></section>
+    <section class="page" id="page-questions"></section>
+    <section class="page" id="page-results"></section>
+
+    <!-- Quiz Attempt — shown only when a student taps "Attempt" on a quiz -->
+    <section class="page" id="page-quizAttempt">
+      <div class="page-head">
+        <div>
+          <button class="btn btn-ghost" style="margin-bottom:.8rem;" onclick="goToPage('quizzes')"><i class="fa-solid fa-arrow-left"></i> Back to Quizzes</button>
+          <h2 id="quizAttemptTitle">Quiz</h2>
+          <p id="quizAttemptMeta"></p>
+        </div>
+      </div>
+      <div class="table-panel" id="quizAttemptPanel" style="max-width:640px;"></div>
+    </section>
+
+    <!-- CREATE USER -->
+    <section class="page" id="page-createUser">
+      <div class="page-head"><div><h2>Create User</h2><p>Add a new Student, Mentor, or Admin account with portal login access.</p></div></div>
+      <div class="table-panel" style="max-width:520px;">
+        <form id="createUserForm">
+          <div class="f-group">
+            <label class="f-label">Role</label>
+            <select class="f-input" style="padding-left:.9rem;" id="cuRole" required>
+              <option value="student">Student</option>
+              <option value="mentor">Mentor</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <div class="f-group"><label class="f-label">Full Name</label><input class="f-input" style="padding-left:.9rem;" id="cuName" required></div>
+          <div class="f-group"><label class="f-label">Email Address</label><input class="f-input" style="padding-left:.9rem;" type="email" id="cuEmail" required></div>
+          <div class="f-group"><label class="f-label">Temporary Password</label><input class="f-input" style="padding-left:.9rem;" type="text" id="cuPass" minlength="6" required></div>
+          <div class="f-group" id="cuBoardWrap"><label class="f-label">Board</label>
+            <select class="f-input" style="padding-left:.9rem;" id="cuBoard">
+              <option value="ICSE">ICSE</option>
+              <option value="CBSE">CBSE</option>
+              <option value="State">State</option>
+            </select>
+          </div>
+          <div class="f-group" id="cuClassWrap"><label class="f-label">Class</label><input class="f-input" style="padding-left:.9rem;" id="cuClass" placeholder="e.g. Class 10"></div>
+          <div class="f-group" id="cuSubjectWrap" style="display:none;"><label class="f-label">Subject Handled (Title)</label><input class="f-input" style="padding-left:.9rem;" id="cuSubject" placeholder="e.g. Mathematics"></div>
+          <div class="f-group" id="cuAssignedSubjectsWrap">
+            <label class="f-label">Assign Subjects (Portal Access)</label>
+            <div class="ms-box" id="cuAssignedSubjects"></div>
+            <p id="cuAssignedSubjectsHint" style="font-size:.72rem;color:var(--text-3);margin-top:.35rem;">This account will only see content — across every section it has access to — for the subjects checked here.</p>
+          </div>
+          <div class="f-group" id="cuAssignedStudentsWrap" style="display:none;">
+            <label class="f-label">Assign Students (optional)</label>
+            <div class="ms-box" id="cuAssignedStudents"></div>
+            <p style="font-size:.72rem;color:var(--text-3);margin-top:.35rem;">This mentor's "My Students" count and Results form will be limited to the students checked here.</p>
+          </div>
+          <div class="f-group" id="cuSectionOverridesWrap">
+            <label class="f-label" id="cuSectionOverridesLabel">Section Access (this account's pack)</label>
+            <div class="ms-box" id="cuSectionOverrides" style="max-height:280px;"></div>
+            <p style="font-size:.72rem;color:var(--text-3);margin-top:.35rem;">Leave sections on "Plan default" to follow the Section Access settings for this role — use Allow/Block to give this one person a custom pack (e.g. Basic vs Premium).</p>
+          </div>
+          <div class="first-admin-note" id="cuAdminNote" style="display:none;">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Admins get full, unrestricted access to every section of the portal — including User Management, Settings, and the ability to create other Admin accounts. Only create Admin accounts for people you fully trust.</span>
+          </div>
+          <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:.4rem;" id="cuBtn" type="submit"><i class="fa-solid fa-user-plus"></i> Create Account</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="page" id="page-settings">
+      <div class="page-head"><div><h2>Settings</h2><p>Manage your admin profile and institute details.</p></div></div>
+      <div class="table-panel" style="max-width:520px;">
+        <div class="f-group"><label class="f-label">Name</label><input class="f-input" style="padding-left:.9rem;" id="setName"></div>
+        <div class="f-group"><label class="f-label">Email</label><input class="f-input" style="padding-left:.9rem;" id="setEmail" disabled></div>
+        <div class="f-group"><label class="f-label">Institute Name</label><input class="f-input" style="padding-left:.9rem;" id="setInstitute" value="Sri Hari Sattva Jnana"></div>
+        <button class="btn btn-primary" id="setSaveBtn"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+      </div>
+
+      <div class="table-panel" style="max-width:720px;margin-top:1.2rem;">
+        <div class="panel-head" style="margin-bottom:.6rem;">
+          <h3>Section Access</h3>
+        </div>
+        <p style="font-size:.78rem;color:var(--text-2);margin:-.3rem 0 .9rem;">
+          Choose which sections Mentors and Students can see in their portal. A section stays hidden from a role until you check it here — subjects a mentor/student isn't assigned to still stay out of reach either way.
+        </p>
+        <div style="overflow-x:auto;">
+          <table id="sectionAccessTable">
+            <thead><tr><th>Section</th><th style="text-align:center;">Mentor</th><th style="text-align:center;">Student</th></tr></thead>
+            <tbody id="sectionAccessBody"></tbody>
+          </table>
+        </div>
+        <button class="btn btn-primary" id="sectionAccessSaveBtn" style="margin-top:1rem;"><i class="fa-solid fa-floppy-disk"></i> Save Section Access</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-head"><h3 id="modalTitle">Add</h3><button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot"><button class="btn btn-ghost" id="modalCancelBtn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" id="modalSaveBtn">Save</button></div>
+  </div>
+</div>
+
+<div id="toastWrap"></div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
