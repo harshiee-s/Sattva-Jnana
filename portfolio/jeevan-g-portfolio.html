@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeevan G — Education Professional & Centre Head</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:   #0d1b36;
+    --navy-base:   #16294d;
+    --navy-light:  #16294d;
+    --navy-raised: #eef1f6;
+    --shadow-dark: #c7cdd9;
+    --shadow-light:#ffffff;
+    --gold:        #b8862f;
+    --gold-bright: #a9782a;
+    --gold-dim:    #8a6f34;
+    --ivory:       #1b2c50;
+    --ivory-dim:   #5b6784;
+    --rail-w: 3px;
+    --bg:          #eef1f6;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ivory);
+    font-family:'Manrope', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  /* subtle warmth handled by .bg-ambience now */
+  h1,h2,h3{ font-family:'Fraunces', serif; font-weight:600; letter-spacing:0.01em; color:var(--navy-deep); }
+
+  .neo{
+    background:var(--navy-raised);
+    border-radius:22px;
+    box-shadow:
+      9px 9px 18px var(--shadow-dark),
+      -9px -9px 18px var(--shadow-light);
+  }
+  .neo-inset{
+    background:var(--bg);
+    border-radius:16px;
+    box-shadow:
+      inset 5px 5px 10px var(--shadow-dark),
+      inset -5px -5px 10px var(--shadow-light);
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  /* ---------- AMBIENT BACKGROUND ---------- */
+  .bg-ambience{
+    position:fixed; inset:0; z-index:0;
+    overflow:hidden; pointer-events:none;
+  }
+  .orb{
+    position:absolute; border-radius:50%;
+    filter:blur(60px);
+    will-change:transform;
+  }
+  .orb-gold{
+    width:520px; height:520px; top:-160px; left:-140px;
+    background:radial-gradient(circle, rgba(184,134,47,0.32), transparent 70%);
+    animation:driftA 22s ease-in-out infinite;
+  }
+  .orb-navy{
+    width:600px; height:600px; top:15%; right:-240px;
+    background:radial-gradient(circle, rgba(22,38,74,0.18), transparent 70%);
+    animation:driftB 28s ease-in-out infinite;
+  }
+  .orb-gold2{
+    width:400px; height:400px; bottom:-160px; left:25%;
+    background:radial-gradient(circle, rgba(184,134,47,0.24), transparent 70%);
+    animation:driftC 20s ease-in-out infinite;
+  }
+  .orb-navy2{
+    width:340px; height:340px; bottom:10%; right:8%;
+    background:radial-gradient(circle, rgba(22,38,74,0.14), transparent 70%);
+    animation:driftD 25s ease-in-out infinite;
+  }
+  .drift-line{
+    position:absolute; left:0; right:0; height:1px;
+    background:linear-gradient(90deg, transparent, rgba(184,134,47,0.4), transparent);
+    animation:pan 22s linear infinite;
+  }
+  .line1{ top:28%; animation-duration:18s; }
+  .line2{ top:68%; animation-duration:24s; animation-direction:reverse; opacity:0.7; }
+
+  @keyframes driftA{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(90px,110px) scale(1.15); }
+  }
+  @keyframes driftB{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(-100px,-70px) scale(1.1); }
+  }
+  @keyframes driftC{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(70px,-90px) scale(1.15); }
+  }
+  @keyframes driftD{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(-60px,60px) scale(1.12); }
+  }
+  @keyframes pan{
+    0%{ transform:translateX(-10%); }
+    100%{ transform:translateX(10%); }
+  }
+  @keyframes fadeUp{
+    from{ opacity:0; transform:translateY(24px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+  .reveal{ opacity:0; }
+  .reveal.in-view{ animation:fadeUp 0.7s ease forwards; }
+
+  @media (prefers-reduced-motion: reduce){
+    .orb, .drift-line{ animation:none !important; }
+    .reveal{ opacity:1 !important; animation:none !important; }
+  }
+
+  /* ---------- NAVBAR ---------- */
+  .navbar{
+    position:sticky; top:0; z-index:50;
+    padding:18px 32px;
+    display:flex; justify-content:center;
+    background:linear-gradient(var(--bg) 60%, rgba(238,241,246,0));
+  }
+  .nav-inner{
+    width:100%; max-width:1180px;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 26px;
+    border-radius:18px;
+  }
+  .nav-brand{
+    font-family:'Fraunces', serif; font-weight:600; font-size:19px; color:var(--navy-deep);
+    letter-spacing:0.02em;
+  }
+  .nav-brand span{ color:var(--gold); }
+  .nav-links{ display:flex; gap:30px; }
+  .nav-links a{
+    font-size:13px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase;
+    color:var(--ivory-dim); position:relative; padding-bottom:4px;
+    transition:color 0.2s ease;
+  }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:0; width:0; height:2px;
+    background:var(--gold); transition:width 0.25s ease;
+  }
+  .nav-links a:hover{ color:var(--navy-deep); }
+  .nav-links a:hover::after{ width:100%; }
+
+  /* ---------- layout shell ---------- */
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; position:relative; z-index:1;}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding:88px 0 64px;
+    position:relative;
+    animation:fadeUp 0.9s ease both;
+  }
+  header.hero .hero-role{ animation:fadeUp 0.9s ease 0.15s both; }
+  header.hero .hero-summary{ animation:fadeUp 0.9s ease 0.3s both; }
+  header.hero .eyebrow{ animation:fadeUp 0.9s ease both; }
+  header.hero .hero-name{ animation:none; }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:12.5px; letter-spacing:0.22em; text-transform:uppercase;
+    color:var(--gold-bright); font-weight:700;
+    padding:9px 18px;
+    border-radius:999px;
+    background:var(--navy-raised);
+  }
+  .eyebrow::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--gold-bright); box-shadow:0 0 8px var(--gold-bright);}
+
+  .hero-grid{
+    display:grid; grid-template-columns:1.5fr 1fr; gap:40px;
+    margin-top:28px; align-items:stretch;
+  }
+  .hero-name{
+    font-size:clamp(42px, 6vw, 74px);
+    line-height:0.98;
+    color:var(--ivory);
+  }
+  .hero-name em{ font-style:italic; color:var(--gold); }
+  .hero-role{
+    margin-top:18px; font-size:19px; color:var(--ivory-dim);
+    max-width:46ch; font-weight:400;
+  }
+  .hero-summary{
+    margin-top:22px; font-size:15.5px; color:var(--ivory-dim);
+    max-width:56ch;
+  }
+
+  .contact-card{ padding:34px 32px; display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .contact-row{ display:flex; align-items:center; gap:14px; font-size:14.5px; }
+  .icon-chip{
+    width:38px; height:38px; flex:0 0 38px; border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--navy-deep);
+    box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
+    color:var(--gold-bright); font-size:16px;
+  }
+  .contact-row .label{ color:var(--ivory-dim); font-size:11px; text-transform:uppercase; letter-spacing:0.08em; display:block; margin-bottom:2px;}
+  .contact-row .value{ color:var(--ivory); font-weight:600; }
+
+  /* ---------- SECTION HEADINGS ---------- */
+  .section{ padding:70px 0; position:relative; }
+  .section-head{ display:flex; align-items:baseline; gap:16px; margin-bottom:40px; }
+  .section-num{ font-family:'Fraunces',serif; font-size:14px; color:var(--gold-dim); }
+  .section-title{ font-size:30px; color:var(--ivory); }
+  .section-rule{ flex:1; height:1px; background:linear-gradient(90deg, rgba(184,134,47,0.4), transparent); }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{ display:flex; flex-wrap:wrap; gap:12px; }
+  .skill-chip{
+    padding:11px 20px; font-size:13.5px; font-weight:600; color:var(--ivory-dim);
+    border-radius:999px;
+  }
+  .skill-chip:hover{ color:var(--gold-bright); }
+
+  /* two column: skills + summary card side panel not needed, summary already in hero */
+
+  .about-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:28px; }
+  .about-card{ padding:32px; }
+  .about-card h3{ font-size:15px; color:var(--gold-bright); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:16px; font-family:'Manrope',sans-serif; font-weight:800;}
+
+  /* ---------- RAIL TIMELINE ---------- */
+  .rail{
+    position:relative;
+    padding-left:56px;
+  }
+  .rail::before{
+    content:"";
+    position:absolute; left:19px; top:6px; bottom:6px; width:var(--rail-w);
+    background:linear-gradient(180deg, var(--gold) 0%, var(--gold-dim) 70%, transparent 100%);
+    border-radius:4px;
+    box-shadow:0 0 12px rgba(184,134,47,0.3);
+  }
+  .rail-item{ position:relative; padding-bottom:46px; }
+  .rail-item:last-child{ padding-bottom:0; }
+  .rail-node{
+    position:absolute; left:-56px; top:6px;
+    width:41px; height:41px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--navy-raised);
+    box-shadow:6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+    z-index:2;
+  }
+  .rail-node .dot{ width:12px; height:12px; border-radius:50%; background:var(--gold); box-shadow:0 0 8px rgba(184,134,47,0.6);}
+  .rail-item.current .rail-node{ box-shadow:6px 6px 14px var(--shadow-dark), -6px -6px 12px var(--shadow-light), 0 0 0 3px rgba(184,134,47,0.25);}
+
+  .job-card{ padding:28px 30px; }
+  .job-top{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:10px 20px; margin-bottom:4px;}
+  .job-title{ font-size:19px; color:var(--ivory); font-family:'Fraunces',serif; font-weight:600;}
+  .job-dates{
+    font-size:12px; font-weight:700; letter-spacing:0.05em; color:var(--navy-deep);
+    background:var(--gold); padding:5px 13px; border-radius:999px; white-space:nowrap;
+  }
+  .job-meta{ display:flex; flex-wrap:wrap; gap:6px 16px; font-size:13.5px; color:var(--gold-bright); margin-bottom:14px; font-weight:600;}
+  .job-meta span{ color:var(--ivory-dim); font-weight:500;}
+  .job-list{ list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .job-list li{ position:relative; padding-left:20px; font-size:14px; color:var(--ivory-dim); }
+  .job-list li::before{ content:"—"; position:absolute; left:0; color:var(--gold-dim); }
+
+  /* ---------- EDUCATION / LANGUAGES ---------- */
+  .split{ display:grid; grid-template-columns:1.3fr 0.7fr; gap:28px; align-items:start; }
+  .edu-card{ padding:26px 28px; margin-bottom:18px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .edu-card:last-child{ margin-bottom:0; }
+  .edu-degree{ font-family:'Fraunces',serif; font-size:17px; color:var(--ivory); margin-bottom:4px;}
+  .edu-school{ font-size:13.5px; color:var(--gold-bright); }
+  .edu-year{ font-size:12.5px; color:var(--ivory-dim); align-self:center; white-space:nowrap; }
+
+  .lang-card{ padding:28px; }
+  .lang-row{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--shadow-dark);}
+  .lang-row:last-child{ border-bottom:none; }
+  .lang-name{ font-size:14.5px; font-weight:700; color:var(--ivory); }
+  .lang-bars{ display:flex; gap:4px; }
+  .lang-bars i{ width:16px; height:6px; border-radius:3px; background:var(--bg); box-shadow:inset 2px 2px 4px var(--shadow-dark), inset -2px -2px 4px var(--shadow-light);}
+  .lang-bars i.on{ background:var(--gold); box-shadow:0 0 6px rgba(184,134,47,0.5); }
+
+  footer{ padding:50px 0 70px; text-align:center; color:var(--ivory-dim); font-size:13px; }
+  footer .gold{ color:var(--gold-bright); font-weight:700;}
+
+  @media (max-width: 860px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .about-grid{ grid-template-columns:1fr; }
+    .split{ grid-template-columns:1fr; }
+    .wrap{ padding:0 20px; }
+    .contact-card{ grid-template-columns:1fr; }
+    .nav-links{ gap:14px; }
+    .nav-links a{ font-size:12px; }
+  }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+
+  ::selection{ background:var(--gold); color:var(--navy-deep); }
+</style>
+</head>
+<body>
+
+<div class="bg-ambience" aria-hidden="true">
+  <span class="orb orb-gold"></span>
+  <span class="orb orb-navy"></span>
+  <span class="orb orb-gold2"></span>
+  <span class="orb orb-navy2"></span>
+  <div class="drift-line line1"></div>
+  <div class="drift-line line2"></div>
+</div>
+
+<nav class="navbar">
+  <div class="nav-inner neo">
+    <a href="#top" class="nav-brand">JG<span>.</span></a>
+    <div class="nav-links">
+      <a href="#about">Strengths</a>
+      <a href="#experience">Journey</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero" id="top">
+    <span class="eyebrow neo-inset">Based in Bengaluru, India</span>
+    <h1 class="hero-name">Jeevan<br><em>G</em></h1>
+    <p class="hero-role">I build classrooms and centres where children learn well and the adults around them do too.</p>
+    <p class="hero-summary">Four years into a career spanning IB and CBSE settings, I've moved from the classroom into leading a whole centre — its people, its curriculum, and the families who trust us with their children. I'm happiest when a team is growing, a lesson finally clicks, or a nervous parent leaves reassured.</p>
+  </header>
+
+  <!-- SKILLS + SUMMARY -->
+  <section class="section reveal" id="about">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">What I Bring</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="skills-grid">
+      <span class="skill-chip neo-inset">Academic Leadership</span>
+      <span class="skill-chip neo-inset">Curriculum Design</span>
+      <span class="skill-chip neo-inset">Classroom Management</span>
+      <span class="skill-chip neo-inset">Teacher Mentoring</span>
+      <span class="skill-chip neo-inset">Centre Operations</span>
+      <span class="skill-chip neo-inset">Admissions &amp; Counselling</span>
+      <span class="skill-chip neo-inset">Parent Partnerships</span>
+      <span class="skill-chip neo-inset">Team Building</span>
+      <span class="skill-chip neo-inset">Event Planning</span>
+      <span class="skill-chip neo-inset">Student Assessment</span>
+      <span class="skill-chip neo-inset">Digital Fluency</span>
+      <span class="skill-chip neo-inset">Clear Communication</span>
+      <span class="skill-chip neo-inset">Calm Problem-Solving</span>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE — RAIL TIMELINE -->
+  <section class="section reveal" id="experience">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">How I Got Here</h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="rail">
+
+      <div class="rail-item current reveal">
+        <div class="rail-node"><div class="dot"></div></div>
+        <div class="neo job-card">
+          <div class="job-top">
+            <span class="job-title">Educator &amp; Centre Coordinator (CBSE Curriculum)</span>
+            <span class="job-dates">May 2023 – Current</span>
+          </div>
+          <div class="job-meta">Royal Public School <span>· Bengaluru, India</span></div>
+          <ul class="job-list">
+            <li>Taught Grades 9 and 10, aiming for concepts that stuck rather than answers that were memorised.</li>
+            <li>Coordinated the academic schedule — exams, remedial classes, all the moving parts.</li>
+            <li>Backed up other teachers in the classroom and in lesson planning when things got stretched.</li>
+            <li>Ran parent meetings myself and followed through on the interventions we agreed to.</li>
+            <li>Picked up school admin and event coordination wherever it was needed.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rail-item reveal">
+        <div class="rail-node"><div class="dot"></div></div>
+        <div class="neo job-card">
+          <div class="job-top">
+            <span class="job-title">Educator &amp; Programme Coordinator (IB Curriculum)</span>
+            <span class="job-dates">Mar 2022 – Apr 2023</span>
+          </div>
+          <div class="job-meta">Dibber International Preschool <span>· Bengaluru, India</span></div>
+          <ul class="job-list">
+            <li>Taught through inquiry, IB-style — questions before answers.</li>
+            <li>Designed age-appropriate activities and programmes for very young learners.</li>
+            <li>Kept detailed developmental records — the kind that actually get read and used.</li>
+            <li>Worked closely with other teachers so the curriculum felt consistent across classrooms.</li>
+            <li>Organised school events, celebrations, and the moments that pulled parents into school life.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rail-item reveal">
+        <div class="rail-node"><div class="dot"></div></div>
+        <div class="neo job-card">
+          <div class="job-top">
+            <span class="job-title">Educator (Part-Time)</span>
+            <span class="job-dates">Feb 2021 – Jan 2026</span>
+          </div>
+          <div class="job-meta">Otto Private Limited <span>· Evening Sessions, Bengaluru</span></div>
+          <ul class="job-list">
+            <li>Tutor one-on-one across subjects and grade levels, evenings after the day job.</li>
+            <li>Build lesson plans around how each student actually learns, not a generic syllabus pace.</li>
+            <li>Assess regularly enough to catch a slipping grade before it becomes a pattern.</li>
+            <li>Keep parents in the loop — no surprises at report card time.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION + LANGUAGES -->
+  <section class="section reveal" id="education">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Learning, on Both Sides of the Desk</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="split">
+      <div>
+        <div class="neo edu-card">
+          <div>
+            <div class="edu-degree">M.Sc. Mathematics</div>
+            <div class="edu-school">Manipal University, Manipal</div>
+          </div>
+          <div class="edu-year">2024 – 2026</div>
+        </div>
+        <div class="neo edu-card">
+          <div>
+            <div class="edu-degree">Bachelor of Science (B.Sc.)</div>
+            <div class="edu-school">St. Joseph's University, Bengaluru</div>
+          </div>
+          <div class="edu-year">2024</div>
+        </div>
+        <div class="neo edu-card">
+          <div>
+            <div class="edu-degree">PCME</div>
+            <div class="edu-school">Vijaya PU College, Bangalore</div>
+          </div>
+          <div class="edu-year">2021</div>
+        </div>
+      </div>
+
+      <div class="neo lang-card">
+        <div class="lang-row">
+          <span class="lang-name">English</span>
+          <span class="lang-bars"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+        </div>
+        <div class="lang-row">
+          <span class="lang-name">Kannada</span>
+          <span class="lang-bars"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+        </div>
+        <div class="lang-row">
+          <span class="lang-name">Telugu</span>
+          <span class="lang-bars"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section reveal" id="contact">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Let's Talk</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p style="color:var(--ivory-dim); font-size:15px; max-width:52ch; margin-bottom:28px;">Hiring for a centre, need a curriculum consult, or just want to compare notes on running a classroom — reach out.</p>
+    <div class="neo contact-card">
+      <div class="contact-row">
+        <div class="icon-chip">✉</div>
+        <div><span class="label">Email</span><span class="value">jeevan@sattvajnana.in</span></div>
+      </div>
+      <div class="contact-row">
+        <div class="icon-chip">☎</div>
+        <div><span class="label">Phone</span><span class="value">7411007181</span></div>
+      </div>
+      <div class="contact-row">
+        <div class="icon-chip">⚲</div>
+        <div><span class="label">Location</span><span class="value">Bangalore</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="gold">Jeevan G</span> · Bengaluru, India
+  </footer>
+
+</div>
+<script>
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){
+      els.forEach(function(el){ el.classList.add('in-view'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(function(el){ io.observe(el); });
+  })();
+</script>
+</body>
+</html>
