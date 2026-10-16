@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" href="../svg.png" />
-<link rel="shortcut icon" type="image/png" href="../svg.png" />
-<link rel="apple-touch-icon" href="../svg.png" />
+<link rel="icon" type="image/png" href="https://sattvajnana.in/images/svg.webp" />
+<link rel="shortcut icon" type="image/png" href="https://sattvajnana.in/images/svg.webp" />
+<link rel="apple-touch-icon" href="https://sattvajnana.in/images/svg.webp" />
 
 <title>Meet Our Founders — Harshith G S, Sahana Shree & Jeevan G | Sri Hari Sattva Jnana</title>
 <meta name="description" content="Sri Hari Sattva Jnana (Sattva Jnana) was founded in Bengaluru by Harshith G S, Sahana Shree and Jeevan G. Harshith is AI-certified and brings AI-powered teaching methods into every classroom. Meet the three mentors behind our personalised home tuition programme.">
@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="Sri Hari Sattva Jnana">
 <meta property="og:title" content="Meet Our Founders — Harshith G S, Sahana Shree & Jeevan G | Sri Hari Sattva Jnana">
 <meta property="og:description" content="Sri Hari Sattva Jnana (Sattva Jnana) was founded in Bengaluru by Harshith G S, Sahana Shree and Jeevan G. Harshith is AI-certified and brings AI-powered teaching methods into every classroom.">
-<meta property="og:image" content="https://sattvajnana.in/founders/founder-1.png">
+<meta property="og:image" content="https://sattvajnana.in/images/founder-1.webp">
 <meta property="og:url" content="https://sattvajnana.in/founders/">
 <meta property="og:locale" content="en_IN">
 
@@ -30,7 +30,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Meet Our Founders — Harshith G S, Sahana Shree & Jeevan G | Sri Hari Sattva Jnana">
 <meta name="twitter:description" content="Sri Hari Sattva Jnana (Sattva Jnana) was founded in Bengaluru by Harshith G S, Sahana Shree and Jeevan G.">
-<meta name="twitter:image" content="https://sattvajnana.in/founders/founder-1.png">
+<meta name="twitter:image" content="https://sattvajnana.in/images/founder-1.webp">
 
 <!-- Structured data -->
 <script type="application/ld+json">
@@ -44,7 +44,7 @@
       "alternateName": "Sattva Jnana",
       "description": "Personalised home tuition and one-on-one academic support for students, provided at home by qualified private mentors.",
       "url": "https://sattvajnana.in/",
-      "logo": "https://sattvajnana.in/logo.png",
+      "logo": "https://sattvajnana.in/images/logo.webp",
       "areaServed": "Bengaluru, Karnataka",
       "founder": [
         { "@id": "https://sattvajnana.in/founders/#harshith-g-s" },
@@ -64,7 +64,7 @@
       "name": "Harshith G S",
       "jobTitle": "Founder & AI-Powered Education Strategist",
       "description": "Founder of Sri Hari Sattva Jnana, specialising in Commerce and Accountancy, with 6+ years of teaching experience and 50+ students mentored. AI-certified, with a background building AI-automation tools for the finance industry, Harshith now applies that AI expertise to personalised education at Sattva Jnana.",
-      "image": "https://sattvajnana.in/founders/founder-1.png",
+      "image": "https://sattvajnana.in/images/founder-1.webp",
       "worksFor": { "@id": "https://sattvajnana.in/#organization" },
       "knowsAbout": ["Commerce", "Accountancy", "Home Tuition", "Personalised Learning", "Artificial Intelligence", "AI Automation", "AI in Education"]
     },
@@ -72,9 +72,9 @@
       "@type": "Person",
       "@id": "https://sattvajnana.in/founders/#sahana-shree",
       "name": "Sahana Shree",
-      "jobTitle": "Co-Founder & Science Mentor",
+      "jobTitle": "Co-Founder & Maths Mentor",
       "description": "Co-Founder of Sri Hari Sattva Jnana and Maths Mentor, with 6+ years of teaching experience and 100+ students mentored.",
-      "image": "https://sattvajnana.in/founders/founder-2.png",
+      "image": "https://sattvajnana.in/images/founder-2.webp",
       "worksFor": { "@id": "https://sattvajnana.in/#organization" },
       "knowsAbout": ["Mathematics", "Home Tuition", "Personalised Learning"]
     },
@@ -82,9 +82,9 @@
       "@type": "Person",
       "@id": "https://sattvajnana.in/founders/#jeevan-g",
       "name": "Jeevan G",
-      "jobTitle": "Co-Founder & Maths Mentor",
+      "jobTitle": "Co-Founder & Science Mentor",
       "description": "Co-Founder of Sri Hari Sattva Jnana and Science Mentor, specialising in Mathematics and Physics, with 6+ years of teaching experience and 50+ students mentored.",
-      "image": "https://sattvajnana.in/founders/founder-3.png",
+      "image": "https://sattvajnana.in/images/founder-3.webp",
       "worksFor": { "@id": "https://sattvajnana.in/#organization" },
       "knowsAbout": ["Physics", "Mathematics", "Home Tuition", "Personalised Learning"]
     },
@@ -134,6 +134,9 @@
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{font-family:var(--sans); color:var(--text); background:var(--ivory); line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden;}
+  /* Fixed page background (works on iOS too) */
+  body::before{content:''; position:fixed; inset:0; z-index:-2; background:url('https://sattvajnana.in/images/page-2.webp') center / cover no-repeat;}
+  body::after{content:''; position:fixed; inset:0; z-index:-1; background:rgba(255,255,255,0.35);}
   img{max-width:100%; display:block;}
   a{color:inherit; text-decoration:none;}
   ul{list-style:none;}
@@ -194,16 +197,16 @@
   .mobile-menu a.active{color:var(--gold);}
 
   /* Page header banner */
-  .page-header{position:relative; color:var(--white); background-color:var(--navy); background-image:url('founders.png'); background-size:cover; background-position:center top;}
-  .page-header::before{content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(16,42,67,0.55), rgba(11,31,51,0.7));}
+  .page-header{position:relative; color:var(--navy); background:transparent;}
+  
   .page-header .container{position:relative; z-index:1; padding-top:150px; padding-bottom:64px; text-align:center;}
-  .breadcrumbs{display:flex; justify-content:center; gap:8px; font-size:13px; color:#B9C2CE; margin-bottom:18px;}
-  .breadcrumbs a{color:var(--gold-warm);}
+  .breadcrumbs{display:flex; justify-content:center; gap:8px; font-size:13px; color:var(--text-soft); margin-bottom:18px;}
+  .breadcrumbs a{color:#9c7215; font-weight:600;}
   .breadcrumbs a:hover{text-decoration:underline;}
-  .page-header h1{color:var(--white); font-size:clamp(30px,4vw,46px); max-width:760px; margin:0 auto 16px; text-shadow:0 2px 16px rgba(0,0,0,0.45);}
-  .page-header .lede{color:#D7DEE8; max-width:640px; margin:0 auto; text-shadow:0 2px 12px rgba(0,0,0,0.4);}
-  .page-header .eyebrow{color:var(--gold-warm); justify-content:center;}
-  .page-header .eyebrow::before{background:var(--gold-warm);}
+  .page-header h1{color:var(--navy-dark); font-size:clamp(30px,4vw,46px); max-width:760px; margin:0 auto 16px; text-shadow:0 1px 12px rgba(255,255,255,0.6);}
+  .page-header .lede{color:var(--navy); font-weight:500; max-width:640px; margin:0 auto;}
+  .page-header .eyebrow{color:#9c7215; justify-content:center;}
+  .page-header .eyebrow::before{background:var(--gold);}
 
   /* Intro */
   .intro-text{max-width:820px; margin:0 auto; text-align:center; font-size:17.5px; color:var(--text-soft);}
@@ -233,16 +236,16 @@
   .fp-quote p{font-family:var(--serif); font-style:italic; color:var(--navy); font-size:15px; line-height:1.6; margin:0;}
 
   /* Story band */
-  .section-dark{position:relative; color:var(--white); background-color:var(--navy); background-image:url('founders-1.png'); background-size:cover; background-position:center; background-repeat:no-repeat;}
-  .section-dark::before{content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(16,42,67,0.68), rgba(11,31,51,0.8));}
+  .section-dark{position:relative; color:var(--text); background:transparent;}
+  
   .section-dark > .container{position:relative; z-index:1;}
-  .section-dark h2.title{color:var(--white);}
-  .section-dark .lede{color:#B9C2CE;}
+  .section-dark h2.title{color:var(--navy-dark);}
+  .section-dark .lede{color:var(--navy);}
   .story-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:48px;}
-  .story-card{background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:var(--radius-lg); padding:30px 26px;}
+  .story-card{background:rgba(255,255,255,0.22); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); border:1px solid rgba(197,150,46,0.5); box-shadow:0 8px 24px rgba(16,42,67,0.06); border-radius:var(--radius-lg); padding:30px 26px;}
   .story-card .story-tag{display:inline-block; font-size:10.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--navy-dark); font-weight:700; background:var(--gold-warm); padding:4px 12px; border-radius:20px; margin-bottom:16px;}
-  .story-card h4{color:var(--white); font-size:17px; margin-bottom:10px;}
-  .story-card p{color:#C7CEDA; font-size:14px; line-height:1.7;}
+  .story-card h4{color:var(--navy-dark); font-size:17px; margin-bottom:10px;}
+  .story-card p{color:var(--navy-dark); font-weight:500; font-size:14px; line-height:1.7;}
 
   /* CTA band */
   .cta-band{background:var(--navy); color:var(--white); border-radius:var(--radius-lg); padding:56px 48px; text-align:center; position:relative; overflow:hidden;}
@@ -252,17 +255,21 @@
   .cta-band .gold-line{width:70px; height:2px; background:var(--gold-warm); margin:0 auto 22px;}
 
   /* Footer (matches site) */
-  footer{background:var(--navy-dark); color:#B9C2CE; padding:72px 0 24px;}
-  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08);}
+  footer{background:var(--white); color:#4a5568; padding:72px 0 24px;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(16,42,67,0.1);}
   .footer-brand{display:flex; gap:12px; align-items:center; margin-bottom:16px;}
-  .footer-brand .main{font-family:var(--serif); color:var(--white); font-size:19px; font-weight:700;}
+  .footer-brand .main{font-family:var(--serif); color:var(--navy); font-size:19px; font-weight:700;}
   .footer-brand .sri{font-size:10px; letter-spacing:2px; color:var(--gold-warm); text-transform:uppercase; display:block;}
-  footer h5{color:var(--white); font-size:14px; margin-bottom:18px; font-weight:600; letter-spacing:0.5px;}
+  footer h5{color:var(--navy); font-size:14px; margin-bottom:18px; font-weight:600; letter-spacing:0.5px;}
   footer ul li{margin-bottom:11px; font-size:14px;}
-  footer ul li a:hover{color:var(--gold-warm);}
+  footer ul li a{color:#4a5568;}
+  footer ul li a:hover{color:var(--gold);}
   .social-row{display:flex; gap:12px; margin-top:16px;}
-  .social-row a{width:32px; height:32px; border:1px solid rgba(212,175,87,0.35); border-radius:50%; display:flex; align-items:center; justify-content:center;}
-  .footer-bottom{padding-top:22px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:13px;}
+  .social-row a{width:34px; height:34px; border-radius:50%; background:var(--navy); display:flex; align-items:center; justify-content:center;}
+  .social-row a:hover{background:var(--navy-dark);}
+  .footer-bottom{padding-top:22px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:13px; color:#4a5568;}
+  .footer-bottom a{color:#4a5568;}
+  .footer-bottom a:hover{color:var(--gold);}
 
   @media (max-width: 980px){
     nav.primary-nav{display:none;}
@@ -289,12 +296,10 @@
     .brand-text .main{font-size:15px;}
     .nav-right{gap:8px;}
     .nav-right .btn-sm{padding:9px 14px; font-size:12.5px;}
-    .page-header{background-image:url('founders-m.png');}
     .page-header .container{padding-top:118px; padding-bottom:44px;}
     .page-header h1{font-size:clamp(24px,7vw,32px);}
     .breadcrumbs{font-size:12px; margin-bottom:14px;}
     .intro-text{font-size:16px;}
-    .section-dark{background-image:url('founders-1m.png');}
     .founder-profile, .founder-profile.rev{padding:40px 0; gap:24px;}
     .founder-profile .fp-photo, .founder-profile.rev .fp-photo{max-width:280px;}
     .fp-name{font-size:24px;}
@@ -332,7 +337,7 @@
 <header id="site-header">
   <div class="nav-wrap">
     <a href="https://sattvajnana.in/" class="brand" aria-label="Sattva Jnana home">
-      <img src="../logo.png" alt="Sattva Jnana logo">
+      <img src="https://sattvajnana.in/images/logo.webp" alt="Sattva Jnana logo">
       <span class="brand-text"><span class="sri">Sri Hari</span><span class="main">SATTVA JNANA</span></span>
     </a>
     <nav class="primary-nav" aria-label="Primary navigation">
@@ -356,7 +361,7 @@
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-top">
     <a href="https://sattvajnana.in/" class="brand" aria-label="Sattva Jnana home">
-      <img src="../logo.png" alt="Sattva Jnana logo">
+      <img src="https://sattvajnana.in/images/logo.webp" alt="Sattva Jnana logo">
       <span class="brand-text"><span class="sri">Sri Hari</span><span class="main">SATTVA JNANA</span></span>
     </a>
     <button class="close-btn" id="closeMenuBtn" aria-label="Close menu">&times;</button>
@@ -396,8 +401,8 @@
   <div class="container">
     <div class="founder-profile reveal">
       <div class="fp-photo">
-        <img src="founder-1.png" alt="Harshith G S, Founder of Sri Hari Sattva Jnana, home tuition mentor in Bengaluru" loading="lazy" decoding="async">
-        <div class="fp-seal"><img src="../svg.png" alt="Sattva Jnana seal"></div>
+        <img src="https://sattvajnana.in/images/founder-1.webp" alt="Harshith G S, Founder of Sri Hari Sattva Jnana, home tuition mentor in Bengaluru" loading="lazy" decoding="async">
+        <div class="fp-seal"><img src="https://sattvajnana.in/images/svg.webp" alt="Sattva Jnana seal"></div>
       </div>
       <div class="fp-info">
         <div class="fp-num">Founder — 01</div>
@@ -424,8 +429,8 @@
   <div class="container">
     <div class="founder-profile rev reveal">
       <div class="fp-photo">
-        <img src="founder-2.png" alt="Sahana Shree, Co-Founder and Maths Mentor at Sri Hari Sattva Jnana, Bengaluru" loading="lazy" decoding="async">
-        <div class="fp-seal"><img src="../svg.png" alt="Sattva Jnana seal"></div>
+        <img src="https://sattvajnana.in/images/founder-2.webp" alt="Sahana Shree, Co-Founder and Maths Mentor at Sri Hari Sattva Jnana, Bengaluru" loading="lazy" decoding="async">
+        <div class="fp-seal"><img src="https://sattvajnana.in/images/svg.webp" alt="Sattva Jnana seal"></div>
       </div>
       <div class="fp-info">
         <div class="fp-num">Co-Founder — 02</div>
@@ -451,8 +456,8 @@
   <div class="container">
     <div class="founder-profile reveal">
       <div class="fp-photo">
-        <img src="founder-3.png" alt="Jeevan G, Co-Founder and Science Mentor at Sri Hari Sattva Jnana, Bengaluru" loading="lazy" decoding="async">
-        <div class="fp-seal"><img src="../svg.png" alt="Sattva Jnana seal"></div>
+        <img src="https://sattvajnana.in/images/founder-3.webp" alt="Jeevan G, Co-Founder and Science Mentor at Sri Hari Sattva Jnana, Bengaluru" loading="lazy" decoding="async">
+        <div class="fp-seal"><img src="https://sattvajnana.in/images/svg.webp" alt="Sattva Jnana seal"></div>
       </div>
       <div class="fp-info">
         <div class="fp-num">Co-Founder — 03</div>
@@ -477,7 +482,7 @@
 <section class="section section-dark">
   <div class="container">
     <div class="section-head center reveal">
-      <div class="eyebrow no-dash" style="color:var(--gold-warm);">Why Sattva Jnana Works</div>
+      <div class="eyebrow no-dash" style="color:#9c7215;">Why Sattva Jnana Works</div>
       <h2 class="title">One Team, Three Areas of Mastery</h2>
       <p class="lede">Harshith G S, Sahana Shree and Jeevan G lead Sattva Jnana together so that no student has to look elsewhere for a subject expert.</p>
     </div>
@@ -501,21 +506,6 @@
   </div>
 </section>
 
-<!-- ============ CTA ============ -->
-<section class="section" style="padding-top:0;">
-  <div class="container">
-    <div class="cta-band reveal">
-      <div class="gold-line"></div>
-      <h3>Learn Directly From Sattva Jnana's Founding Mentors</h3>
-      <p>Book a free demo and see how Harshith G S, Sahana Shree and Jeevan G's teaching approach can help your child.</p>
-      <div class="btnrow">
-        <a href="https://sattvajnana.in/book-demo/" class="btn btn-gold">Book a Free Demo</a>
-        <a href="https://sattvajnana.in/programmes/" class="btn btn-outline-light">Explore Programmes</a>
-      </div>
-    </div>
-  </div>
-</section>
-
 </main>
 
 <footer>
@@ -523,7 +513,7 @@
     <div class="footer-grid">
       <div>
         <div class="footer-brand">
-          <img src="../svg.png" alt="Sattva Jnana logo" width="40" height="40">
+          <img src="https://sattvajnana.in/images/svg.webp" alt="Sattva Jnana logo" width="40" height="40">
           <span><span class="sri">Sri Hari</span><span class="main">SATTVA JNANA</span></span>
         </div>
         <p style="font-size:14px; max-width:260px;">Personalised learning. Focused attention. Meaningful progress.</p>
@@ -562,7 +552,7 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Sri Hari Sattva Jnana. All Rights Reserved.</span>
-      <span><a href="https://sattvajnana.in/privacy-policy/">Privacy Policy</a> | <a href="https://sattvajnana.in/terms-and-conditions/">Terms &amp; Conditions</a></span>
+      <span><a href="https://sattvajnana.in/privacy-policy/">Privacy Policy</a> | <a href="https://sattvajnana.in/terms-and-conditions/">Terms &amp; Conditions</a> | <a href="https://sattvajnana.in/refund-policy/">Refund Policy</a></span>
     </div>
   </div>
 </footer>
