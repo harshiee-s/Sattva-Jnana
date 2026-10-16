@@ -42,12 +42,68 @@
   h1,h2,h3{font-family:var(--serif); color:var(--navy); font-weight:700;}
 
   /* ============ LOGIN SCREEN ============ */
-  #loginScreen{min-height:100vh; display:flex; align-items:center; justify-content:center; background:linear-gradient(160deg, var(--navy) 0%, var(--navy-dark) 100%); padding:24px;}
-  .login-card{background:var(--white); border-radius:var(--radius-lg); padding:44px 40px; width:100%; max-width:400px; box-shadow:var(--shadow-lg);}
-  .login-brand{display:flex; flex-direction:column; align-items:center; margin-bottom:28px;}
-  .login-brand .sri{font-size:10px; letter-spacing:2px; color:var(--gold); font-weight:700; text-transform:uppercase; margin-bottom:2px;}
-  .login-brand .main{font-family:var(--serif); font-size:21px; color:var(--navy); font-weight:700;}
-  .login-brand .tag{font-size:12px; color:var(--text-soft); margin-top:6px;}
+  #loginScreen{min-height:100vh; display:flex; background:var(--white);}
+
+  /* Left: brand panel */
+  .login-art{flex:1.1; position:relative; overflow:hidden; display:flex; flex-direction:column; padding:48px 56px; color:var(--white);
+    background:radial-gradient(120% 90% at 0% 0%, #1D3D61 0%, var(--navy) 45%, var(--navy-dark) 100%);}
+  .login-art::before{content:''; position:absolute; width:760px; height:760px; right:-280px; bottom:-300px; border-radius:50%;
+    background:repeating-radial-gradient(circle, rgba(212,175,87,0.18) 0 1px, transparent 1px 36px);}
+  .login-art::after{content:''; position:absolute; width:460px; height:460px; left:-160px; top:-180px; border-radius:50%;
+    background:radial-gradient(circle, rgba(212,175,87,0.20), transparent 70%);}
+  .art-brand{position:relative; z-index:1; display:flex; align-items:center; gap:14px;}
+  .art-mark{width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    background:linear-gradient(135deg, var(--gold-warm), var(--gold)); color:var(--navy-dark); font-family:var(--serif); font-size:18px; font-weight:700;
+    box-shadow:0 0 0 6px rgba(212,175,87,0.14);}
+  .art-brand .sri{display:block; font-size:10px; letter-spacing:2.5px; color:var(--gold-warm); font-weight:700; text-transform:uppercase;}
+  .art-brand .main{display:block; font-family:var(--serif); font-size:19px; font-weight:700; letter-spacing:.5px;}
+  .art-body{position:relative; z-index:1; margin:auto 0; max-width:460px; padding:48px 0;}
+  .art-eyebrow{display:inline-flex; align-items:center; gap:10px; font-size:11px; letter-spacing:2.5px; text-transform:uppercase; font-weight:700; color:var(--gold-warm); margin-bottom:18px;}
+  .art-eyebrow::before{content:''; width:28px; height:1.5px; background:var(--gold-warm);}
+  .art-body h1{font-family:var(--serif); color:var(--white); font-size:44px; line-height:1.15; margin-bottom:18px;}
+  .art-body h1 em{color:var(--gold-warm); font-style:italic;}
+  .art-body > p{color:#B9C2CE; font-size:15px; max-width:400px;}
+  .art-list{list-style:none; margin-top:34px; display:flex; flex-direction:column; gap:14px;}
+  .art-list li{display:flex; align-items:center; gap:14px; font-size:14px; font-weight:500; color:#E4E9F0;}
+  .art-list i{width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    background:rgba(255,255,255,0.07); border:1px solid rgba(212,175,87,0.25); color:var(--gold-warm); font-size:14px;}
+  .art-foot{position:relative; z-index:1; font-size:12px; color:#8A97A8;}
+
+  /* Right: form panel */
+  .login-panel{flex:1; display:flex; align-items:center; justify-content:center; padding:48px 28px; background:var(--white);}
+  .login-card{width:100%; max-width:380px; animation:loginIn .6s ease both;}
+  @keyframes loginIn{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:none;}}
+  .login-mobile-brand{display:none; align-items:center; gap:12px; margin-bottom:30px;}
+  .login-mobile-brand .art-mark{width:40px; height:40px; font-size:15px;}
+  .login-mobile-brand .sri{display:block; font-size:9px; letter-spacing:2px; color:var(--gold); font-weight:700; text-transform:uppercase;}
+  .login-mobile-brand .main{display:block; font-family:var(--serif); font-size:17px; color:var(--navy); font-weight:700;}
+  .login-head{margin-bottom:28px;}
+  .login-head h2{font-size:30px; line-height:1.2; margin-bottom:8px;}
+  .login-head p{font-size:14px; color:var(--text-soft);}
+  #loginScreen .field label{font-size:12.5px; margin-bottom:8px;}
+  .input-wrap{position:relative;}
+  .input-wrap > i{position:absolute; left:15px; top:50%; transform:translateY(-50%); color:#9AA5B4; font-size:14px; pointer-events:none; transition:color .2s;}
+  #loginScreen .input-wrap input{padding:13px 44px 13px 42px; border-radius:10px; background:var(--ivory); border-color:transparent; transition:border-color .2s, background .2s, box-shadow .2s;}
+  #loginScreen .input-wrap input:hover{border-color:var(--border);}
+  #loginScreen .input-wrap input:focus{background:var(--white); border-color:var(--blue); box-shadow:0 0 0 4px rgba(30,95,168,0.10);}
+  .input-wrap:focus-within > i{color:var(--blue);}
+  .pw-toggle{position:absolute; right:6px; top:50%; transform:translateY(-50%); width:34px; height:34px; border:none; background:none; border-radius:8px; color:#9AA5B4; font-size:14px;}
+  .pw-toggle:hover{color:var(--navy); background:rgba(16,42,67,0.05);}
+  #loginBtn{padding:14px 22px; margin-top:8px; font-size:15px; box-shadow:0 10px 24px rgba(197,150,46,0.25);}
+  #loginBtn::after{content:"\f061"; font-family:"Font Awesome 6 Free"; font-weight:900; font-size:13px; transition:transform .2s;}
+  #loginBtn:hover::after{transform:translateX(3px);}
+  #loginBtn:disabled::after{content:none;}
+  .login-help{display:flex; align-items:center; gap:8px; margin-top:28px; padding-top:20px; border-top:1px solid var(--border); font-size:12.5px; color:var(--text-soft);}
+  .login-help i{color:var(--gold);}
+
+  @media (max-width: 900px){
+    .login-art{display:none;}
+    .login-panel{background:linear-gradient(180deg, var(--ivory), var(--white));}
+    .login-card{background:var(--white); padding:32px 26px; border-radius:var(--radius-lg); box-shadow:var(--shadow-lg);}
+    .login-mobile-brand{display:flex;}
+    .login-head h2{font-size:26px;}
+  }
+  @media (prefers-reduced-motion: reduce){ .login-card{animation:none;} }
   .field{margin-bottom:18px;}
   .field label{display:block; font-size:12.5px; font-weight:600; color:var(--navy); margin-bottom:7px;}
   .field input, .field select, .field textarea{width:100%; padding:11px 14px; border:1.5px solid var(--border); border-radius:8px; background:var(--white); color:var(--text); transition:border-color .2s;}
@@ -63,7 +119,7 @@
   .btn-danger:hover{background:var(--danger-soft);}
   .btn-block{width:100%;}
   .btn:disabled{opacity:0.6; cursor:not-allowed; transform:none;}
-  .login-error{background:var(--danger-soft); color:var(--danger); font-size:13px; padding:10px 14px; border-radius:8px; margin-bottom:16px; display:none;}
+  .login-error{background:var(--danger-soft); color:var(--danger); font-size:13px; padding:11px 14px; border-radius:10px; border-left:3px solid var(--danger); margin-bottom:18px; display:none;}
   .login-error.show{display:block;}
   .setup-notice{background:var(--blue-soft); color:var(--blue); font-size:13px; padding:12px 14px; border-radius:8px; margin-bottom:18px; display:none; gap:9px; align-items:flex-start; line-height:1.5;}
   .setup-notice.show{display:flex;}
@@ -163,39 +219,120 @@
     .app-row{grid-template-columns:1fr 90px; }
     .app-row .app-job, .app-row .col-date{display:none;}
   }
+
+  /* ============ MENTOR PORTFOLIOS ============ */
+  #mentorEditorView{display:none;}
+  #mentorEditorView.show{display:block;}
+  .stack > .editor-card{margin-bottom:20px;}
+  .stack > .editor-card:last-child{margin-bottom:0;}
+  .section-num{display:inline-flex; align-items:center; justify-content:center; min-width:30px; height:22px; padding:0 8px; margin-right:10px; border-radius:100px; background:var(--gold-soft); color:var(--gold); font-family:var(--sans); font-size:11px; font-weight:700; letter-spacing:.5px; vertical-align:2px;}
+  .card-sub{font-size:12.5px; color:var(--text-soft); margin:-10px 0 18px;}
+  .sub-head{font-size:11px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; color:var(--text-soft); margin:24px 0 12px; padding-top:18px; border-top:1px solid var(--border);}
+  .sub-head:first-of-type{margin-top:4px;}
+  textarea.short{min-height:90px;}
+  .mentor-thumb{width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:var(--blue);}
+  .repeat-list:empty::before{content:attr(data-empty); display:block; font-size:12.5px; color:var(--text-soft); padding:14px; border:1.5px dashed var(--border); border-radius:10px; margin-bottom:12px; text-align:center;}
+  .repeat-item{position:relative; border:1.5px solid var(--border); border-radius:10px; padding:16px 16px 4px; margin-bottom:12px; background:var(--ivory);}
+  .repeat-item .remove-item{position:absolute; top:10px; right:10px;}
+  .repeat-grid{display:grid; grid-template-columns:1fr 1fr; gap:0 14px; padding-right:38px;}
+  .repeat-grid .field{margin-bottom:12px;}
+  .repeat-grid .full{grid-column:1/-1;}
+  .btn-sm{padding:8px 16px; font-size:12.5px;}
+  .check-group{display:flex; flex-wrap:wrap; gap:8px;}
+  .check-group label{display:inline-flex !important; align-items:center; gap:7px; padding:7px 14px; margin:0 !important; border:1.5px solid var(--border); border-radius:100px; background:var(--white); font-size:12.5px; font-weight:600; color:var(--navy); cursor:pointer;}
+  .check-group input{width:auto !important; accent-color:var(--navy);}
+  .check-group label:has(input:checked){background:var(--blue-soft); border-color:var(--blue);}
+  .inline-check{display:flex !important; align-items:center; gap:8px; font-size:13px; font-weight:600; color:var(--navy); cursor:pointer; margin:4px 0 0 !important;}
+  .inline-check input{width:auto !important; accent-color:var(--navy);}
+  .photo-preview{display:flex; align-items:center; gap:14px;}
+  .photo-preview img{width:72px; height:72px; border-radius:50%; object-fit:cover; border:3px solid var(--gold-soft);}
+  @media (max-width: 900px){
+    .sidebar-nav{flex-wrap:wrap;}
+    .repeat-grid{grid-template-columns:1fr;}
+  }
 </style>
 </head>
 <body>
 
 <!-- ============ LOGIN SCREEN ============ -->
 <div id="loginScreen">
-  <div class="login-card">
-    <div class="login-brand">
-      <span class="sri">Sri Hari</span>
-      <span class="main">SATTVA JNANA</span>
-      <span class="tag" id="loginTag">Admin Portal</span>
+  <section class="login-art" aria-hidden="true">
+    <div class="art-brand">
+      <span class="art-mark">SJ</span>
+      <div>
+        <span class="sri">Sri Hari</span>
+        <span class="main">SATTVA JNANA</span>
+      </div>
     </div>
-    <div class="setup-notice" id="setupNotice">
-      <i class="fa-solid fa-circle-info"></i>
-      <span>No admin account exists yet. Create one below — the account you set up here becomes the only account with access to this portal.</span>
+
+    <div class="art-body">
+      <div class="art-eyebrow">Admin Portal</div>
+      <h1>Shaping how families <em>meet</em> our mentors.</h1>
+      <p>Publish stories, showcase mentor portfolios and manage openings — everything students and parents see, in one place.</p>
+      <ul class="art-list">
+        <li><i class="fa-solid fa-feather-pointed"></i> Blog posts &amp; study guides</li>
+        <li><i class="fa-solid fa-chalkboard-user"></i> Verified mentor portfolios</li>
+        <li><i class="fa-solid fa-briefcase"></i> Job posts &amp; applications</li>
+      </ul>
     </div>
-    <div class="login-error" id="loginError"></div>
-    <form id="loginForm">
-      <div class="field">
-        <label for="loginEmail">Email</label>
-        <input type="email" id="loginEmail" required autocomplete="username">
+
+    <div class="art-foot">© <span id="loginYear"></span> Sri Hari Sattva Jnana</div>
+  </section>
+
+  <section class="login-panel">
+    <div class="login-card">
+      <div class="login-mobile-brand">
+        <span class="art-mark">SJ</span>
+        <div>
+          <span class="sri">Sri Hari</span>
+          <span class="main">SATTVA JNANA</span>
+        </div>
       </div>
-      <div class="field">
-        <label for="loginPassword">Password</label>
-        <input type="password" id="loginPassword" required autocomplete="current-password" minlength="6">
+
+      <div class="login-head">
+        <h2 id="loginTag">Admin Portal</h2>
+        <p id="loginSub">Sign in to manage the Sattva Jnana website.</p>
       </div>
-      <div class="field" id="confirmPasswordField" style="display:none;">
-        <label for="loginPasswordConfirm">Confirm Password</label>
-        <input type="password" id="loginPasswordConfirm" autocomplete="new-password" minlength="6">
+
+      <div class="setup-notice" id="setupNotice">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>No admin account exists yet. Create one below — the account you set up here becomes the only account with access to this portal.</span>
       </div>
-      <button type="submit" class="btn btn-gold btn-block" id="loginBtn">Sign In</button>
-    </form>
-  </div>
+      <div class="login-error" id="loginError" role="alert"></div>
+
+      <form id="loginForm">
+        <div class="field">
+          <label for="loginEmail">Email address</label>
+          <div class="input-wrap">
+            <i class="fa-regular fa-envelope"></i>
+            <input type="email" id="loginEmail" required autocomplete="username" placeholder="you@sattvajnana.in">
+          </div>
+        </div>
+        <div class="field">
+          <label for="loginPassword">Password</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="loginPassword" required autocomplete="current-password" minlength="6" placeholder="Enter your password">
+            <button type="button" class="pw-toggle" data-target="loginPassword" aria-label="Show password"><i class="fa-regular fa-eye"></i></button>
+          </div>
+        </div>
+        <div class="field" id="confirmPasswordField" style="display:none;">
+          <label for="loginPasswordConfirm">Confirm password</label>
+          <div class="input-wrap">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="loginPasswordConfirm" autocomplete="new-password" minlength="6" placeholder="Re-enter your password">
+            <button type="button" class="pw-toggle" data-target="loginPasswordConfirm" aria-label="Show password"><i class="fa-regular fa-eye"></i></button>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-gold btn-block" id="loginBtn">Sign In</button>
+      </form>
+
+      <div class="login-help">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>Restricted to authorised Sattva Jnana staff.</span>
+      </div>
+    </div>
+  </section>
 </div>
 
 <!-- ============ APP SHELL ============ -->
@@ -207,6 +344,7 @@
     </div>
     <nav class="sidebar-nav">
       <button class="active" id="navBlogPosts"><i class="fa-solid fa-feather-pointed"></i> Blog Posts</button>
+      <button id="navMentors"><i class="fa-solid fa-chalkboard-user"></i> Mentors</button>
       <button id="navJobPosts"><i class="fa-solid fa-briefcase"></i> Job Posts</button>
       <button id="navApplications"><i class="fa-solid fa-inbox"></i> Applications</button>
     </nav>
@@ -317,6 +455,316 @@
               </div>
               <button type="button" class="btn btn-danger btn-block" id="deleteBlogBtn" style="margin-top:12px; display:none;">Delete Post</button>
               <div class="save-msg" id="blogSaveMsg"></div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- ============ MENTOR LIST VIEW ============ -->
+    <div id="mentorListView" style="display:none;">
+      <div class="page-head">
+        <div>
+          <h1>Mentor Portfolios</h1>
+          <p>Create and manage mentor profiles shown on the public website.</p>
+        </div>
+        <button class="btn btn-gold" id="newMentorBtn"><i class="fa-solid fa-plus"></i> New Mentor</button>
+      </div>
+
+      <div class="toolbar">
+        <div class="status-tabs" id="mentorStatusTabs">
+          <button class="active" data-filter="All">All</button>
+          <button data-filter="Published">Published</button>
+          <button data-filter="Draft">Draft</button>
+        </div>
+      </div>
+
+      <div class="post-table" id="mentorTable">
+        <div class="post-row head">
+          <div></div>
+          <div>Mentor</div>
+          <div>Status</div>
+          <div class="col-date">Last Updated</div>
+          <div class="col-actions-label">Actions</div>
+        </div>
+        <div id="mentorRows"></div>
+      </div>
+
+      <div class="empty-state" id="mentorListEmpty" style="display:none;">
+        <i class="fa-solid fa-chalkboard-user"></i>
+        <p>No mentor portfolios yet — click "New Mentor" to add your first one.</p>
+      </div>
+    </div>
+
+    <!-- ============ MENTOR EDITOR VIEW ============ -->
+    <div id="mentorEditorView">
+      <div class="page-head">
+        <div>
+          <h1 id="mentorEditorHeading">New Mentor</h1>
+          <p>Fill in each section of the portfolio. Leave a field blank if it doesn't apply.</p>
+        </div>
+        <button class="btn btn-outline" id="backToMentorListBtn"><i class="fa-solid fa-arrow-left"></i> Back to list</button>
+      </div>
+
+      <form id="mentorForm">
+        <div class="editor-grid">
+          <div class="stack">
+
+            <!-- 01 -->
+            <div class="editor-card">
+              <h3><span class="section-num">01</span>Professional Overview</h3>
+              <div class="field-row">
+                <div class="field">
+                  <label for="mfName">Full Name</label>
+                  <input type="text" id="mfName" required placeholder="e.g. Ananya Rao">
+                </div>
+                <div class="field">
+                  <label for="mfDesignation">Designation</label>
+                  <input type="text" id="mfDesignation" placeholder="e.g. Senior Mathematics Mentor">
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="mfMentorId">Mentor ID</label>
+                  <input type="text" id="mfMentorId" placeholder="e.g. SJ-M-014">
+                </div>
+                <div class="field">
+                  <label for="mfTotalExp">Total Years of Experience</label>
+                  <input type="number" id="mfTotalExp" min="0" step="0.5" placeholder="e.g. 8">
+                </div>
+              </div>
+              <div class="field">
+                <label for="mfSummary">Professional Summary</label>
+                <textarea class="short" id="mfSummary" required maxlength="800" placeholder="A short introduction to the mentor, their background and what they bring to students."></textarea>
+              </div>
+              <div class="field">
+                <label for="mfSubjects">Subjects Handled</label>
+                <input type="text" id="mfSubjects" placeholder="e.g. Mathematics, Physics">
+                <div class="hint">Separate with commas.</div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="mfGrades">Grades Handled</label>
+                  <input type="text" id="mfGrades" placeholder="e.g. Grade 6, Grade 7, Grade 8">
+                  <div class="hint">Separate with commas.</div>
+                </div>
+                <div class="field">
+                  <label for="mfLanguages">Languages Known</label>
+                  <input type="text" id="mfLanguages" placeholder="e.g. English, Kannada, Hindi">
+                  <div class="hint">Separate with commas.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 02 -->
+            <div class="editor-card">
+              <h3><span class="section-num">02</span>Educational Qualifications</h3>
+              <div class="field">
+                <label for="mfHighestQual">Highest Educational Qualification</label>
+                <input type="text" id="mfHighestQual" placeholder="e.g. M.Sc Mathematics, B.Ed">
+              </div>
+
+              <div class="sub-head">Degrees</div>
+              <div class="repeat-list" id="mfEducationList" data-empty="No degrees added yet."></div>
+              <button type="button" class="btn btn-outline btn-sm" data-add-repeat="education"><i class="fa-solid fa-plus"></i> Add Degree</button>
+
+              <div class="sub-head">Additional Certifications</div>
+              <div class="repeat-list" id="mfCertList" data-empty="No certifications added yet."></div>
+              <button type="button" class="btn btn-outline btn-sm" data-add-repeat="certifications"><i class="fa-solid fa-plus"></i> Add Certification</button>
+
+              <div class="sub-head">Academic Achievements</div>
+              <div class="field">
+                <label for="mfAcademicAchievements">Relevant Academic Achievements</label>
+                <textarea class="short" id="mfAcademicAchievements" placeholder="e.g. University gold medal, M.Sc 2015"></textarea>
+                <div class="hint">One per line.</div>
+              </div>
+              <div class="hint"><i class="fa-solid fa-circle-check" style="color:var(--gold);"></i> Tick "verified" on each degree or certificate once you've checked the original document — only verified credentials should be shown as verified.</div>
+            </div>
+
+            <!-- 03 -->
+            <div class="editor-card">
+              <h3><span class="section-num">03</span>Professional &amp; Teaching Experience</h3>
+              <p class="card-sub">Mark each role as Teaching or General Work so the two are shown separately.</p>
+              <div class="repeat-list" id="mfExperienceList" data-empty="No roles added yet."></div>
+              <button type="button" class="btn btn-outline btn-sm" data-add-repeat="experience"><i class="fa-solid fa-plus"></i> Add Role</button>
+
+              <div class="sub-head">Teaching Summary</div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="mfTeachingYears">Total Teaching Experience (years)</label>
+                  <input type="number" id="mfTeachingYears" min="0" step="0.5" placeholder="e.g. 6">
+                </div>
+                <div class="field">
+                  <label for="mfHomeTutoring">Home Tutoring / Private Mentoring</label>
+                  <input type="text" id="mfHomeTutoring" placeholder="e.g. 4 years, 50+ students">
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="mfOnlineExp">Online Teaching Experience</label>
+                  <input type="text" id="mfOnlineExp" placeholder="e.g. 3 years on Zoom / Google Meet">
+                </div>
+                <div class="field">
+                  <label for="mfOfflineExp">Offline Teaching Experience</label>
+                  <input type="text" id="mfOfflineExp" placeholder="e.g. 5 years classroom teaching">
+                </div>
+              </div>
+            </div>
+
+            <!-- 04 -->
+            <div class="editor-card">
+              <h3><span class="section-num">04</span>Subject &amp; Curriculum Expertise</h3>
+              <div class="sub-head">Subjects &amp; Grade-wise Capability</div>
+              <div class="repeat-list" id="mfSubjectGradeList" data-empty="No subjects added yet."></div>
+              <button type="button" class="btn btn-outline btn-sm" data-add-repeat="subjectGrades"><i class="fa-solid fa-plus"></i> Add Subject</button>
+
+              <div class="sub-head">Board Experience</div>
+              <div class="field">
+                <div class="check-group" id="mfBoards">
+                  <label><input type="checkbox" value="CBSE"> CBSE</label>
+                  <label><input type="checkbox" value="ICSE"> ICSE</label>
+                  <label><input type="checkbox" value="State Board"> State Board</label>
+                </div>
+              </div>
+              <div class="field">
+                <label for="mfStateBoardName">State Board name (if applicable)</label>
+                <input type="text" id="mfStateBoardName" placeholder="e.g. Karnataka State Board">
+              </div>
+
+              <div class="sub-head">Strengths</div>
+              <div class="field">
+                <label for="mfExamPrep">Exam Preparation &amp; Revision</label>
+                <textarea class="short" id="mfExamPrep" placeholder="e.g. Board exam strategy, previous-year paper practice, timed mock tests"></textarea>
+              </div>
+              <div class="field">
+                <label for="mfTopicStrengths">Topic-specific Strengths</label>
+                <textarea class="short" id="mfTopicStrengths" placeholder="e.g. Algebra, Trigonometry, Mechanics"></textarea>
+              </div>
+              <div class="field">
+                <label for="mfRemedial">Doubt-solving &amp; Remedial Teaching</label>
+                <textarea class="short" id="mfRemedial" placeholder="How the mentor handles doubts and helps students who are behind"></textarea>
+              </div>
+            </div>
+
+            <!-- 05 -->
+            <div class="editor-card">
+              <h3><span class="section-num">05</span>Teaching Methodology</h3>
+              <div id="mfMethodologyFields"></div>
+            </div>
+
+            <!-- 07 -->
+            <div class="editor-card">
+              <h3><span class="section-num">07</span>Achievements &amp; Professional Development</h3>
+              <p class="card-sub">One item per line in each box.</p>
+              <div class="field">
+                <label for="mfAwards">Teaching Awards &amp; Recognition</label>
+                <textarea class="short" id="mfAwards" placeholder="e.g. Best Teacher Award, XYZ School, 2021"></textarea>
+              </div>
+              <div class="field">
+                <label for="mfWorkshops">Relevant Workshops &amp; Training</label>
+                <textarea class="short" id="mfWorkshops" placeholder="e.g. CBSE Competency-Based Education workshop, 2023"></textarea>
+              </div>
+              <div class="field">
+                <label for="mfSkillDev">Certifications &amp; Skill Development</label>
+                <textarea class="short" id="mfSkillDev" placeholder="e.g. Google Certified Educator Level 1"></textarea>
+              </div>
+              <div class="field">
+                <label for="mfProjects">Notable Academic Projects</label>
+                <textarea class="short" id="mfProjects" placeholder="e.g. Designed a Grade 9 lab-activity workbook"></textarea>
+              </div>
+              <div class="field">
+                <label for="mfOutcomes">Verified Student Outcomes</label>
+                <textarea class="short" id="mfOutcomes" placeholder="e.g. 12 students scored 90%+ in CBSE Class 10 Maths, 2025"></textarea>
+                <label class="inline-check"><input type="checkbox" id="mfOutcomesVerified"> These outcomes have been verified</label>
+              </div>
+            </div>
+
+            <!-- 08 -->
+            <div class="editor-card">
+              <h3><span class="section-num">08</span>Mentoring Approach &amp; Student Support</h3>
+              <div id="mfApproachFields"></div>
+            </div>
+          </div>
+
+          <div class="stack">
+            <div class="editor-card">
+              <h3>Profile</h3>
+              <div class="field">
+                <label for="mfSlug">URL Slug</label>
+                <input type="text" id="mfSlug" required pattern="[a-z0-9\-]+" placeholder="ananya-rao">
+                <div class="hint">Auto-generated from the name. Lowercase letters, numbers and hyphens only.</div>
+              </div>
+              <div class="field">
+                <label for="mfPhoto">Professional Photograph URL</label>
+                <input type="url" id="mfPhoto" placeholder="https://...">
+              </div>
+              <div class="field" id="mPhotoPreviewWrap" style="display:none;">
+                <div class="photo-preview"><img id="mPhotoPreviewImg" alt="Photo preview"><span class="hint">Shown as a round photo on the portfolio.</span></div>
+              </div>
+            </div>
+
+            <!-- 10 -->
+            <div class="editor-card">
+              <h3><span class="section-num">10</span>Verification &amp; Availability</h3>
+              <div class="field">
+                <label for="mfQualVerification">Qualification Verification Status</label>
+                <select id="mfQualVerification">
+                  <option>Pending</option>
+                  <option>Verified</option>
+                  <option>Not Verified</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="mfBgCheck">Background Check</label>
+                <select id="mfBgCheck">
+                  <option>Not Applicable</option>
+                  <option>Not Started</option>
+                  <option>In Progress</option>
+                  <option>Completed</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="mfVerifiedOn">Last Verified On</label>
+                <input type="date" id="mfVerifiedOn">
+              </div>
+              <div class="field">
+                <label>Teaching Modes</label>
+                <div class="check-group" id="mfModes">
+                  <label><input type="checkbox" value="Online"> Online</label>
+                  <label><input type="checkbox" value="Offline (Centre)"> Offline (Centre)</label>
+                  <label><input type="checkbox" value="Home Tutoring"> Home Tutoring</label>
+                </div>
+              </div>
+              <div class="field">
+                <label>Available Days</label>
+                <div class="check-group" id="mfDays">
+                  <label><input type="checkbox" value="Mon"> Mon</label>
+                  <label><input type="checkbox" value="Tue"> Tue</label>
+                  <label><input type="checkbox" value="Wed"> Wed</label>
+                  <label><input type="checkbox" value="Thu"> Thu</label>
+                  <label><input type="checkbox" value="Fri"> Fri</label>
+                  <label><input type="checkbox" value="Sat"> Sat</label>
+                  <label><input type="checkbox" value="Sun"> Sun</label>
+                </div>
+              </div>
+              <div class="field">
+                <label for="mfTimeSlots">Available Time Slots</label>
+                <input type="text" id="mfTimeSlots" placeholder="e.g. 4 PM – 8 PM weekdays">
+                <div class="hint">Languages are taken from the Professional Overview.</div>
+              </div>
+            </div>
+
+            <div class="editor-card">
+              <h3>Publishing</h3>
+              <div class="status-toggle">
+                <label><input type="radio" name="mfStatus" value="Draft" checked><span>Draft</span></label>
+                <label><input type="radio" name="mfStatus" value="Published"><span>Published</span></label>
+              </div>
+              <div class="editor-actions">
+                <button type="submit" class="btn btn-blue btn-block" id="saveMentorBtn">Save Portfolio</button>
+              </div>
+              <button type="button" class="btn btn-danger btn-block" id="deleteMentorBtn" style="margin-top:12px; display:none;">Delete Portfolio</button>
+              <div class="save-msg" id="mentorSaveMsg"></div>
             </div>
           </div>
         </div>
@@ -614,14 +1062,28 @@
     updateLoginMode();
   }
 
+  const loginSub = document.getElementById('loginSub');
+  document.getElementById('loginYear').textContent = new Date().getFullYear();
+  document.querySelectorAll('.pw-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const input = document.getElementById(btn.dataset.target);
+      const show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      btn.querySelector('i').className = show ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye';
+    });
+  });
+
   function updateLoginMode() {
     if (isSetupMode) {
+      loginSub.textContent = 'Create the one account that will manage this website.';
       loginTag.textContent = 'Set Up Admin Account';
       setupNotice.classList.add('show');
       confirmPasswordField.style.display = 'block';
       loginPasswordConfirm.required = true;
       loginBtn.textContent = 'Create Admin Account';
     } else {
+      loginSub.textContent = 'Sign in to manage the Sattva Jnana website.';
       loginTag.textContent = 'Admin Portal';
       setupNotice.classList.remove('show');
       confirmPasswordField.style.display = 'none';
@@ -716,6 +1178,9 @@
     navBlogPosts.classList.remove('active');
     navJobPosts.classList.remove('active');
     navApplications.classList.remove('active');
+    navMentors.classList.remove('active');
+    mentorListView.style.display = 'none';
+    mentorEditorView.classList.remove('show');
     blogListView.style.display = 'none';
     blogEditorView.classList.remove('show');
     jobListView.style.display = 'none';
@@ -1131,6 +1596,454 @@
     } catch (err) {
       console.error('Failed to delete job post:', err);
       alert("Couldn't delete this job post. Please try again.");
+    }
+  }
+
+  // ============================================================
+  // MENTOR PORTFOLIOS — stored in the "mentors" collection, one
+  // document per mentor keyed by URL slug. Sections are saved as
+  // nested objects so the public profile page can render each one.
+  // ============================================================
+  const byId = (id) => document.getElementById(id);
+  const navMentors = byId('navMentors');
+  const mentorListView = byId('mentorListView');
+  const mentorEditorView = byId('mentorEditorView');
+  const mentorRows = byId('mentorRows');
+  const mentorListEmpty = byId('mentorListEmpty');
+  const mentorStatusTabs = byId('mentorStatusTabs');
+  const newMentorBtn = byId('newMentorBtn');
+  const backToMentorListBtn = byId('backToMentorListBtn');
+  const mentorForm = byId('mentorForm');
+  const mentorEditorHeading = byId('mentorEditorHeading');
+  const saveMentorBtn = byId('saveMentorBtn');
+  const deleteMentorBtn = byId('deleteMentorBtn');
+  const mentorSaveMsg = byId('mentorSaveMsg');
+  const mfName = byId('mfName');
+  const mfSlug = byId('mfSlug');
+  const mfPhoto = byId('mfPhoto');
+  const mPhotoPreviewWrap = byId('mPhotoPreviewWrap');
+  const mPhotoPreviewImg = byId('mPhotoPreviewImg');
+  const mfMethodologyFields = byId('mfMethodologyFields');
+  const mfApproachFields = byId('mfApproachFields');
+
+  let allMentors = [];
+  let activeMentorFilter = 'All';
+  let editingMentorSlug = null; // null = creating new portfolio
+  let mentorSlugManuallyEdited = false;
+
+  function showMentorSection() {
+    hideAllSections();
+    navMentors.classList.add('active');
+    showMentorList();
+    loadMentors();
+  }
+  function showMentorList() {
+    mentorListView.style.display = 'block';
+    mentorEditorView.classList.remove('show');
+  }
+  function showMentorEditor() {
+    mentorListView.style.display = 'none';
+    mentorEditorView.classList.add('show');
+    window.scrollTo(0, 0);
+  }
+  navMentors.addEventListener('click', showMentorSection);
+  newMentorBtn.addEventListener('click', () => openMentorEditor(null));
+  backToMentorListBtn.addEventListener('click', () => { showMentorList(); loadMentors(); });
+
+  // ---------- Small helpers ----------
+  const escapeAttr = (s) => escapeHtml(s == null ? '' : String(s)).replace(/"/g, '&quot;');
+  const splitComma = (s) => (s || '').split(',').map(x => x.trim()).filter(Boolean);
+  const splitLines = (s) => (s || '').split('\n').map(x => x.trim()).filter(Boolean);
+  const joinLines = (a) => (a || []).join('\n');
+  const toNum = (s) => { const n = parseFloat(s); return isNaN(n) ? null : n; };
+  const getChecks = (groupId) => [...byId(groupId).querySelectorAll('input:checked')].map(i => i.value);
+  const setChecks = (groupId, values) => byId(groupId).querySelectorAll('input').forEach(i => { i.checked = (values || []).includes(i.value); });
+  function initials(name) {
+    return (name || '?').split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join('');
+  }
+
+  // ---------- Fixed text sections (05 Methodology, 08 Mentoring Approach) ----------
+  const METHODOLOGY_FIELDS = [
+    ['conceptualLearning', 'Conceptual and application-based learning'],
+    ['lessonPlanning', 'Personalized lesson planning'],
+    ['practicalExamples', 'Practical examples and demonstrations'],
+    ['practiceRevision', 'Practice assignments and revision'],
+    ['engagement', 'Student engagement and doubt clarification']
+  ];
+  const APPROACH_FIELDS = [
+    ['learningNeeds', 'Understanding individual learning needs'],
+    ['clarityConfidence', 'Building conceptual clarity and confidence'],
+    ['progressMonitoring', 'Monitoring progress'],
+    ['additionalPractice', 'Supporting students who need additional practice'],
+    ['parentCommunication', 'Communicating progress to parents']
+  ];
+  function buildFixedFields(container, prefix, fields) {
+    container.innerHTML = fields.map(([key, label]) => `
+      <div class="field">
+        <label for="${prefix}_${key}">${label}</label>
+        <textarea class="short" id="${prefix}_${key}" data-key="${key}" placeholder="Describe how this mentor approaches this."></textarea>
+      </div>`).join('');
+  }
+  const readFixed = (container) => {
+    const o = {};
+    container.querySelectorAll('textarea').forEach(t => { o[t.dataset.key] = t.value.trim(); });
+    return o;
+  };
+  const fillFixed = (container, obj) => {
+    container.querySelectorAll('textarea').forEach(t => { t.value = (obj && obj[t.dataset.key]) || ''; });
+  };
+  buildFixedFields(mfMethodologyFields, 'mfMeth', METHODOLOGY_FIELDS);
+  buildFixedFields(mfApproachFields, 'mfAppr', APPROACH_FIELDS);
+
+  // ---------- Repeatable entries (degrees, certifications, roles, subjects) ----------
+  const REPEATERS = {
+    education: { list: byId('mfEducationList'), fields: [
+      { key: 'degree', label: 'Degree', ph: 'e.g. M.Sc' },
+      { key: 'specialization', label: 'Specialization', ph: 'e.g. Mathematics' },
+      { key: 'institution', label: 'College / University', ph: 'e.g. Bangalore University', full: true },
+      { key: 'year', label: 'Year of Completion', type: 'number', ph: 'e.g. 2015' },
+      { key: 'verified', label: 'Credential verified', type: 'checkbox' }
+    ]},
+    certifications: { list: byId('mfCertList'), fields: [
+      { key: 'name', label: 'Certification', ph: 'e.g. CTET (Paper II)', full: true },
+      { key: 'issuer', label: 'Issued By', ph: 'e.g. CBSE' },
+      { key: 'year', label: 'Year', type: 'number', ph: 'e.g. 2019' },
+      { key: 'verified', label: 'Certificate verified', type: 'checkbox' }
+    ]},
+    experience: { list: byId('mfExperienceList'), fields: [
+      { key: 'kind', label: 'Experience Type', type: 'select', options: ['Teaching', 'General Work'] },
+      { key: 'designation', label: 'Designation', ph: 'e.g. TGT Mathematics' },
+      { key: 'organization', label: 'Institution / Organization', ph: 'e.g. National Public School', full: true },
+      { key: 'from', label: 'From', ph: 'e.g. Jun 2018' },
+      { key: 'to', label: 'To', ph: 'e.g. Mar 2022 or Present' },
+      { key: 'responsibilities', label: 'Responsibilities', type: 'textarea', full: true, ph: 'Key responsibilities in this role' }
+    ]},
+    subjectGrades: { list: byId('mfSubjectGradeList'), fields: [
+      { key: 'subject', label: 'Subject', ph: 'e.g. Physics' },
+      { key: 'grades', label: 'Grades', ph: 'e.g. Grade 8 – 12' },
+      { key: 'boards', label: 'Boards', ph: 'e.g. CBSE, ICSE', full: true }
+    ]}
+  };
+
+  function addRepeatItem(name, data = {}) {
+    const cfg = REPEATERS[name];
+    const item = document.createElement('div');
+    item.className = 'repeat-item';
+    const inner = cfg.fields.map(f => {
+      const val = data[f.key];
+      let control;
+      if (f.type === 'checkbox') {
+        control = `<label class="inline-check"><input type="checkbox" data-key="${f.key}"${val ? ' checked' : ''}> ${f.label}</label>`;
+      } else if (f.type === 'select') {
+        control = `<label>${f.label}</label><select data-key="${f.key}">${f.options.map(o => `<option${o === val ? ' selected' : ''}>${o}</option>`).join('')}</select>`;
+      } else if (f.type === 'textarea') {
+        control = `<label>${f.label}</label><textarea class="short" data-key="${f.key}" placeholder="${escapeAttr(f.ph)}">${escapeHtml(val == null ? '' : String(val))}</textarea>`;
+      } else {
+        control = `<label>${f.label}</label><input type="${f.type || 'text'}" data-key="${f.key}" value="${escapeAttr(val)}" placeholder="${escapeAttr(f.ph)}">`;
+      }
+      return `<div class="field${f.full ? ' full' : ''}">${control}</div>`;
+    }).join('');
+    item.innerHTML = `<button type="button" class="icon-btn danger remove-item" title="Remove"><i class="fa-solid fa-xmark"></i></button><div class="repeat-grid">${inner}</div>`;
+    item.querySelector('.remove-item').addEventListener('click', () => item.remove());
+    cfg.list.appendChild(item);
+  }
+
+  // Returns the filled-in entries; rows with no typed text are skipped.
+  function readRepeat(name) {
+    return [...REPEATERS[name].list.children].map(item => {
+      const o = {};
+      let hasText = false;
+      item.querySelectorAll('[data-key]').forEach(el => {
+        if (el.type === 'checkbox') { o[el.dataset.key] = el.checked; return; }
+        const v = el.value.trim();
+        o[el.dataset.key] = v;
+        if (el.tagName !== 'SELECT' && v) hasText = true;
+      });
+      return hasText ? o : null;
+    }).filter(Boolean);
+  }
+
+  document.querySelectorAll('[data-add-repeat]').forEach(btn => {
+    btn.addEventListener('click', () => addRepeatItem(btn.dataset.addRepeat));
+  });
+
+  // ---------- Slug & photo preview ----------
+  mfName.addEventListener('input', () => {
+    if (!mentorSlugManuallyEdited && !editingMentorSlug) mfSlug.value = slugify(mfName.value);
+  });
+  mfSlug.addEventListener('input', () => { mentorSlugManuallyEdited = true; });
+  function updatePhotoPreview() {
+    const url = mfPhoto.value.trim();
+    if (url) { mPhotoPreviewImg.src = url; mPhotoPreviewWrap.style.display = 'block'; }
+    else { mPhotoPreviewWrap.style.display = 'none'; }
+  }
+  mfPhoto.addEventListener('input', updatePhotoPreview);
+
+  // ---------- Load & render mentors ----------
+  async function loadMentors() {
+    mentorRows.innerHTML = '<div class="post-row"><div style="grid-column:1/-1; color:var(--text-soft); font-size:13px;">Loading&hellip;</div></div>';
+    try {
+      const q = query(collection(db, 'mentors'), orderBy('updatedAt', 'desc'));
+      const snap = await getDocs(q);
+      allMentors = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      renderMentorRows();
+    } catch (err) {
+      console.error('Failed to load mentors:', err);
+      mentorRows.innerHTML = '';
+      mentorListEmpty.style.display = 'block';
+      mentorListEmpty.querySelector('p').textContent = "Couldn't load mentors. Check your connection and Firestore rules.";
+    }
+  }
+
+  function renderMentorRows() {
+    const list = activeMentorFilter === 'All' ? allMentors : allMentors.filter(m => m.status === activeMentorFilter);
+    mentorRows.innerHTML = '';
+    mentorListEmpty.style.display = list.length === 0 ? 'block' : 'none';
+    mentorListEmpty.querySelector('p').textContent = 'No mentor portfolios yet — click "New Mentor" to add your first one.';
+
+    list.forEach(m => {
+      const sub = [m.mentorId, m.designation].filter(Boolean).join(' · ') || '/' + m.id;
+      const verified = m.verification?.qualificationStatus === 'Verified'
+        ? ' <i class="fa-solid fa-circle-check" style="color:var(--gold);" title="Qualifications verified"></i>' : '';
+      const row = document.createElement('div');
+      row.className = 'post-row';
+      row.innerHTML = `
+        <div class="post-thumb mentor-thumb">${m.photoUrl ? `<img src="${escapeAttr(m.photoUrl)}" alt="">` : escapeHtml(initials(m.name))}</div>
+        <div class="post-title-cell">
+          <div class="t">${escapeHtml(m.name || 'Unnamed')}${verified}</div>
+          <div class="s">${escapeHtml(sub)}</div>
+        </div>
+        <div><span class="badge ${m.status === 'Published' ? 'badge-published' : 'badge-draft'}">${m.status || 'Draft'}</span></div>
+        <div class="col-date">${fmtDate(m.updatedAt || m.createdAt)}</div>
+        <div class="row-actions">
+          <button class="icon-btn edit-btn" title="Edit"><i class="fa-solid fa-pen"></i></button>
+          <button class="icon-btn danger delete-btn" title="Delete"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      `;
+      row.querySelector('.edit-btn').addEventListener('click', () => openMentorEditor(m.id));
+      row.querySelector('.delete-btn').addEventListener('click', () => confirmDeleteMentor(m.id, m.name));
+      mentorRows.appendChild(row);
+    });
+  }
+
+  mentorStatusTabs.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      mentorStatusTabs.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeMentorFilter = btn.dataset.filter;
+      renderMentorRows();
+    });
+  });
+
+  // ---------- Fill form from a saved portfolio ----------
+  function fillMentorForm(slug, m) {
+    mfName.value = m.name || '';
+    mfSlug.value = slug;
+    byId('mfDesignation').value = m.designation || '';
+    byId('mfMentorId').value = m.mentorId || '';
+    byId('mfTotalExp').value = m.totalExperienceYears ?? '';
+    byId('mfSummary').value = m.summary || '';
+    byId('mfSubjects').value = (m.subjects || []).join(', ');
+    byId('mfGrades').value = (m.grades || []).join(', ');
+    byId('mfLanguages').value = (m.languages || []).join(', ');
+    mfPhoto.value = m.photoUrl || '';
+    updatePhotoPreview();
+
+    const edu = m.education || {};
+    byId('mfHighestQual').value = edu.highestQualification || '';
+    (edu.degrees || []).forEach(d => addRepeatItem('education', d));
+    (edu.certifications || []).forEach(c => addRepeatItem('certifications', c));
+    byId('mfAcademicAchievements').value = joinLines(edu.academicAchievements);
+
+    const exp = m.experience || {};
+    (exp.roles || []).forEach(r => addRepeatItem('experience', r));
+    byId('mfTeachingYears').value = exp.totalTeachingYears ?? '';
+    byId('mfHomeTutoring').value = exp.homeTutoring || '';
+    byId('mfOnlineExp').value = exp.online || '';
+    byId('mfOfflineExp').value = exp.offline || '';
+
+    const ex = m.expertise || {};
+    (ex.subjectGrades || []).forEach(s => addRepeatItem('subjectGrades', s));
+    setChecks('mfBoards', ex.boards);
+    byId('mfStateBoardName').value = ex.stateBoardName || '';
+    byId('mfExamPrep').value = ex.examPreparation || '';
+    byId('mfTopicStrengths').value = ex.topicStrengths || '';
+    byId('mfRemedial').value = ex.remedialTeaching || '';
+
+    fillFixed(mfMethodologyFields, m.methodology);
+
+    const ach = m.achievements || {};
+    byId('mfAwards').value = joinLines(ach.awards);
+    byId('mfWorkshops').value = joinLines(ach.workshops);
+    byId('mfSkillDev').value = joinLines(ach.skillDevelopment);
+    byId('mfProjects').value = joinLines(ach.projects);
+    byId('mfOutcomes').value = joinLines(ach.studentOutcomes);
+    byId('mfOutcomesVerified').checked = !!ach.studentOutcomesVerified;
+
+    fillFixed(mfApproachFields, m.mentoringApproach);
+
+    const v = m.verification || {};
+    byId('mfQualVerification').value = v.qualificationStatus || 'Pending';
+    byId('mfBgCheck').value = v.backgroundCheck || 'Not Applicable';
+    byId('mfVerifiedOn').value = v.lastVerifiedOn || '';
+    setChecks('mfModes', v.teachingModes);
+    setChecks('mfDays', v.availableDays);
+    byId('mfTimeSlots').value = v.timeSlots || '';
+
+    const radio = mentorForm.querySelector(`input[name="mfStatus"][value="${m.status || 'Draft'}"]`);
+    if (radio) radio.checked = true;
+  }
+
+  // ---------- Read form into a portfolio object ----------
+  function readMentorForm() {
+    return {
+      name: mfName.value.trim(),
+      designation: byId('mfDesignation').value.trim(),
+      mentorId: byId('mfMentorId').value.trim(),
+      photoUrl: mfPhoto.value.trim(),
+      summary: byId('mfSummary').value.trim(),
+      totalExperienceYears: toNum(byId('mfTotalExp').value),
+      subjects: splitComma(byId('mfSubjects').value),
+      grades: splitComma(byId('mfGrades').value),
+      languages: splitComma(byId('mfLanguages').value),
+      education: {
+        highestQualification: byId('mfHighestQual').value.trim(),
+        degrees: readRepeat('education'),
+        certifications: readRepeat('certifications'),
+        academicAchievements: splitLines(byId('mfAcademicAchievements').value)
+      },
+      experience: {
+        roles: readRepeat('experience'),
+        totalTeachingYears: toNum(byId('mfTeachingYears').value),
+        homeTutoring: byId('mfHomeTutoring').value.trim(),
+        online: byId('mfOnlineExp').value.trim(),
+        offline: byId('mfOfflineExp').value.trim()
+      },
+      expertise: {
+        subjectGrades: readRepeat('subjectGrades'),
+        boards: getChecks('mfBoards'),
+        stateBoardName: byId('mfStateBoardName').value.trim(),
+        examPreparation: byId('mfExamPrep').value.trim(),
+        topicStrengths: byId('mfTopicStrengths').value.trim(),
+        remedialTeaching: byId('mfRemedial').value.trim()
+      },
+      methodology: readFixed(mfMethodologyFields),
+      achievements: {
+        awards: splitLines(byId('mfAwards').value),
+        workshops: splitLines(byId('mfWorkshops').value),
+        skillDevelopment: splitLines(byId('mfSkillDev').value),
+        projects: splitLines(byId('mfProjects').value),
+        studentOutcomes: splitLines(byId('mfOutcomes').value),
+        studentOutcomesVerified: byId('mfOutcomesVerified').checked
+      },
+      mentoringApproach: readFixed(mfApproachFields),
+      verification: {
+        qualificationStatus: byId('mfQualVerification').value,
+        backgroundCheck: byId('mfBgCheck').value,
+        lastVerifiedOn: byId('mfVerifiedOn').value,
+        teachingModes: getChecks('mfModes'),
+        availableDays: getChecks('mfDays'),
+        timeSlots: byId('mfTimeSlots').value.trim()
+      }
+    };
+  }
+
+  // ---------- Open editor (new or existing) ----------
+  async function openMentorEditor(slug) {
+    mentorForm.reset();
+    Object.values(REPEATERS).forEach(r => { r.list.innerHTML = ''; });
+    mPhotoPreviewWrap.style.display = 'none';
+    mentorSaveMsg.classList.remove('show');
+    mentorSlugManuallyEdited = false;
+    editingMentorSlug = slug;
+
+    if (slug) {
+      mentorEditorHeading.textContent = 'Edit Mentor';
+      mfSlug.disabled = true;
+      deleteMentorBtn.style.display = 'block';
+      deleteMentorBtn.onclick = () => confirmDeleteMentor(slug, mfName.value);
+      showMentorEditor();
+      try {
+        const snap = await getDoc(doc(db, 'mentors', slug));
+        if (snap.exists()) fillMentorForm(slug, snap.data());
+      } catch (err) {
+        console.error('Failed to load mentor for editing:', err);
+        mentorSaveMsg.textContent = "Couldn't load this portfolio.";
+        mentorSaveMsg.className = 'save-msg show err';
+      }
+    } else {
+      mentorEditorHeading.textContent = 'New Mentor';
+      mfSlug.disabled = false;
+      deleteMentorBtn.style.display = 'none';
+      addRepeatItem('education');
+      addRepeatItem('experience');
+      addRepeatItem('subjectGrades');
+      showMentorEditor();
+    }
+  }
+
+  // ---------- Save (create or update) ----------
+  mentorForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const slug = editingMentorSlug || slugify(mfSlug.value);
+    if (!slug) {
+      mentorSaveMsg.textContent = 'Please enter a valid URL slug.';
+      mentorSaveMsg.className = 'save-msg show err';
+      return;
+    }
+    const status = mentorForm.querySelector('input[name="mfStatus"]:checked').value;
+
+    saveMentorBtn.disabled = true;
+    saveMentorBtn.textContent = 'Saving...';
+
+    try {
+      const snap = await getDoc(doc(db, 'mentors', slug));
+      if (!editingMentorSlug && snap.exists()) {
+        mentorSaveMsg.textContent = 'A mentor with this URL slug already exists. Please change the slug.';
+        mentorSaveMsg.className = 'save-msg show err';
+        return;
+      }
+      const existing = snap.exists() ? snap.data() : null;
+      const data = {
+        ...readMentorForm(),
+        status,
+        updatedAt: serverTimestamp(),
+        createdAt: existing?.createdAt || serverTimestamp(),
+        publishedAt: status === 'Published' ? (existing?.publishedAt || serverTimestamp()) : (existing?.publishedAt || null)
+      };
+      await setDoc(doc(db, 'mentors', slug), data);
+
+      mentorSaveMsg.textContent = 'Portfolio saved successfully.';
+      mentorSaveMsg.className = 'save-msg show ok';
+      editingMentorSlug = slug;
+      mfSlug.disabled = true;
+      deleteMentorBtn.style.display = 'block';
+      deleteMentorBtn.onclick = () => confirmDeleteMentor(slug, mfName.value);
+      mentorEditorHeading.textContent = 'Edit Mentor';
+    } catch (err) {
+      console.error('Failed to save mentor:', err);
+      mentorSaveMsg.textContent = "Couldn't save the portfolio. Check your connection and try again.";
+      mentorSaveMsg.className = 'save-msg show err';
+    } finally {
+      saveMentorBtn.disabled = false;
+      saveMentorBtn.textContent = 'Save Portfolio';
+    }
+  });
+
+  // ---------- Delete ----------
+  function confirmDeleteMentor(slug, name) {
+    if (!confirm(`Delete the portfolio for "${name || slug}"? This can't be undone.`)) return;
+    deleteMentor(slug);
+  }
+
+  async function deleteMentor(slug) {
+    try {
+      await deleteDoc(doc(db, 'mentors', slug));
+      showMentorList();
+      loadMentors();
+    } catch (err) {
+      console.error('Failed to delete mentor:', err);
+      alert("Couldn't delete this portfolio. Please try again.");
     }
   }
 
