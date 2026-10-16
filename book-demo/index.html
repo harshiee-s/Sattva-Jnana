@@ -361,6 +361,70 @@
     .nav-right{gap:10px;}
     .nav-right .btn-sm{padding:9px 14px; font-size:12.5px;}
   }
+
+  /* ================= LIGHT THEME OVERRIDES ================= */
+  :root{ --gold-text:#9c7215; }
+
+  /* 1. Hero — students.webp with white tint */
+  .page-hero{color:var(--navy); background-image:url('https://sattvajnana.in/images/students.webp');}
+  .page-hero::before{background:linear-gradient(180deg, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.6) 55%, rgba(255,255,255,0.78) 100%);}
+  .page-hero::after{border-color:rgba(197,150,46,0.25);}
+  .page-hero .eyebrow{color:var(--gold-text);}
+  .page-hero h1{color:var(--navy-dark);}
+  .page-hero h1 .accent{color:var(--gold);}
+  .page-hero p.sub{color:var(--navy); font-weight:500;}
+  .page-hero-trust span{color:var(--navy);}
+  .page-hero-trust svg{color:var(--gold);}
+
+  /* 2. "What to Expect" panel — page-3-mob.webp with white tint */
+  .demo-panel-side{background:url('https://sattvajnana.in/images/page-3-mob.webp') center / cover no-repeat; color:var(--text);}
+  .demo-panel-side::before{opacity:1; background:rgba(255,255,255,0.68); background-image:none;}
+  .demo-panel-side .eyebrow{color:var(--gold-text);}
+  .demo-panel-side h4{color:var(--navy-dark);}
+  .demo-check-list li{color:var(--text);}
+  .demo-check-list .ic{border-color:var(--gold); color:var(--gold); background:rgba(255,255,255,0.7);}
+  .demo-panel-side .divider-line{background:rgba(197,150,46,0.5);}
+  .demo-panel-side .contact-alt{color:var(--text-soft);}
+  .demo-panel-side .contact-alt a{color:var(--gold-text);}
+
+  /* 3. "Why a Free Demo" — page-3-w.webp with white tint */
+  #why-demo{background-color:var(--white);}
+  #why-demo.section-photo::before{background:linear-gradient(180deg, rgba(255,255,255,0.62), rgba(255,255,255,0.74));}
+  #why-demo h2.title{color:var(--navy-dark);}
+  #why-demo .lede{color:var(--navy);}
+  #why-demo .eyebrow{color:var(--gold-text);}
+  #why-demo .tl-h::before{background:rgba(197,150,46,0.35);}
+  #why-demo .tl-h-num{color:var(--gold);}
+  #why-demo .tl-h-item h4{color:var(--navy-dark);}
+  #why-demo .tl-h-item p{color:var(--text);}
+
+  /* 4. "Ready to See the Difference?" — book-box.webp */
+  .cta-band{background:url('https://sattvajnana.in/images/book-box.webp') center / cover no-repeat;}
+  .cta-band::before{content:''; position:absolute; inset:0; z-index:0; background:rgba(255,255,255,0.55); border-radius:inherit; pointer-events:none;}
+  .cta-band > *{position:relative; z-index:1;}
+  .cta-band h3{color:var(--navy-dark);}
+  .cta-band p{color:#2b2118;}
+  .cta-band .gold-line{background:var(--gold);}
+  .cta-band .btn-outline-light{color:var(--gold-text); border-color:var(--gold); background:rgba(255,255,255,0.6);}
+  .cta-band .btn-outline-light:hover{background:var(--gold); color:var(--white); border-color:var(--gold);}
+
+
+  /* Universal page background */
+  body::before{content:''; position:fixed; inset:0; z-index:-2; background:url('https://sattvajnana.in/images/page-2.webp') center / cover no-repeat;}
+  body::after{content:''; position:fixed; inset:0; z-index:-1; background:rgba(255,255,255,0.35);}
+  .section-logo-bg{background:transparent;}
+  /* 5. White footer */
+  footer{background:var(--white); color:#4a5568;}
+  .footer-grid{border-bottom:1px solid rgba(16,42,67,0.1);}
+  .footer-brand .main{color:var(--navy);}
+  footer h5{color:var(--navy);}
+  footer ul li a{color:#4a5568;}
+  footer ul li a:hover{color:var(--gold);}
+  .social-row a{border:1px solid rgba(197,150,46,0.5); background:var(--white);}
+  .social-row a:hover{background:rgba(197,150,46,0.12); border-color:var(--gold);}
+  .footer-bottom{color:#4a5568;}
+  .footer-bottom a, #cookieSettingsBtn{color:#4a5568;}
+  .footer-bottom a:hover, #cookieSettingsBtn:hover{color:var(--gold);}
 </style>
 </head>
 <body>
@@ -545,7 +609,7 @@
 </section>
 
 <!-- ============ WHY BOOK A DEMO ============ -->
-<section class="section section-dark section-photo" style="background-image:url('https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1600&q=80');">
+<section class="section section-dark section-photo" id="why-demo" style="background-image:url('https://sattvajnana.in/images/page-3-w.webp');">
   <div class="container">
     <div class="section-head center reveal">
       <div class="eyebrow">Why a Free Demo</div>
@@ -619,7 +683,7 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Sattva Jnana. All Rights Reserved.</span>
-      <span><a href="https://sattvajnana.in/privacy-policy">Privacy Policy</a> | <a href="https://sattvajnana.in/terms-and-conditions">Terms &amp; Conditions</a> | <button type="button" id="cookieSettingsBtn">Cookie Settings</button></span>
+      <span><a href="https://sattvajnana.in/privacy-policy">Privacy Policy</a> | <a href="https://sattvajnana.in/terms-and-conditions">Terms &amp; Conditions</a> | <a href="https://sattvajnana.in/refund-policy/">Refund Policy</a> | <button type="button" id="cookieSettingsBtn">Cookie Settings</button></span>
     </div>
   </div>
 </footer>
