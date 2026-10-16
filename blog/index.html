@@ -750,6 +750,58 @@
   @media (max-width: 600px){
     .post-view{padding-top:130px;}
   }
+
+  /* ================= LIGHT THEME OVERRIDES (no navy blocks; navigation untouched) ================= */
+  :root{ --gold-text:#9c7215; --cream:#F3ECDD; }
+
+  /* Single fixed page background */
+  body::before{content:''; position:fixed; inset:0; z-index:-2; background:url('https://sattvajnana.in/images/page-2.webp') center / cover no-repeat;}
+  body::after{content:''; position:fixed; inset:0; z-index:-1; background:rgba(255,255,255,0.35);}
+
+  /* Sections transparent so page-2.webp shows through */
+  .section-logo-bg{background:transparent;}
+  .section-dark{background-color:transparent;}
+  .eyebrow{color:var(--gold-text);}
+  .blog-hero h2.title{color:var(--navy-dark);}
+  .blog-hero .lede{color:var(--navy);}
+
+  /* Category chips */
+  .cat-chip{border-color:var(--gold); color:var(--gold-text); background:rgba(255,255,255,0.7);}
+  .cat-chip:hover{background:rgba(197,150,46,0.1); border-color:var(--gold);}
+  .cat-chip.active{background:var(--gold); border-color:var(--gold); color:var(--white);}
+
+  /* Blog cards */
+  .blog-card{border:1px solid rgba(197,150,46,0.3); background:rgba(255,255,255,0.95);}
+  .blog-card .cat{color:var(--gold-text);}
+  .blog-card-meta .author{color:var(--gold-text);}
+
+  /* Loading / empty / error boxes readable over the photo */
+  .blog-empty, .blog-loading, .blog-error{background:rgba(255,255,255,0.6); border:1px solid rgba(197,150,46,0.3); border-radius:var(--radius-lg); color:var(--text);}
+
+  /* Single post view — readable card over the photo */
+  .post-view .container{background:rgba(255,255,255,0.92); border:1px solid rgba(197,150,46,0.3); border-radius:22px; box-shadow:0 30px 70px rgba(16,42,67,0.12); padding-top:40px; padding-bottom:48px; max-width:1000px;}
+  .post-back{color:var(--gold-text);}
+  .post-cat{color:var(--gold-text);}
+
+  /* Post CTA — cream instead of navy */
+  .post-cta{background:linear-gradient(135deg, #FBF6EA 0%, var(--cream) 100%); border:1px solid rgba(197,150,46,0.45);}
+  .post-cta h4{color:var(--navy-dark);}
+  .post-cta p{color:var(--text-soft);}
+
+  /* White footer */
+  footer{background:var(--white); color:#4a5568;}
+  .footer-grid{border-bottom:1px solid rgba(16,42,67,0.1);}
+  .footer-brand .main{color:var(--navy);}
+  footer h5{color:var(--navy);}
+  footer ul li a{color:#4a5568;}
+  footer ul li a:hover{color:var(--gold);}
+  .social-row a{border:1px solid rgba(197,150,46,0.5); background:var(--white);}
+  .social-row a:hover{background:rgba(197,150,46,0.12); border-color:var(--gold);}
+  .footer-bottom{color:#4a5568;}
+  .footer-bottom a{color:#4a5568;}
+  .footer-bottom a:hover{color:var(--gold);}
+
+  @media (max-width:600px){ .post-view .container{padding:28px 18px 36px; border-radius:18px;} }
 </style>
 </head>
 <body>
@@ -890,7 +942,7 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Sri Hari Sattva Jnana. All Rights Reserved.</span>
-      <span><a href="https://sattvajnana.in/privacy-policy">Privacy Policy</a> | <a href="https://sattvajnana.in/terms-and-conditions">Terms &amp; Conditions</a></span>
+      <span><a href="https://sattvajnana.in/privacy-policy">Privacy Policy</a> | <a href="https://sattvajnana.in/terms-and-conditions">Terms &amp; Conditions</a> | <a href="https://sattvajnana.in/refund-policy/">Refund Policy</a></span>
     </div>
   </div>
 </footer>
