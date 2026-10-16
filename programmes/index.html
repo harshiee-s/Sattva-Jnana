@@ -6,16 +6,16 @@
 <link rel="icon" type="image/png" href="svg.png" />
 <link rel="shortcut icon" type="image/png" href="svg.png" />
 <link rel="apple-touch-icon" href="svg.png" />
-<title>Private Tuition &amp; Personalised One-on-One Tutoring in Bangalore | Sattva Jnana</title>
-<meta name="description" content="Looking for private tuition in Bengaluru or personalised One-on-One tutoring in Bangalore? Sattva Jnana offers personalised academic coaching, individual learning support and AI-integrated learning for school students.">
-<meta name="keywords" content="private tuition, private tutoring, personalized tutoring, One-on-One tuition, private tuition in Bengaluru, private tutors in Bangalore, personalized learning in Bangalore, home tuition, personal tutor, personalised academic coaching, AI-integrated learning, exam preparation tuition">
+<title>Private Tuition &amp; Personalised One-to-One Tutoring in Bangalore | Sattva Jnana</title>
+<meta name="description" content="Looking for private tuition in Bengaluru or personalised one-to-one tutoring in Bangalore? Sattva Jnana offers personalised academic coaching, individual learning support and AI-integrated learning for school students.">
+<meta name="keywords" content="private tuition, private tutoring, personalized tutoring, one-to-one tuition, private tuition in Bengaluru, private tutors in Bangalore, personalized learning in Bangalore, home tuition, personal tutor, personalised academic coaching, AI-integrated learning, exam preparation tuition">
 <link rel="canonical" href="https://www.sattvajnana.in/programmes">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sattva Jnana">
-<meta property="og:title" content="Private Tuition &amp; Personalised One-on-One Tutoring in Bangalore | Sattva Jnana">
-<meta property="og:description" content="Personalised private tuition and One-on-One tutoring in Bengaluru, now enhanced with AI-integrated learning — with expert tutors always at the centre.">
+<meta property="og:title" content="Private Tuition &amp; Personalised One-to-One Tutoring in Bangalore | Sattva Jnana">
+<meta property="og:description" content="Personalised private tuition and one-to-one tutoring in Bengaluru, now enhanced with AI-integrated learning — with expert tutors always at the centre.">
 <meta property="og:image" content="assets/og-cover.jpg">
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
@@ -795,6 +795,98 @@
     .ai-benefit-grid{grid-template-columns:1fr;}
     .ai-highlight-list{grid-template-columns:1fr;}
   }
+
+  /* ================= LIGHT THEME OVERRIDES (no navy blocks; navigation untouched) ================= */
+  :root{ --gold-text:#9c7215; --cream:#F3ECDD; }
+
+  /* Single fixed page background */
+  body::before{content:''; position:fixed; inset:0; z-index:-2; background:url('https://sattvajnana.in/images/page-2.webp') center / cover no-repeat;}
+  body::after{content:''; position:fixed; inset:0; z-index:-1; background:rgba(255,255,255,0.35);}
+
+  /* Sections become transparent so page-2.webp shows through */
+  .section-logo-bg{background:transparent;}
+  .section-dark{background-color:transparent;}
+  .section-photo{background-image:none !important;}
+  .section-photo::before{background:transparent;}
+  .section-dark h2.title{color:var(--navy-dark);}
+  .section-dark .lede{color:var(--navy);}
+  .section-dark .check-list li{color:var(--text);}
+  .eyebrow{color:var(--gold-text);}
+
+  /* Hero */
+  .prog-hero{background:transparent; background-image:none; padding-top:130px;}
+  .crumbs{color:var(--text-soft);}
+  .crumbs a{color:var(--gold-text);}
+  .crumbs .sep{color:rgba(16,42,67,0.3);}
+  .prog-hero h1{color:var(--navy-dark);}
+  .prog-hero h1 span{color:var(--gold);}
+  .prog-hero p.sub{color:var(--text);}
+  .prog-hero-stats{border-top:1px solid rgba(197,150,46,0.35);}
+  .prog-hero-stats div strong{color:var(--gold-text);}
+  .prog-hero-stats div span{color:var(--text-soft);}
+  .prog-hero-media img{box-shadow:0 30px 60px rgba(16,42,67,0.18);}
+  .prog-hero-badge{box-shadow:0 20px 46px rgba(16,42,67,0.15); border:1px solid rgba(197,150,46,0.35);}
+  .prog-hero-badge .ic{background:var(--cream); border:1.5px solid var(--gold);}
+  .prog-hero-badge .ic svg{color:var(--gold);}
+
+  /* Outline buttons (body only) — gold instead of white-on-navy */
+  .btn-outline-light{background:transparent; color:var(--gold-text); border-color:var(--gold);}
+  .btn-outline-light:hover{background:var(--gold); color:var(--white); border-color:var(--gold);}
+
+  /* Filter pills */
+  .filter-pill{border-color:var(--gold); color:var(--gold-text); background:rgba(255,255,255,0.6);}
+  .filter-pill:hover{background:rgba(197,150,46,0.1);}
+  .filter-pill.active{background:var(--gold); color:var(--white); border-color:var(--gold);}
+
+  /* Programme cards — light caption fade instead of navy */
+  .pcard{border:1px solid rgba(197,150,46,0.25);}
+  .pcard-media::after{background:linear-gradient(180deg, rgba(255,255,255,0) 40%, rgba(255,255,255,0.94) 100%);}
+  .pcard-media h4{color:var(--navy-dark);}
+  .pcard-media .tag{color:var(--gold-text); border:1px solid rgba(197,150,46,0.4);}
+  .pcard-cta{color:var(--gold-text);}
+
+  /* Trust strip — glass card instead of navy bar */
+  .tutor-trust-bar{background:rgba(255,255,255,0.6); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:1px solid rgba(197,150,46,0.4); box-shadow:0 14px 34px rgba(16,42,67,0.08);}
+  .tutor-trust-item svg{color:var(--gold);}
+  .tutor-trust-item strong{color:var(--gold-text);}
+  .tutor-trust-item p{color:var(--text);}
+  .tutor-trust-item:not(:last-child)::after{border-right-color:rgba(197,150,46,0.45);}
+
+  /* Philosophy band */
+  .ai-highlight-copy{color:var(--text);}
+  .ai-highlight-list{background:rgba(255,255,255,0.55); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(197,150,46,0.35); border-radius:16px; padding:24px 28px;}
+
+  /* Cards with a gold edge */
+  .ai-benefit-card, .prog-faq details{border:1px solid rgba(197,150,46,0.25);}
+
+  /* Final CTA — cream instead of navy */
+  .cta-band{background:linear-gradient(135deg, #FBF6EA 0%, var(--cream) 100%); color:var(--text); border:1px solid rgba(197,150,46,0.45);}
+  .cta-band h3{color:var(--navy-dark);}
+  .cta-band p{color:var(--text-soft);}
+  .cta-band .gold-line{background:var(--gold);}
+
+  /* White footer */
+  footer{background:var(--white); color:#4a5568;}
+  .footer-grid{border-bottom:1px solid rgba(16,42,67,0.1);}
+  .footer-brand .main{color:var(--navy);}
+  footer h5{color:var(--navy);}
+  footer ul li a{color:#4a5568;}
+  footer ul li a:hover{color:var(--gold);}
+  .social-row a{border:1px solid rgba(197,150,46,0.5); background:var(--white);}
+  .social-row a:hover{background:rgba(197,150,46,0.12); border-color:var(--gold);}
+  .social-row a svg{stroke:var(--gold);}
+  .footer-bottom{color:#4a5568;}
+  .footer-bottom a{color:#4a5568;}
+  .footer-bottom a:hover{color:var(--gold);}
+
+
+  /* Final CTA — photo background with light wash for readability */
+  .cta-band{background:url('https://sattvajnana.in/images/how-we-teach.webp') center / cover no-repeat;}
+  .cta-band::before{content:''; position:absolute; inset:0; z-index:0; background:rgba(255,255,255,0.55); border-radius:inherit; pointer-events:none;}
+  .cta-band > *{position:relative; z-index:1;}
+  .cta-band p{color:#2b2118;}
+  @media (max-width:980px){ .prog-hero{padding-top:110px;} }
+  @media (max-width:600px){ .prog-hero{padding-top:100px;} .ai-highlight-list{padding:18px 20px;} }
 </style>
 <script type="application/ld+json">
 {
@@ -838,7 +930,7 @@
       "name": "What is AI-integrated private tutoring?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "AI-integrated private tutoring combines personalised human guidance with intelligent learning tools. At Sattva Jnana, tutors continue to guide students through One-on-One learning, while AI can support practice, interactive learning and personalised learning experiences."
+        "text": "AI-integrated private tutoring combines personalised human guidance with intelligent learning tools. At Sattva Jnana, tutors continue to guide students through one-to-one learning, while AI can support practice, interactive learning and personalised learning experiences."
       }
     },
     {
@@ -875,10 +967,10 @@
     },
     {
       "@type": "Question",
-      "name": "How does One-on-One tutoring help students?",
+      "name": "How does one-to-one tutoring help students?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "One-on-One tutoring allows tutors to provide individual attention, understand a student's learning pace, focus on specific learning gaps and provide more personalised academic support."
+        "text": "One-to-one tutoring allows tutors to provide individual attention, understand a student's learning pace, focus on specific learning gaps and provide more personalised academic support."
       }
     }
   ]
@@ -932,7 +1024,7 @@
     <div class="prog-hero-grid">
       <div class="reveal">
         <h1>Find the Programme That Fits Your Child's <span>Next Step</span></h1>
-        <p class="sub">Every programme is One-on-One and paced to the student — delivered at home or live online. Filter below by grade or need to see what's right for you.</p>
+        <p class="sub">Every programme is one-to-one and paced to the student — delivered at home or live online. Filter below by grade or need to see what's right for you.</p>
         <div class="btnrow">
           <a href="https://sattvajnana.in/book-demo/" class="btn btn-gold">Book a Free Demo</a>
           <a href="#pcard-grid" class="btn btn-outline-light">See All Programmes</a>
@@ -940,12 +1032,12 @@
         <div class="prog-hero-stats">
           <div><strong>7</strong><span>Programmes</span></div>
           <div><strong>1–12</strong><span>Grades Covered</span></div>
-          <div><strong>100%</strong><span>One-on-One</span></div>
+          <div><strong>100%</strong><span>One-to-One</span></div>
           <div><strong>100%</strong><span>Verified Tutors</span></div>
         </div>
       </div>
       <div class="prog-hero-media reveal">
-        <img src="img-01.png" alt="Tutor giving One-on-One attention to a student at home">
+        <img src="img-01.png" alt="Tutor giving one-to-one attention to a student at home">
         <div class="prog-hero-badge">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg></div>
           <div><strong>Personally Interviewed</strong><span>Every tutor, every subject</span></div>
@@ -1117,7 +1209,7 @@
         </div>
         <div class="pcard-body">
           <div class="pcard-best">Best for flexibility, wherever you are</div>
-          <p class="pcard-desc">The same One-on-One, personalised approach delivered live online — ideal for families outside our home-tuition areas or who simply prefer learning from home on-screen.</p>
+          <p class="pcard-desc">The same one-to-one, personalised approach delivered live online — ideal for families outside our home-tuition areas or who simply prefer learning from home on-screen.</p>
           <div class="pcard-meta">
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>Live online</span>
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Flexible scheduling</span>
@@ -1125,7 +1217,7 @@
           <ul class="pcard-features">
             <li>Learn from anywhere with a stable connection</li>
             <li>Interactive whiteboard &amp; screen-sharing sessions</li>
-            <li>Same verified, One-on-One tutors as home tuition</li>
+            <li>Same verified, one-to-one tutors as home tuition</li>
           </ul>
           <a href="https://sattvajnana.in/book-demo/?programme=Online%20Coaching" class="pcard-cta">Enquire about this programme <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
         </div>
@@ -1143,7 +1235,7 @@
       <h2 class="title">Every Programme Is Built the Same Way</h2>
       <p class="lede">Whatever the grade or subject, three things stay constant across every programme we offer.</p>
     </div>
-    <div class="tutor-trust-bar" style="border-radius:20px; border-top:none;">
+    <div class="tutor-trust-bar" style="border-radius:20px;">
       <div class="tutor-trust-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg>
         <div><strong>Personalised Pace</strong><p>Every session is paced to how the student learns, not a fixed timetable.</p></div>
@@ -1168,7 +1260,7 @@
       <h2 class="title">Personalised Private Tuition Enhanced with AI-Integrated Learning</h2>
       <div class="ai-intro">
         <p>At Sattva Jnana, we combine personalised private tuition, experienced tutor guidance and AI-integrated learning to create a smarter, more engaging learning experience for students.</p>
-        <p>Our approach to private tutoring focuses on understanding every student's individual learning needs. With One-on-One tutoring and intelligent learning tools, students can learn at their own pace, practise concepts more effectively and receive the individual attention they need.</p>
+        <p>Our approach to private tutoring focuses on understanding every student's individual learning needs. With one-to-one tutoring and intelligent learning tools, students can learn at their own pace, practise concepts more effectively and receive the individual attention they need.</p>
         <p>AI supports our personalised tutoring approach by helping students explore concepts, practise independently, identify learning gaps and access interactive learning support, while our <a href="https://sattvajnana.in/programmes#pcard-grid">tutors remain at the centre of the learning experience</a> — providing guidance, mentorship, motivation and personalised academic coaching.</p>
       </div>
     </div>
@@ -1181,8 +1273,8 @@
       </div>
       <div class="ai-benefit-card reveal">
         <div class="ai-benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3.4"/><path d="M2.5 20c0-3.3 2.9-5.6 6.5-5.6s6.5 2.3 6.5 5.6"/><path d="M17 8.2c1 .5 1.7 1.5 1.7 2.7 0 1.5-1.1 2.7-2.6 3M19.5 20c0-2.6-1.9-4.7-4.5-5.4"/></svg></div>
-        <h3>Smarter One-on-One Tutoring</h3>
-        <p>One-on-One tuition gives students individual attention and direct support from their tutor. AI-integrated tools can complement these private classes by helping students continue practising and exploring concepts beyond their tutoring sessions.</p>
+        <h3>Smarter One-to-One Tutoring</h3>
+        <p>One-to-one tuition gives students individual attention and direct support from their tutor. AI-integrated tools can complement these private classes by helping students continue practising and exploring concepts beyond their tutoring sessions.</p>
       </div>
       <div class="ai-benefit-card reveal">
         <div class="ai-benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 11 2Z"/><path d="M9 20h4M10 22h2"/></svg></div>
@@ -1214,13 +1306,13 @@
     <div class="section-head center reveal">
       <div class="eyebrow">Our Philosophy</div>
       <h2 class="title">AI Supports Learning. Personal Tutors Make the Difference.</h2>
-      <p class="lede">At Sattva Jnana, AI does not replace teachers or personal tutors. Our private tutoring and One-on-One tuition approach continues to focus on meaningful human interaction, individual attention and personalised academic guidance.</p>
+      <p class="lede">At Sattva Jnana, AI does not replace teachers or personal tutors. Our private tutoring and one-to-one tuition approach continues to focus on meaningful human interaction, individual attention and personalised academic guidance.</p>
     </div>
     <p class="ai-highlight-copy reveal">AI acts as a supportive learning tool that can help students practise, explore concepts and identify learning opportunities. Our tutors provide the human understanding, mentorship, motivation and academic support that technology alone cannot replace.</p>
     <ul class="check-list ai-highlight-list reveal">
       <li>Personalised private tuition</li>
       <li>Experienced tutor guidance</li>
-      <li>One-on-One tutoring</li>
+      <li>One-to-one tutoring</li>
       <li>Individual attention</li>
       <li>AI-supported learning tools</li>
       <li>Interactive practice</li>
@@ -1238,8 +1330,8 @@
       <div class="eyebrow">Serving in Bengaluru</div>
       <h2 class="title">Personalised Private Tuition in Bengaluru</h2>
       <div class="ai-location">
-        <p>Sattva Jnana offers personalised learning experiences for students looking for private tuition in Bengaluru and private tutors in Bangalore. Our approach combines One-on-One tutoring, personalised academic coaching and modern learning tools to support students based on their individual academic needs.</p>
-        <p>Whether students are looking for private tuition for school students, private tuition for CBSE students, individual attention tuition classes, or personalised learning in Bangalore, Sattva Jnana focuses on creating customised learning experiences that support academic understanding and confidence — through <a href="https://sattvajnana.in/programmes#pcard-grid">One-on-One tuition in Bangalore</a>, private tutoring classes in Bengaluru, and private online and offline tutoring, delivered by experienced private tutors for CBSE students.</p>
+        <p>Sattva Jnana offers personalised learning experiences for students looking for private tuition in Bengaluru and private tutors in Bangalore. Our approach combines one-to-one tutoring, personalised academic coaching and modern learning tools to support students based on their individual academic needs.</p>
+        <p>Whether students are looking for private tuition for school students, private tuition for CBSE students, individual attention tuition classes, or personalised learning in Bangalore, Sattva Jnana focuses on creating customised learning experiences that support academic understanding and confidence — through <a href="https://sattvajnana.in/programmes#pcard-grid">one-to-one tuition in Bangalore</a>, private tutoring classes in Bengaluru, and private online and offline tutoring, delivered by experienced private tutors for CBSE students.</p>
       </div>
     </div>
   </div>
@@ -1271,7 +1363,7 @@
       </details>
       <details>
         <summary><h3>What is AI-integrated private tutoring?</h3><span class="plus">+</span></summary>
-        <p>AI-integrated private tutoring combines personalised human guidance with intelligent learning tools. At Sattva Jnana, tutors continue to guide students through One-on-One learning, while AI can support practice, interactive learning and personalised learning experiences.</p>
+        <p>AI-integrated private tutoring combines personalised human guidance with intelligent learning tools. At Sattva Jnana, tutors continue to guide students through one-to-one learning, while AI can support practice, interactive learning and personalised learning experiences.</p>
       </details>
       <details>
         <summary><h3>Does AI replace personal tutors?</h3><span class="plus">+</span></summary>
@@ -1290,8 +1382,8 @@
         <p>Private online and offline tutoring options can provide flexibility based on a student's learning requirements and programme availability.</p>
       </details>
       <details>
-        <summary><h3>How does One-on-One tutoring help students?</h3><span class="plus">+</span></summary>
-        <p>One-on-One tutoring allows tutors to provide individual attention, understand a student's learning pace, focus on specific learning gaps and provide more personalised academic support.</p>
+        <summary><h3>How does one-to-one tutoring help students?</h3><span class="plus">+</span></summary>
+        <p>One-to-one tutoring allows tutors to provide individual attention, understand a student's learning pace, focus on specific learning gaps and provide more personalised academic support.</p>
       </details>
     </div>
   </div>
@@ -1356,7 +1448,7 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Sattva Jnana. All Rights Reserved.</span>
-      <span><a href="https://sattvajnana.in/privacy-policy">Privacy Policy</a> | <a href="https://sattvajnana.in/terms-and-conditions">Terms &amp; Conditions</a></span>
+      <span><a href="https://sattvajnana.in/privacy-policy">Privacy Policy</a> | <a href="https://sattvajnana.in/terms-and-conditions">Terms &amp; Conditions</a> | <a href="https://sattvajnana.in/refund-policy/">Refund Policy</a></span>
     </div>
   </div>
 </footer>
