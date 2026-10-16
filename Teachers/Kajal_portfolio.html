@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kajal Rathore | High School Educator</title>
+<meta name="description" content="Portfolio of Kajal Rathore, dedicated High School Educator based in Bengaluru, showcasing extensive teaching experience across CBSE, ICSE, State, and IB boards.">
+<meta name="theme-color" content="#102A43">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --navy:#102A43;
+    --navy-dark:#0B1F33;
+    --gold:#C5962E;
+    --gold-warm:#D4AF57;
+    --ivory:#E9EDF3;
+    --white:#FFFFFF;
+    --text:#374151;
+    --text-soft:#5B6472;
+    --radius:10px;
+    --radius-lg:16px;
+    --shadow:0 6px 24px rgba(16,42,67,0.08);
+    --shadow-lg:0 14px 40px rgba(16,42,67,0.14);
+    --maxw:1080px;
+    --serif:'Playfair Display', Georgia, serif;
+    --sans:'Inter', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans); color:var(--text); background:var(--ivory); line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  h1,h2,h3,h4{font-family:var(--serif); color:var(--navy); font-weight:600; line-height:1.2;}
+  .container{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  .eyebrow{display:inline-flex; align-items:center; gap:8px; font-size:12.5px; font-weight:600; letter-spacing:2.2px; text-transform:uppercase; color:var(--gold); margin-bottom:14px;}
+  .eyebrow::before{content:''; width:16px; height:1px; background:var(--gold);}
+  .section{padding:88px 0;}
+  .section-tight{padding:56px 0;}
+  .section-dark{background-color:var(--navy);}
+  .section-dark h2.title, .section-dark h3{color:var(--white);}
+  .section-dark .lede{color:#B9C2CE;}
+  .section-head{max-width:640px; margin-bottom:48px;}
+  .section-head.center{margin:0 auto 48px; text-align:center;}
+  h2.title{font-size:clamp(26px,3.2vw,38px); margin-bottom:12px;}
+  .lede{color:var(--text-soft); font-size:16.5px;}
+  .divider-gold{width:64px; height:2px; background:linear-gradient(90deg,var(--gold-warm),var(--gold)); margin:16px auto 0; border-radius:2px;}
+  .section-head:not(.center) .divider-gold{margin-left:0;}
+
+  .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:14px 28px; border-radius:6px; font-weight:600; font-size:14.5px; cursor:pointer; border:1px solid transparent; transition:all .25s ease; white-space:nowrap;}
+  .btn-gold{background:var(--gold); color:var(--white);}
+  .btn-gold:hover{background:#b5851f; transform:translateY(-1px); box-shadow:var(--shadow-lg);}
+  .btn-outline-light{background:transparent; color:var(--white); border-color:rgba(255,255,255,0.5);}
+  .btn-outline-light:hover{background:rgba(255,255,255,0.12); border-color:var(--white);}
+
+  /* Header */
+  header{position:fixed; top:18px; left:50%; transform:translateX(-50%); z-index:200; width:calc(100% - 32px); max-width:980px; background:rgba(255,255,255,0.75); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.55); border-radius:999px; box-shadow:0 10px 34px rgba(16,42,67,0.14); transition:all .3s ease;}
+  header.scrolled{background:rgba(255,255,255,0.92);}
+  .nav-wrap{display:flex; align-items:center; justify-content:space-between; padding:10px 10px 10px 22px;}
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand-avatar{width:36px; height:36px; border-radius:50%; background:var(--navy); color:var(--gold-warm); display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-weight:700; font-size:15px;}
+  .brand-text{font-family:var(--serif); font-size:16px; font-weight:700; color:var(--navy);}
+  nav.primary-nav{display:flex; align-items:center; gap:24px;}
+  nav.primary-nav a{font-size:14px; font-weight:500; color:var(--text); transition:color .25s ease;}
+  nav.primary-nav a:hover{color:var(--gold);}
+  .hamburger{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:6px;}
+  .hamburger span{width:22px; height:2px; background:var(--navy);}
+  .mobile-menu{display:none; position:fixed; inset:0; background:var(--white); z-index:300; padding:24px; flex-direction:column;}
+  .mobile-menu.open{display:flex;}
+  .mobile-menu-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:28px;}
+  .mobile-menu .close-btn{background:none; border:none; font-size:28px; color:var(--navy);}
+  .mobile-menu a{font-size:20px; font-family:var(--serif); color:var(--navy); padding:14px 0; border-bottom:1px solid #eee;}
+
+  /* Hero */
+  .hero{position:relative; color:var(--white); overflow:hidden; background:linear-gradient(120deg, var(--navy-dark) 0%, var(--navy) 55%, #1b3a5c 100%);}
+  .hero::after{content:''; position:absolute; right:-120px; top:-120px; width:340px; height:340px; border:1px solid rgba(212,175,87,0.18); border-radius:50%;}
+  .hero::before{content:''; position:absolute; left:-100px; bottom:-140px; width:280px; height:280px; border:1px solid rgba(212,175,87,0.1); border-radius:50%;}
+  .hero-grid{position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; text-align:center; gap:22px; padding:150px 24px 100px; max-width:780px; margin:0 auto;}
+  .hero-photo-wrap{width:140px; height:140px; border-radius:50%; padding:4px; background:linear-gradient(135deg, var(--gold-warm), var(--gold)); box-shadow:0 20px 50px rgba(0,0,0,0.3);}
+  .hero-photo{width:100%; height:100%; border-radius:50%; object-fit:cover; display:block; background:var(--navy-dark);}
+  .hero .eyebrow{color:var(--gold-warm); justify-content:center;}
+  .hero h1{color:var(--white); font-size:clamp(32px,4.4vw,50px); letter-spacing:0.2px;}
+  .hero h1 .accent{color:var(--gold-warm); display:block; font-size:0.45em; letter-spacing:2px; text-transform:uppercase; font-family:var(--sans); font-weight:700; margin-top:10px;}
+  .hero p.sub{color:#D7DEE8; font-size:16.5px; max-width:620px;}
+  .hero-trust{display:flex; gap:22px; flex-wrap:wrap; justify-content:center; margin-top:12px; font-size:13.5px; letter-spacing:.4px; color:#B9C2CE;}
+  .hero-trust span{display:flex; align-items:center; gap:7px;}
+  .hero-trust i{color:var(--gold-warm);}
+
+  /* Quick stats */
+  .stats{margin-top:-46px; position:relative; z-index:10;}
+  .stats-inner{background:rgba(255,255,255,0.65); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); border-radius:var(--radius-lg); box-shadow:0 20px 50px rgba(16,42,67,0.18); padding:30px; border:1px solid rgba(255,255,255,0.6); display:grid; grid-template-columns:repeat(4,1fr); gap:18px; text-align:center;}
+  .stat-num{font-family:var(--serif); font-size:26px; font-weight:700; color:var(--navy);}
+  .stat-label{font-size:12.5px; color:var(--text-soft); margin-top:4px; letter-spacing:.3px;}
+
+  /* About */
+  .about-wrap{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;}
+  .about-card{background:var(--white); border-radius:var(--radius-lg); padding:36px; box-shadow:var(--shadow);}
+  .about-card p{color:var(--text-soft); font-size:15px; line-height:1.75;}
+  .quote-strip{border-left:3px solid var(--gold); padding-left:20px; font-family:var(--serif); font-style:italic; color:var(--navy); font-size:18px; line-height:1.6;}
+
+  /* Timeline Horizontal */
+  .tl-h-item{flex:1; min-width:180px; max-width:220px; text-align:center; padding:16px;}
+  .tl-h-num{width:48px; height:48px; border-radius:50%; background:rgba(255,255,255,0.1); border:2px solid var(--gold-warm); color:var(--gold-warm); display:flex; align-items:center; justify-content:center; margin:0 auto 14px; font-family:var(--serif); font-weight:700; font-size:18px;}
+  .tl-h-item h4{color:var(--white); font-size:16px; margin-bottom:6px;}
+
+  /* Timeline Vertical */
+  .tl-v{max-width:780px; margin:0 auto; position:relative;}
+  .tl-v-item{display:grid; grid-template-columns:56px 1fr; gap:22px; position:relative; padding-bottom:34px;}
+  .tl-v-item:last-child{padding-bottom:0;}
+  .tl-v-item::before{content:''; position:absolute; left:27px; top:56px; bottom:-34px; width:2px; background:rgba(16,42,67,0.15); z-index:0;}
+  .tl-v-item:last-child::before{display:none;}
+  .tl-v-num{width:56px; height:56px; border-radius:50%; background:rgba(255,255,255,0.16); backdrop-filter:blur(10px); border:2px solid var(--gold-warm); color:var(--white); font-family:var(--serif); font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center; flex-shrink:0; z-index:1; text-align:center; line-height:1.1;}
+  .tl-v-content{background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:14px; padding:24px 26px;}
+  .tl-v-content .role-title{font-size:18px; margin-bottom:2px; color:var(--white);}
+  .tl-v-content .role-org{font-size:14px; color:var(--gold-warm); font-weight:600; margin-bottom:12px;}
+  .tl-v-content ul{display:flex; flex-direction:column; gap:8px;}
+  .tl-v-content li{display:flex; gap:10px; font-size:14px; color:#C7CEDA; line-height:1.55;}
+  .tl-v-content li::before{content:'▸'; color:var(--gold-warm); flex-shrink:0;}
+
+  /* Education */
+  .edu-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .edu-card{background:var(--white); border-radius:14px; padding:24px 22px; box-shadow:var(--shadow); position:relative;}
+  .edu-card .yr{position:absolute; top:22px; right:20px; font-family:var(--serif); font-size:13px; color:var(--gold); font-weight:700;}
+  .edu-card h4{font-size:16px; margin-bottom:6px; padding-right:50px;}
+  .edu-card .school{font-size:13px; color:var(--text-soft); margin-bottom:12px; line-height:1.4;}
+  .edu-card .grade{display:inline-block; font-size:12px; font-weight:700; letter-spacing:.5px; color:var(--navy); background:var(--ivory); padding:4px 12px; border-radius:20px;}
+
+  /* Skills & Badges */
+  .skills-wrap{display:grid; grid-template-columns:repeat(2,1fr); gap:24px;}
+  .skill-block h4{font-size:14px; text-transform:uppercase; letter-spacing:1.5px; color:var(--gold-warm); margin-bottom:16px;}
+  .pill-row{display:flex; flex-wrap:wrap; gap:10px;}
+  .pill{display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.08); border:1.4px solid var(--gold-warm); color:var(--white); font-size:13.5px; font-weight:500; padding:9px 16px; border-radius:999px;}
+
+  /* Subject Badges (Light Section) */
+  .subject-pill-row{display:flex; flex-wrap:wrap; gap:10px;}
+  .subject-pill{display:inline-flex; align-items:center; gap:8px; background:var(--white); border:1px solid rgba(16,42,67,0.12); color:var(--navy); font-size:14px; font-weight:600; padding:10px 18px; border-radius:999px; box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+  .subject-pill i{color:var(--gold);}
+
+  /* Split Grid Cards */
+  .split-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .info-card{background:var(--white); border-radius:14px; padding:26px; box-shadow:var(--shadow);}
+  .info-card h4{font-size:16.5px; margin-bottom:16px; display:flex; align-items:center; gap:10px;}
+  .info-card h4 i{color:var(--gold);}
+  .info-card ul{display:flex; flex-direction:column; gap:10px;}
+  .info-card li{display:flex; gap:10px; font-size:14px; color:var(--text-soft); line-height:1.5;}
+  .info-card li::before{content:'✓'; color:var(--gold); font-weight:700; flex-shrink:0;}
+
+  /* Project Cards */
+  .proj-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .proj-card{background:var(--white); border-radius:14px; padding:28px; box-shadow:var(--shadow); border-top:4px solid var(--gold);}
+  .proj-card .tag{display:inline-block; font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--gold); background:var(--ivory); padding:4px 10px; border-radius:4px; margin-bottom:12px;}
+  .proj-card h4{font-size:18px; margin-bottom:8px;}
+  .proj-card p{font-size:14px; color:var(--text-soft); line-height:1.6;}
+
+  /* Personal details bar */
+  .personal-bar{display:flex; flex-wrap:wrap; gap:28px; justify-content:center; padding:22px 0; border-top:1px solid rgba(16,42,67,0.08); border-bottom:1px solid rgba(16,42,67,0.08); font-size:13.5px; color:var(--text-soft);}
+  .personal-bar span{display:flex; align-items:center; gap:8px;}
+  .personal-bar i{color:var(--gold);}
+
+  /* Footer */
+  footer{background:var(--navy-dark); color:#B9C2CE; padding:44px 0 24px; text-align:center; font-size:13.5px;}
+  footer .fname{font-family:var(--serif); color:var(--white); font-size:17px; margin-bottom:6px;}
+
+  .reveal{opacity:0; transform:translateY(20px); transition:all .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (max-width:900px){
+    nav.primary-nav{display:none;}
+    .hamburger{display:flex;}
+    .about-wrap, .split-grid, .skills-wrap, .proj-grid, .edu-grid{grid-template-columns:1fr;}
+    .stats-inner{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:600px){
+    .section{padding:56px 0;}
+    .hero-grid{padding:120px 20px 70px;}
+    .hero-trust{flex-direction:column; gap:8px;}
+  }
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="nav-wrap">
+    <a href="#home" class="brand">
+      <span class="brand-avatar">KR</span>
+      <span class="brand-text">Kajal Rathore</span>
+    </a>
+    <nav class="primary-nav" aria-label="Primary navigation">
+      <a href="#about">About</a>
+      <a href="#teaching">Teaching &amp; Expertise</a>
+      <a href="#experience">Experience</a>
+      <a href="#pedagogy">Pedagogical Initiatives</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+    </nav>
+    <div class="nav-right">
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-top">
+    <span class="brand-text" style="font-size:18px;">Kajal Rathore</span>
+    <button class="close-btn" id="closeMenuBtn" aria-label="Close menu">&times;</button>
+  </div>
+  <a href="#about">About</a>
+  <a href="#teaching">Teaching &amp; Expertise</a>
+  <a href="#experience">Experience</a>
+  <a href="#pedagogy">Pedagogical Initiatives</a>
+  <a href="#education">Education</a>
+  <a href="#skills">Skills</a>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid">
+    <div class="hero-photo-wrap">
+      <img src="Professional Kajol photo_2.png" alt="Kajal Rathore" class="hero-photo" onerror="this.src='https://placehold.co/140x140/102A43/D4AF57?text=KR'">
+    </div>
+    <div class="eyebrow">Passionate High School Educator</div>
+    <h1>Kajal Rathore<span class="accent">Fostering Academic Excellence &amp; Conceptual Clarity</span></h1>
+    <p class="sub">High School Teacher with 3+ years of comprehensive teaching experience across CBSE, ICSE, State, and IB curricula for 1st to 9th Standard, dedicated to cultivating critical thinking, student engagement, and holistic academic growth.</p>
+    <div class="hero-trust">
+      <span><i class="fa-solid fa-location-dot"></i> Bengaluru, India</span>
+      <span><i class="fa-solid fa-envelope"></i> kajalrathore6398@gmail.com</span>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK STATS BAR -->
+<div class="container stats reveal">
+  <div class="stats-inner">
+    <div><div class="stat-num">3+</div><div class="stat-label">Years Teaching Experience</div></div>
+    <div><div class="stat-num">1st–9th</div><div class="stat-label">Classes Taught (Std)</div></div>
+    <div><div class="stat-num">6</div><div class="stat-label">Core Subjects Taught</div></div>
+    <div><div class="stat-num">4</div><div class="stat-label">Curricula (State, CBSE, ICSE, IB)</div></div>
+  </div>
+</div>
+
+<!-- ABOUT SECTION -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Professional Profile</div>
+      <h2 class="title">About Kajal Rathore</h2>
+      <div class="divider-gold"></div>
+    </div>
+    <div class="about-wrap">
+      <div class="about-card reveal">
+        <p>Kajal Rathore is a dedicated and enthusiastic high school educator with extensive classroom teaching experience at esteemed institutions like <strong>VIBGYOR High, Haralur</strong>. She specializes in crafting student-centered, interactive learning environments tailored to primary and middle school students (Grades 1st to 9th).</p>
+        <p style="margin-top:14px;">Her philosophy centers on making complex concepts intuitive and approachable, building foundational confidence in mathematics, sciences, and languages through personalized attention, structured lesson planning, and positive reinforcement.</p>
+      </div>
+      <div class="reveal">
+        <div class="quote-strip">"Connecting with students through clarity, patience, and interactive problem-solving to eliminate fear and build lifelong confidence."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHING APPROACH -->
+<section class="section section-tight section-dark" style="background:var(--navy-dark);">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Teaching Methodology</div>
+      <h2 class="title">How She Teaches</h2>
+      <p class="lede">A structured, student-centered approach designed to foster curiosity and mastery across subjects.</p>
+    </div>
+    <div class="tl-h reveal" style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px;">
+      <div class="tl-h-item"><div class="tl-h-num">1</div><h4>Assess &amp; Adapt</h4><p style="color:#B9C2CE;">Identify each child's learning pace and tailor lessons accordingly.</p></div>
+      <div class="tl-h-item"><div class="tl-h-num">2</div><h4>Simplify</h4><p style="color:#B9C2CE;">Break down complex concepts into intuitive, easy-to-digest steps.</p></div>
+      <div class="tl-h-item"><div class="tl-h-num">3</div><h4>Engage</h4><p style="color:#B9C2CE;">Incorporate visual aids, experiments, and active discussions.</p></div>
+      <div class="tl-h-item"><div class="tl-h-num">4</div><h4>Evaluate</h4><p style="color:#B9C2CE;">Track progress regularly with continuous assessment and constructive feedback.</p></div>
+      <div class="tl-h-item"><div class="tl-h-num">5</div><h4>Inspire</h4><p style="color:#B9C2CE;">Build confidence in STEM and languages through encouragement and guidance.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHING EXPERTISE & SUBJECTS -->
+<section class="section" id="teaching">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Academic Coverage</div>
+      <h2 class="title">Subjects &amp; Syllabi Offered</h2>
+      <p class="lede">Comprehensive teaching coverage across classes 1st Standard through 9th Standard.</p>
+    </div>
+
+    <div style="margin-bottom:36px;" class="reveal">
+      <h3 style="font-size:18px; margin-bottom:14px; text-align:center;">Subjects She Teaches</h3>
+      <div class="subject-pill-row" style="justify-content:center;">
+        <span class="subject-pill"><i class="fa-solid fa-calculator"></i> Mathematics</span>
+        <span class="subject-pill"><i class="fa-solid fa-flask"></i> Science (Physics, Chemistry, Biology)</span>
+        <span class="subject-pill"><i class="fa-solid fa-book-open"></i> English</span>
+        <span class="subject-pill"><i class="fa-solid fa-language"></i> Hindi</span>
+        <span class="subject-pill"><i class="fa-solid fa-globe"></i> Social Science</span>
+        <span class="subject-pill"><i class="fa-solid fa-scroll"></i> Sanskrit</span>
+      </div>
+    </div>
+
+    <div class="split-grid">
+      <div class="info-card reveal">
+        <h4><i class="fa-solid fa-layer-group"></i> Syllabi Covered</h4>
+        <ul>
+          <li><strong>CBSE Board:</strong> Complete curriculum alignment with modern NCERT guidelines.</li>
+          <li><strong>ICSE Board:</strong> Detailed, application-oriented concept delivery for middle school.</li>
+          <li><strong>State Board:</strong> Strong fundamentals tailored to regional educational standards.</li>
+          <li><strong>IB Curriculum:</strong> Inquiry-based learning fostering conceptual understanding and critical thinking.</li>
+        </ul>
+      </div>
+
+      <div class="info-card reveal">
+        <h4><i class="fa-solid fa-comments"></i> Languages Spoken &amp; Communication</h4>
+        <ul>
+          <li><strong>English:</strong> Fluent (Professional &amp; Academic Instruction)</li>
+          <li><strong>Hindi:</strong> Native / Fluent (Primary &amp; Secondary Teaching)</li>
+          <li><strong>Parent Collaboration:</strong> Regular student progress updates and formative feedback sessions.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEACHING EXPERIENCE -->
+<section class="section section-dark" id="experience">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Teaching Career</div>
+      <h2 class="title">Classroom Experience</h2>
+      <p class="lede">Proven track record of success in high school and primary school classrooms.</p>
+    </div>
+
+    <div class="tl-v">
+      <div class="tl-v-item reveal">
+        <div class="tl-v-num">3+<br>Yrs</div>
+        <div class="tl-v-content">
+          <div class="role-title">High School Teacher</div>
+          <div class="role-org">VIBGYOR High, Haralur, Bengaluru &middot; 3 Years Experience</div>
+          <ul>
+            <li>Taught Mathematics, Science, English, Hindi, Social Science, and Sanskrit for students from 1st to 9th Standard across CBSE, ICSE, and State boards.</li>
+            <li>Designed structured, age-appropriate lesson plans and practical hands-on activities to simplify challenging STEM and language concepts.</li>
+            <li>Monitored individual student academic growth, conducted systematic evaluations, and communicated regularly with parents to provide targeted progress updates.</li>
+            <li>Fostered an inclusive, disciplined, and highly interactive classroom environment that elevated student confidence and overall subject scores.</li>
+            <li>Collaborated with school faculty on curriculum development, academic event management, and co-curricular student activities.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PEDAGOGICAL INITIATIVES & CLASSROOM STRATEGIES -->
+<section class="section" id="pedagogy">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Classroom Leadership</div>
+      <h2 class="title">Pedagogical Initiatives &amp; Strategies</h2>
+      <p class="lede">Fostering active student engagement through structured curriculum design and interactive learning.</p>
+    </div>
+
+    <div class="proj-grid">
+      <div class="proj-card reveal">
+        <span class="tag">Curriculum Design</span>
+        <h4>Differentiated Instruction &amp; Lesson Planning</h4>
+        <p>Created adaptable lesson frameworks accommodating diverse learning paces, ensuring both remedial support for struggling students and enrichment tasks for advanced learners.</p>
+      </div>
+
+      <div class="proj-card reveal">
+        <span class="tag">Student Engagement</span>
+        <h4>Experiential &amp; Inquiry-Based Learning</h4>
+        <p>Integrated interactive activities, visual aids, and inquiry-driven models into daily science and math lessons to move away from rote memorization toward deep conceptual clarity.</p>
+      </div>
+
+      <div class="proj-card reveal" style="grid-column:1/-1;">
+        <span class="tag" style="background:#e0f2fe; color:#0369a1;">Holistic Development</span>
+        <h4>Classroom Environment &amp; Co-Curricular Mentorship</h4>
+        <p>Cultivated a supportive, anxiety-free classroom culture emphasizing positive reinforcement, discipline, and active student participation in school academic events and quizzes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACADEMIC QUALIFICATIONS -->
+<section class="section section-dark" id="education">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Academic Foundation</div>
+      <h2 class="title">Educational Qualifications</h2>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <span class="yr">Graduate</span>
+        <h4>B.E. in ECE</h4>
+        <div class="school">Atria Institute of Technology, VTU, Bengaluru</div>
+        <span class="grade">Bachelor of Engineering</span>
+      </div>
+      <div class="edu-card reveal">
+        <span class="yr">12th Standard</span>
+        <h4>Senior Secondary</h4>
+        <div class="school">National Institute of Open Schooling, Raipur</div>
+        <span class="grade">Senior Secondary</span>
+      </div>
+      <div class="edu-card reveal">
+        <span class="yr">10th Standard</span>
+        <h4>Secondary School</h4>
+        <div class="school">DAV Public School, Gevra Project, Chhattisgarh</div>
+        <span class="grade">Secondary School</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS SECTION -->
+<section class="section section-dark section-tight" id="skills" style="background:var(--navy-dark);">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Skills &amp; Capabilities</div>
+      <h2 class="title">Pedagogical &amp; Professional Skills</h2>
+    </div>
+    <div class="skills-wrap" style="grid-template-columns: repeat(2, 1fr);">
+      <div class="skill-block reveal">
+        <h4>Teaching &amp; Pedagogy</h4>
+        <div class="pill-row">
+          <span class="pill">Lesson Planning</span>
+          <span class="pill">Classroom Management</span>
+          <span class="pill">Multi-Curriculum Teaching</span>
+          <span class="pill">Student Assessment</span>
+          <span class="pill">STEM &amp; Language Teaching</span>
+          <span class="pill">Parent Communication</span>
+          <span class="pill">Differentiated Instruction</span>
+        </div>
+      </div>
+      <div class="skill-block reveal">
+        <h4>Languages Spoken</h4>
+        <div class="pill-row">
+          <span class="pill">English (Fluent)</span>
+          <span class="pill">Hindi (Native/Fluent)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS & EXTRACURRICULAR -->
+<section class="section">
+  <div class="container">
+    <div class="split-grid">
+      <div class="info-card reveal">
+        <h4><i class="fa-solid fa-trophy"></i> Achievements &amp; Recognitions</h4>
+        <ul>
+          <li><strong>Academic &amp; Innovation Recognition:</strong> Honored for creative academic contributions and mentorship.</li>
+          <li><strong>Hariyali Quiz:</strong> Qualified for Round 2 on World Environment Day, promoting ecological awareness among students.</li>
+        </ul>
+      </div>
+      <div class="info-card reveal">
+        <h4><i class="fa-solid fa-users"></i> Leadership &amp; School Activities</h4>
+        <ul>
+          <li><strong>Co-Curricular Mentorship:</strong> Guided students through science exhibitions, quiz competitions, and cultural events.</li>
+          <li><strong>Community Engagement:</strong> Active involvement in collaborative educational outreach and institutional support initiatives.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONAL DETAILS BAR -->
+<div class="container">
+  <div class="personal-bar reveal">
+    <span><i class="fa-solid fa-graduation-cap"></i> Qualification: B.E. (Graduate)</span>
+    <span><i class="fa-solid fa-briefcase"></i> Teaching Experience: 3+ Years</span>
+    <span><i class="fa-solid fa-location-dot"></i> Location: Bengaluru, Karnataka</span>
+    <span><i class="fa-solid fa-envelope"></i> Email: kajalrathore6398@gmail.com</span>
+    <span><i class="fa-solid fa-language"></i> Spoken Languages: English, Hindi</span>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="fname">Kajal Rathore</div>
+    <p>High School Teacher &middot; Bengaluru, India</p>
+    <p>&copy; 2026 Kajal Rathore. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 30));
+
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const closeMenuBtn = document.getElementById('closeMenuBtn');
+  hamburgerBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
+  closeMenuBtn.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('in');
+      else e.target.classList.remove('in');
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
