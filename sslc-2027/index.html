@@ -187,8 +187,20 @@
   .subj-list li{display:flex; gap:10px; font-size:14px; color:var(--text); line-height:1.5;}
   .subj-list li::before{content:'\2713'; color:var(--gold); font-weight:700; flex:none;}
   .subj-list.deva li{font-family:'Noto Sans Devanagari', var(--sans); font-size:14.5px;}
-  .subj-link{display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:600; color:var(--navy); align-self:flex-start; border-bottom:1.5px solid var(--gold); padding-bottom:2px; transition:gap .2s, color .2s;}
+  .subj-grid{align-items:start;}
+  .subj-link{display:inline-flex; align-items:center; gap:8px; font-family:inherit; font-size:14px; font-weight:600; color:var(--navy); align-self:flex-start; background:none; border:none; border-bottom:1.5px solid var(--gold); padding:0 0 2px; cursor:pointer; transition:gap .2s, color .2s;}
   .subj-link:hover{gap:12px; color:var(--gold-text);}
+  .subj-link i{font-size:12px; transition:transform .25s;}
+  .subj-link[aria-expanded="true"] i{transform:rotate(180deg);}
+  .subj-drop{display:grid; grid-template-rows:0fr; transition:grid-template-rows .3s ease, margin .3s ease;}
+  .subj-drop > ul{overflow:hidden; min-height:0;}
+  .subj-card.open .subj-drop{grid-template-rows:1fr; margin-top:14px;}
+  .subj-drop ul{border:1px solid var(--line); border-radius:var(--radius); background:var(--tint);}
+  .subj-card:not(.open) .subj-drop ul{border-width:0;}
+  .subj-drop li + li{border-top:1px solid var(--line);}
+  .subj-drop a{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:11px 14px; font-size:13.5px; color:var(--text); transition:background .2s, color .2s;}
+  .subj-drop a:hover{background:var(--white); color:var(--gold-text);}
+  .subj-drop a i{font-size:12px; color:var(--gold); flex:none;}
 
   /* Book-stack illustration */
   .art{position:relative; width:150px; height:96px;}
@@ -439,7 +451,8 @@
           <li>Grammar and language practice</li>
           <li>Model questions and writing practice</li>
         </ul>
-        <a href="#" class="subj-link" data-wa="subject" data-subject="Kannada">View Demo Materials <i class="fa-solid fa-arrow-right"></i></a>
+        <button type="button" class="subj-link" data-subject="Kannada" aria-expanded="false">View Demo Materials <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="subj-drop"><ul></ul></div>
       </article>
 
       <!-- English -->
@@ -457,7 +470,8 @@
           <li>Grammar and vocabulary practice</li>
           <li>Writing skills and model answers</li>
         </ul>
-        <a href="#" class="subj-link" data-wa="subject" data-subject="English">View Demo Materials <i class="fa-solid fa-arrow-right"></i></a>
+        <button type="button" class="subj-link" data-subject="English" aria-expanded="false">View Demo Materials <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="subj-drop"><ul></ul></div>
       </article>
 
       <!-- Hindi -->
@@ -475,7 +489,8 @@
           <li>व्याकरण एवं भाषा अभ्यास</li>
           <li>लेखन अभ्यास और मॉडल प्रश्न</li>
         </ul>
-        <a href="#" class="subj-link" data-wa="subject" data-subject="Hindi">View Demo Materials <i class="fa-solid fa-arrow-right"></i></a>
+        <button type="button" class="subj-link" data-subject="Hindi" aria-expanded="false">View Demo Materials <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="subj-drop"><ul></ul></div>
       </article>
 
       <!-- Mathematics -->
@@ -494,7 +509,8 @@
           <li>Worked examples and formula sheets</li>
           <li>Board-style practice questions</li>
         </ul>
-        <a href="#" class="subj-link" data-wa="subject" data-subject="Mathematics">View Demo Materials <i class="fa-solid fa-arrow-right"></i></a>
+        <button type="button" class="subj-link" data-subject="Mathematics" aria-expanded="false">View Demo Materials <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="subj-drop"><ul></ul></div>
       </article>
 
       <!-- Science -->
@@ -514,7 +530,8 @@
           <li>Diagrams and labelled diagrams</li>
           <li>Important questions and practice sets</li>
         </ul>
-        <a href="#" class="subj-link" data-wa="subject" data-subject="Science">View Demo Materials <i class="fa-solid fa-arrow-right"></i></a>
+        <button type="button" class="subj-link" data-subject="Science" aria-expanded="false">View Demo Materials <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="subj-drop"><ul></ul></div>
       </article>
 
       <!-- Social Science -->
@@ -533,7 +550,8 @@
           <li>Maps, timelines and key points</li>
           <li>Structured answers for board exams</li>
         </ul>
-        <a href="#" class="subj-link" data-wa="subject" data-subject="Social Science">View Demo Materials <i class="fa-solid fa-arrow-right"></i></a>
+        <button type="button" class="subj-link" data-subject="Social Science" aria-expanded="false">View Demo Materials <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="subj-drop"><ul></ul></div>
       </article>
     </div>
 
@@ -670,6 +688,78 @@
       a.href = 'mailto:' + FALLBACK_EMAIL + '?subject=' + encodeURIComponent('SSLC 2027 enquiry') + '&body=' + encodeURIComponent(msg);
     }
   });
+
+  /* ---------- DEMO TOPICS: edit the topics for each subject here ----------
+     Each topic: { title: 'Topic name', url: 'link to the PDF/page' }
+     Leave url empty ('') and the topic will open WhatsApp asking for that topic. */
+  var DEMO_TOPICS = {
+    'Kannada': [
+      { title: 'ಕೌರವೇಂದ್ರನ ಕೊಂದೆ ನೀನು · ಕನ್ನಡ ಪ್ರಥಮ ಭಾಷೆ · ಪದ್ಯ ೩', url: 'https://sattvajnana.in/sslc-2027/kannada/ಕೌರವೇಂದ್ರನ-ಕೊಂದೆ-ನೀನು·ಕನ್ನಡ-ಪ್ರಥಮ-ಭಾಷೆ·ಪದ್ಯ-೩' }
+    ],
+    'English': [
+      { title: 'A Hero · English, Chapter 1', url: 'https://sattvajnana.in/sslc-2027/english/English·A-Hero,Chp-1' }
+    ],
+    'Hindi': [
+      { title: 'मेरा बचपन · हिंदी · अध्याय 5', url: 'https://sattvajnana.in/sslc-2027/hindi/मेरा-बचपन·हिंदी·अध्याय-5' }
+    ],
+    'Mathematics': [
+      { title: 'Heights & Distances · Mathematics, Ch. 9', url: 'https://sattvajnana.in/sslc-2027/mathematics/Heights&Distances·Mathematics,Ch.9' }
+    ],
+    'Science': [
+      { title: 'Electronic Configurations', url: 'https://sattvajnana.in/sslc-2027/science/Electronic-Configurations' },
+      { title: 'Metals & Non-metals · Science, Ch. 3', url: 'https://sattvajnana.in/sslc-2027/science/Metals&Non-metals·Science,Ch.3' }
+    ],
+    'Social Science': [
+      { title: 'India – Position & Features · Ch. 10', url: 'https://sattvajnana.in/sslc-2027/social/Ch.10·India-Position&Features' }
+    ]
+  };
+
+  // Build and toggle the subject dropdowns
+  document.querySelectorAll('.subj-link[data-subject]').forEach(function (btn) {
+    var subject = btn.getAttribute('data-subject');
+    var card = btn.closest('.subj-card');
+    var drop = btn.nextElementSibling;
+    var list = drop.querySelector('ul');
+    var id = 'drop-' + subject.toLowerCase().replace(/\s+/g, '-');
+    drop.id = id;
+    btn.setAttribute('aria-controls', id);
+
+    (DEMO_TOPICS[subject] || []).forEach(function (t) {
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      if (t.url) {
+        a.href = t.url;
+      } else {
+        var msg = WA_TEMPLATE + '\nSubject: ' + subject + '\nTopic: ' + t.title;
+        a.href = WHATSAPP_NUMBER
+          ? 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg)
+          : 'mailto:' + FALLBACK_EMAIL + '?subject=' + encodeURIComponent('SSLC 2027 enquiry') + '&body=' + encodeURIComponent(msg);
+      }
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.tabIndex = -1;
+      a.innerHTML = '<span></span><i class="fa-solid fa-arrow-up-right-from-square"></i>';
+      a.firstChild.textContent = t.title;
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+
+    btn.addEventListener('click', function () {
+      var willOpen = !card.classList.contains('open');
+      // close any other open dropdown
+      document.querySelectorAll('.subj-card.open').forEach(function (c) {
+        if (c !== card) setOpen(c, false);
+      });
+      setOpen(card, willOpen);
+    });
+  });
+
+  function setOpen(card, open) {
+    card.classList.toggle('open', open);
+    var b = card.querySelector('.subj-link');
+    b.setAttribute('aria-expanded', open ? 'true' : 'false');
+    card.querySelectorAll('.subj-drop a').forEach(function (a) { a.tabIndex = open ? 0 : -1; });
+  }
 
   // Header scroll state
   var header = document.getElementById('site-header');
